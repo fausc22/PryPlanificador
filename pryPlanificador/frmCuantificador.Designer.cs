@@ -34,19 +34,21 @@
             this.txtMes = new System.Windows.Forms.TextBox();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.dgvHora = new System.Windows.Forms.DataGridView();
+            this.dgvTotales = new System.Windows.Forms.DataGridView();
             this.btnAyuda = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHora)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTotales)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAnio
             // 
             this.lblAnio.AutoSize = true;
             this.lblAnio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAnio.Location = new System.Drawing.Point(1750, 135);
+            this.lblAnio.Location = new System.Drawing.Point(1722, 16);
             this.lblAnio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAnio.Name = "lblAnio";
-            this.lblAnio.Size = new System.Drawing.Size(39, 16);
+            this.lblAnio.Size = new System.Drawing.Size(48, 20);
             this.lblAnio.TabIndex = 22;
             this.lblAnio.Text = "AÑO";
             // 
@@ -54,10 +56,10 @@
             // 
             this.lblMes.AutoSize = true;
             this.lblMes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMes.Location = new System.Drawing.Point(1545, 135);
+            this.lblMes.Location = new System.Drawing.Point(1517, 16);
             this.lblMes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMes.Name = "lblMes";
-            this.lblMes.Size = new System.Drawing.Size(39, 16);
+            this.lblMes.Size = new System.Drawing.Size(48, 20);
             this.lblMes.TabIndex = 21;
             this.lblMes.Text = "MES";
             // 
@@ -65,10 +67,10 @@
             // 
             this.txtAnio.Enabled = false;
             this.txtAnio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAnio.Location = new System.Drawing.Point(1715, 159);
+            this.txtAnio.Location = new System.Drawing.Point(1687, 40);
             this.txtAnio.Margin = new System.Windows.Forms.Padding(4);
             this.txtAnio.Name = "txtAnio";
-            this.txtAnio.Size = new System.Drawing.Size(132, 20);
+            this.txtAnio.Size = new System.Drawing.Size(132, 23);
             this.txtAnio.TabIndex = 20;
             this.txtAnio.Text = "2023";
             // 
@@ -76,10 +78,10 @@
             // 
             this.txtMes.Enabled = false;
             this.txtMes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMes.Location = new System.Drawing.Point(1509, 159);
+            this.txtMes.Location = new System.Drawing.Point(1481, 40);
             this.txtMes.Margin = new System.Windows.Forms.Padding(4);
             this.txtMes.Name = "txtMes";
-            this.txtMes.Size = new System.Drawing.Size(132, 20);
+            this.txtMes.Size = new System.Drawing.Size(132, 23);
             this.txtMes.TabIndex = 19;
             this.txtMes.Text = "OCTUBRE";
             // 
@@ -87,10 +89,10 @@
             // 
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(390, 13);
+            this.lblTitulo.Location = new System.Drawing.Point(301, 9);
             this.lblTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(482, 29);
+            this.lblTitulo.Size = new System.Drawing.Size(610, 36);
             this.lblTitulo.TabIndex = 18;
             this.lblTitulo.Text = "HORAS TRABAJADAS + TARIFA ($ARS)";
             // 
@@ -104,29 +106,43 @@
             this.dgvHora.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgvHora.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHora.EnableHeadersVisualStyles = false;
-            this.dgvHora.Location = new System.Drawing.Point(29, 55);
+            this.dgvHora.Location = new System.Drawing.Point(-8, 49);
             this.dgvHora.Margin = new System.Windows.Forms.Padding(4);
             this.dgvHora.Name = "dgvHora";
-            this.dgvHora.Size = new System.Drawing.Size(1417, 821);
+            this.dgvHora.RowHeadersWidth = 51;
+            this.dgvHora.Size = new System.Drawing.Size(1377, 676);
             this.dgvHora.TabIndex = 17;
+            // 
+            // dgvTotales
+            // 
+            this.dgvTotales.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvTotales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTotales.Location = new System.Drawing.Point(1, 741);
+            this.dgvTotales.Name = "dgvTotales";
+            this.dgvTotales.RowHeadersWidth = 51;
+            this.dgvTotales.RowTemplate.Height = 24;
+            this.dgvTotales.Size = new System.Drawing.Size(1368, 82);
+            this.dgvTotales.TabIndex = 25;
             // 
             // btnAyuda
             // 
-            this.btnAyuda.Location = new System.Drawing.Point(1651, 848);
+            this.btnAyuda.AutoSize = true;
+            this.btnAyuda.Location = new System.Drawing.Point(1628, 848);
             this.btnAyuda.Margin = new System.Windows.Forms.Padding(4);
             this.btnAyuda.Name = "btnAyuda";
             this.btnAyuda.Size = new System.Drawing.Size(100, 28);
-            this.btnAyuda.TabIndex = 24;
+            this.btnAyuda.TabIndex = 27;
             this.btnAyuda.Text = "AYUDA";
             this.btnAyuda.UseVisualStyleBackColor = true;
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(1764, 848);
+            this.btnSalir.AutoSize = true;
+            this.btnSalir.Location = new System.Drawing.Point(1768, 848);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(100, 28);
-            this.btnSalir.TabIndex = 23;
+            this.btnSalir.TabIndex = 26;
             this.btnSalir.Text = "SALIR";
             this.btnSalir.UseVisualStyleBackColor = true;
             // 
@@ -138,6 +154,7 @@
             this.ClientSize = new System.Drawing.Size(1877, 889);
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.btnSalir);
+            this.Controls.Add(this.dgvTotales);
             this.Controls.Add(this.lblAnio);
             this.Controls.Add(this.lblMes);
             this.Controls.Add(this.txtAnio);
@@ -149,6 +166,7 @@
             this.Text = "PLANEAMIENTO - CUANTIFICADOR";
             this.Load += new System.EventHandler(this.frmCuantificador_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHora)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTotales)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,6 +180,7 @@
         private System.Windows.Forms.TextBox txtMes;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.DataGridView dgvHora;
+        private System.Windows.Forms.DataGridView dgvTotales;
         private System.Windows.Forms.Button btnAyuda;
         private System.Windows.Forms.Button btnSalir;
     }

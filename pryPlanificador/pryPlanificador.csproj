@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsEmpleado.cs" />
     <Compile Include="clsPlanificar.cs" />
     <Compile Include="frmCuantificador.cs">
       <SubType>Form</SubType>
@@ -59,6 +60,12 @@
     <Compile Include="frmHoras.Designer.cs">
       <DependentUpon>frmHoras.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmLogueo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogueo.Designer.cs">
+      <DependentUpon>frmLogueo.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPlanificar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +78,18 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRecibo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRecibo.Designer.cs">
+      <DependentUpon>frmRecibo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTurnos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTurnos.Designer.cs">
+      <DependentUpon>frmTurnos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmCuantificador.resx">
@@ -79,11 +98,20 @@
     <EmbeddedResource Include="frmHoras.resx">
       <DependentUpon>frmHoras.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmLogueo.resx">
+      <DependentUpon>frmLogueo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPlanificar.resx">
       <DependentUpon>frmPlanificar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRecibo.resx">
+      <DependentUpon>frmRecibo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTurnos.resx">
+      <DependentUpon>frmTurnos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

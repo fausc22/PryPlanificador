@@ -42,5 +42,15 @@ namespace pryPlanificador
         {
             this.Close();
         }
+
+        private void txtMes_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblMes_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

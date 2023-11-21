@@ -24,6 +24,7 @@ namespace pryPlanificador
         {
             objC.CargarGrillaCuantificador(dgvHora);
             objC.PintarValores(dgvHora);
+            objC.CargarGrillaTotales(dgvTotales);
                 
         }
     }

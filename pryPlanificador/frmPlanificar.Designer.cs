@@ -53,9 +53,11 @@
             this.dgvHora.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgvHora.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHora.EnableHeadersVisualStyles = false;
-            this.dgvHora.Location = new System.Drawing.Point(12, 43);
+            this.dgvHora.Location = new System.Drawing.Point(16, 53);
+            this.dgvHora.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvHora.Name = "dgvHora";
-            this.dgvHora.Size = new System.Drawing.Size(1063, 667);
+            this.dgvHora.RowHeadersWidth = 51;
+            this.dgvHora.Size = new System.Drawing.Size(1417, 821);
             this.dgvHora.TabIndex = 0;
             this.dgvHora.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvHora_CellMouseDoubleClick);
             this.dgvHora.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvHora_RowsAdded);
@@ -64,9 +66,11 @@
             // 
             this.gpCmb.Controls.Add(this.btnModificar);
             this.gpCmb.Controls.Add(this.cmbTurno);
-            this.gpCmb.Location = new System.Drawing.Point(1152, 196);
+            this.gpCmb.Location = new System.Drawing.Point(1536, 241);
+            this.gpCmb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gpCmb.Name = "gpCmb";
-            this.gpCmb.Size = new System.Drawing.Size(200, 100);
+            this.gpCmb.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpCmb.Size = new System.Drawing.Size(267, 123);
             this.gpCmb.TabIndex = 1;
             this.gpCmb.TabStop = false;
             this.gpCmb.Text = "Seleccione un turno";
@@ -75,9 +79,10 @@
             // btnModificar
             // 
             this.btnModificar.Enabled = false;
-            this.btnModificar.Location = new System.Drawing.Point(60, 59);
+            this.btnModificar.Location = new System.Drawing.Point(80, 73);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.Size = new System.Drawing.Size(100, 28);
             this.btnModificar.TabIndex = 1;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -87,17 +92,19 @@
             // 
             this.cmbTurno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTurno.FormattingEnabled = true;
-            this.cmbTurno.Location = new System.Drawing.Point(38, 31);
+            this.cmbTurno.Location = new System.Drawing.Point(51, 38);
+            this.cmbTurno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbTurno.Name = "cmbTurno";
-            this.cmbTurno.Size = new System.Drawing.Size(121, 21);
+            this.cmbTurno.Size = new System.Drawing.Size(160, 24);
             this.cmbTurno.TabIndex = 0;
             this.cmbTurno.SelectedIndexChanged += new System.EventHandler(this.cmbTurno_SelectedIndexChanged);
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(1321, 687);
+            this.btnSalir.Location = new System.Drawing.Point(1761, 846);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(75, 23);
+            this.btnSalir.Size = new System.Drawing.Size(100, 28);
             this.btnSalir.TabIndex = 2;
             this.btnSalir.Text = "SALIR";
             this.btnSalir.UseVisualStyleBackColor = true;
@@ -107,9 +114,10 @@
             // 
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(283, 9);
+            this.lblTitulo.Location = new System.Drawing.Point(377, 11);
+            this.lblTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(382, 29);
+            this.lblTitulo.Size = new System.Drawing.Size(475, 36);
             this.lblTitulo.TabIndex = 3;
             this.lblTitulo.Text = "PLANIFICADOR DE HORARIOS";
             // 
@@ -117,9 +125,10 @@
             // 
             this.txtMes.Enabled = false;
             this.txtMes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMes.Location = new System.Drawing.Point(1122, 127);
+            this.txtMes.Location = new System.Drawing.Point(1496, 156);
+            this.txtMes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtMes.Name = "txtMes";
-            this.txtMes.Size = new System.Drawing.Size(100, 20);
+            this.txtMes.Size = new System.Drawing.Size(132, 23);
             this.txtMes.TabIndex = 4;
             this.txtMes.Text = "OCTUBRE";
             // 
@@ -127,9 +136,10 @@
             // 
             this.txtAnio.Enabled = false;
             this.txtAnio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAnio.Location = new System.Drawing.Point(1277, 127);
+            this.txtAnio.Location = new System.Drawing.Point(1703, 156);
+            this.txtAnio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtAnio.Name = "txtAnio";
-            this.txtAnio.Size = new System.Drawing.Size(100, 20);
+            this.txtAnio.Size = new System.Drawing.Size(132, 23);
             this.txtAnio.TabIndex = 5;
             this.txtAnio.Text = "2023";
             // 
@@ -137,9 +147,10 @@
             // 
             this.lblMes.AutoSize = true;
             this.lblMes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMes.Location = new System.Drawing.Point(1149, 108);
+            this.lblMes.Location = new System.Drawing.Point(1532, 133);
+            this.lblMes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMes.Name = "lblMes";
-            this.lblMes.Size = new System.Drawing.Size(39, 16);
+            this.lblMes.Size = new System.Drawing.Size(48, 20);
             this.lblMes.TabIndex = 6;
             this.lblMes.Text = "MES";
             // 
@@ -147,27 +158,30 @@
             // 
             this.lblAnio.AutoSize = true;
             this.lblAnio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAnio.Location = new System.Drawing.Point(1303, 108);
+            this.lblAnio.Location = new System.Drawing.Point(1737, 133);
+            this.lblAnio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAnio.Name = "lblAnio";
-            this.lblAnio.Size = new System.Drawing.Size(39, 16);
+            this.lblAnio.Size = new System.Drawing.Size(48, 20);
             this.lblAnio.TabIndex = 7;
             this.lblAnio.Text = "AÑO";
             // 
             // btnAyuda
             // 
-            this.btnAyuda.Location = new System.Drawing.Point(1236, 687);
+            this.btnAyuda.Location = new System.Drawing.Point(1648, 846);
+            this.btnAyuda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAyuda.Name = "btnAyuda";
-            this.btnAyuda.Size = new System.Drawing.Size(75, 23);
+            this.btnAyuda.Size = new System.Drawing.Size(100, 28);
             this.btnAyuda.TabIndex = 8;
             this.btnAyuda.Text = "AYUDA";
             this.btnAyuda.UseVisualStyleBackColor = true;
             // 
             // frmPlanificar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1408, 722);
+            this.ClientSize = new System.Drawing.Size(1877, 889);
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.lblAnio);
             this.Controls.Add(this.lblMes);
@@ -177,6 +191,7 @@
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.gpCmb);
             this.Controls.Add(this.dgvHora);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmPlanificar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PLANEAMIENTO - PLANIFICADOR DE HORARIOS";

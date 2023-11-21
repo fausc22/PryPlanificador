@@ -23,6 +23,7 @@ namespace pryPlanificador
         {
             objP.CargarGrillaPlanificador(dgvHora);
             objP.CargarTurnos(cmbTurno);
+            
         }
 
         private void dgvHora_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)

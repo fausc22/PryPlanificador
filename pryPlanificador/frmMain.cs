@@ -44,5 +44,33 @@ namespace pryPlanificador
             frmCuantificador frm = new frmCuantificador();
             frm.Show();
         }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void colaboradoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logueoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmLogueo f = new frmLogueo();
+            f.ShowDialog();
+        }
+
+        private void reciboToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmRecibo F = new frmRecibo();
+            F.ShowDialog();
+        }
+
+        private void turnosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTurnos f = new frmTurnos();
+            f.ShowDialog();
+        }
     }
 }
