@@ -9,6 +9,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
 
+
 namespace pryPlanificador
 {
     public class clsPlanificar

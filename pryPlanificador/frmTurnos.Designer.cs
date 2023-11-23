@@ -44,8 +44,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnModificar = new System.Windows.Forms.Button();
             this.lblid = new System.Windows.Forms.Label();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -170,6 +171,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.lblid);
             this.groupBox1.Controls.Add(this.btnModificar);
             this.groupBox1.Controls.Add(this.lblMes);
@@ -187,6 +189,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "DATOS TURNO";
             // 
+            // lblid
+            // 
+            this.lblid.AutoSize = true;
+            this.lblid.Location = new System.Drawing.Point(202, 230);
+            this.lblid.Name = "lblid";
+            this.lblid.Size = new System.Drawing.Size(35, 13);
+            this.lblid.TabIndex = 29;
+            this.lblid.Text = "label4";
+            this.lblid.Visible = false;
+            // 
             // btnModificar
             // 
             this.btnModificar.BackColor = System.Drawing.SystemColors.Info;
@@ -198,15 +210,18 @@
             this.btnModificar.UseVisualStyleBackColor = false;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
-            // lblid
+            // label4
             // 
-            this.lblid.AutoSize = true;
-            this.lblid.Location = new System.Drawing.Point(202, 230);
-            this.lblid.Name = "lblid";
-            this.lblid.Size = new System.Drawing.Size(35, 13);
-            this.lblid.TabIndex = 29;
-            this.lblid.Text = "label4";
-            this.lblid.Visible = false;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(27, 172);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(150, 13);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "ASIGNAR MANUALMENTE !!";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label4.Visible = false;
             // 
             // frmTurnos
             // 
@@ -246,5 +261,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Label lblid;
+        private System.Windows.Forms.Label label4;
     }
 }
