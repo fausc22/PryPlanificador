@@ -44,9 +44,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.lblid = new System.Windows.Forms.Label();
             this.btnModificar = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -189,6 +189,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "DATOS TURNO";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(27, 172);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(150, 13);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "ASIGNAR MANUALMENTE !!";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // lblid
             // 
             this.lblid.AutoSize = true;
@@ -209,19 +221,6 @@
             this.btnModificar.Text = "MODIFICAR";
             this.btnModificar.UseVisualStyleBackColor = false;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(27, 172);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(150, 13);
-            this.label4.TabIndex = 30;
-            this.label4.Text = "ASIGNAR MANUALMENTE !!";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label4.Visible = false;
             // 
             // frmTurnos
             // 

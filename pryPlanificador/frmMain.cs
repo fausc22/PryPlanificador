@@ -29,7 +29,7 @@ namespace pryPlanificador
 
         private void planificadorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmPlanificar frm = new frmPlanificar();
+            frmPlaneamientoPlanificador frm = new frmPlaneamientoPlanificador();
             frm.Show();
         }
 
@@ -70,6 +70,18 @@ namespace pryPlanificador
         private void turnosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmTurnos f = new frmTurnos();
+            f.ShowDialog();
+        }
+
+        private void nuevoEmpleadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAgregarEmpleado f = new frmAgregarEmpleado();
+            f.ShowDialog();
+        }
+
+        private void editarEmpleadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmEmpleado f = new frmEmpleado();
             f.ShowDialog();
         }
     }

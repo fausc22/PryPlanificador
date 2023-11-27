@@ -16,10 +16,12 @@ namespace pryPlanificador
         {
             InitializeComponent();
         }
-        clsEmpleado objE = new clsEmpleado();
+        clsConexion objE = new clsConexion();
+        clsPlaneamiento objC = new clsPlaneamiento();
         private void frmTurnos_Load(object sender, EventArgs e)
         {
-            objE.CargarGrillaTurnos(dgvTurnos);
+            //objE.CargarGrillaTurnos(dgvTurnos);
+            objC.CargarGrillaTurnos(dgvTurnos);
         }
 
         private void dgvTurnos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -54,9 +56,10 @@ namespace pryPlanificador
             int horaTotal = Convert.ToInt32(txtTotal.Text);
             string turno = horaInicio + " a " + horaFin;
 
-            objE.ActualizarTurnos(id, turno, horaInicio, horaFin, horaTotal);
-            objE.CargarGrillaTurnos(dgvTurnos);
-        
+            objE.ActualizarHorarios(id, turno, horaInicio, horaFin, horaTotal);
+            
+            objC.CargarGrillaTurnos(dgvTurnos);
+
         }
     }
 }

@@ -52,6 +52,7 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnAyuda = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHuella)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).BeginInit();
@@ -59,6 +60,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.btnActualizarHuella);
             this.groupBox1.Controls.Add(this.pbHuella);
             this.groupBox1.Controls.Add(this.btnActualizarFoto);
@@ -141,14 +143,17 @@
             // 
             // txtApellido
             // 
+            this.txtApellido.Enabled = false;
             this.txtApellido.Location = new System.Drawing.Point(187, 70);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(102, 20);
             this.txtApellido.TabIndex = 67;
+            this.txtApellido.TextChanged += new System.EventHandler(this.txtApellido_TextChanged);
             // 
             // btnAgregar
             // 
             this.btnAgregar.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnAgregar.Enabled = false;
             this.btnAgregar.Location = new System.Drawing.Point(82, 313);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(149, 42);
@@ -164,15 +169,17 @@
             this.label9.Location = new System.Drawing.Point(25, 39);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(72, 16);
-            this.label9.TabIndex = 52;
+            this.label9.TabIndex = 3;
             this.label9.Text = "NOMBRE";
             // 
             // txtHoraVacaciones
             // 
+            this.txtHoraVacaciones.Enabled = false;
             this.txtHoraVacaciones.Location = new System.Drawing.Point(187, 265);
             this.txtHoraVacaciones.Name = "txtHoraVacaciones";
             this.txtHoraVacaciones.Size = new System.Drawing.Size(102, 20);
             this.txtHoraVacaciones.TabIndex = 48;
+            this.txtHoraVacaciones.TextChanged += new System.EventHandler(this.txtHoraVacaciones_TextChanged);
             // 
             // label1
             // 
@@ -196,17 +203,21 @@
             // 
             // txtMail
             // 
+            this.txtMail.Enabled = false;
             this.txtMail.Location = new System.Drawing.Point(187, 108);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(102, 20);
             this.txtMail.TabIndex = 47;
+            this.txtMail.TextChanged += new System.EventHandler(this.txtMail_TextChanged);
             // 
             // txtHoraFeriado
             // 
+            this.txtHoraFeriado.Enabled = false;
             this.txtHoraFeriado.Location = new System.Drawing.Point(187, 226);
             this.txtHoraFeriado.Name = "txtHoraFeriado";
             this.txtHoraFeriado.Size = new System.Drawing.Size(102, 20);
             this.txtHoraFeriado.TabIndex = 57;
+            this.txtHoraFeriado.TextChanged += new System.EventHandler(this.txtHoraFeriado_TextChanged);
             // 
             // label2
             // 
@@ -234,20 +245,25 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
             this.txtNombre.TabIndex = 51;
+            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             // 
             // txtHoraNormal
             // 
+            this.txtHoraNormal.Enabled = false;
             this.txtHoraNormal.Location = new System.Drawing.Point(187, 185);
             this.txtHoraNormal.Name = "txtHoraNormal";
             this.txtHoraNormal.Size = new System.Drawing.Size(102, 20);
             this.txtHoraNormal.TabIndex = 55;
+            this.txtHoraNormal.TextChanged += new System.EventHandler(this.txtHoraNormal_TextChanged);
             // 
             // txtFecha
             // 
+            this.txtFecha.Enabled = false;
             this.txtFecha.Location = new System.Drawing.Point(187, 146);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(102, 20);
             this.txtFecha.TabIndex = 53;
+            this.txtFecha.TextChanged += new System.EventHandler(this.txtFecha_TextChanged);
             // 
             // label10
             // 
@@ -266,7 +282,7 @@
             this.lblTitulo.Location = new System.Drawing.Point(194, 9);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(250, 29);
-            this.lblTitulo.TabIndex = 62;
+            this.lblTitulo.TabIndex = 1;
             this.lblTitulo.Text = "NUEVO EMPLEADO";
             // 
             // btnAyuda
@@ -278,6 +294,7 @@
             this.btnAyuda.TabIndex = 68;
             this.btnAyuda.Text = "AYUDA";
             this.btnAyuda.UseVisualStyleBackColor = false;
+            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
             // 
             // btnSalir
             // 
@@ -288,6 +305,19 @@
             this.btnSalir.TabIndex = 67;
             this.btnSalir.Text = "SALIR";
             this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnLimpiar.Enabled = false;
+            this.btnLimpiar.Location = new System.Drawing.Point(82, 361);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(149, 42);
+            this.btnLimpiar.TabIndex = 73;
+            this.btnLimpiar.Text = "LIMPIAR ";
+            this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // frmAgregarEmpleado
             // 
@@ -338,5 +368,6 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnAyuda;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnLimpiar;
     }
 }

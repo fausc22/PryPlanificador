@@ -50,6 +50,8 @@
             this.graficoEficienciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graficoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
+            this.nuevoEmpleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarEmpleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -153,6 +155,9 @@
             // 
             // colaboradoresToolStripMenuItem
             // 
+            this.colaboradoresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nuevoEmpleadoToolStripMenuItem,
+            this.editarEmpleadoToolStripMenuItem});
             this.colaboradoresToolStripMenuItem.Name = "colaboradoresToolStripMenuItem";
             this.colaboradoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.colaboradoresToolStripMenuItem.Text = "Empleados";
@@ -221,6 +226,20 @@
             this.label1.Text = "PLANIFICADOR DE TRABAJO ANUAL";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // nuevoEmpleadoToolStripMenuItem
+            // 
+            this.nuevoEmpleadoToolStripMenuItem.Name = "nuevoEmpleadoToolStripMenuItem";
+            this.nuevoEmpleadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevoEmpleadoToolStripMenuItem.Text = "Nuevo empleado";
+            this.nuevoEmpleadoToolStripMenuItem.Click += new System.EventHandler(this.nuevoEmpleadoToolStripMenuItem_Click);
+            // 
+            // editarEmpleadoToolStripMenuItem
+            // 
+            this.editarEmpleadoToolStripMenuItem.Name = "editarEmpleadoToolStripMenuItem";
+            this.editarEmpleadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editarEmpleadoToolStripMenuItem.Text = "Editar empleado";
+            this.editarEmpleadoToolStripMenuItem.Click += new System.EventHandler(this.editarEmpleadoToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,6 +284,8 @@
         private System.Windows.Forms.ToolStripMenuItem reciboToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem facturacionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vacacionesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem nuevoEmpleadoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editarEmpleadoToolStripMenuItem;
     }
 }
 

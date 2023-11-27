@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -21,6 +23,7 @@ namespace pryPlanificador
         static string user = "root";
         static string pw = "251199";
         static string port = "3306";
+        
 
 
         string cadenaConexion = "server=" + servidor + ";" + "port=" + port + ";" + "user=" + user + ";" + "password=" + pw + ";" + "database=" + bd + ";";
@@ -56,7 +59,7 @@ namespace pryPlanificador
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("EMPLEADO CREADO CON ÉXITO!", "EXITO", MessageBoxButtons.OK);
+                    
                 }
             }
             catch (Exception ex)
@@ -64,6 +67,49 @@ namespace pryPlanificador
                 // Maneja la excepción según tus necesidades
                 MessageBox.Show("Error al insertar nuevo empleado: " + ex.Message);
             }
+
+            try
+            {
+                int anio = 23;
+                //for(int anio = 23; anio < 25; anio++)
+                //{
+                    for (int mes = 1; mes < 13; mes++)
+                    {
+                        for (int dia = 1; dia < 32; dia++)
+                        {
+                            using (MySqlCommand cmd = new MySqlCommand())
+                            {
+                                MySqlConnection conn = new MySqlConnection(cadenaConexion);
+                                cmd.Connection = conn;
+                                string tabla = "turnos_" + mes + "_20" + anio;
+                                string tablaEscapada = $"`{tabla}`";
+                                string fecharda = dia + "/" + mes + "/20" + anio;
+                                string estado = "libre";
+                                cmd.CommandText = $"INSERT INTO {tablaEscapada}  (fecha, nombre_empleado, valor) " +
+                                                  "VALUES (@fecha, @nombre, @estado)";
+
+                                
+                                cmd.Parameters.AddWithValue("@nombre", nombre);
+                                cmd.Parameters.AddWithValue("@fecha", fecharda);
+                                cmd.Parameters.AddWithValue("@estado", estado);
+                                
+
+                                conn.Open();
+                                cmd.ExecuteNonQuery();
+                                MessageBox.Show("EMPLEADO CREADO CON ÉXITO!", "EXITO", MessageBoxButtons.OK);
+                            }
+                        }
+                    }
+                //}
+
+                
+            }
+            catch (Exception ex)
+            {
+                // Maneja la excepción según tus necesidades
+                MessageBox.Show("Error al insertar nuevo empleado: " + ex.Message);
+            }
+
 
         }
 
@@ -196,6 +242,43 @@ namespace pryPlanificador
                 MessageBox.Show("Error al actualizar empleado: " + ex.Message);
             }
         }
+
+
+        public void ActualizarHorarios(int id, string turnos, string horaInicio, string horaFin, int horas)
+        {
+            try
+            {
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    MySqlConnection conn = new MySqlConnection(cadenaConexion);
+                    cmd.Connection = conn;
+                    // Prepara una consulta SQL para actualizar el valor en la base de datos
+                    string consulta = $"UPDATE horarios SET turnos = @turnos, horaInicio = @horaInicio, horaFin = @horaFin, horas = @horas WHERE id = @ID";
+                    cmd.CommandText = consulta;
+                    cmd.Parameters.AddWithValue("@turnos", turnos);
+                    cmd.Parameters.AddWithValue("@horaInicio", horaInicio);
+                    cmd.Parameters.AddWithValue("@horaFin", horaFin);
+                    cmd.Parameters.AddWithValue("@horas", horas);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("El valor se ha actualizado con éxito");
+                }
+
+
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+
 
 
     }

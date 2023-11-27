@@ -52,7 +52,7 @@ namespace pryPlanificador
         {
 
                 string sumaHoras = cmbTurno.SelectedValue.ToString();
-            string nuevoValor = cmbTurno.Text;
+                string nuevoValor = cmbTurno.Text;
                 DataGridViewCell cell = dgvHora.SelectedCells[0];
 
                 if (cell is DataGridViewTextBoxCell)
