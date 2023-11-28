@@ -36,7 +36,7 @@ namespace pryPlanificador
         //    return conn;
         //}
 
-        public void NuevoEmpleado(string nombre, string apellido, string email, string fecha, decimal hora_normal, decimal hora_feriado, decimal hora_vacaciones, byte[] foto, byte[] huella)
+        public void NuevoEmpleado(string nombre, string apellido, string email, string fecha, int hora_normal, int hora_feriado, int hora_vacaciones, byte[] foto, byte[] huella)
         {
             try
             {
@@ -75,34 +75,58 @@ namespace pryPlanificador
                 //{
                     for (int mes = 1; mes < 13; mes++)
                     {
-                        for (int dia = 1; dia < 32; dia++)
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        MySqlConnection conn = new MySqlConnection(cadenaConexion);
+                        cmd.Connection = conn;
+                        string tabla = "totales_20" + anio;
+                        string tablaEscapada = $"`{tabla}`";
+                        int horas = 0;
+                        decimal total = 0;
+                        cmd.CommandText = $"INSERT INTO {tablaEscapada}  (mes, nombre_empleado, horas, acumulado) " +
+                                                  "VALUES (@fecha, @nombre, @horas, @acumulado)";
+
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@fecha", mes);                       
+                        cmd.Parameters.AddWithValue("@horas", horas);
+                        cmd.Parameters.AddWithValue("@acumulado", total);
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    for (int dia = 1; dia < 32; dia++)
                         {
                             using (MySqlCommand cmd = new MySqlCommand())
                             {
                                 MySqlConnection conn = new MySqlConnection(cadenaConexion);
                                 cmd.Connection = conn;
-                                string tabla = "turnos_" + mes + "_20" + anio;
+                                string tabla = "turnos_20" + anio;
                                 string tablaEscapada = $"`{tabla}`";
                                 string fecharda = dia + "/" + mes + "/20" + anio;
                                 string estado = "libre";
-                                cmd.CommandText = $"INSERT INTO {tablaEscapada}  (fecha, nombre_empleado, valor) " +
-                                                  "VALUES (@fecha, @nombre, @estado)";
+                                int horas = 0;
+                                decimal total = 0;
 
-                                
+                                cmd.CommandText = $"INSERT INTO {tablaEscapada}  (fecha, nombre_empleado, valor, horas, acumulado) " +
+                                                  "VALUES (@fecha, @nombre, @estado, @horas, @acumulado)";
+
+
                                 cmd.Parameters.AddWithValue("@nombre", nombre);
                                 cmd.Parameters.AddWithValue("@fecha", fecharda);
                                 cmd.Parameters.AddWithValue("@estado", estado);
-                                
+                                cmd.Parameters.AddWithValue("@horas", horas);
+                                cmd.Parameters.AddWithValue("@acumulado", total);
+
 
                                 conn.Open();
                                 cmd.ExecuteNonQuery();
-                                MessageBox.Show("EMPLEADO CREADO CON ÉXITO!", "EXITO", MessageBoxButtons.OK);
+
                             }
                         }
                     }
                 //}
+                MessageBox.Show("EMPLEADO CREADO CON ÉXITO!", "EXITO", MessageBoxButtons.OK);
 
-                
             }
             catch (Exception ex)
             {
@@ -203,7 +227,7 @@ namespace pryPlanificador
             }
         }
 
-        public void EditarEmpleado(int id, string nombre, string apellido, string email, string fecha, decimal hora_normal, decimal hora_feriado, decimal hora_vacaciones, byte[] foto, byte[] huella)
+        public void EditarEmpleado(int id, string nombre, string apellido, string email, string fecha, int hora_normal, int hora_feriado, int hora_vacaciones, byte[] foto, byte[] huella)
         {
             try
             {
@@ -275,6 +299,36 @@ namespace pryPlanificador
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        public int HoraEmpleado(string empleado)
+        {
+            int valorHora = 0;
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT hora_normal FROM empleados WHERE nombre = @nombre", conn))
+                    {
+                        // Suponiendo que tienes un parámetro llamado "@nombre" en tu consulta SQL
+                        cmd.Parameters.AddWithValue("@nombre", empleado);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader()) 
+                        {
+                            if (reader.Read())
+                            {
+                                valorHora = Convert.ToInt32(reader["hora_normal"]);
+                            }
+                        }
+                    }
+                    return valorHora;
+                }
+            } catch (Exception ex)
+            {
+                return valorHora;
             }
         }
 

@@ -35,13 +35,13 @@ namespace pryPlanificador
 
         private void horasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmHoras f = new frmHoras();
+            frmPlaneamientoHoras f = new frmPlaneamientoHoras();
             f.Show();
         }
 
         private void cuantificadorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmCuantificador frm = new frmCuantificador();
+            frmPlaneamientoCuantificador frm = new frmPlaneamientoCuantificador();
             frm.Show();
         }
 

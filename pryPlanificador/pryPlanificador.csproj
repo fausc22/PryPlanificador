@@ -132,17 +132,23 @@
     <Compile Include="frmLogueo.Designer.cs">
       <DependentUpon>frmLogueo.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPlaneamientoCuantificador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPlaneamientoCuantificador.Designer.cs">
+      <DependentUpon>frmPlaneamientoCuantificador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPlaneamientoHoras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPlaneamientoHoras.Designer.cs">
+      <DependentUpon>frmPlaneamientoHoras.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPlaneamientoPlanificador.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPlaneamientoPlanificador.Designer.cs">
       <DependentUpon>frmPlaneamientoPlanificador.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmPlanificar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmPlanificar.Designer.cs">
-      <DependentUpon>frmPlanificar.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
@@ -179,11 +185,14 @@
     <EmbeddedResource Include="frmLogueo.resx">
       <DependentUpon>frmLogueo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPlaneamientoCuantificador.resx">
+      <DependentUpon>frmPlaneamientoCuantificador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPlaneamientoHoras.resx">
+      <DependentUpon>frmPlaneamientoHoras.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPlaneamientoPlanificador.resx">
       <DependentUpon>frmPlaneamientoPlanificador.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmPlanificar.resx">
-      <DependentUpon>frmPlanificar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>

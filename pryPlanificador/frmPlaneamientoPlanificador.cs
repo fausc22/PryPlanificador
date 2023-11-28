@@ -17,8 +17,10 @@ namespace pryPlanificador
             InitializeComponent();
         }
         clsPlaneamiento plan = new clsPlaneamiento();
+        clsConexion objC = new clsConexion();
         string nombreC;
         string nombreF;
+        string form = "valor";
 
 
         private void gpEmpleado_Enter(object sender, EventArgs e)
@@ -41,7 +43,7 @@ namespace pryPlanificador
             string mes = cmbMes.Text;
             int anio = Convert.ToInt32(cmbAnio.Text);
             
-            plan.CargarGrillaPlanificador(dgvHora, mes, anio);
+            plan.CargarGrillaPlanificador(dgvHora, mes, anio, form);
         }
 
         private void dgvHora_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -76,8 +78,13 @@ namespace pryPlanificador
             string mes = cmbMes.Text;
             int anio = Convert.ToInt32(cmbAnio.Text);
             string nuevoValor = cmbTurno.Text;
-            plan.ActualizarTurnos(mes, anio, nuevoValor, nombreF, nombreC);
-            plan.CargarGrillaPlanificador(dgvHora, mes, anio);
+            int cantidadHoras = Convert.ToInt32(cmbTurno.SelectedValue.ToString());
+            int valorHora = objC.HoraEmpleado(nombreC);
+            int totalHoras = valorHora * cantidadHoras;
+            
+            
+            plan.ActualizarTurnos(mes, anio, nuevoValor, nombreF, nombreC, cantidadHoras, totalHoras);
+            plan.CargarGrillaPlanificador(dgvHora, mes, anio, form);
 
         }
     }

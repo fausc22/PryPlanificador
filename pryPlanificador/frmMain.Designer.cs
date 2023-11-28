@@ -121,7 +121,7 @@
             // controlHorasToolStripMenuItem1
             // 
             this.controlHorasToolStripMenuItem1.Name = "controlHorasToolStripMenuItem1";
-            this.controlHorasToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+             this.controlHorasToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
             this.controlHorasToolStripMenuItem1.Text = "Control Horas";
             // 
             // reciboToolStripMenuItem1

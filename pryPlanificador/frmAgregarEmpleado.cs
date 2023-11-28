@@ -93,9 +93,9 @@ namespace pryPlanificador
             string apellido = txtApellido.Text;
             string mail = txtMail.Text;
             string fecha = txtFecha.Text;
-            decimal horaNormal = Convert.ToDecimal(txtHoraNormal.Text);
-            decimal horaFeriado = Convert.ToDecimal(txtHoraFeriado.Text);
-            decimal horaVacaciones = Convert.ToDecimal(txtHoraVacaciones.Text);
+            int horaNormal = Convert.ToInt32(txtHoraNormal.Text);
+            int horaFeriado = Convert.ToInt32(txtHoraFeriado.Text);
+            int horaVacaciones = Convert.ToInt32(txtHoraVacaciones.Text);
 
             objC.NuevoEmpleado(nombre, apellido, mail, fecha, horaNormal, horaFeriado, horaVacaciones, fotoperfil, huella);
 

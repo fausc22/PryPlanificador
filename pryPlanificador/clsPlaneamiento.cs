@@ -26,7 +26,7 @@ namespace pryPlanificador
 
         string cadenaConexion = "server=" + servidor + ";" + "port=" + port + ";" + "user=" + user + ";" + "password=" + pw + ";" + "database=" + bd + ";";
 
-        public void CargarGrillaPlanificador(DataGridView grilla, string Mes, int anio)
+        public void CargarGrillaPlanificador(DataGridView grilla, string Mes, int anio, string form)
         {
             // Limpiar la grilla
             grilla.Columns.Clear();
@@ -42,7 +42,7 @@ namespace pryPlanificador
             int NroMes = ObtenerNumeroMes(Mes);
             int NroAnio = anio;
             int diasEnMes = DateTime.DaysInMonth(NroAnio, NroMes);
-            string tabla = "turnos_" + NroMes + "_" + NroAnio;
+            string tabla = "turnos_" + NroAnio;
             for (int dia = 1; dia <= diasEnMes; dia++)
             {
                 // Agregar una fila por cada día en el mes
@@ -94,7 +94,7 @@ namespace pryPlanificador
 
                         foreach (string empleado in empleados)
                         {
-                            using (MySqlCommand cmd = new MySqlCommand($"SELECT valor FROM {tabla} WHERE fecha = @fecha AND nombre_empleado = @empleado", conn))
+                            using (MySqlCommand cmd = new MySqlCommand($"SELECT {form} FROM {tabla} WHERE fecha = @fecha AND nombre_empleado = @empleado", conn))
                             {
                                 cmd.Parameters.AddWithValue("@fecha", fecha);
                                 cmd.Parameters.AddWithValue("@empleado", empleado);
@@ -103,7 +103,7 @@ namespace pryPlanificador
                                 {
                                     if (reader.Read())
                                     {
-                                        row.Cells[empleado].Value = reader["valor"].ToString();
+                                        row.Cells[empleado].Value = reader[form].ToString();
                                     }
                                     
                                 }
@@ -111,6 +111,93 @@ namespace pryPlanificador
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                // Maneja la excepción según tus necesidades
+                MessageBox.Show("Error al cargar empleados: " + ex.Message);
+            }
+        }
+
+        public void CargarGrillaTotales(DataGridView grilla, string Mes, int anio, string form)
+        {
+            // Limpiar la grilla
+            grilla.Columns.Clear();
+            grilla.Rows.Clear();
+
+            // Agregar la columna "Fecha"
+            DataGridViewTextBoxColumn fechaColumn = new DataGridViewTextBoxColumn();
+            fechaColumn.HeaderText = "MES";
+            fechaColumn.ReadOnly = true;
+            fechaColumn.DefaultCellStyle.BackColor = Color.LightBlue;
+            grilla.Columns.Add(fechaColumn);
+            int NroMes = ObtenerNumeroMes(Mes);
+            int NroAnio = anio;
+            string tabla = "totales_" + NroAnio;
+            grilla.Rows.Add(Mes);
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+                    List<string> empleados = new List<string>();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT nombre FROM empleados", conn))
+                    {
+
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string empleado = reader["nombre"].ToString();
+                                empleados.Add(empleado);
+
+                                // Crea una nueva columna de ComboBox para cada empleado
+                                DataGridViewTextBoxColumn comboBoxColumn = new DataGridViewTextBoxColumn();
+                                comboBoxColumn.HeaderText = empleado;
+                                comboBoxColumn.Name = empleado; // Nombre de la columna para referencia futura
+                                                                // Cambia el color de fondo de la columna a azul
+                                comboBoxColumn.DefaultCellStyle.BackColor = Color.DarkSalmon;
+
+
+                                // Agrega la columna ComboBox al DataGridView
+                                grilla.Columns.Add(comboBoxColumn);
+
+                            }
+                            // Bloquear los títulos de las columnas
+                            foreach (DataGridViewColumn column in grilla.Columns)
+                            {
+                                column.SortMode = DataGridViewColumnSortMode.NotSortable; // Desactiva la capacidad de ordenar las columnas
+                                column.Resizable = DataGridViewTriState.False; // Evita que se pueda cambiar el tamaño de las columnas
+                            }
+                        }
+                    }
+
+                    // Obtener los valores para cada fecha y empleado
+                    foreach (DataGridViewRow row in grilla.Rows)
+                    {
+
+
+                        foreach (string empleado in empleados)
+                        {
+                            using (MySqlCommand cmd = new MySqlCommand($"SELECT {form} FROM {tabla} WHERE mes = @fecha AND nombre_empleado = @empleado", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@fecha", NroMes);
+                                cmd.Parameters.AddWithValue("@empleado", empleado);
+
+                                using (MySqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    if (reader.Read())
+                                    {
+                                        row.Cells[empleado].Value = reader[form].ToString();
+                                    }
+
+                                }
+                            }
+                        }
+                }
+            }
             }
             catch (Exception ex)
             {
@@ -236,27 +323,65 @@ namespace pryPlanificador
             }
         }
 
-        public void ActualizarTurnos(string Mes, int anio, string valor, string fecha, string nombre)
+
+        public void ActualizarTurnos(string Mes, int anio, string valor, string fecha, string nombre, int horas, int acumulado)
         {
-
-
+            int NroMes = ObtenerNumeroMes(Mes);
+            int NroAnio = anio;
+            string tablaAnual = "totales_" + NroAnio;
+            string tabla = "turnos_" + NroAnio;
+            int horasTotales = 0;
+            int acumuladoTotal = 0;
             try
             {
 
                 using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
                 {
                     conn.Open();
-                    int NroMes = ObtenerNumeroMes(Mes);
-                    int NroAnio = anio;
                     
-                    string tabla = "turnos_" + NroMes + "_" + NroAnio;
-                    string consulta = $"UPDATE {tabla} SET valor = @valor WHERE fecha = @fecha AND nombre_empleado = @nombre";
+                    using (MySqlCommand cmd = new MySqlCommand($"SELECT horas, acumulado FROM {tablaAnual} WHERE mes = @mes AND nombre_empleado = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@mes", NroMes);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader()) 
+                        {
+                            if (reader.Read())
+                            {
+                                horasTotales = Convert.ToInt32(reader["horas"]);
+                                acumuladoTotal = Convert.ToInt32(reader["acumulado"]);
+                            }
+                            
+                        }
+                    }
+                        
+                    string consulta = $"UPDATE {tabla} SET valor = @valor, horas = @horas, acumulado = @acumulado WHERE fecha = @fecha AND nombre_empleado = @nombre";
+                    
                     using (MySqlCommand cmd = new MySqlCommand(consulta, conn))
                     {
                         cmd.Parameters.AddWithValue("@valor", valor);
                         cmd.Parameters.AddWithValue("@fecha", fecha);
                         cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@horas", horas);
+                        cmd.Parameters.AddWithValue("@acumulado", acumulado);
+
+
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    string consulta2 = $"UPDATE {tablaAnual} SET horas = @horas, acumulado = @acumulado WHERE mes = @fecha AND nombre_empleado = @nombre";
+                    int horasAgregar = horasTotales + horas;
+                    int acumuladoAgregar = acumuladoTotal + acumulado;
+                    
+
+                    using (MySqlCommand cmd = new MySqlCommand(consulta2, conn))
+                    {
                         
+                        cmd.Parameters.AddWithValue("@fecha", NroMes);
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@horas", horasAgregar);
+                        cmd.Parameters.AddWithValue("@acumulado", acumuladoAgregar);
+
 
                         cmd.ExecuteNonQuery();
                     }
