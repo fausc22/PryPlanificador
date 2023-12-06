@@ -145,7 +145,7 @@ namespace pryPlanificador
                 {
                     conn.Open();
 
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT nombre FROM empleados", conn))
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM empleados", conn))
                     {
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
@@ -333,7 +333,718 @@ namespace pryPlanificador
         }
 
 
+        
 
 
-    }
+
+
+        public void CargarGrillaFeriado(DataGridView grilla, string anio)
+        {
+            // Limpiar la grilla
+            grilla.Columns.Clear();
+            grilla.Rows.Clear();
+
+            DataGridViewTextBoxColumn idColumn = new DataGridViewTextBoxColumn();
+            idColumn.Name = "ID"; // Asigna un nombre a la columna (puedes usar el mismo nombre que tienes en tu base de datos)
+            idColumn.Visible = false; // Hacer que la columna no sea visible
+            grilla.Columns.Add(idColumn);
+
+            DataGridViewTextBoxColumn fechaColumn = new DataGridViewTextBoxColumn();
+            fechaColumn.HeaderText = "Fecha";
+            fechaColumn.ReadOnly = true;
+            fechaColumn.DefaultCellStyle.BackColor = Color.LightBlue;
+            grilla.Columns.Add(fechaColumn);
+
+            DataGridViewTextBoxColumn fechColumn = new DataGridViewTextBoxColumn();
+            fechColumn.HeaderText = "Festejo";
+            fechColumn.ReadOnly = true;
+            grilla.Columns.Add(fechColumn);
+
+            DataGridViewTextBoxColumn fecColumn = new DataGridViewTextBoxColumn();
+            fecColumn.HeaderText = "Día";
+            fecColumn.ReadOnly = true;
+            fecColumn.DefaultCellStyle.BackColor = Color.DarkGray;
+            grilla.Columns.Add(fecColumn);
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM feriados WHERE periodo = @anio", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@anio", anio);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Agregar una nueva fila a la grilla
+                                int rowIndex = grilla.Rows.Add();
+
+                                // Acceder a las celdas de la fila recién creada y asignar los valores desde el reader
+                                grilla.Rows[rowIndex].Cells[0].Value = reader["id"];
+                                grilla.Rows[rowIndex].Cells[1].Value = reader["fecha"];
+                                grilla.Rows[rowIndex].Cells[2].Value = reader["festejo"];
+                                grilla.Rows[rowIndex].Cells[3].Value = reader["dia"];
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja la excepción según tus necesidades
+                MessageBox.Show("Error al cargar feriados: " + ex.Message);
+            }
+        }
+
+        public void NuevoFeriado(string fecha, string festejo, string dia, string periodo)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand("INSERT INTO feriados (fecha, festejo, dia, periodo) VALUES (@fecha, @festejo, @dia, @periodo)", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@fecha", fecha);
+                        cmd.Parameters.AddWithValue("@festejo", festejo);
+                        cmd.Parameters.AddWithValue("@dia", dia);
+                        cmd.Parameters.AddWithValue("@periodo", periodo);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("FERIADO CREADO CON EXITO!");
+                    }
+                }
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+
+
+        public void EditarFeriado(int id, string fecha, string festejo, string dia, string periodo)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand("UPDATE feriados SET fecha = @fecha, festejo = @festejo, dia = @dia, periodo = @periodo WHERE id = @id", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@fecha", fecha);
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@festejo", festejo);
+                        cmd.Parameters.AddWithValue("@dia", dia);
+                        cmd.Parameters.AddWithValue("@periodo", periodo);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("FERIADO MODIFICADO CON EXITO!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+
+        public void EliminarFeriado(int id)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    
+                    using (MySqlCommand cmd = new MySqlCommand("DELETE FROM feriados WHERE id = @id", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("FERIADO ELIMINADO CON ÉXITO!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+
+
+        public void CargarGrillaLogueo(DataGridView grilla, string anio, string mes)
+        {
+            grilla.Rows.Clear();
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    string tabla = "logueo_" + anio;
+                    using (MySqlCommand cmd = new MySqlCommand($"SELECT * FROM {tabla} WHERE mes = @mes", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@mes", mes);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Agregar una nueva fila a la grilla
+                                int rowIndex = grilla.Rows.Add();
+
+                                // Acceder a las celdas de la fila recién creada y asignar los valores desde el reader
+                                grilla.Rows[rowIndex].Cells[0].Value = reader["id"];
+                                grilla.Rows[rowIndex].Cells[1].Value = reader["fecha"];
+                                grilla.Rows[rowIndex].Cells[2].Value = reader["nombre_empleado"];
+                                grilla.Rows[rowIndex].Cells[3].Value = reader["accion"];
+                                grilla.Rows[rowIndex].Cells[4].Value = reader["hora"];
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja la excepción según tus necesidades
+                MessageBox.Show("Error al cargar feriados: " + ex.Message);
+            }
+        }
+
+
+        public void CargarGrillaLogueoFiltrada(DataGridView grilla, string anio, string mes, string nombre)
+        {
+            grilla.Rows.Clear();
+            
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    string tabla = "logueo_" + anio;
+                    using (MySqlCommand cmd = new MySqlCommand($"SELECT * FROM {tabla} WHERE mes = @mes AND nombre_empleado = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@mes", mes);
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Agregar una nueva fila a la grilla
+                                int rowIndex = grilla.Rows.Add();
+
+                                // Acceder a las celdas de la fila recién creada y asignar los valores desde el reader
+                                grilla.Rows[rowIndex].Cells[0].Value = reader["id"];
+                                grilla.Rows[rowIndex].Cells[1].Value = reader["fecha"];
+                                grilla.Rows[rowIndex].Cells[2].Value = reader["nombre_empleado"];
+                                grilla.Rows[rowIndex].Cells[3].Value = reader["accion"];
+                                grilla.Rows[rowIndex].Cells[4].Value = reader["hora"];
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja la excepción según tus necesidades
+                MessageBox.Show("Error al cargar feriados: " + ex.Message);
+            }
+        }
+
+
+
+        public int ObtenerNumeroMes(string mesTexto)
+        {
+            switch (mesTexto.ToUpper())
+            {
+                case "ENERO":
+                    return 1;
+                case "FEBRERO":
+                    return 2;
+                case "MARZO":
+                    return 3;
+                case "ABRIL":
+                    return 4;
+                case "MAYO":
+                    return 5;
+                case "JUNIO":
+                    return 6;
+                case "JULIO":
+                    return 7;
+                case "AGOSTO":
+                    return 8;
+                case "SEPTIEMBRE":
+                    return 9;
+                case "OCTUBRE":
+                    return 10;
+                case "NOVIEMBRE":
+                    return 11;
+                case "DICIEMBRE":
+                    return 12;
+                default:
+                    return 0;
+            }
+        }
+
+
+
+        public void CargarGrillaControlHs(DataGridView grilla, string anio, string mes, string nombre)
+        {
+            int horasTrabajadasRedondeadas;
+            int valorHora = 0;
+            // Limpiar la grilla
+            grilla.Columns.Clear();
+            grilla.Rows.Clear();
+
+            // Agregar la columna "Fecha"
+            DataGridViewTextBoxColumn fechaColumn = new DataGridViewTextBoxColumn();
+            fechaColumn.HeaderText = "Fecha";
+            fechaColumn.ReadOnly = true;
+            fechaColumn.DefaultCellStyle.BackColor = Color.LightBlue;
+            grilla.Columns.Add(fechaColumn);
+
+            int NroMes = ObtenerNumeroMes(mes);
+            int NroAnio = Convert.ToInt32(anio);
+            
+
+            DataGridViewTextBoxColumn fechColumn = new DataGridViewTextBoxColumn();
+            fechColumn.HeaderText = "Entrada";
+            fechColumn.ReadOnly = true;
+            grilla.Columns.Add(fechColumn);
+
+            DataGridViewTextBoxColumn fecColumn = new DataGridViewTextBoxColumn();
+            fecColumn.HeaderText = "Salida";
+            fecColumn.ReadOnly = true;
+            grilla.Columns.Add(fecColumn);
+
+            DataGridViewTextBoxColumn feColumn = new DataGridViewTextBoxColumn();
+            feColumn.HeaderText = "HS trabajadas";
+            feColumn.ReadOnly = true;
+            grilla.Columns.Add(feColumn);
+
+            DataGridViewTextBoxColumn fColumn = new DataGridViewTextBoxColumn();
+            fColumn.HeaderText = "Acumulado ($)";
+            fColumn.ReadOnly = true;
+            grilla.Columns.Add(fColumn);
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT hora_normal FROM empleados where nombre = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                valorHora = Convert.ToInt32(reader["hora_normal"]);
+                            }
+                        }
+                    }
+
+
+                    string tabla = "logueo_" + anio;
+                    using (MySqlCommand cmd = new MySqlCommand($"SELECT * FROM {tabla} WHERE nombre_empleado = @nombre AND mes = @mes ORDER BY fecha", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@mes", mes);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                DateTime fecha = Convert.ToDateTime(reader["fecha"]);
+                                string accion = reader["accion"].ToString();
+                                string hora = reader["hora"].ToString();
+
+                                // Buscar la fila correspondiente a la fecha en la grilla
+                                int rowIndex = -1;
+                                for (int i = 0; i < grilla.Rows.Count; i++)
+                                {
+                                    if (grilla.Rows[i].Cells[0].Value.ToString() == fecha.ToString("dd/MM/yyyy"))
+                                    {
+                                        rowIndex = i;
+                                        break;
+                                    }
+                                }
+
+                                // Si la fila no existe, agregar una nueva
+                                if (rowIndex == -1)
+                                {
+                                    rowIndex = grilla.Rows.Add();
+                                    grilla.Rows[rowIndex].Cells[0].Value = fecha.ToString("dd/MM/yyyy");
+                                }
+
+                                // Asignar los valores de entrada y salida a las celdas correspondientes
+                                if (accion == "entrada")
+                                {
+                                    grilla.Rows[rowIndex].Cells[1].Value = hora;
+                                }
+                                else if (accion == "salida")
+                                {
+                                    grilla.Rows[rowIndex].Cells[2].Value = hora;
+
+                                    // Calcular las horas trabajadas y mostrarlas en la columna correspondiente
+                                    DateTime entrada = Convert.ToDateTime(grilla.Rows[rowIndex].Cells[1].Value);
+                                    DateTime salida = Convert.ToDateTime(hora);
+
+                                    TimeSpan horasTrabajadas = salida - entrada;
+
+                                    // Redondear y convertir a entero
+                                    horasTrabajadasRedondeadas = Convert.ToInt32(Math.Round(horasTrabajadas.TotalHours));
+                                    int acumulado = valorHora * horasTrabajadasRedondeadas;
+
+                                    grilla.Rows[rowIndex].Cells[3].Value = horasTrabajadasRedondeadas.ToString();
+                                    grilla.Rows[rowIndex].Cells[4].Value = acumulado.ToString();
+                                }
+                            }
+
+                        }
+
+
+                    }
+
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja la excepción según tus necesidades
+                MessageBox.Show("Error al cargar empleados: " + ex.Message);
+            }
+        }
+
+
+        public void NuevoPagoExtra(string nombre, string anio, string mes, string categoria, int monto, string descripcion)
+        {
+            string tablaAnual = "extras_" + anio;
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand($"INSERT INTO {tablaAnual} (nombre_empleado, mes, categoria, monto, descripcion) VALUES (@nombre, @mes, @categoria, @monto, @descripcion)", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@mes", mes);
+                        cmd.Parameters.AddWithValue("@categoria", categoria);
+                        cmd.Parameters.AddWithValue("@monto", monto);
+                        cmd.Parameters.AddWithValue("@descripcion", descripcion);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("PAGO EXTRA REGISTRADO CON EXITO!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+
+        static int CalcularAntiguedad(DateTime fechaIngreso)
+        {
+            // Obtiene la fecha actual
+            DateTime fechaActual = DateTime.Now;
+
+            // Calcula la diferencia en años
+            int antiguedad = fechaActual.Year - fechaIngreso.Year;
+
+            // Ajusta la antigüedad si el aniversario de ingreso aún no ha ocurrido este año
+            if (fechaIngreso.Date > fechaActual.AddYears(-antiguedad))
+            {
+                antiguedad--;
+            }
+
+            return antiguedad;
+        }
+
+
+        public void CargarGrillaEmpleado(DataGridView grilla)
+        {
+            int antiguedad = 0;
+            // Limpiar la grilla
+            grilla.Columns.Clear();
+            grilla.Rows.Clear();
+
+            DataGridViewTextBoxColumn idColumn = new DataGridViewTextBoxColumn();
+            idColumn.Name = "ID"; // Asigna un nombre a la columna (puedes usar el mismo nombre que tienes en tu base de datos)
+            idColumn.Visible = false; // Hacer que la columna no sea visible
+            grilla.Columns.Add(idColumn);
+
+            DataGridViewTextBoxColumn fechaColumn = new DataGridViewTextBoxColumn();
+            fechaColumn.HeaderText = "Empleado";
+            fechaColumn.ReadOnly = true;
+            grilla.Columns.Add(fechaColumn);
+
+            DataGridViewTextBoxColumn fechColumn = new DataGridViewTextBoxColumn();
+            fechColumn.HeaderText = "Fecha Ingreso";
+            fechColumn.ReadOnly = true;
+            grilla.Columns.Add(fechColumn);
+
+            DataGridViewTextBoxColumn fecColumn = new DataGridViewTextBoxColumn();
+            fecColumn.HeaderText = "Años de Antiguedad";
+            fecColumn.ReadOnly = true;
+            grilla.Columns.Add(fecColumn);
+
+
+            DataGridViewTextBoxColumn feColumn = new DataGridViewTextBoxColumn();
+            feColumn.HeaderText = "Días de Vacaciones";
+            feColumn.ReadOnly = true;
+            grilla.Columns.Add(feColumn);
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM empleados", conn))
+                    {
+                        
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            
+
+                                while (reader.Read())
+                                {
+                                string fechaIngreso = reader["fecha_ingreso"].ToString();
+                                // Llamada a la función para obtener la antigüedad en años
+                                if (DateTime.TryParseExact(fechaIngreso, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime fecha))
+                                {
+                                    antiguedad = CalcularAntiguedad(fecha);
+                                }
+
+                                // Agregar una nueva fila a la grilla
+                                int rowIndex = grilla.Rows.Add();
+
+                                // Acceder a las celdas de la fila recién creada y asignar los valores desde el reader
+                                grilla.Rows[rowIndex].Cells[0].Value = reader["id"];
+                                grilla.Rows[rowIndex].Cells[1].Value = reader["nombre"];
+                                grilla.Rows[rowIndex].Cells[2].Value = reader["fecha_ingreso"];
+                                grilla.Rows[rowIndex].Cells[3].Value = antiguedad;
+                                grilla.Rows[rowIndex].Cells[4].Value = reader["dia_vacaciones"];
+                                }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja la excepción según tus necesidades
+                MessageBox.Show("Error al cargar empleados: " + ex.Message);
+            }
+        }
+
+        public void CargarGrillaVacaciones(DataGridView grilla)
+        {
+            int antiguedad = 0;
+            // Limpiar la grilla
+            grilla.Columns.Clear();
+            grilla.Rows.Clear();
+
+            DataGridViewTextBoxColumn idColumn = new DataGridViewTextBoxColumn();
+            idColumn.Name = "ID"; // Asigna un nombre a la columna (puedes usar el mismo nombre que tienes en tu base de datos)
+            idColumn.Visible = false; // Hacer que la columna no sea visible
+            grilla.Columns.Add(idColumn);
+
+            DataGridViewTextBoxColumn fColumn = new DataGridViewTextBoxColumn();
+            fColumn.HeaderText = "Empleado";
+            fColumn.ReadOnly = true;
+            grilla.Columns.Add(fColumn);
+
+            DataGridViewTextBoxColumn fechaColumn = new DataGridViewTextBoxColumn();
+            fechaColumn.HeaderText = "Días";
+            fechaColumn.ReadOnly = true;
+            grilla.Columns.Add(fechaColumn);
+
+            DataGridViewTextBoxColumn fechColumn = new DataGridViewTextBoxColumn();
+            fechColumn.HeaderText = "Salida";
+            fechColumn.ReadOnly = true;
+            grilla.Columns.Add(fechColumn);
+
+            DataGridViewTextBoxColumn fecColumn = new DataGridViewTextBoxColumn();
+            fecColumn.HeaderText = "Regreso";
+            fecColumn.ReadOnly = true;
+            grilla.Columns.Add(fecColumn);
+
+
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM vacaciones", conn))
+                    {
+
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            
+
+                            while (reader.Read())
+                            {
+
+                                // Agregar una nueva fila a la grilla
+                                int rowIndex = grilla.Rows.Add();
+
+                                // Acceder a las celdas de la fila recién creada y asignar los valores desde el reader
+                                grilla.Rows[rowIndex].Cells[0].Value = reader["id"];
+                                grilla.Rows[rowIndex].Cells[1].Value = reader["nombre_empleado"];
+                                grilla.Rows[rowIndex].Cells[2].Value = reader["dias"];
+                                grilla.Rows[rowIndex].Cells[3].Value = reader["salida"];
+                                grilla.Rows[rowIndex].Cells[4].Value = reader["regreso"];
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja la excepción según tus necesidades
+                MessageBox.Show("Error al cargar vacaciones: " + ex.Message);
+            }
+        }
+
+        public void NuevoVacaciones(string nombre, int dias, string salida, string regreso, int DiasTotales)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand("INSERT INTO vacaciones (nombre_empleado, dias, salida, regreso) VALUES (@nombre, @dias, @salida, @regreso)", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@dias", dias);
+                        cmd.Parameters.AddWithValue("@salida", salida);
+                        cmd.Parameters.AddWithValue("@regreso", regreso);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("VACACIONES CREADAS CON EXITO!");
+                    }
+
+                    using (MySqlCommand cmd = new MySqlCommand("UPDATE empleados SET dia_vacaciones = @dia WHERE nombre = @nombre", conn))
+                    {
+                        int DiasAgregar = DiasTotales - dias;
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@dia", DiasAgregar);
+                        
+
+                        cmd.ExecuteNonQuery();
+                        
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        public void ActualizarVacaciones(int id, string nombre, int dias, string salida, string regreso, int DiasTotales)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand("UPDATE vacaciones SET nombre_empleado = @nombre, dias = @dias, salida = @salida, regreso = @regreso WHERE id = @id", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@dias", dias);
+                        cmd.Parameters.AddWithValue("@salida", salida);
+                        cmd.Parameters.AddWithValue("@regreso", regreso);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("VACACIONES EDITADAS CON EXITO!");
+                    }
+
+                    using (MySqlCommand cmd = new MySqlCommand("UPDATE empleados SET dia_vacaciones = @dia WHERE nombre = @nombre", conn))
+                    {
+                        int DiasAgregar = DiasTotales - dias;
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@dia", DiasAgregar);
+
+
+                        cmd.ExecuteNonQuery();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        public void CargarCmbEmpleadoVacaciones(ComboBox cmb)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM empleados", conn))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            DataTable dtHora = new DataTable();
+
+                            if (reader.HasRows)
+                            {
+                                dtHora.Load(reader);
+                                cmb.DataSource = dtHora;
+                                cmb.ValueMember = "dia_vacaciones";
+                                cmb.DisplayMember = "nombre"; // Corregido: Usar "turno" en lugar de "turnos"
+                            }
+                            
+                        }
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja la excepción según tus necesidades
+                MessageBox.Show("Error al cargar empleados: " + ex.Message);
+            }
+        }
+        
+
+
+}
 }

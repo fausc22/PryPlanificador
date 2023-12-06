@@ -41,6 +41,8 @@
             this.cmbAnio = new System.Windows.Forms.ComboBox();
             this.cmbMes = new System.Windows.Forms.ComboBox();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.btnAyuda = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHora)).BeginInit();
             this.gpCmb.SuspendLayout();
             this.gpEmpleado.SuspendLayout();
@@ -58,9 +60,11 @@
             this.dgvHora.EnableHeadersVisualStyles = false;
             this.dgvHora.Location = new System.Drawing.Point(188, 60);
             this.dgvHora.Name = "dgvHora";
+            this.dgvHora.ReadOnly = true;
             this.dgvHora.RowHeadersWidth = 51;
             this.dgvHora.Size = new System.Drawing.Size(1156, 529);
             this.dgvHora.TabIndex = 1;
+            this.dgvHora.Visible = false;
             this.dgvHora.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvHora_CellMouseDoubleClick);
             // 
             // gpCmb
@@ -112,6 +116,7 @@
             // 
             // btnLimpiar
             // 
+            this.btnLimpiar.Enabled = false;
             this.btnLimpiar.Location = new System.Drawing.Point(45, 112);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
@@ -122,6 +127,7 @@
             // 
             // button1
             // 
+            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(45, 83);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -163,6 +169,7 @@
             this.cmbAnio.Name = "cmbAnio";
             this.cmbAnio.Size = new System.Drawing.Size(101, 21);
             this.cmbAnio.TabIndex = 26;
+            this.cmbAnio.SelectedIndexChanged += new System.EventHandler(this.cmbAnio_SelectedIndexChanged);
             // 
             // cmbMes
             // 
@@ -196,18 +203,41 @@
             this.lblTitulo.TabIndex = 33;
             this.lblTitulo.Text = "PLANIFICADOR DE HORARIOS";
             // 
+            // btnAyuda
+            // 
+            this.btnAyuda.Location = new System.Drawing.Point(1140, 595);
+            this.btnAyuda.Name = "btnAyuda";
+            this.btnAyuda.Size = new System.Drawing.Size(92, 22);
+            this.btnAyuda.TabIndex = 34;
+            this.btnAyuda.Text = "Ayuda";
+            this.btnAyuda.UseVisualStyleBackColor = true;
+            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(1240, 595);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(92, 22);
+            this.btnSalir.TabIndex = 35;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // frmPlaneamientoPlanificador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1356, 629);
+            this.Controls.Add(this.btnSalir);
+            this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.gpEmpleado);
             this.Controls.Add(this.gpCmb);
             this.Controls.Add(this.dgvHora);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPlaneamientoPlanificador";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PLANEAMIENTO - PLANIFICADOR DE HORARIOS";
             this.Load += new System.EventHandler(this.frmPlaneamientoPlanificador_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHora)).EndInit();
@@ -233,5 +263,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Button btnAyuda;
+        private System.Windows.Forms.Button btnSalir;
     }
 }

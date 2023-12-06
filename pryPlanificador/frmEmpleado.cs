@@ -31,6 +31,7 @@ namespace pryPlanificador
         private void btnSelec_Click(object sender, EventArgs e)
         {
             string empleado = cmbEmpleado.Text;
+            gpInfo.Visible = true;
             objC.CargarEmpleado(empleado, lblId, txtNombre, txtApellido, txtMail, txtFecha, txtHoraNormal, txtHoraFeriado, txtHoraVacaciones, pbFoto, pbHuella, fotoperfil, huella);
         }
 
@@ -45,6 +46,7 @@ namespace pryPlanificador
             int horaFeriado = Convert.ToInt32(txtHoraFeriado.Text);
             int horaVacaciones = Convert.ToInt32(txtHoraVacaciones.Text);
             objC.EditarEmpleado(id, nombre, apellido, mail, fecha, horaNormal, horaFeriado, horaVacaciones, fotoperfil, huella);
+            gpInfo.Visible = false;
         }
 
         private void btnActualizarHuella_Click(object sender, EventArgs e)
@@ -100,6 +102,17 @@ namespace pryPlanificador
                     }
                 }
             }
+        }
+
+        private void btnAyuda_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("SELECCIONE EL EMPLEADO QUE DESEA MODIFICAR LOS DATOS. LUEGO ACTUALICE LO NECESARIO Y SOLO CUANDO HAYA TERMINADO, HAGA CLICK EN EL BOTON 'ACTUALIZAR DATOS'.", "", MessageBoxButtons.OK);
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            
         }
     }
 }

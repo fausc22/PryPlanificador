@@ -30,18 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEmpleado));
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnActualizarHuella = new System.Windows.Forms.Button();
-            this.pbHuella = new System.Windows.Forms.PictureBox();
-            this.btnActualizarFoto = new System.Windows.Forms.Button();
-            this.pbFoto = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.gpEmpleado = new System.Windows.Forms.GroupBox();
-            this.btnSelec = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cmbEmpleado = new System.Windows.Forms.ComboBox();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.btnAyuda = new System.Windows.Forms.Button();
+            this.gpInfo = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -56,8 +45,19 @@
             this.txtHoraNormal = new System.Windows.Forms.TextBox();
             this.txtFecha = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnActualizarHuella = new System.Windows.Forms.Button();
+            this.pbHuella = new System.Windows.Forms.PictureBox();
+            this.btnActualizarFoto = new System.Windows.Forms.Button();
+            this.pbFoto = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.gpEmpleado = new System.Windows.Forms.GroupBox();
             this.lblId = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.btnSelec = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbEmpleado = new System.Windows.Forms.ComboBox();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnAyuda = new System.Windows.Forms.Button();
+            this.gpInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHuella)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).BeginInit();
             this.gpEmpleado.SuspendLayout();
@@ -73,145 +73,34 @@
             this.lblTitulo.TabIndex = 59;
             this.lblTitulo.Text = "ADMINISTRACIÓN DE EMEPLEADOS";
             // 
-            // groupBox1
+            // gpInfo
             // 
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtApellido);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.txtHoraVacaciones);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.txtMail);
-            this.groupBox1.Controls.Add(this.txtHoraFeriado);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.txtNombre);
-            this.groupBox1.Controls.Add(this.txtHoraNormal);
-            this.groupBox1.Controls.Add(this.txtFecha);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.btnActualizarHuella);
-            this.groupBox1.Controls.Add(this.pbHuella);
-            this.groupBox1.Controls.Add(this.btnActualizarFoto);
-            this.groupBox1.Controls.Add(this.pbFoto);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 170);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(589, 409);
-            this.groupBox1.TabIndex = 60;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "INFORMACION";
-            // 
-            // btnActualizarHuella
-            // 
-            this.btnActualizarHuella.BackColor = System.Drawing.SystemColors.Info;
-            this.btnActualizarHuella.Location = new System.Drawing.Point(407, 361);
-            this.btnActualizarHuella.Name = "btnActualizarHuella";
-            this.btnActualizarHuella.Size = new System.Drawing.Size(133, 29);
-            this.btnActualizarHuella.TabIndex = 72;
-            this.btnActualizarHuella.Text = "ACTUALIZAR HUELLA";
-            this.btnActualizarHuella.UseVisualStyleBackColor = false;
-            this.btnActualizarHuella.Click += new System.EventHandler(this.btnActualizarHuella_Click);
-            // 
-            // pbHuella
-            // 
-            this.pbHuella.Location = new System.Drawing.Point(367, 208);
-            this.pbHuella.Name = "pbHuella";
-            this.pbHuella.Size = new System.Drawing.Size(199, 147);
-            this.pbHuella.TabIndex = 71;
-            this.pbHuella.TabStop = false;
-            // 
-            // btnActualizarFoto
-            // 
-            this.btnActualizarFoto.BackColor = System.Drawing.SystemColors.Info;
-            this.btnActualizarFoto.Location = new System.Drawing.Point(407, 161);
-            this.btnActualizarFoto.Name = "btnActualizarFoto";
-            this.btnActualizarFoto.Size = new System.Drawing.Size(133, 29);
-            this.btnActualizarFoto.TabIndex = 70;
-            this.btnActualizarFoto.Text = "ACTUALIZAR FOTO";
-            this.btnActualizarFoto.UseVisualStyleBackColor = false;
-            this.btnActualizarFoto.Click += new System.EventHandler(this.btnActualizarFoto_Click);
-            // 
-            // pbFoto
-            // 
-            this.pbFoto.Location = new System.Drawing.Point(367, 10);
-            this.pbFoto.Name = "pbFoto";
-            this.pbFoto.Size = new System.Drawing.Size(199, 147);
-            this.pbFoto.TabIndex = 69;
-            this.pbFoto.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.Info;
-            this.button1.Location = new System.Drawing.Point(82, 313);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 29);
-            this.button1.TabIndex = 64;
-            this.button1.Text = "ACTUALIZAR DATOS";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // gpEmpleado
-            // 
-            this.gpEmpleado.Controls.Add(this.lblId);
-            this.gpEmpleado.Controls.Add(this.btnSelec);
-            this.gpEmpleado.Controls.Add(this.label7);
-            this.gpEmpleado.Controls.Add(this.cmbEmpleado);
-            this.gpEmpleado.Location = new System.Drawing.Point(199, 41);
-            this.gpEmpleado.Name = "gpEmpleado";
-            this.gpEmpleado.Size = new System.Drawing.Size(183, 123);
-            this.gpEmpleado.TabIndex = 61;
-            this.gpEmpleado.TabStop = false;
-            this.gpEmpleado.Text = "SELECCIONE EMPLEADO";
-            // 
-            // btnSelec
-            // 
-            this.btnSelec.BackColor = System.Drawing.SystemColors.Info;
-            this.btnSelec.Location = new System.Drawing.Point(30, 71);
-            this.btnSelec.Name = "btnSelec";
-            this.btnSelec.Size = new System.Drawing.Size(118, 39);
-            this.btnSelec.TabIndex = 31;
-            this.btnSelec.Text = "HABILITAR EDICIÓN";
-            this.btnSelec.UseVisualStyleBackColor = false;
-            this.btnSelec.Click += new System.EventHandler(this.btnSelec_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(46, 25);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 16);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "EMPLEADO";
-            // 
-            // cmbEmpleado
-            // 
-            this.cmbEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbEmpleado.FormattingEnabled = true;
-            this.cmbEmpleado.Location = new System.Drawing.Point(19, 44);
-            this.cmbEmpleado.Name = "cmbEmpleado";
-            this.cmbEmpleado.Size = new System.Drawing.Size(144, 21);
-            this.cmbEmpleado.TabIndex = 30;
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSalir.Location = new System.Drawing.Point(489, 592);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(107, 29);
-            this.btnSalir.TabIndex = 65;
-            this.btnSalir.Text = "SALIR";
-            this.btnSalir.UseVisualStyleBackColor = false;
-            // 
-            // btnAyuda
-            // 
-            this.btnAyuda.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnAyuda.Location = new System.Drawing.Point(376, 592);
-            this.btnAyuda.Name = "btnAyuda";
-            this.btnAyuda.Size = new System.Drawing.Size(107, 29);
-            this.btnAyuda.TabIndex = 66;
-            this.btnAyuda.Text = "AYUDA";
-            this.btnAyuda.UseVisualStyleBackColor = false;
+            this.gpInfo.Controls.Add(this.label3);
+            this.gpInfo.Controls.Add(this.txtApellido);
+            this.gpInfo.Controls.Add(this.label9);
+            this.gpInfo.Controls.Add(this.txtHoraVacaciones);
+            this.gpInfo.Controls.Add(this.label1);
+            this.gpInfo.Controls.Add(this.label12);
+            this.gpInfo.Controls.Add(this.txtMail);
+            this.gpInfo.Controls.Add(this.txtHoraFeriado);
+            this.gpInfo.Controls.Add(this.label2);
+            this.gpInfo.Controls.Add(this.label11);
+            this.gpInfo.Controls.Add(this.txtNombre);
+            this.gpInfo.Controls.Add(this.txtHoraNormal);
+            this.gpInfo.Controls.Add(this.txtFecha);
+            this.gpInfo.Controls.Add(this.label10);
+            this.gpInfo.Controls.Add(this.btnActualizarHuella);
+            this.gpInfo.Controls.Add(this.pbHuella);
+            this.gpInfo.Controls.Add(this.btnActualizarFoto);
+            this.gpInfo.Controls.Add(this.pbFoto);
+            this.gpInfo.Controls.Add(this.button1);
+            this.gpInfo.Location = new System.Drawing.Point(12, 170);
+            this.gpInfo.Name = "gpInfo";
+            this.gpInfo.Size = new System.Drawing.Size(589, 409);
+            this.gpInfo.TabIndex = 60;
+            this.gpInfo.TabStop = false;
+            this.gpInfo.Text = "INFORMACION";
+            this.gpInfo.Visible = false;
             // 
             // label3
             // 
@@ -332,6 +221,70 @@
             this.label10.TabIndex = 80;
             this.label10.Text = "FECHA INGRESO";
             // 
+            // btnActualizarHuella
+            // 
+            this.btnActualizarHuella.BackColor = System.Drawing.SystemColors.Info;
+            this.btnActualizarHuella.Location = new System.Drawing.Point(407, 361);
+            this.btnActualizarHuella.Name = "btnActualizarHuella";
+            this.btnActualizarHuella.Size = new System.Drawing.Size(133, 29);
+            this.btnActualizarHuella.TabIndex = 72;
+            this.btnActualizarHuella.Text = "ACTUALIZAR HUELLA";
+            this.btnActualizarHuella.UseVisualStyleBackColor = false;
+            this.btnActualizarHuella.Click += new System.EventHandler(this.btnActualizarHuella_Click);
+            // 
+            // pbHuella
+            // 
+            this.pbHuella.Location = new System.Drawing.Point(367, 208);
+            this.pbHuella.Name = "pbHuella";
+            this.pbHuella.Size = new System.Drawing.Size(199, 147);
+            this.pbHuella.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbHuella.TabIndex = 71;
+            this.pbHuella.TabStop = false;
+            // 
+            // btnActualizarFoto
+            // 
+            this.btnActualizarFoto.BackColor = System.Drawing.SystemColors.Info;
+            this.btnActualizarFoto.Location = new System.Drawing.Point(407, 161);
+            this.btnActualizarFoto.Name = "btnActualizarFoto";
+            this.btnActualizarFoto.Size = new System.Drawing.Size(133, 29);
+            this.btnActualizarFoto.TabIndex = 70;
+            this.btnActualizarFoto.Text = "ACTUALIZAR FOTO";
+            this.btnActualizarFoto.UseVisualStyleBackColor = false;
+            this.btnActualizarFoto.Click += new System.EventHandler(this.btnActualizarFoto_Click);
+            // 
+            // pbFoto
+            // 
+            this.pbFoto.Location = new System.Drawing.Point(367, 10);
+            this.pbFoto.Name = "pbFoto";
+            this.pbFoto.Size = new System.Drawing.Size(199, 147);
+            this.pbFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbFoto.TabIndex = 69;
+            this.pbFoto.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.Info;
+            this.button1.Location = new System.Drawing.Point(82, 313);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(138, 29);
+            this.button1.TabIndex = 64;
+            this.button1.Text = "ACTUALIZAR DATOS";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // gpEmpleado
+            // 
+            this.gpEmpleado.Controls.Add(this.lblId);
+            this.gpEmpleado.Controls.Add(this.btnSelec);
+            this.gpEmpleado.Controls.Add(this.label7);
+            this.gpEmpleado.Controls.Add(this.cmbEmpleado);
+            this.gpEmpleado.Location = new System.Drawing.Point(199, 41);
+            this.gpEmpleado.Name = "gpEmpleado";
+            this.gpEmpleado.Size = new System.Drawing.Size(183, 123);
+            this.gpEmpleado.TabIndex = 61;
+            this.gpEmpleado.TabStop = false;
+            this.gpEmpleado.Text = "SELECCIONE EMPLEADO";
+            // 
             // lblId
             // 
             this.lblId.AutoSize = true;
@@ -343,6 +296,58 @@
             this.lblId.Text = "ID";
             this.lblId.Visible = false;
             // 
+            // btnSelec
+            // 
+            this.btnSelec.BackColor = System.Drawing.SystemColors.Info;
+            this.btnSelec.Location = new System.Drawing.Point(30, 71);
+            this.btnSelec.Name = "btnSelec";
+            this.btnSelec.Size = new System.Drawing.Size(118, 39);
+            this.btnSelec.TabIndex = 31;
+            this.btnSelec.Text = "HABILITAR EDICIÓN";
+            this.btnSelec.UseVisualStyleBackColor = false;
+            this.btnSelec.Click += new System.EventHandler(this.btnSelec_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(46, 25);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(89, 16);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "EMPLEADO";
+            // 
+            // cmbEmpleado
+            // 
+            this.cmbEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbEmpleado.FormattingEnabled = true;
+            this.cmbEmpleado.Location = new System.Drawing.Point(19, 44);
+            this.cmbEmpleado.Name = "cmbEmpleado";
+            this.cmbEmpleado.Size = new System.Drawing.Size(144, 21);
+            this.cmbEmpleado.TabIndex = 30;
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSalir.Location = new System.Drawing.Point(489, 592);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(107, 29);
+            this.btnSalir.TabIndex = 65;
+            this.btnSalir.Text = "SALIR";
+            this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // btnAyuda
+            // 
+            this.btnAyuda.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnAyuda.Location = new System.Drawing.Point(376, 592);
+            this.btnAyuda.Name = "btnAyuda";
+            this.btnAyuda.Size = new System.Drawing.Size(107, 29);
+            this.btnAyuda.TabIndex = 66;
+            this.btnAyuda.Text = "AYUDA";
+            this.btnAyuda.UseVisualStyleBackColor = false;
+            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
+            // 
             // frmEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -352,15 +357,15 @@
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.gpEmpleado);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gpInfo);
             this.Controls.Add(this.lblTitulo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmEmpleado";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EMPLEADOS ";
             this.Load += new System.EventHandler(this.frmEmpleado_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gpInfo.ResumeLayout(false);
+            this.gpInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHuella)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).EndInit();
             this.gpEmpleado.ResumeLayout(false);
@@ -372,7 +377,7 @@
 
         #endregion
         private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gpInfo;
         private System.Windows.Forms.GroupBox gpEmpleado;
         private System.Windows.Forms.Button btnSelec;
         private System.Windows.Forms.Label label7;

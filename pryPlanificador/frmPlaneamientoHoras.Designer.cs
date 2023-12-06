@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPlaneamientoHoras));
             this.dgvHora = new System.Windows.Forms.DataGridView();
             this.dgvTotales = new System.Windows.Forms.DataGridView();
             this.gpEmpleado = new System.Windows.Forms.GroupBox();
@@ -38,6 +39,8 @@
             this.cmbAnio = new System.Windows.Forms.ComboBox();
             this.cmbMes = new System.Windows.Forms.ComboBox();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnAyuda = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHora)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTotales)).BeginInit();
             this.gpEmpleado.SuspendLayout();
@@ -55,9 +58,11 @@
             this.dgvHora.EnableHeadersVisualStyles = false;
             this.dgvHora.Location = new System.Drawing.Point(281, 41);
             this.dgvHora.Name = "dgvHora";
+            this.dgvHora.ReadOnly = true;
             this.dgvHora.RowHeadersWidth = 51;
             this.dgvHora.Size = new System.Drawing.Size(1063, 533);
             this.dgvHora.TabIndex = 10;
+            this.dgvHora.Visible = false;
             // 
             // dgvTotales
             // 
@@ -66,10 +71,12 @@
             this.dgvTotales.Location = new System.Drawing.Point(281, 580);
             this.dgvTotales.Margin = new System.Windows.Forms.Padding(2);
             this.dgvTotales.Name = "dgvTotales";
+            this.dgvTotales.ReadOnly = true;
             this.dgvTotales.RowHeadersWidth = 51;
             this.dgvTotales.RowTemplate.Height = 24;
             this.dgvTotales.Size = new System.Drawing.Size(1063, 50);
             this.dgvTotales.TabIndex = 27;
+            this.dgvTotales.Visible = false;
             // 
             // gpEmpleado
             // 
@@ -88,15 +95,18 @@
             // 
             // btnLimpiar
             // 
+            this.btnLimpiar.Enabled = false;
             this.btnLimpiar.Location = new System.Drawing.Point(45, 112);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 28;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // button1
             // 
+            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(45, 83);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -138,6 +148,7 @@
             this.cmbAnio.Name = "cmbAnio";
             this.cmbAnio.Size = new System.Drawing.Size(101, 21);
             this.cmbAnio.TabIndex = 26;
+            this.cmbAnio.SelectedIndexChanged += new System.EventHandler(this.cmbAnio_SelectedIndexChanged);
             // 
             // cmbMes
             // 
@@ -171,16 +182,39 @@
             this.lblTitulo.TabIndex = 34;
             this.lblTitulo.Text = "HORAS TRABAJADAS";
             // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(1254, 635);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(92, 22);
+            this.btnSalir.TabIndex = 42;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // btnAyuda
+            // 
+            this.btnAyuda.Location = new System.Drawing.Point(1154, 635);
+            this.btnAyuda.Name = "btnAyuda";
+            this.btnAyuda.Size = new System.Drawing.Size(92, 22);
+            this.btnAyuda.TabIndex = 41;
+            this.btnAyuda.Text = "Ayuda";
+            this.btnAyuda.UseVisualStyleBackColor = true;
+            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
+            // 
             // frmPlaneamientoHoras
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1356, 643);
+            this.ClientSize = new System.Drawing.Size(1356, 660);
+            this.Controls.Add(this.btnSalir);
+            this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.gpEmpleado);
             this.Controls.Add(this.dgvTotales);
             this.Controls.Add(this.dgvHora);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPlaneamientoHoras";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PLANEAMIENTO - HORAS TRABAJADAS";
@@ -206,5 +240,7 @@
         private System.Windows.Forms.ComboBox cmbAnio;
         private System.Windows.Forms.ComboBox cmbMes;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnAyuda;
     }
 }

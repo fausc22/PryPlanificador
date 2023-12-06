@@ -43,12 +43,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gpDatos = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lblid = new System.Windows.Forms.Label();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.lblTitulo = new System.Windows.Forms.Label();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnAyuda = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.gpDatos.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvTurnos
@@ -60,7 +63,7 @@
             this.horaInicio,
             this.SALIDA,
             this.CANTIDAD});
-            this.dgvTurnos.Location = new System.Drawing.Point(24, 12);
+            this.dgvTurnos.Location = new System.Drawing.Point(12, 54);
             this.dgvTurnos.Name = "dgvTurnos";
             this.dgvTurnos.Size = new System.Drawing.Size(471, 504);
             this.dgvTurnos.TabIndex = 0;
@@ -169,25 +172,26 @@
             this.label3.TabIndex = 27;
             this.label3.Text = "CANT. HORAS";
             // 
-            // groupBox1
+            // gpDatos
             // 
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.lblid);
-            this.groupBox1.Controls.Add(this.btnModificar);
-            this.groupBox1.Controls.Add(this.lblMes);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtTurno);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txtInicio);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtFin);
-            this.groupBox1.Controls.Add(this.txtTotal);
-            this.groupBox1.Location = new System.Drawing.Point(513, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(243, 246);
-            this.groupBox1.TabIndex = 28;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "DATOS TURNO";
+            this.gpDatos.Controls.Add(this.label4);
+            this.gpDatos.Controls.Add(this.lblid);
+            this.gpDatos.Controls.Add(this.btnModificar);
+            this.gpDatos.Controls.Add(this.lblMes);
+            this.gpDatos.Controls.Add(this.label3);
+            this.gpDatos.Controls.Add(this.txtTurno);
+            this.gpDatos.Controls.Add(this.label2);
+            this.gpDatos.Controls.Add(this.txtInicio);
+            this.gpDatos.Controls.Add(this.label1);
+            this.gpDatos.Controls.Add(this.txtFin);
+            this.gpDatos.Controls.Add(this.txtTotal);
+            this.gpDatos.Location = new System.Drawing.Point(501, 54);
+            this.gpDatos.Name = "gpDatos";
+            this.gpDatos.Size = new System.Drawing.Size(243, 246);
+            this.gpDatos.TabIndex = 28;
+            this.gpDatos.TabStop = false;
+            this.gpDatos.Text = "DATOS TURNO";
+            this.gpDatos.Visible = false;
             // 
             // label4
             // 
@@ -222,22 +226,57 @@
             this.btnModificar.UseVisualStyleBackColor = false;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.Location = new System.Drawing.Point(327, 9);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(122, 29);
+            this.lblTitulo.TabIndex = 38;
+            this.lblTitulo.Text = "TURNOS";
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(647, 562);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(92, 22);
+            this.btnSalir.TabIndex = 41;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // btnAyuda
+            // 
+            this.btnAyuda.Location = new System.Drawing.Point(547, 562);
+            this.btnAyuda.Name = "btnAyuda";
+            this.btnAyuda.Size = new System.Drawing.Size(92, 22);
+            this.btnAyuda.TabIndex = 40;
+            this.btnAyuda.Text = "Ayuda";
+            this.btnAyuda.UseVisualStyleBackColor = true;
+            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
+            // 
             // frmTurnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(780, 539);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(753, 596);
+            this.Controls.Add(this.btnSalir);
+            this.Controls.Add(this.btnAyuda);
+            this.Controls.Add(this.lblTitulo);
+            this.Controls.Add(this.gpDatos);
             this.Controls.Add(this.dgvTurnos);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmTurnos";
-            this.Text = "TURNOS";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "EDICION - TURNOS";
             this.Load += new System.EventHandler(this.frmTurnos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gpDatos.ResumeLayout(false);
+            this.gpDatos.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -257,9 +296,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gpDatos;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Label lblid;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnAyuda;
     }
 }

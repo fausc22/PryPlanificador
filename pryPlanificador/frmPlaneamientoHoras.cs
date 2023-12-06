@@ -34,6 +34,43 @@ namespace pryPlanificador
 
             plan.CargarGrillaPlanificador(dgvHora, mes, anio, form);
             plan.CargarGrillaTotales(dgvTotales, mes, anio, form);
+
+            cmbMes.Enabled = false;
+            cmbAnio.Enabled = false;
+            btnLimpiar.Enabled = true;
+            button1.Enabled = false;
+            dgvHora.Visible = true;
+            dgvTotales.Visible = true;
+        }
+
+        private void cmbAnio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbAnio.SelectedIndex != -1 && cmbMes.SelectedIndex != -1)
+            {
+                button1.Enabled=true;
+            }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            cmbMes.SelectedIndex = -1;
+            cmbAnio.SelectedIndex = -1;
+            cmbAnio.Enabled = true;
+            cmbMes.Enabled = true;
+            btnLimpiar.Enabled = false;
+            dgvHora.Visible = false;
+            dgvTotales.Visible = false;
+            
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnAyuda_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("SELECCIONE EL MES Y EL AÑO CORRESPONIDENTE EN EL QUE DESEA CONSULTAR LA INFORMACION.", "AYUDA", MessageBoxButtons.OK);
         }
     }
 }

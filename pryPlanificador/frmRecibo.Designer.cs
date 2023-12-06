@@ -228,9 +228,9 @@
             this.gpDatos.Controls.Add(this.textBox4);
             this.gpDatos.Controls.Add(this.textBox6);
             this.gpDatos.Controls.Add(this.textBox5);
-            this.gpDatos.Location = new System.Drawing.Point(311, 129);
+            this.gpDatos.Location = new System.Drawing.Point(311, 68);
             this.gpDatos.Name = "gpDatos";
-            this.gpDatos.Size = new System.Drawing.Size(653, 333);
+            this.gpDatos.Size = new System.Drawing.Size(653, 484);
             this.gpDatos.TabIndex = 28;
             this.gpDatos.TabStop = false;
             this.gpDatos.Text = "DATOS MENSUALES";
@@ -546,7 +546,7 @@
             this.lblEmpleado.AutoSize = true;
             this.lblEmpleado.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmpleado.ForeColor = System.Drawing.Color.Bisque;
-            this.lblEmpleado.Location = new System.Drawing.Point(410, 67);
+            this.lblEmpleado.Location = new System.Drawing.Point(1153, 68);
             this.lblEmpleado.Name = "lblEmpleado";
             this.lblEmpleado.Size = new System.Drawing.Size(137, 25);
             this.lblEmpleado.TabIndex = 32;
@@ -557,7 +557,7 @@
             this.lblMes.AutoSize = true;
             this.lblMes.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMes.ForeColor = System.Drawing.Color.Bisque;
-            this.lblMes.Location = new System.Drawing.Point(386, 92);
+            this.lblMes.Location = new System.Drawing.Point(1129, 93);
             this.lblMes.Name = "lblMes";
             this.lblMes.Size = new System.Drawing.Size(108, 24);
             this.lblMes.TabIndex = 33;
@@ -568,7 +568,7 @@
             this.lblAnio.AutoSize = true;
             this.lblAnio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAnio.ForeColor = System.Drawing.Color.Bisque;
-            this.lblAnio.Location = new System.Drawing.Point(510, 92);
+            this.lblAnio.Location = new System.Drawing.Point(1253, 93);
             this.lblAnio.Name = "lblAnio";
             this.lblAnio.Size = new System.Drawing.Size(54, 24);
             this.lblAnio.TabIndex = 34;

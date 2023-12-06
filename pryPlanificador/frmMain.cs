@@ -84,5 +84,23 @@ namespace pryPlanificador
             frmEmpleado f = new frmEmpleado();
             f.ShowDialog();
         }
+
+        private void feriadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmFeriados f = new frmFeriados();
+            f.ShowDialog();
+        }
+
+        private void controlHorasToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmControlHoras f = new frmControlHoras();
+            f.ShowDialog();
+        }
+
+        private void pagosExtraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPagoExtra f = new frmPagoExtra();
+            f.ShowDialog();
+        }
     }
 }

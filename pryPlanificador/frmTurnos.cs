@@ -26,6 +26,7 @@ namespace pryPlanificador
 
         private void dgvTurnos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            gpDatos.Visible = true;
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow selectedRow = dgvTurnos.Rows[e.RowIndex];
@@ -59,7 +60,18 @@ namespace pryPlanificador
             objE.ActualizarHorarios(id, turno, horaInicio, horaFin, horaTotal);
             
             objC.CargarGrillaTurnos(dgvTurnos);
+            gpDatos.Visible = false; 
 
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnAyuda_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("HAGA DOBLE CLICK EN LA GRILLA SOBRE EL TURNO QUE DESEA MODFIICAR, INTRODUZCA LOS DATOS Y HAGA CLICK EN EL BOTON. POR FAVOR ASIGNAR EL CALCULO DE CANTIDAD DE HORAS MANUALMENTE.", "", MessageBoxButtons.OK);
         }
     }
 }

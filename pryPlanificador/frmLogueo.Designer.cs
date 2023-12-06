@@ -43,8 +43,15 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnSelec = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbEmpleado = new System.Windows.Forms.ComboBox();
+            this.gpFiltro = new System.Windows.Forms.GroupBox();
+            this.btnFiltrar = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnAyuda = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogueo)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.gpFiltro.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -112,6 +119,7 @@
             this.cmbAnio.Name = "cmbAnio";
             this.cmbAnio.Size = new System.Drawing.Size(100, 21);
             this.cmbAnio.TabIndex = 28;
+            this.cmbAnio.SelectedIndexChanged += new System.EventHandler(this.cmbAnio_SelectedIndexChanged);
             // 
             // dgvLogueo
             // 
@@ -127,8 +135,9 @@
             this.dgvLogueo.Location = new System.Drawing.Point(276, 54);
             this.dgvLogueo.Name = "dgvLogueo";
             this.dgvLogueo.ReadOnly = true;
-            this.dgvLogueo.Size = new System.Drawing.Size(508, 541);
+            this.dgvLogueo.Size = new System.Drawing.Size(488, 541);
             this.dgvLogueo.TabIndex = 29;
+            this.dgvLogueo.Visible = false;
             // 
             // idRegistro
             // 
@@ -139,25 +148,25 @@
             // 
             // Fecha
             // 
-            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.HeaderText = "FECHA";
             this.Fecha.Name = "Fecha";
             this.Fecha.ReadOnly = true;
             // 
             // Nombre
             // 
-            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.HeaderText = "NOMBRE";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
             // 
             // Entrada
             // 
-            this.Entrada.HeaderText = "Entrada";
+            this.Entrada.HeaderText = "ACCION";
             this.Entrada.Name = "Entrada";
             this.Entrada.ReadOnly = true;
             // 
             // Salida
             // 
-            this.Salida.HeaderText = "Salida";
+            this.Salida.HeaderText = "HORA";
             this.Salida.Name = "Salida";
             this.Salida.ReadOnly = true;
             // 
@@ -179,39 +188,114 @@
             // btnLimpiar
             // 
             this.btnLimpiar.BackColor = System.Drawing.SystemColors.Info;
+            this.btnLimpiar.Enabled = false;
             this.btnLimpiar.Location = new System.Drawing.Point(69, 107);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(101, 26);
             this.btnLimpiar.TabIndex = 32;
             this.btnLimpiar.Text = "LIMPIAR";
             this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnSelec
             // 
             this.btnSelec.BackColor = System.Drawing.SystemColors.Info;
+            this.btnSelec.Enabled = false;
             this.btnSelec.Location = new System.Drawing.Point(69, 75);
             this.btnSelec.Name = "btnSelec";
             this.btnSelec.Size = new System.Drawing.Size(101, 26);
             this.btnSelec.TabIndex = 33;
             this.btnSelec.Text = "SELECCIONAR";
             this.btnSelec.UseVisualStyleBackColor = false;
+            this.btnSelec.Click += new System.EventHandler(this.btnSelec_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(81, 25);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(89, 16);
+            this.label7.TabIndex = 31;
+            this.label7.Text = "EMPLEADO";
+            // 
+            // cmbEmpleado
+            // 
+            this.cmbEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbEmpleado.FormattingEnabled = true;
+            this.cmbEmpleado.Location = new System.Drawing.Point(37, 44);
+            this.cmbEmpleado.Name = "cmbEmpleado";
+            this.cmbEmpleado.Size = new System.Drawing.Size(169, 21);
+            this.cmbEmpleado.TabIndex = 32;
+            this.cmbEmpleado.SelectedIndexChanged += new System.EventHandler(this.cmbEmpleado_SelectedIndexChanged);
+            // 
+            // gpFiltro
+            // 
+            this.gpFiltro.Controls.Add(this.btnFiltrar);
+            this.gpFiltro.Controls.Add(this.label7);
+            this.gpFiltro.Controls.Add(this.cmbEmpleado);
+            this.gpFiltro.Location = new System.Drawing.Point(17, 209);
+            this.gpFiltro.Name = "gpFiltro";
+            this.gpFiltro.Size = new System.Drawing.Size(238, 107);
+            this.gpFiltro.TabIndex = 33;
+            this.gpFiltro.TabStop = false;
+            this.gpFiltro.Text = "FILTRO";
+            this.gpFiltro.Visible = false;
+            // 
+            // btnFiltrar
+            // 
+            this.btnFiltrar.BackColor = System.Drawing.SystemColors.Info;
+            this.btnFiltrar.Enabled = false;
+            this.btnFiltrar.Location = new System.Drawing.Point(74, 68);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(101, 26);
+            this.btnFiltrar.TabIndex = 34;
+            this.btnFiltrar.Text = "FILTRAR";
+            this.btnFiltrar.UseVisualStyleBackColor = false;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(674, 611);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(92, 22);
+            this.btnSalir.TabIndex = 43;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // btnAyuda
+            // 
+            this.btnAyuda.Location = new System.Drawing.Point(574, 611);
+            this.btnAyuda.Name = "btnAyuda";
+            this.btnAyuda.Size = new System.Drawing.Size(92, 22);
+            this.btnAyuda.TabIndex = 42;
+            this.btnAyuda.Text = "Ayuda";
+            this.btnAyuda.UseVisualStyleBackColor = true;
+            this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
             // 
             // frmLogueo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(856, 661);
+            this.ClientSize = new System.Drawing.Size(774, 643);
+            this.Controls.Add(this.btnSalir);
+            this.Controls.Add(this.btnAyuda);
+            this.Controls.Add(this.gpFiltro);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvLogueo);
             this.Controls.Add(this.lblTitulo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmLogueo";
-            this.Text = "LOGUEO DE EMPLEADOS ";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "EMPLAEDOS -LOGUEO DE EMPLEADOS ";
             this.Load += new System.EventHandler(this.frmLogueo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogueo)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.gpFiltro.ResumeLayout(false);
+            this.gpFiltro.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,13 +309,19 @@
         private System.Windows.Forms.ComboBox cmbMes;
         private System.Windows.Forms.ComboBox cmbAnio;
         private System.Windows.Forms.DataGridView dgvLogueo;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Button btnSelec;
         private System.Windows.Forms.DataGridViewTextBoxColumn idRegistro;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Entrada;
         private System.Windows.Forms.DataGridViewTextBoxColumn Salida;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.Button btnSelec;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbEmpleado;
+        private System.Windows.Forms.GroupBox gpFiltro;
+        private System.Windows.Forms.Button btnFiltrar;
+        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnAyuda;
     }
 }

@@ -42,6 +42,8 @@
             this.vacacionesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.eDICIONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colaboradoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nuevoEmpleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarEmpleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.feriadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.turnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eSTADISTICASToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,8 +52,7 @@
             this.graficoEficienciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graficoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
-            this.nuevoEmpleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editarEmpleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pagosExtraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,6 +106,7 @@
             this.logueoToolStripMenuItem1,
             this.controlHorasToolStripMenuItem1,
             this.reciboToolStripMenuItem1,
+            this.pagosExtraToolStripMenuItem,
             this.facturacionToolStripMenuItem,
             this.vacacionesToolStripMenuItem1});
             this.eMPLEADOSToolStripMenuItem.Name = "eMPLEADOSToolStripMenuItem";
@@ -114,33 +116,34 @@
             // logueoToolStripMenuItem1
             // 
             this.logueoToolStripMenuItem1.Name = "logueoToolStripMenuItem1";
-            this.logueoToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.logueoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.logueoToolStripMenuItem1.Text = "Logueo";
             this.logueoToolStripMenuItem1.Click += new System.EventHandler(this.logueoToolStripMenuItem1_Click);
             // 
             // controlHorasToolStripMenuItem1
             // 
             this.controlHorasToolStripMenuItem1.Name = "controlHorasToolStripMenuItem1";
-             this.controlHorasToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.controlHorasToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.controlHorasToolStripMenuItem1.Text = "Control Horas";
+            this.controlHorasToolStripMenuItem1.Click += new System.EventHandler(this.controlHorasToolStripMenuItem1_Click);
             // 
             // reciboToolStripMenuItem1
             // 
             this.reciboToolStripMenuItem1.Name = "reciboToolStripMenuItem1";
-            this.reciboToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.reciboToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.reciboToolStripMenuItem1.Text = "Recibo";
             this.reciboToolStripMenuItem1.Click += new System.EventHandler(this.reciboToolStripMenuItem1_Click);
             // 
             // facturacionToolStripMenuItem
             // 
             this.facturacionToolStripMenuItem.Name = "facturacionToolStripMenuItem";
-            this.facturacionToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.facturacionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.facturacionToolStripMenuItem.Text = "Facturacion";
             // 
             // vacacionesToolStripMenuItem1
             // 
             this.vacacionesToolStripMenuItem1.Name = "vacacionesToolStripMenuItem1";
-            this.vacacionesToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.vacacionesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.vacacionesToolStripMenuItem1.Text = "Vacaciones";
             // 
             // eDICIONToolStripMenuItem
@@ -159,20 +162,35 @@
             this.nuevoEmpleadoToolStripMenuItem,
             this.editarEmpleadoToolStripMenuItem});
             this.colaboradoresToolStripMenuItem.Name = "colaboradoresToolStripMenuItem";
-            this.colaboradoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.colaboradoresToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.colaboradoresToolStripMenuItem.Text = "Empleados";
             this.colaboradoresToolStripMenuItem.Click += new System.EventHandler(this.colaboradoresToolStripMenuItem_Click);
+            // 
+            // nuevoEmpleadoToolStripMenuItem
+            // 
+            this.nuevoEmpleadoToolStripMenuItem.Name = "nuevoEmpleadoToolStripMenuItem";
+            this.nuevoEmpleadoToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.nuevoEmpleadoToolStripMenuItem.Text = "Nuevo empleado";
+            this.nuevoEmpleadoToolStripMenuItem.Click += new System.EventHandler(this.nuevoEmpleadoToolStripMenuItem_Click);
+            // 
+            // editarEmpleadoToolStripMenuItem
+            // 
+            this.editarEmpleadoToolStripMenuItem.Name = "editarEmpleadoToolStripMenuItem";
+            this.editarEmpleadoToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.editarEmpleadoToolStripMenuItem.Text = "Editar empleado";
+            this.editarEmpleadoToolStripMenuItem.Click += new System.EventHandler(this.editarEmpleadoToolStripMenuItem_Click);
             // 
             // feriadosToolStripMenuItem
             // 
             this.feriadosToolStripMenuItem.Name = "feriadosToolStripMenuItem";
-            this.feriadosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.feriadosToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.feriadosToolStripMenuItem.Text = "Feriados";
+            this.feriadosToolStripMenuItem.Click += new System.EventHandler(this.feriadosToolStripMenuItem_Click);
             // 
             // turnosToolStripMenuItem
             // 
             this.turnosToolStripMenuItem.Name = "turnosToolStripMenuItem";
-            this.turnosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.turnosToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.turnosToolStripMenuItem.Text = "Turnos";
             this.turnosToolStripMenuItem.Click += new System.EventHandler(this.turnosToolStripMenuItem_Click);
             // 
@@ -226,19 +244,12 @@
             this.label1.Text = "PLANIFICADOR DE TRABAJO ANUAL";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // nuevoEmpleadoToolStripMenuItem
+            // pagosExtraToolStripMenuItem
             // 
-            this.nuevoEmpleadoToolStripMenuItem.Name = "nuevoEmpleadoToolStripMenuItem";
-            this.nuevoEmpleadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.nuevoEmpleadoToolStripMenuItem.Text = "Nuevo empleado";
-            this.nuevoEmpleadoToolStripMenuItem.Click += new System.EventHandler(this.nuevoEmpleadoToolStripMenuItem_Click);
-            // 
-            // editarEmpleadoToolStripMenuItem
-            // 
-            this.editarEmpleadoToolStripMenuItem.Name = "editarEmpleadoToolStripMenuItem";
-            this.editarEmpleadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.editarEmpleadoToolStripMenuItem.Text = "Editar empleado";
-            this.editarEmpleadoToolStripMenuItem.Click += new System.EventHandler(this.editarEmpleadoToolStripMenuItem_Click);
+            this.pagosExtraToolStripMenuItem.Name = "pagosExtraToolStripMenuItem";
+            this.pagosExtraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pagosExtraToolStripMenuItem.Text = "Pagos Extra";
+            this.pagosExtraToolStripMenuItem.Click += new System.EventHandler(this.pagosExtraToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -249,6 +260,7 @@
             this.ClientSize = new System.Drawing.Size(1408, 722);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.Text = "Planificador de trabajo anual - FC SOFTWARE ©";
@@ -286,6 +298,7 @@
         private System.Windows.Forms.ToolStripMenuItem vacacionesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem nuevoEmpleadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarEmpleadoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pagosExtraToolStripMenuItem;
     }
 }
 
