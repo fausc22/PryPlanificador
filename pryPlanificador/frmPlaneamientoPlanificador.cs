@@ -41,6 +41,7 @@ namespace pryPlanificador
             cmbMes.Enabled = true;
             btnLimpiar.Enabled = false;
             dgvHora.Visible = false;
+            gpCmb.Visible = false;
         }
 
         private void button1_Click(object sender, EventArgs e)

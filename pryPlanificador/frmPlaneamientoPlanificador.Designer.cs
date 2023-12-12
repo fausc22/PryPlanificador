@@ -58,11 +58,12 @@
             this.dgvHora.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgvHora.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHora.EnableHeadersVisualStyles = false;
-            this.dgvHora.Location = new System.Drawing.Point(188, 60);
+            this.dgvHora.Location = new System.Drawing.Point(251, 74);
+            this.dgvHora.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvHora.Name = "dgvHora";
             this.dgvHora.ReadOnly = true;
             this.dgvHora.RowHeadersWidth = 51;
-            this.dgvHora.Size = new System.Drawing.Size(1156, 529);
+            this.dgvHora.Size = new System.Drawing.Size(1541, 651);
             this.dgvHora.TabIndex = 1;
             this.dgvHora.Visible = false;
             this.dgvHora.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvHora_CellMouseDoubleClick);
@@ -71,9 +72,11 @@
             // 
             this.gpCmb.Controls.Add(this.btnModificar);
             this.gpCmb.Controls.Add(this.cmbTurno);
-            this.gpCmb.Location = new System.Drawing.Point(12, 217);
+            this.gpCmb.Location = new System.Drawing.Point(16, 267);
+            this.gpCmb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gpCmb.Name = "gpCmb";
-            this.gpCmb.Size = new System.Drawing.Size(170, 95);
+            this.gpCmb.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpCmb.Size = new System.Drawing.Size(227, 117);
             this.gpCmb.TabIndex = 2;
             this.gpCmb.TabStop = false;
             this.gpCmb.Text = "SELECCIONE UN TURNO";
@@ -81,9 +84,10 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(45, 55);
+            this.btnModificar.Location = new System.Drawing.Point(60, 68);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.Size = new System.Drawing.Size(100, 28);
             this.btnModificar.TabIndex = 1;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -93,9 +97,10 @@
             // 
             this.cmbTurno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTurno.FormattingEnabled = true;
-            this.cmbTurno.Location = new System.Drawing.Point(29, 28);
+            this.cmbTurno.Location = new System.Drawing.Point(39, 34);
+            this.cmbTurno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbTurno.Name = "cmbTurno";
-            this.cmbTurno.Size = new System.Drawing.Size(101, 21);
+            this.cmbTurno.Size = new System.Drawing.Size(133, 24);
             this.cmbTurno.TabIndex = 0;
             // 
             // gpEmpleado
@@ -106,9 +111,11 @@
             this.gpEmpleado.Controls.Add(this.lblblblb);
             this.gpEmpleado.Controls.Add(this.cmbAnio);
             this.gpEmpleado.Controls.Add(this.cmbMes);
-            this.gpEmpleado.Location = new System.Drawing.Point(12, 60);
+            this.gpEmpleado.Location = new System.Drawing.Point(16, 74);
+            this.gpEmpleado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gpEmpleado.Name = "gpEmpleado";
-            this.gpEmpleado.Size = new System.Drawing.Size(170, 151);
+            this.gpEmpleado.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpEmpleado.Size = new System.Drawing.Size(227, 186);
             this.gpEmpleado.TabIndex = 32;
             this.gpEmpleado.TabStop = false;
             this.gpEmpleado.Text = "SELECCIONE PERIODO";
@@ -116,10 +123,10 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Enabled = false;
-            this.btnLimpiar.Location = new System.Drawing.Point(45, 112);
+            this.btnLimpiar.Location = new System.Drawing.Point(60, 138);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.Size = new System.Drawing.Size(100, 28);
             this.btnLimpiar.TabIndex = 28;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
@@ -128,9 +135,10 @@
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(45, 83);
+            this.button1.Location = new System.Drawing.Point(60, 102);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 27;
             this.button1.Text = "Modificar";
             this.button1.UseVisualStyleBackColor = true;
@@ -140,7 +148,8 @@
             // 
             this.lblb.AutoSize = true;
             this.lblb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblb.Location = new System.Drawing.Point(6, 29);
+            this.lblb.Location = new System.Drawing.Point(8, 36);
+            this.lblb.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblb.Name = "lblb";
             this.lblb.Size = new System.Drawing.Size(39, 16);
             this.lblb.TabIndex = 23;
@@ -150,7 +159,8 @@
             // 
             this.lblblblb.AutoSize = true;
             this.lblblblb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblblblb.Location = new System.Drawing.Point(6, 58);
+            this.lblblblb.Location = new System.Drawing.Point(8, 71);
+            this.lblblblb.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblblblb.Name = "lblblblb";
             this.lblblblb.Size = new System.Drawing.Size(39, 16);
             this.lblblblb.TabIndex = 24;
@@ -165,9 +175,10 @@
             "2023",
             "2024",
             "2025"});
-            this.cmbAnio.Location = new System.Drawing.Point(52, 56);
+            this.cmbAnio.Location = new System.Drawing.Point(69, 69);
+            this.cmbAnio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbAnio.Name = "cmbAnio";
-            this.cmbAnio.Size = new System.Drawing.Size(101, 21);
+            this.cmbAnio.Size = new System.Drawing.Size(133, 24);
             this.cmbAnio.TabIndex = 26;
             this.cmbAnio.SelectedIndexChanged += new System.EventHandler(this.cmbAnio_SelectedIndexChanged);
             // 
@@ -188,16 +199,18 @@
             "OCTUBRE",
             "NOVIEMBRE",
             "DICIEMBRE"});
-            this.cmbMes.Location = new System.Drawing.Point(52, 29);
+            this.cmbMes.Location = new System.Drawing.Point(69, 36);
+            this.cmbMes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbMes.Name = "cmbMes";
-            this.cmbMes.Size = new System.Drawing.Size(101, 21);
+            this.cmbMes.Size = new System.Drawing.Size(133, 24);
             this.cmbMes.TabIndex = 25;
             // 
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(440, 9);
+            this.lblTitulo.Location = new System.Drawing.Point(587, 11);
+            this.lblTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(382, 29);
             this.lblTitulo.TabIndex = 33;
@@ -205,9 +218,10 @@
             // 
             // btnAyuda
             // 
-            this.btnAyuda.Location = new System.Drawing.Point(1140, 595);
+            this.btnAyuda.Location = new System.Drawing.Point(1520, 732);
+            this.btnAyuda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAyuda.Name = "btnAyuda";
-            this.btnAyuda.Size = new System.Drawing.Size(92, 22);
+            this.btnAyuda.Size = new System.Drawing.Size(123, 27);
             this.btnAyuda.TabIndex = 34;
             this.btnAyuda.Text = "Ayuda";
             this.btnAyuda.UseVisualStyleBackColor = true;
@@ -215,9 +229,10 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(1240, 595);
+            this.btnSalir.Location = new System.Drawing.Point(1653, 732);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(92, 22);
+            this.btnSalir.Size = new System.Drawing.Size(123, 27);
             this.btnSalir.TabIndex = 35;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
@@ -225,10 +240,10 @@
             // 
             // frmPlaneamientoPlanificador
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1356, 629);
+            this.ClientSize = new System.Drawing.Size(1808, 774);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.lblTitulo);
@@ -236,6 +251,7 @@
             this.Controls.Add(this.gpCmb);
             this.Controls.Add(this.dgvHora);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmPlaneamientoPlanificador";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PLANEAMIENTO - PLANIFICADOR DE HORARIOS";

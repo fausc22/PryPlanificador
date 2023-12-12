@@ -28,6 +28,7 @@ namespace pryPlanificador
             btnNuevoFeriado.Enabled=true;
             cmbAnio.Enabled=false;
             btnLimpiar.Enabled = true;
+            button1.Enabled = false;
 
         }
 
@@ -42,7 +43,7 @@ namespace pryPlanificador
         private void btnNuevoFeriado_Click(object sender, EventArgs e)
         {
             gpNuevoFeriado.Visible = true;
-            gpNuevoFeriado.Text = "NUEVO EMPLEADO";
+            gpNuevoFeriado.Text = "NUEVO FERIADO";
             btnAgregar.Text = "AGREGAR";
             btnEliminar.Visible = false;
             agregar = true;
@@ -51,7 +52,7 @@ namespace pryPlanificador
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            txtDia.Clear();
+            cmbDia.SelectedIndex = -1;
             txtFecha.Clear();
             txtFestejo.Clear();
             cmbAnioGp.SelectedIndex = -1;
@@ -70,13 +71,13 @@ namespace pryPlanificador
         {
             if (txtFestejo.Text != "")
             {
-                txtDia.Enabled = true;
+                cmbDia.Enabled = true;
             }
         }
 
         private void txtDia_TextChanged(object sender, EventArgs e)
         {
-            if (txtDia.Text != "")
+            if (cmbDia.SelectedIndex != -1)
             {
                 cmbAnioGp.Enabled = true;
             }
@@ -84,7 +85,7 @@ namespace pryPlanificador
 
         private void cmbAnioGp_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbAnioGp.SelectedIndex != -1 && txtFecha.Text != "" && txtDia.Text != "" && txtFestejo.Text != "")
+            if (cmbAnioGp.SelectedIndex != -1 && txtFecha.Text != "" && cmbDia.SelectedIndex != -1 && txtFestejo.Text != "")
             {
                 btnAgregar.Enabled = true;
             }
@@ -111,7 +112,7 @@ namespace pryPlanificador
                 lblId.Text = id;
                 txtFecha.Text = Fecha;
                 txtFestejo.Text = festejo;
-                txtDia.Text = dia;
+                cmbDia.Text = dia;
                 cmbAnioGp.Text = cmbAnio.Text;
 
             }
@@ -122,13 +123,13 @@ namespace pryPlanificador
             
             string fecha = txtFecha.Text;
             string festejo = txtFestejo.Text;
-            string dia = txtDia.Text;
+            string dia = cmbDia.Text;
             string anio = cmbAnioGp.Text;
 
             if (agregar == true)
             {
                 objC.NuevoFeriado(fecha, festejo, dia, anio);
-                txtDia.Clear();
+                cmbDia.SelectedIndex = -1;
                 txtFecha.Clear();
                 txtFestejo.Clear();
                 btnEliminar.Visible = false;
@@ -140,7 +141,7 @@ namespace pryPlanificador
             {
                 int id = Convert.ToInt32(lblId.Text);
                 objC.EditarFeriado(id, fecha, festejo, dia, anio);
-                txtDia.Clear();
+                cmbDia.SelectedIndex = -1;
                 txtFecha.Clear();
                 txtFestejo.Clear();
                 btnEliminar.Visible = false;
@@ -181,13 +182,20 @@ namespace pryPlanificador
             btnLimpiar.Enabled = false;
             cmbAnio.SelectedIndex = -1;
             cmbAnioGp.SelectedIndex = -1;
-            txtDia.Clear();
+            cmbDia.SelectedIndex = -1;
             txtFecha.Clear();
             txtFestejo.Clear();
             dgvFeriado.Visible = false;
             gpNuevoFeriado.Visible = false;
             btnNuevoFeriado.Visible = false;
+            cmbAnio.Enabled = true;
+            button1.Enabled = true;
             
+        }
+
+        private void frmFeriados_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

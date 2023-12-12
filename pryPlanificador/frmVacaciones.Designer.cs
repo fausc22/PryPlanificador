@@ -34,6 +34,11 @@
             this.btnAyuda = new System.Windows.Forms.Button();
             this.btnNuevoFeriado = new System.Windows.Forms.Button();
             this.gpEmpleado = new System.Windows.Forms.GroupBox();
+            this.lblDias = new System.Windows.Forms.Label();
+            this.lblId = new System.Windows.Forms.Label();
+            this.txtCantDia = new System.Windows.Forms.TextBox();
+            this.txtRegreso = new System.Windows.Forms.TextBox();
+            this.txtSalida = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnSelec = new System.Windows.Forms.Button();
@@ -41,13 +46,8 @@
             this.cmbEmpleado = new System.Windows.Forms.ComboBox();
             this.lblb = new System.Windows.Forms.Label();
             this.lblblblb = new System.Windows.Forms.Label();
-            this.txtSalida = new System.Windows.Forms.TextBox();
-            this.txtRegreso = new System.Windows.Forms.TextBox();
-            this.txtCantDia = new System.Windows.Forms.TextBox();
             this.dgvEmpleados = new System.Windows.Forms.DataGridView();
             this.dgvCalendario = new System.Windows.Forms.DataGridView();
-            this.lblId = new System.Windows.Forms.Label();
-            this.lblDias = new System.Windows.Forms.Label();
             this.gpEmpleado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalendario)).BeginInit();
@@ -126,6 +126,49 @@
             this.gpEmpleado.Text = "COMPLETE LOS SIGUIENTOS DATOS";
             this.gpEmpleado.Visible = false;
             // 
+            // lblDias
+            // 
+            this.lblDias.AutoSize = true;
+            this.lblDias.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDias.Location = new System.Drawing.Point(225, 57);
+            this.lblDias.Name = "lblDias";
+            this.lblDias.Size = new System.Drawing.Size(27, 29);
+            this.lblDias.TabIndex = 54;
+            this.lblDias.Text = "1";
+            this.lblDias.Visible = false;
+            // 
+            // lblId
+            // 
+            this.lblId.AutoSize = true;
+            this.lblId.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblId.Location = new System.Drawing.Point(224, 14);
+            this.lblId.Name = "lblId";
+            this.lblId.Size = new System.Drawing.Size(27, 29);
+            this.lblId.TabIndex = 53;
+            this.lblId.Text = "1";
+            this.lblId.Visible = false;
+            // 
+            // txtCantDia
+            // 
+            this.txtCantDia.Location = new System.Drawing.Point(43, 173);
+            this.txtCantDia.Name = "txtCantDia";
+            this.txtCantDia.Size = new System.Drawing.Size(176, 20);
+            this.txtCantDia.TabIndex = 41;
+            // 
+            // txtRegreso
+            // 
+            this.txtRegreso.Location = new System.Drawing.Point(43, 131);
+            this.txtRegreso.Name = "txtRegreso";
+            this.txtRegreso.Size = new System.Drawing.Size(176, 20);
+            this.txtRegreso.TabIndex = 40;
+            // 
+            // txtSalida
+            // 
+            this.txtSalida.Location = new System.Drawing.Point(43, 89);
+            this.txtSalida.Name = "txtSalida";
+            this.txtSalida.Size = new System.Drawing.Size(176, 20);
+            this.txtSalida.TabIndex = 39;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -197,27 +240,6 @@
             this.lblblblb.TabIndex = 24;
             this.lblblblb.Text = "FECHA REGRESO";
             // 
-            // txtSalida
-            // 
-            this.txtSalida.Location = new System.Drawing.Point(43, 89);
-            this.txtSalida.Name = "txtSalida";
-            this.txtSalida.Size = new System.Drawing.Size(176, 20);
-            this.txtSalida.TabIndex = 39;
-            // 
-            // txtRegreso
-            // 
-            this.txtRegreso.Location = new System.Drawing.Point(43, 131);
-            this.txtRegreso.Name = "txtRegreso";
-            this.txtRegreso.Size = new System.Drawing.Size(176, 20);
-            this.txtRegreso.TabIndex = 40;
-            // 
-            // txtCantDia
-            // 
-            this.txtCantDia.Location = new System.Drawing.Point(43, 173);
-            this.txtCantDia.Name = "txtCantDia";
-            this.txtCantDia.Size = new System.Drawing.Size(176, 20);
-            this.txtCantDia.TabIndex = 41;
-            // 
             // dgvEmpleados
             // 
             this.dgvEmpleados.AllowUserToAddRows = false;
@@ -252,28 +274,6 @@
             this.dgvCalendario.Size = new System.Drawing.Size(478, 323);
             this.dgvCalendario.TabIndex = 52;
             this.dgvCalendario.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCalendario_CellMouseDoubleClick);
-            // 
-            // lblId
-            // 
-            this.lblId.AutoSize = true;
-            this.lblId.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblId.Location = new System.Drawing.Point(224, 14);
-            this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(27, 29);
-            this.lblId.TabIndex = 53;
-            this.lblId.Text = "1";
-            this.lblId.Visible = false;
-            // 
-            // lblDias
-            // 
-            this.lblDias.AutoSize = true;
-            this.lblDias.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDias.Location = new System.Drawing.Point(225, 57);
-            this.lblDias.Name = "lblDias";
-            this.lblDias.Size = new System.Drawing.Size(27, 29);
-            this.lblDias.TabIndex = 54;
-            this.lblDias.Text = "1";
-            this.lblDias.Visible = false;
             // 
             // frmVacaciones
             // 

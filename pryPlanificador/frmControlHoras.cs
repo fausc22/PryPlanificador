@@ -69,6 +69,9 @@ namespace pryPlanificador
             cmbMes.Enabled = true;
             cmbAnio.Enabled = true;
             btnLimpiar.Enabled = false;
+            cmbAnio.SelectedIndex = -1;
+            cmbEmpleado.SelectedIndex = -1;
+            cmbMes.SelectedIndex = -1;
         }
 
         private void btnAyuda_Click(object sender, EventArgs e)

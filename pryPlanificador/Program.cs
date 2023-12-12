@@ -16,7 +16,7 @@ namespace pryPlanificador
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmVacaciones());
+            Application.Run(new frmMain());
         }
     }
 }

@@ -102,5 +102,11 @@ namespace pryPlanificador
             frmPagoExtra f = new frmPagoExtra();
             f.ShowDialog();
         }
+
+        private void vacacionesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmVacaciones f = new frmVacaciones();
+            f.ShowDialog();
+        }
     }
 }

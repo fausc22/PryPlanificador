@@ -105,7 +105,7 @@ namespace pryPlanificador
             cmbMes.SelectedIndex = -1;
             cmbMes.Enabled = false;
             cmbEmpleado.SelectedIndex = -1;
-            cmbEmpleado.Enabled = false;
+            
             txtDescripcion.Clear();
             txtDescripcion.Enabled = false;
             txtMonto.Clear();
@@ -116,6 +116,16 @@ namespace pryPlanificador
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             Limpiar();
+        }
+
+        private void txtMonto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verifica si la tecla presionada es un número o una tecla de control
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                // Si no es un número ni una tecla de control, se cancela el evento
+                e.Handled = true;
+            }
         }
     }
 }

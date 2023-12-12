@@ -36,8 +36,8 @@
             this.cmbAnio = new System.Windows.Forms.ComboBox();
             this.dgvFeriado = new System.Windows.Forms.DataGridView();
             this.gpNuevoFeriado = new System.Windows.Forms.GroupBox();
+            this.cmbDia = new System.Windows.Forms.ComboBox();
             this.lblId = new System.Windows.Forms.Label();
-            this.txtDia = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -131,15 +131,15 @@
             this.dgvFeriado.Name = "dgvFeriado";
             this.dgvFeriado.ReadOnly = true;
             this.dgvFeriado.RowHeadersWidth = 51;
-            this.dgvFeriado.Size = new System.Drawing.Size(423, 528);
+            this.dgvFeriado.Size = new System.Drawing.Size(497, 528);
             this.dgvFeriado.TabIndex = 33;
             this.dgvFeriado.Visible = false;
             this.dgvFeriado.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvFeriado_CellMouseDoubleClick);
             // 
             // gpNuevoFeriado
             // 
+            this.gpNuevoFeriado.Controls.Add(this.cmbDia);
             this.gpNuevoFeriado.Controls.Add(this.lblId);
-            this.gpNuevoFeriado.Controls.Add(this.txtDia);
             this.gpNuevoFeriado.Controls.Add(this.label4);
             this.gpNuevoFeriado.Controls.Add(this.btnEliminar);
             this.gpNuevoFeriado.Controls.Add(this.btnCancelar);
@@ -158,6 +158,24 @@
             this.gpNuevoFeriado.Text = "NUEVO FERIADO";
             this.gpNuevoFeriado.Visible = false;
             // 
+            // cmbDia
+            // 
+            this.cmbDia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDia.Enabled = false;
+            this.cmbDia.FormattingEnabled = true;
+            this.cmbDia.Items.AddRange(new object[] {
+            "Lunes",
+            "Martes",
+            "Miercoles",
+            "Jueves",
+            "Viernes",
+            "Sabado",
+            "Domingo"});
+            this.cmbDia.Location = new System.Drawing.Point(23, 184);
+            this.cmbDia.Name = "cmbDia";
+            this.cmbDia.Size = new System.Drawing.Size(119, 21);
+            this.cmbDia.TabIndex = 41;
+            // 
             // lblId
             // 
             this.lblId.AutoSize = true;
@@ -168,15 +186,6 @@
             this.lblId.TabIndex = 40;
             this.lblId.Text = "1";
             this.lblId.Visible = false;
-            // 
-            // txtDia
-            // 
-            this.txtDia.Enabled = false;
-            this.txtDia.Location = new System.Drawing.Point(25, 175);
-            this.txtDia.Name = "txtDia";
-            this.txtDia.Size = new System.Drawing.Size(119, 20);
-            this.txtDia.TabIndex = 39;
-            this.txtDia.TextChanged += new System.EventHandler(this.txtDia_TextChanged);
             // 
             // label4
             // 
@@ -310,7 +319,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(536, 584);
+            this.btnSalir.Location = new System.Drawing.Point(613, 584);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(92, 22);
             this.btnSalir.TabIndex = 39;
@@ -320,7 +329,7 @@
             // 
             // btnAyuda
             // 
-            this.btnAyuda.Location = new System.Drawing.Point(436, 584);
+            this.btnAyuda.Location = new System.Drawing.Point(513, 584);
             this.btnAyuda.Name = "btnAyuda";
             this.btnAyuda.Size = new System.Drawing.Size(92, 22);
             this.btnAyuda.TabIndex = 38;
@@ -333,7 +342,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(641, 616);
+            this.ClientSize = new System.Drawing.Size(715, 616);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.lblTitulo);
@@ -345,6 +354,7 @@
             this.Name = "frmFeriados";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EDICION - FERIADOS";
+            this.Load += new System.EventHandler(this.frmFeriados_Load);
             this.gpEmpleado.ResumeLayout(false);
             this.gpEmpleado.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFeriado)).EndInit();
@@ -374,11 +384,11 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnNuevoFeriado;
-        private System.Windows.Forms.TextBox txtDia;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnAyuda;
+        private System.Windows.Forms.ComboBox cmbDia;
     }
 }

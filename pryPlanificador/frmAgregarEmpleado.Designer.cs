@@ -30,7 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAgregarEmpleado));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnActualizarHuella = new System.Windows.Forms.Button();
+            this.lblId = new System.Windows.Forms.Label();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.bnInit = new System.Windows.Forms.Button();
             this.pbHuella = new System.Windows.Forms.PictureBox();
             this.btnActualizarFoto = new System.Windows.Forms.Button();
             this.pbFoto = new System.Windows.Forms.PictureBox();
@@ -38,11 +40,11 @@
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtHoraVacaciones = new System.Windows.Forms.TextBox();
+            this.txtDiaVacaciones = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.lblxd = new System.Windows.Forms.Label();
             this.txtMail = new System.Windows.Forms.TextBox();
-            this.txtHoraFeriado = new System.Windows.Forms.TextBox();
+            this.txtAntiguedad = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -52,7 +54,7 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnAyuda = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHuella)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).BeginInit();
@@ -60,8 +62,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.lblId);
             this.groupBox1.Controls.Add(this.btnLimpiar);
-            this.groupBox1.Controls.Add(this.btnActualizarHuella);
+            this.groupBox1.Controls.Add(this.bnInit);
             this.groupBox1.Controls.Add(this.pbHuella);
             this.groupBox1.Controls.Add(this.btnActualizarFoto);
             this.groupBox1.Controls.Add(this.pbFoto);
@@ -69,11 +73,11 @@
             this.groupBox1.Controls.Add(this.txtApellido);
             this.groupBox1.Controls.Add(this.btnAgregar);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.txtHoraVacaciones);
+            this.groupBox1.Controls.Add(this.txtDiaVacaciones);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.lblxd);
             this.groupBox1.Controls.Add(this.txtMail);
-            this.groupBox1.Controls.Add(this.txtHoraFeriado);
+            this.groupBox1.Controls.Add(this.txtAntiguedad);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.txtNombre);
@@ -82,36 +86,61 @@
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Location = new System.Drawing.Point(12, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(589, 409);
-            this.groupBox1.TabIndex = 61;
+            this.groupBox1.Size = new System.Drawing.Size(645, 409);
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "INFORMACION";
             // 
-            // btnActualizarHuella
+            // lblId
             // 
-            this.btnActualizarHuella.BackColor = System.Drawing.SystemColors.Info;
-            this.btnActualizarHuella.Location = new System.Drawing.Point(407, 361);
-            this.btnActualizarHuella.Name = "btnActualizarHuella";
-            this.btnActualizarHuella.Size = new System.Drawing.Size(133, 29);
-            this.btnActualizarHuella.TabIndex = 72;
-            this.btnActualizarHuella.Text = "CARGAR HUELLA";
-            this.btnActualizarHuella.UseVisualStyleBackColor = false;
-            this.btnActualizarHuella.Click += new System.EventHandler(this.btnActualizarHuella_Click);
+            this.lblId.AutoSize = true;
+            this.lblId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblId.Location = new System.Drawing.Point(626, 335);
+            this.lblId.Name = "lblId";
+            this.lblId.Size = new System.Drawing.Size(15, 16);
+            this.lblId.TabIndex = 69;
+            this.lblId.Text = "0";
+            this.lblId.Visible = false;
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnLimpiar.Location = new System.Drawing.Point(82, 361);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(149, 42);
+            this.btnLimpiar.TabIndex = 73;
+            this.btnLimpiar.Text = "LIMPIAR ";
+            this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // bnInit
+            // 
+            this.bnInit.BackColor = System.Drawing.SystemColors.Info;
+            this.bnInit.Location = new System.Drawing.Point(465, 370);
+            this.bnInit.Name = "bnInit";
+            this.bnInit.Size = new System.Drawing.Size(133, 29);
+            this.bnInit.TabIndex = 72;
+            this.bnInit.Text = "CARGAR HUELLA";
+            this.bnInit.UseVisualStyleBackColor = false;
+            this.bnInit.LocationChanged += new System.EventHandler(this.bnInit_LocationChanged);
+            this.bnInit.Click += new System.EventHandler(this.btnActualizarHuella_Click);
             // 
             // pbHuella
             // 
             this.pbHuella.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pbHuella.Location = new System.Drawing.Point(367, 208);
+            this.pbHuella.Location = new System.Drawing.Point(425, 217);
             this.pbHuella.Name = "pbHuella";
             this.pbHuella.Size = new System.Drawing.Size(199, 147);
             this.pbHuella.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbHuella.TabIndex = 71;
             this.pbHuella.TabStop = false;
+            this.pbHuella.LoadCompleted += new System.ComponentModel.AsyncCompletedEventHandler(this.pbHuella_LoadCompleted);
+            this.pbHuella.LocationChanged += new System.EventHandler(this.pbHuella_LocationChanged);
             // 
             // btnActualizarFoto
             // 
             this.btnActualizarFoto.BackColor = System.Drawing.SystemColors.Info;
-            this.btnActualizarFoto.Location = new System.Drawing.Point(407, 161);
+            this.btnActualizarFoto.Location = new System.Drawing.Point(465, 170);
             this.btnActualizarFoto.Name = "btnActualizarFoto";
             this.btnActualizarFoto.Size = new System.Drawing.Size(133, 29);
             this.btnActualizarFoto.TabIndex = 70;
@@ -124,7 +153,7 @@
             this.pbFoto.BackColor = System.Drawing.SystemColors.HighlightText;
             this.pbFoto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pbFoto.InitialImage = null;
-            this.pbFoto.Location = new System.Drawing.Point(367, 10);
+            this.pbFoto.Location = new System.Drawing.Point(425, 19);
             this.pbFoto.Name = "pbFoto";
             this.pbFoto.Size = new System.Drawing.Size(199, 147);
             this.pbFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -144,10 +173,11 @@
             // txtApellido
             // 
             this.txtApellido.Enabled = false;
-            this.txtApellido.Location = new System.Drawing.Point(187, 70);
+            this.txtApellido.Location = new System.Drawing.Point(236, 70);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(102, 20);
             this.txtApellido.TabIndex = 67;
+            this.txtApellido.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtApellido.TextChanged += new System.EventHandler(this.txtApellido_TextChanged);
             // 
             // btnAgregar
@@ -172,14 +202,16 @@
             this.label9.TabIndex = 3;
             this.label9.Text = "NOMBRE";
             // 
-            // txtHoraVacaciones
+            // txtDiaVacaciones
             // 
-            this.txtHoraVacaciones.Enabled = false;
-            this.txtHoraVacaciones.Location = new System.Drawing.Point(187, 265);
-            this.txtHoraVacaciones.Name = "txtHoraVacaciones";
-            this.txtHoraVacaciones.Size = new System.Drawing.Size(102, 20);
-            this.txtHoraVacaciones.TabIndex = 48;
-            this.txtHoraVacaciones.TextChanged += new System.EventHandler(this.txtHoraVacaciones_TextChanged);
+            this.txtDiaVacaciones.Enabled = false;
+            this.txtDiaVacaciones.Location = new System.Drawing.Point(236, 265);
+            this.txtDiaVacaciones.Name = "txtDiaVacaciones";
+            this.txtDiaVacaciones.Size = new System.Drawing.Size(102, 20);
+            this.txtDiaVacaciones.TabIndex = 48;
+            this.txtDiaVacaciones.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtDiaVacaciones.TextChanged += new System.EventHandler(this.txtHoraVacaciones_TextChanged);
+            this.txtDiaVacaciones.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtHoraVacaciones_KeyPress);
             // 
             // label1
             // 
@@ -191,33 +223,36 @@
             this.label1.TabIndex = 49;
             this.label1.Text = "MAIL";
             // 
-            // label12
+            // lblxd
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(27, 230);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(120, 16);
-            this.label12.TabIndex = 58;
-            this.label12.Text = "HORA FERIADO";
+            this.lblxd.AutoSize = true;
+            this.lblxd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblxd.Location = new System.Drawing.Point(28, 188);
+            this.lblxd.Name = "lblxd";
+            this.lblxd.Size = new System.Drawing.Size(106, 16);
+            this.lblxd.TabIndex = 58;
+            this.lblxd.Text = "ANTIGÜEDAD";
             // 
             // txtMail
             // 
             this.txtMail.Enabled = false;
-            this.txtMail.Location = new System.Drawing.Point(187, 108);
+            this.txtMail.Location = new System.Drawing.Point(236, 108);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(102, 20);
             this.txtMail.TabIndex = 47;
+            this.txtMail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtMail.TextChanged += new System.EventHandler(this.txtMail_TextChanged);
             // 
-            // txtHoraFeriado
+            // txtAntiguedad
             // 
-            this.txtHoraFeriado.Enabled = false;
-            this.txtHoraFeriado.Location = new System.Drawing.Point(187, 226);
-            this.txtHoraFeriado.Name = "txtHoraFeriado";
-            this.txtHoraFeriado.Size = new System.Drawing.Size(102, 20);
-            this.txtHoraFeriado.TabIndex = 57;
-            this.txtHoraFeriado.TextChanged += new System.EventHandler(this.txtHoraFeriado_TextChanged);
+            this.txtAntiguedad.Enabled = false;
+            this.txtAntiguedad.Location = new System.Drawing.Point(236, 184);
+            this.txtAntiguedad.Name = "txtAntiguedad";
+            this.txtAntiguedad.Size = new System.Drawing.Size(102, 20);
+            this.txtAntiguedad.TabIndex = 57;
+            this.txtAntiguedad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtAntiguedad.TextChanged += new System.EventHandler(this.txtHoraFeriado_TextChanged);
+            this.txtAntiguedad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtHoraFeriado_KeyPress);
             // 
             // label2
             // 
@@ -225,15 +260,15 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(28, 269);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(150, 16);
+            this.label2.Size = new System.Drawing.Size(167, 16);
             this.label2.TabIndex = 50;
-            this.label2.Text = "HORA VACACIONES";
+            this.label2.Text = "DIAS DE VACACIONES";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(27, 189);
+            this.label11.Location = new System.Drawing.Point(28, 228);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(117, 16);
             this.label11.TabIndex = 56;
@@ -241,28 +276,32 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(187, 35);
+            this.txtNombre.Location = new System.Drawing.Point(238, 35);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
-            this.txtNombre.TabIndex = 51;
+            this.txtNombre.TabIndex = 9;
+            this.txtNombre.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             // 
             // txtHoraNormal
             // 
             this.txtHoraNormal.Enabled = false;
-            this.txtHoraNormal.Location = new System.Drawing.Point(187, 185);
+            this.txtHoraNormal.Location = new System.Drawing.Point(236, 224);
             this.txtHoraNormal.Name = "txtHoraNormal";
             this.txtHoraNormal.Size = new System.Drawing.Size(102, 20);
             this.txtHoraNormal.TabIndex = 55;
+            this.txtHoraNormal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtHoraNormal.TextChanged += new System.EventHandler(this.txtHoraNormal_TextChanged);
+            this.txtHoraNormal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtHoraNormal_KeyPress);
             // 
             // txtFecha
             // 
             this.txtFecha.Enabled = false;
-            this.txtFecha.Location = new System.Drawing.Point(187, 146);
+            this.txtFecha.Location = new System.Drawing.Point(236, 146);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(102, 20);
             this.txtFecha.TabIndex = 53;
+            this.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtFecha.TextChanged += new System.EventHandler(this.txtFecha_TextChanged);
             // 
             // label10
@@ -288,7 +327,7 @@
             // btnAyuda
             // 
             this.btnAyuda.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnAyuda.Location = new System.Drawing.Point(379, 459);
+            this.btnAyuda.Location = new System.Drawing.Point(437, 456);
             this.btnAyuda.Name = "btnAyuda";
             this.btnAyuda.Size = new System.Drawing.Size(107, 29);
             this.btnAyuda.TabIndex = 68;
@@ -299,7 +338,7 @@
             // btnSalir
             // 
             this.btnSalir.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSalir.Location = new System.Drawing.Point(492, 459);
+            this.btnSalir.Location = new System.Drawing.Point(550, 456);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(107, 29);
             this.btnSalir.TabIndex = 67;
@@ -307,24 +346,22 @@
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // btnLimpiar
+            // label4
             // 
-            this.btnLimpiar.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnLimpiar.Enabled = false;
-            this.btnLimpiar.Location = new System.Drawing.Point(82, 361);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(149, 42);
-            this.btnLimpiar.TabIndex = 73;
-            this.btnLimpiar.Text = "LIMPIAR ";
-            this.btnLimpiar.UseVisualStyleBackColor = false;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(216, 225);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(15, 16);
+            this.label4.TabIndex = 89;
+            this.label4.Text = "$";
             // 
             // frmAgregarEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(619, 495);
+            this.ClientSize = new System.Drawing.Size(669, 495);
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.lblTitulo);
@@ -332,7 +369,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmAgregarEmpleado";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AGREGAR NUEVO EMPLEADO";
+            this.Text = "EMPLEADOS - NUEVO EMPLEADO";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAgregarEmpleado_FormClosing);
             this.Load += new System.EventHandler(this.frmAgregarEmpleado_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -346,7 +384,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnActualizarHuella;
+        private System.Windows.Forms.Button bnInit;
         private System.Windows.Forms.PictureBox pbHuella;
         private System.Windows.Forms.Button btnActualizarFoto;
         private System.Windows.Forms.PictureBox pbFoto;
@@ -354,11 +392,11 @@
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtHoraVacaciones;
+        private System.Windows.Forms.TextBox txtDiaVacaciones;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lblxd;
         private System.Windows.Forms.TextBox txtMail;
-        private System.Windows.Forms.TextBox txtHoraFeriado;
+        private System.Windows.Forms.TextBox txtAntiguedad;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtNombre;
@@ -369,5 +407,7 @@
         private System.Windows.Forms.Button btnAyuda;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Label lblId;
+        private System.Windows.Forms.Label label4;
     }
 }

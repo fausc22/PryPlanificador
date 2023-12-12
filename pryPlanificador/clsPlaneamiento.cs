@@ -15,16 +15,24 @@ namespace pryPlanificador
 {
     class clsPlaneamiento
     {
-        static string servidor = "localhost";
+        //static string servidor = "localhost";
+        //static string bd = "planificadordatabase";
+        //static string user = "root";
+        //static string pw = "251199";
+        //static string port = "3306";
+
+
+
+
+        static string servidor = "www.rsoftware.com.ar";
         static string bd = "planificadordatabase";
-        static string user = "root";
+        static string user = "planificador";
         static string pw = "251199";
         static string port = "3306";
 
 
 
-
-        string cadenaConexion = "server=" + servidor + ";" + "port=" + port + ";" + "user=" + user + ";" + "password=" + pw + ";" + "database=" + bd + ";";
+        string cadenaConexion = "server=" + servidor + ";" + "user=" + user + ";" + "password=" + pw + ";" + "database=" + bd + ";";
 
         public void CargarGrillaPlanificador(DataGridView grilla, string Mes, int anio, string form)
         {

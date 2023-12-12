@@ -38,6 +38,7 @@
             this.logueoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.controlHorasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.reciboToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.pagosExtraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.facturacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vacacionesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.eDICIONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,8 +52,6 @@
             this.graficoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graficoEficienciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graficoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pagosExtraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,35 +115,43 @@
             // logueoToolStripMenuItem1
             // 
             this.logueoToolStripMenuItem1.Name = "logueoToolStripMenuItem1";
-            this.logueoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.logueoToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
             this.logueoToolStripMenuItem1.Text = "Logueo";
             this.logueoToolStripMenuItem1.Click += new System.EventHandler(this.logueoToolStripMenuItem1_Click);
             // 
             // controlHorasToolStripMenuItem1
             // 
             this.controlHorasToolStripMenuItem1.Name = "controlHorasToolStripMenuItem1";
-            this.controlHorasToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.controlHorasToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
             this.controlHorasToolStripMenuItem1.Text = "Control Horas";
             this.controlHorasToolStripMenuItem1.Click += new System.EventHandler(this.controlHorasToolStripMenuItem1_Click);
             // 
             // reciboToolStripMenuItem1
             // 
             this.reciboToolStripMenuItem1.Name = "reciboToolStripMenuItem1";
-            this.reciboToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.reciboToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
             this.reciboToolStripMenuItem1.Text = "Recibo";
             this.reciboToolStripMenuItem1.Click += new System.EventHandler(this.reciboToolStripMenuItem1_Click);
+            // 
+            // pagosExtraToolStripMenuItem
+            // 
+            this.pagosExtraToolStripMenuItem.Name = "pagosExtraToolStripMenuItem";
+            this.pagosExtraToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.pagosExtraToolStripMenuItem.Text = "Pagos Extra";
+            this.pagosExtraToolStripMenuItem.Click += new System.EventHandler(this.pagosExtraToolStripMenuItem_Click);
             // 
             // facturacionToolStripMenuItem
             // 
             this.facturacionToolStripMenuItem.Name = "facturacionToolStripMenuItem";
-            this.facturacionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.facturacionToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.facturacionToolStripMenuItem.Text = "Facturacion";
             // 
             // vacacionesToolStripMenuItem1
             // 
             this.vacacionesToolStripMenuItem1.Name = "vacacionesToolStripMenuItem1";
-            this.vacacionesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.vacacionesToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
             this.vacacionesToolStripMenuItem1.Text = "Vacaciones";
+            this.vacacionesToolStripMenuItem1.Click += new System.EventHandler(this.vacacionesToolStripMenuItem1_Click);
             // 
             // eDICIONToolStripMenuItem
             // 
@@ -232,25 +239,6 @@
             this.graficoToolStripMenuItem1.Text = "Grafico Facturacion";
             this.graficoToolStripMenuItem1.Click += new System.EventHandler(this.graficoToolStripMenuItem1_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(572, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(610, 37);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "PLANIFICADOR DE TRABAJO ANUAL";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pagosExtraToolStripMenuItem
-            // 
-            this.pagosExtraToolStripMenuItem.Name = "pagosExtraToolStripMenuItem";
-            this.pagosExtraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.pagosExtraToolStripMenuItem.Text = "Pagos Extra";
-            this.pagosExtraToolStripMenuItem.Click += new System.EventHandler(this.pagosExtraToolStripMenuItem_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -258,7 +246,6 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1408, 722);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -289,7 +276,6 @@
         private System.Windows.Forms.ToolStripMenuItem feriadosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem turnosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem colaboradoresToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem eMPLEADOSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logueoToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem controlHorasToolStripMenuItem1;
