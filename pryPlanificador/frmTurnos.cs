@@ -73,5 +73,11 @@ namespace pryPlanificador
         {
             MessageBox.Show("HAGA DOBLE CLICK EN LA GRILLA SOBRE EL TURNO QUE DESEA MODFIICAR, INTRODUZCA LOS DATOS Y HAGA CLICK EN EL BOTON. POR FAVOR ASIGNAR EL CALCULO DE CANTIDAD DE HORAS MANUALMENTE.", "", MessageBoxButtons.OK);
         }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            
+
+        }
     }
 }

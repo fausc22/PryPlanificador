@@ -48,6 +48,7 @@
             this.lblblblb = new System.Windows.Forms.Label();
             this.dgvEmpleados = new System.Windows.Forms.DataGridView();
             this.dgvCalendario = new System.Windows.Forms.DataGridView();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.gpEmpleado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalendario)).BeginInit();
@@ -275,12 +276,25 @@
             this.dgvCalendario.TabIndex = 52;
             this.dgvCalendario.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCalendario_CellMouseDoubleClick);
             // 
+            // btnEliminar
+            // 
+            this.btnEliminar.BackColor = System.Drawing.Color.Red;
+            this.btnEliminar.Location = new System.Drawing.Point(571, 370);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(147, 38);
+            this.btnEliminar.TabIndex = 53;
+            this.btnEliminar.Text = "ELIMINAR VACACIONES";
+            this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Visible = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
             // frmVacaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(770, 624);
+            this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.dgvCalendario);
             this.Controls.Add(this.dgvEmpleados);
             this.Controls.Add(this.gpEmpleado);
@@ -323,5 +337,6 @@
         private System.Windows.Forms.DataGridView dgvCalendario;
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.Label lblDias;
+        private System.Windows.Forms.Button btnEliminar;
     }
 }

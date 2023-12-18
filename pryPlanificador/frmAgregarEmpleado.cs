@@ -111,7 +111,7 @@ namespace pryPlanificador
                     captureThread.IsBackground = true;
                     captureThread.Start();
                     bIsTimeToDie = false;
-                    btnAgregar.Enabled = true;
+                    
 
 
                     MessageBox.Show("ATENCION: A continuacion, presione fuertemente con el pulgar sobre el lector hasta ver registrada su huella, luego realice el registro pulsando el boton.");
@@ -253,10 +253,9 @@ namespace pryPlanificador
         private void txtHoraVacaciones_TextChanged(object sender, EventArgs e)
         {
             
-            if (pbFoto.Image != null && pbHuella.Image != null)
-            {
+         
                 btnAgregar.Enabled = true;
-            }
+            
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

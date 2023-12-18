@@ -93,7 +93,7 @@ namespace pryPlanificador
                 txtRegreso.Text = fechaR;
                 txtCantDia.Text = dias;
                 btnSelec.Text = "MODIFICAR VACACIONES";
-
+                btnEliminar.Visible = true;
 
 
 
@@ -108,6 +108,24 @@ namespace pryPlanificador
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(lblId.Text);
+
+            // Muestra el cuadro de diálogo con los botones "Sí" y "No"
+            DialogResult resultado = MessageBox.Show("¿ESTÁS SEGURO DE QUE DESEAS ELIMINAR LAS VACAIONES?", "ATENCIÓN", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            // Verifica la respuesta del usuario
+            if (resultado == DialogResult.Yes)
+            {
+                // Si hace clic en "Sí", ejecuta los procedimientos siguientes
+                objC.EliminarVacaciones(id);
+                objC.CargarGrillaVacaciones(dgvCalendario);
+                objC.CargarGrillaEmpleado(dgvEmpleados);
+
+            }
         }
     }
 }

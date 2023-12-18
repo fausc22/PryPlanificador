@@ -269,9 +269,9 @@ namespace pryPlanificador
 
                 MessageBox.Show("Error al insertar nuevo empleado: " + ex.Message);
             }
-        
-                
-            
+
+
+
         }
 
 
@@ -415,7 +415,7 @@ namespace pryPlanificador
                         MessageBox.Show("EMPLEADO ELIMINADO CON ÉXITO.");
                     }
                 }
-            }catch (Exception ex)
+            } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -457,6 +457,30 @@ namespace pryPlanificador
             }
         }
 
+        public void NuevoHorarios(string turnos, string horaInicio, string horaFin, int horas)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("INSERT INTO horarios (turnos, horaInicio, horaFin, horas) VALUES (@turnos, @horaInicio, @horaFin, @horas)", conn)) 
+                    {
+                        cmd.Parameters.AddWithValue("@turnos", turnos);
+                        cmd.Parameters.AddWithValue("@horaInicio", horaInicio);
+                        cmd.Parameters.AddWithValue("@horaFin", horaFin);
+                        cmd.Parameters.AddWithValue("@horas", horas);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("HORARIO CREADO CON ÉXITO.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         public int HoraEmpleado(string empleado)
         {
             int valorHora = 0;
@@ -471,7 +495,7 @@ namespace pryPlanificador
                         // Suponiendo que tienes un parámetro llamado "@nombre" en tu consulta SQL
                         cmd.Parameters.AddWithValue("@nombre", empleado);
 
-                        using (MySqlDataReader reader = cmd.ExecuteReader()) 
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {
@@ -488,7 +512,7 @@ namespace pryPlanificador
         }
 
 
-        
+
 
 
 
@@ -575,11 +599,11 @@ namespace pryPlanificador
                         MessageBox.Show("FERIADO CREADO CON EXITO!");
                     }
                 }
-            }catch (Exception ex)
+            } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
 
@@ -620,7 +644,7 @@ namespace pryPlanificador
                 {
                     conn.Open();
 
-                    
+
                     using (MySqlCommand cmd = new MySqlCommand("DELETE FROM feriados WHERE id = @id", conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
@@ -682,7 +706,7 @@ namespace pryPlanificador
         public void CargarGrillaLogueoFiltrada(DataGridView grilla, string anio, string mes, string nombre)
         {
             grilla.Rows.Clear();
-            
+
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
@@ -759,7 +783,7 @@ namespace pryPlanificador
 
         public void CargarGrillaControlHs(DataGridView grilla, string anio, string mes, string nombre)
         {
-            
+
             // Limpiar la grilla
             grilla.Columns.Clear();
             grilla.Rows.Clear();
@@ -771,8 +795,8 @@ namespace pryPlanificador
             fechaColumn.DefaultCellStyle.BackColor = Color.LightBlue;
             grilla.Columns.Add(fechaColumn);
 
-            
-            
+
+
 
             DataGridViewTextBoxColumn fechColumn = new DataGridViewTextBoxColumn();
             fechColumn.HeaderText = "Entrada";
@@ -801,7 +825,7 @@ namespace pryPlanificador
                     conn.Open();
 
 
-                    
+
 
 
                     string tabla = "controlhs_" + anio;
@@ -831,7 +855,7 @@ namespace pryPlanificador
 
                     }
 
-                    
+
                 }
             }
             catch (Exception ex)
@@ -931,14 +955,14 @@ namespace pryPlanificador
 
                     using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM empleados", conn))
                     {
-                        
+
 
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            
 
-                                while (reader.Read())
-                                {
+
+                            while (reader.Read())
+                            {
                                 string fechaIngreso = reader["fecha_ingreso"].ToString();
                                 // Llamada a la función para obtener la antigüedad en años
                                 if (DateTime.TryParseExact(fechaIngreso, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime fecha))
@@ -955,7 +979,7 @@ namespace pryPlanificador
                                 grilla.Rows[rowIndex].Cells[2].Value = reader["fecha_ingreso"];
                                 grilla.Rows[rowIndex].Cells[3].Value = antiguedad;
                                 grilla.Rows[rowIndex].Cells[4].Value = reader["dia_vacaciones"];
-                                }
+                            }
                         }
                     }
                 }
@@ -1007,14 +1031,14 @@ namespace pryPlanificador
                 {
                     conn.Open();
 
-                    
+
                     using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM vacaciones", conn))
                     {
 
 
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            
+
 
                             while (reader.Read())
                             {
@@ -1064,10 +1088,10 @@ namespace pryPlanificador
                         int DiasAgregar = DiasTotales - dias;
                         cmd.Parameters.AddWithValue("@nombre", nombre);
                         cmd.Parameters.AddWithValue("@dia", DiasAgregar);
-                        
+
 
                         cmd.ExecuteNonQuery();
-                        
+
                     }
 
                 }
@@ -1139,7 +1163,7 @@ namespace pryPlanificador
                                 cmb.ValueMember = "dia_vacaciones";
                                 cmb.DisplayMember = "nombre"; // Corregido: Usar "turno" en lugar de "turnos"
                             }
-                            
+
                         }
                     }
 
@@ -1169,14 +1193,14 @@ namespace pryPlanificador
                     int totalAcumulado = 0;
                     int totalHorasTrabajadas = 0;
                     int subTotal = 0;
-                    
+
                     int NroMes = ObtenerNumeroMes(mes);
 
 
                     //PLANIFICADO
                     using (MySqlCommand cmd = new MySqlCommand($"SELECT * FROM {tablaPlanificar} WHERE nombre_empleado = @nombre AND mes = @mes", conn))
                     {
-                        
+
                         cmd.Parameters.AddWithValue("@nombre", nombre);
                         cmd.Parameters.AddWithValue("@mes", NroMes);
 
@@ -1184,11 +1208,11 @@ namespace pryPlanificador
                         {
                             while (reader.Read())
                             {
-                               txtHorasPlanificadas.Text = reader["acumulado"].ToString();
-                               lblHorasPlanificadas.Text = "(" + reader["horas"] + ")";
+                                txtHorasPlanificadas.Text = reader["acumulado"].ToString();
+                                lblHorasPlanificadas.Text = "(" + reader["horas"] + ")";
                             }
                         }
-                        
+
 
                     }
 
@@ -1215,7 +1239,7 @@ namespace pryPlanificador
 
                     using (MySqlCommand cmd = new MySqlCommand($"SELECT * FROM {tablaExtras} WHERE nombre_empleado = @nombre AND mes = @mes", conn))
                     {
-                        
+
                         cmd.Parameters.AddWithValue("@nombre", nombre);
                         cmd.Parameters.AddWithValue("@mes", mes);
 
@@ -1238,8 +1262,8 @@ namespace pryPlanificador
                         txtAdelantos.Text = totalAdelantos.ToString();
 
                     }
-                    
-                 
+
+
                 }
             } catch (Exception ex)
             {
@@ -1276,7 +1300,7 @@ namespace pryPlanificador
                                 antiguedad.Text = reader["antiguedad"].ToString();
                                 hora_normal.Text = reader["hora_normal"].ToString();
                                 diavacas.Text = reader["dia_vacaciones"].ToString();
-                                
+
 
                                 // La columna de la imagen puede ser de tipo BLOB en la base de datos
                                 // Aquí asumimos que la columna se llama "foto" y es de tipo BLOB
@@ -1285,10 +1309,10 @@ namespace pryPlanificador
                                     byte[] imageData = (byte[])reader["foto_perfil"];
                                     MemoryStream ms = new MemoryStream(imageData);
                                     foto.Image = Image.FromStream(ms);
-                                    
+
                                 }
 
-                                
+
                             }
                         }
                     }
@@ -1339,6 +1363,27 @@ namespace pryPlanificador
 
             // Devolver el resultado final como una cadena
             return descripcionBuilder.ToString();
+        }
+
+        public void  EliminarVacaciones(int id) 
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("DELETE FROM vacaciones WHERE id = @id", conn)) 
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("VACACIONES ELIMINADAS CON EXITO.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 

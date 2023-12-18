@@ -53,8 +53,17 @@ namespace pryPlanificador
             string tabla = "turnos_" + NroAnio;
             for (int dia = 1; dia <= diasEnMes; dia++)
             {
+                string fecha = $"{dia}/0{NroMes}/{NroAnio}";
+
+                int index = grilla.Rows.Add(fecha);
+
+                if (EsFeriado(fecha) == true)
+                {
+                    grilla.Rows[index].Cells[0].Style.BackColor = Color.Red;
+                    // Puedes ajustar el formato de la fecha según tus necesidades
+                }
                 // Agregar una fila por cada día en el mes
-                grilla.Rows.Add($"{dia}/{NroMes}/{NroAnio}"); // Puedes ajustar el formato de la fecha según tus necesidades
+                
             }
 
             try
@@ -328,6 +337,37 @@ namespace pryPlanificador
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        public bool EsFeriado(string fecha)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM feriados WHERE fecha = @fecha", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@fecha", fecha);
+                        object result = cmd.ExecuteScalar();
+                        int count = result != null ? Convert.ToInt32(result) : 0;
+
+                        if (count > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
             }
         }
 
