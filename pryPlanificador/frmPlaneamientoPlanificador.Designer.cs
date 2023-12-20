@@ -65,6 +65,7 @@
             this.dgvHora.Size = new System.Drawing.Size(1156, 529);
             this.dgvHora.TabIndex = 1;
             this.dgvHora.Visible = false;
+            this.dgvHora.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvHora_CellFormatting);
             this.dgvHora.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvHora_CellMouseDoubleClick);
             // 
             // gpCmb

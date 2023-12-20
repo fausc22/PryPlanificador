@@ -59,13 +59,28 @@ namespace pryPlanificador
         {
             string empleado = cmbEmpleado.Text;
             gpInfo.Visible = true;
-            objC.CargarEmpleado(empleado, lblId, txtNombre, txtApellido, txtMail, txtFecha, txtAntiguedad, txtHoraNormal, txtDiaVacaciones, pbFoto, pbHuella, fotoperfil, huella);
+            objC.CargarEmpleado(empleado, lblId, txtNombre, txtApellido, txtMail, txtFecha, txtAntiguedad, txtHoraNormal, txtDiaVacaciones, pbFoto, pbHuella);
             btnSelec.Enabled = false;
             cmbEmpleado.Enabled = false;
+            
+
+        }
+        private byte[] ImageToByteArray(Image imagen)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                // Convierte la imagen a bytes y guarda en MemoryStream
+                imagen.Save(ms, imagen.RawFormat);
+
+                // Retorna el arreglo de bytes
+                return ms.ToArray();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            huella = ImageToByteArray(pbHuella.Image);
+            fotoperfil = ImageToByteArray(pbFoto.Image);
             int id = Convert.ToInt32(lblId.Text);
             string nombre = txtNombre.Text;
             string apellido = txtApellido.Text;
@@ -78,11 +93,15 @@ namespace pryPlanificador
             gpInfo.Visible = false;
             objC.CargarCmbEmpleado(cmbEmpleado);
             cmbEmpleado.SelectedIndex = -1;
+            cmbEmpleado.Enabled = true;
             btnSelec.Enabled = false;
+            
         }
 
         private void btnActualizarHuella_Click(object sender, EventArgs e)
         {
+
+
             int ret = zkfperrdef.ZKFP_ERR_OK;
             if ((ret = zkfp2.Init()) == zkfperrdef.ZKFP_ERR_OK)
             {
@@ -117,7 +136,7 @@ namespace pryPlanificador
                     captureThread.IsBackground = true;
                     captureThread.Start();
                     bIsTimeToDie = false;
-                    
+
 
 
                     MessageBox.Show("ATENCION: A continuacion, presione fuertemente con el pulgar sobre el lector hasta ver registrada su huella, luego realice el registro pulsando el boton.");
@@ -304,15 +323,21 @@ namespace pryPlanificador
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(lblId.Text);
+            string nombre = txtNombre.Text;
             DialogResult resultado = MessageBox.Show("¿ESTÁS SEGURO DE QUE DESEAS ELIMINAR EL EMPLEADO?", "ATENCIÓN", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             // Verifica la respuesta del usuario
             if (resultado == DialogResult.Yes)
             {
-                objC.EliminarEmpleado(id);
+                objC.EliminarEmpleado(id, nombre);
+                objC.CargarCmbEmpleado(cmbEmpleado);
                 LimpiarFormulario();
                 cmbEmpleado.Enabled = true;
             }
         }
+
+        
+
+        
     }
 }

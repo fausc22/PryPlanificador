@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Globalization;
 
 namespace pryPlanificador
 {
@@ -34,6 +35,31 @@ namespace pryPlanificador
 
         string cadenaConexion = "server=" + servidor + ";" + "user=" + user + ";" + "password=" + pw + ";" + "database=" + bd + ";";
 
+
+
+
+        private static string ObtenerNombreDiaEnEspanol(DayOfWeek dia)
+        {
+            switch (dia)
+            {
+                case DayOfWeek.Sunday:
+                    return "Domingo";
+                case DayOfWeek.Monday:
+                    return "Lunes";
+                case DayOfWeek.Tuesday:
+                    return "Martes";
+                case DayOfWeek.Wednesday:
+                    return "Miércoles";
+                case DayOfWeek.Thursday:
+                    return "Jueves";
+                case DayOfWeek.Friday:
+                    return "Viernes";
+                case DayOfWeek.Saturday:
+                    return "Sábado";
+                default:
+                    return string.Empty; // Manejar el caso por defecto o incorrecto si es necesario
+            }
+        }
         public void CargarGrillaPlanificador(DataGridView grilla, string Mes, int anio, string form)
         {
             // Limpiar la grilla
@@ -45,17 +71,51 @@ namespace pryPlanificador
             fechaColumn.HeaderText = "Fecha";
             fechaColumn.ReadOnly = true;
             fechaColumn.DefaultCellStyle.BackColor = Color.LightBlue;
+            fechaColumn.Width = 150;
             grilla.Columns.Add(fechaColumn);
 
             int NroMes = ObtenerNumeroMes(Mes);
             int NroAnio = anio;
             int diasEnMes = DateTime.DaysInMonth(NroAnio, NroMes);
             string tabla = "turnos_" + NroAnio;
+            string fecha = string.Empty;
             for (int dia = 1; dia <= diasEnMes; dia++)
             {
-                string fecha = $"{dia}/0{NroMes}/{NroAnio}";
+                if (dia < 10)
+                {
+                    if (NroMes < 10)
+                    {
+                        fecha = $"0{dia}/0{NroMes}/{anio}";
+                    }
+                    else
+                    {
+                        fecha = $"0{dia}/{NroMes}/{anio}";
+                    }
 
-                int index = grilla.Rows.Add(fecha);
+                }
+                else
+                {
+                    if (NroMes < 10)
+                    {
+                        fecha = $"{dia}/0{NroMes}/{anio}";
+                    }
+                    else
+                    {
+                        fecha = $"{dia}/{NroMes}/{anio}";
+                    }
+                }
+
+
+                // Convertir la cadena de fecha a un objeto DateTime
+                DateTime fechaDateTime = DateTime.ParseExact(fecha, "d/MM/yyyy", CultureInfo.InvariantCulture);
+
+                // Obtener el día de la semana
+                DayOfWeek ingles = fechaDateTime.DayOfWeek;
+                string diaSemana = ObtenerNombreDiaEnEspanol(ingles);
+
+                string agregar = fecha + " (" + diaSemana + ") ";
+
+                int index = grilla.Rows.Add(agregar);
 
                 if (EsFeriado(fecha) == true)
                 {
@@ -107,13 +167,19 @@ namespace pryPlanificador
                     // Obtener los valores para cada fecha y empleado
                     foreach (DataGridViewRow row in grilla.Rows)
                     {
-                        string fecha = row.Cells[0].Value.ToString();
+
+                        string fechaA = row.Cells[0].Value.ToString();
+                        // Dividir la cadena utilizando el paréntesis como separador
+                        string[] partes = fechaA.Split('(');
+
+                        // La primera parte debe contener la fecha
+                        string fechaString = partes[0].Trim();
 
                         foreach (string empleado in empleados)
                         {
                             using (MySqlCommand cmd = new MySqlCommand($"SELECT {form} FROM {tabla} WHERE fecha = @fecha AND nombre_empleado = @empleado", conn))
                             {
-                                cmd.Parameters.AddWithValue("@fecha", fecha);
+                                cmd.Parameters.AddWithValue("@fecha", fechaString);
                                 cmd.Parameters.AddWithValue("@empleado", empleado);
 
                                 using (MySqlDataReader reader = cmd.ExecuteReader())

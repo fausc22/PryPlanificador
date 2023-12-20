@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySqlX.XDevAPI.Relational;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -70,7 +71,12 @@ namespace pryPlanificador
 
                 DataGridViewColumn colum = dgvHora.Columns[e.ColumnIndex];
                 nombreC = colum.HeaderText;
-                nombreF = fechaFila.ToString();
+                string fechaA = fechaFila.ToString();
+                // Dividir la cadena utilizando el paréntesis como separador
+                string[] partes = fechaA.Split('(');
+
+                
+                nombreF = partes[0].Trim();
 
 
                 // Verifica si el valor no es nulo
@@ -117,6 +123,27 @@ namespace pryPlanificador
         private void btnAyuda_Click(object sender, EventArgs e)
         {
             MessageBox.Show("SELECCIONE EL MES Y EL AÑO CORRESPONIDENTE EN EL QUE DESEA CONSULTAR LA INFORMACION. PARA MODIFICAR UN TURNO HAGA DOBLE CLICK SOBRE EL HORARIO A MODIFICAR, LUEGO SELECCIONE EL TURNO Y APRIETE MODIFICAR.", "AYUDA", MessageBoxButtons.OK);
+        }
+
+        private void dgvHora_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex > 0 && e.RowIndex >= 0)
+            {
+                DataGridViewCell cell = dgvHora.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string valor = cell.Value?.ToString();
+
+                if (!string.IsNullOrEmpty(valor))
+                {
+                    if (valor.Equals("libre", StringComparison.OrdinalIgnoreCase))
+                    {
+                        cell.Style.BackColor = Color.Green; // Cambia el color a verde para "libre"
+                    }
+                    else if (valor.Equals("vacaciones", StringComparison.OrdinalIgnoreCase))
+                    {
+                        cell.Style.BackColor = Color.Yellow; // Cambia el color a amarillo para "vacaciones"
+                    }
+                }
+            }
         }
     }
 }

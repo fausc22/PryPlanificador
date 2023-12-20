@@ -45,6 +45,7 @@ namespace pryPlanificador
         clsConexion objC = new clsConexion();
         public byte[] fotoperfil;
         
+        
 
         private void btnActualizarFoto_Click(object sender, EventArgs e)
         {
@@ -77,6 +78,7 @@ namespace pryPlanificador
 
         private void btnActualizarHuella_Click(object sender, EventArgs e)
         {
+
             int ret = zkfperrdef.ZKFP_ERR_OK;
             if ((ret = zkfp2.Init()) == zkfperrdef.ZKFP_ERR_OK)
             {
@@ -92,11 +94,11 @@ namespace pryPlanificador
                     {
                         MessageBox.Show("OpenDevice fail");
                         zkfp2.Terminate();
-                        
+
                         return;
                     }
 
-                    
+
 
                     zkfp2.GetParameters(mDevHandle, 1, paramValue, ref size);
                     zkfp2.ByteArray2Int(paramValue, ref mfpWidth);
@@ -111,7 +113,7 @@ namespace pryPlanificador
                     captureThread.IsBackground = true;
                     captureThread.Start();
                     bIsTimeToDie = false;
-                    
+
 
 
                     MessageBox.Show("ATENCION: A continuacion, presione fuertemente con el pulgar sobre el lector hasta ver registrada su huella, luego realice el registro pulsando el boton.");
@@ -127,7 +129,7 @@ namespace pryPlanificador
                 MessageBox.Show("ERROR: Verificar que el lector este conectado correctamente.");
             }
 
-            
+
         }
 
         private void DoCapture()

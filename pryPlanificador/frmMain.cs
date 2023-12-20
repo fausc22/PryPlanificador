@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Planificador;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -107,6 +108,12 @@ namespace pryPlanificador
         {
             frmVacaciones f = new frmVacaciones();
             f.ShowDialog();
+        }
+
+        private void registroManualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRegistro frm = new frmRegistro();
+            frm.ShowDialog();
         }
     }
 }

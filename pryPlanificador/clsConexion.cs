@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Globalization;
+using Org.BouncyCastle.Math;
 
 namespace pryPlanificador
 {
@@ -42,145 +44,8 @@ namespace pryPlanificador
         //    return conn;
         //}
 
-        //public void NuevoEmpleado(string nombre, string apellido, string email, string fecha, int antiguedad, int hora_normal, byte[] foto, byte[] huella, int diavacas)
-        //{
-        //    try
-        //    {             
-
-        //        int anioo = 23;
-
-        //        using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
-        //        {
-        //            conn.Open();
-        //            using (MySqlCommand cmd = new MySqlCommand("INSERT INTO empleados (nombre, apellido, mail, fecha_ingreso, antiguedad, hora_normal, foto_perfil, huella_dactilar, dia_vacaciones) " +
-        //                                  "VALUES (@nombre, @apellido, @email, @fecha, @antiguedad, @hora_normal, @foto, @huella, @diavacas)", conn))
-        //            {
-
-
-
-        //                cmd.Parameters.AddWithValue("@nombre", nombre);
-        //                cmd.Parameters.AddWithValue("@apellido", apellido);
-        //                cmd.Parameters.AddWithValue("@email", email);
-        //                cmd.Parameters.AddWithValue("@fecha", fecha);
-        //                cmd.Parameters.AddWithValue("@antiguedad", antiguedad);
-        //                cmd.Parameters.AddWithValue("@hora_normal", hora_normal);
-        //                cmd.Parameters.AddWithValue("@foto", foto);
-        //                cmd.Parameters.AddWithValue("@huella", huella);
-        //                cmd.Parameters.AddWithValue("@diavacas", diavacas);
-        //                cmd.ExecuteNonQuery();
-
-        //            }
-
-        //            while (anioo <= 24)
-        //            {
-        //                int mess = 1; // Mover la inicialización al interior del bucle anidado
-        //                while (mess <= 12)
-        //                {
-        //                    string tablaTotales = $"totales_20{anioo}";
-        //                    int horasTotales = 0;
-        //                    decimal totalTotales = 0;
-        //                    using (MySqlCommand cmdTotales = new MySqlCommand($"INSERT INTO `{tablaTotales}` (mes, nombre_empleado, horas, acumulado) " +
-        //                                                                      "VALUES (@fecha, @nombre, @horas, @acumulado)", conn))
-        //                    {
-        //                        cmdTotales.Parameters.AddWithValue("@nombre", nombre);
-        //                        cmdTotales.Parameters.AddWithValue("@fecha", mess);
-        //                        cmdTotales.Parameters.AddWithValue("@horas", horasTotales);
-        //                        cmdTotales.Parameters.AddWithValue("@acumulado", totalTotales);
-
-        //                        cmdTotales.ExecuteNonQuery();
-        //                    }
-
-        //                    int diaa = 1; // Mover la inicialización al interior del bucle más interno
-        //                    while (diaa <= 31)
-        //                    {
-        //                        string tablaTurnos = $"turnos_20{anioo}";
-        //                        string fecharda = $"{diaa}/{mess}/20{anioo}";
-        //                        string estado = "libre";
-        //                        int horasTurnos = 0;
-        //                        decimal totalTurnos = 0;
-        //                        using (MySqlCommand cmdTurnos = new MySqlCommand($"INSERT INTO `{tablaTurnos}` (fecha, nombre_empleado, valor, horas, acumulado) " +
-        //                                                                          "VALUES (@fecha, @nombre, @estado, @horas, @acumulado)", conn))
-        //                        {
-        //                            cmdTurnos.Parameters.AddWithValue("@nombre", nombre);
-        //                            cmdTurnos.Parameters.AddWithValue("@fecha", fecharda);
-        //                            cmdTurnos.Parameters.AddWithValue("@estado", estado);
-        //                            cmdTurnos.Parameters.AddWithValue("@horas", horasTurnos);
-        //                            cmdTurnos.Parameters.AddWithValue("@acumulado", totalTurnos);
-
-        //                            cmdTurnos.ExecuteNonQuery();
-        //                        }
-        //                        diaa = diaa + 1;
-        //                    }
-        //                    mess = mess + 1;
-        //                }
-        //                anioo = anioo + 1;
-        //            }
-        //        }
-        //        //for (int anio = 23; anio < 25; anio++)
-        //        //{
-        //        //    for (int mes = 1; mes < 13; mes++)
-        //        //    {
-        //        //    using (MySqlCommand cmd = new MySqlCommand())
-        //        //    {
-        //        //        MySqlConnection conn = new MySqlConnection(cadenaConexion);
-        //        //        cmd.Connection = conn;
-        //        //        string tabla = "totales_20" + anio;
-        //        //        string tablaEscapada = $"`{tabla}`";
-        //        //        int horas = 0;
-        //        //        decimal total = 0;
-        //        //        cmd.CommandText = $"INSERT INTO {tablaEscapada}  (id, mes, nombre_empleado, horas, acumulado) " +
-        //        //                                  "VALUES (NULL, @fecha, @nombre, @horas, @acumulado)";
-
-        //        //        cmd.Parameters.AddWithValue("@nombre", nombre);
-        //        //        cmd.Parameters.AddWithValue("@fecha", mes);                       
-        //        //        cmd.Parameters.AddWithValue("@horas", horas);
-        //        //        cmd.Parameters.AddWithValue("@acumulado", total);
-
-        //        //        conn.Open();
-        //        //        cmd.ExecuteNonQuery();
-        //        //    }
-        //        //    for (int dia = 1; dia < 32; dia++)
-        //        //        {
-        //        //            using (MySqlCommand cmd = new MySqlCommand())
-        //        //            {
-        //        //                MySqlConnection conn = new MySqlConnection(cadenaConexion);
-        //        //                cmd.Connection = conn;
-        //        //                string tabla = "turnos_20" + anio;
-        //        //                string tablaEscapada = $"`{tabla}`";
-        //        //                string fecharda = dia + "/" + mes + "/20" + anio;
-        //        //                string estado = "libre";
-        //        //                int horas = 0;
-        //        //                decimal total = 0;
-
-        //        //                cmd.CommandText = $"INSERT INTO {tablaEscapada}  (turno_id, fecha, nombre_empleado, valor, horas, acumulado) " +
-        //        //                                  "VALUES (NULL, @fecha, @nombre, @estado, @horas, @acumulado)";
-
-
-        //        //                cmd.Parameters.AddWithValue("@nombre", nombre);
-        //        //                cmd.Parameters.AddWithValue("@fecha", fecharda);
-        //        //                cmd.Parameters.AddWithValue("@estado", estado);
-        //        //                cmd.Parameters.AddWithValue("@horas", horas);
-        //        //                cmd.Parameters.AddWithValue("@acumulado", total);
-
-
-        //        //                conn.Open();
-        //        //                cmd.ExecuteNonQuery();
-
-        //        //            }
-        //        //        }
-        //        //    }
-        //        //}
-        //        MessageBox.Show("EMPLEADO CREADO CON ÉXITO!", "EXITO", MessageBoxButtons.OK);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Maneja la excepción según tus necesidades
-        //        MessageBox.Show("Error al insertar nuevo empleado: " + ex.Message);
-        //    }
-
-
-        //}
+        
+        
 
 
         public void NuevoEmpleado(string nombre, string apellido, string email, string fecha, int antiguedad, int hora_normal, byte[] foto, byte[] huella, int diavacas)
@@ -235,7 +100,31 @@ namespace pryPlanificador
                             while (diaa <= 31)
                             {
                                 string tablaTurnos = $"turnos_20{anioo}";
-                                string fecharda = $"{diaa}/{mess}/20{anioo}";
+                                string fecharda = string.Empty;
+                                if (diaa < 10)
+                                {
+                                    if (mess < 10)
+                                    {
+                                        fecharda = $"0{diaa}/0{mess}/20{anioo}";
+                                    }
+                                    else
+                                    {
+                                        fecharda = $"0{diaa}/{mess}/20{anioo}";
+                                    }
+
+                                }
+                                else
+                                {
+                                    if (mess < 10)
+                                    {
+                                        fecharda = $"{diaa}/0{mess}/20{anioo}";
+                                    }
+                                    else
+                                    {
+                                        fecharda = $"{diaa}/{mess}/20{anioo}";
+                                    }
+                                }
+                                
                                 string estado = "libre";
                                 int horasTurnos = 0;
                                 decimal totalTurnos = 0;
@@ -262,17 +151,28 @@ namespace pryPlanificador
 
 
                     MessageBox.Show("EMPLEADO CREADO CON ÉXITO!", "EXITO", MessageBoxButtons.OK);
+
+                    conn.Close();
                 }
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show("Error al insertar nuevo empleado: " + ex.Message);
+
             }
 
 
 
         }
+
+        
+
+
+
+
+
+
 
 
         public void CargarCmbEmpleado(ComboBox cmbEmpleado)
@@ -305,7 +205,7 @@ namespace pryPlanificador
             }
         }
 
-        public void CargarEmpleado(string empleado, Label id, TextBox nombre, TextBox apellido, TextBox email, TextBox fecha, TextBox antiguedad, TextBox hora_normal, TextBox diavacas, PictureBox foto, PictureBox huella, byte[] foto2, byte[] huella2)
+        public void CargarEmpleado(string empleado, Label id, TextBox nombre, TextBox apellido, TextBox email, TextBox fecha, TextBox antiguedad, TextBox hora_normal, TextBox diavacas, PictureBox foto, PictureBox huella)
         {
             try
             {
@@ -340,7 +240,7 @@ namespace pryPlanificador
                                     byte[] imageData = (byte[])reader["foto_perfil"];
                                     MemoryStream ms = new MemoryStream(imageData);
                                     foto.Image = Image.FromStream(ms);
-                                    foto2 = imageData;
+                                    
                                 }
 
                                 // La columna de la huella también puede ser de tipo BLOB
@@ -352,7 +252,7 @@ namespace pryPlanificador
                                     // Asigna la imagen de la huella al PictureBox
                                     // (Asegúrate de que el PictureBox esté configurado para mostrar imágenes)
                                     huella.Image = Image.FromStream(msHuella);
-                                    huella2 = huellaData;
+                                    
                                 }
                             }
                         }
@@ -401,7 +301,7 @@ namespace pryPlanificador
             }
         }
 
-        public void EliminarEmpleado(int id)
+        public void EliminarEmpleado(int id, string nombre)
         {
             try
             {
@@ -412,7 +312,36 @@ namespace pryPlanificador
                     {
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.ExecuteNonQuery();
+                        
+                    }
+
+                    using (MySqlCommand cmd = new MySqlCommand("DELETE FROM turnos_2023 WHERE nombre_empleado = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.ExecuteNonQuery();
+                        
+                    }
+
+                    using (MySqlCommand cmd = new MySqlCommand("DELETE FROM turnos_2024 WHERE nombre_empleado = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.ExecuteNonQuery();
+
+                    }
+
+                    using (MySqlCommand cmd = new MySqlCommand("DELETE FROM totales_2023 WHERE nombre_empleado = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.ExecuteNonQuery();
+
+                    }
+
+                    using (MySqlCommand cmd = new MySqlCommand("DELETE FROM totales_2024 WHERE nombre_empleado = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.ExecuteNonQuery();
                         MessageBox.Show("EMPLEADO ELIMINADO CON ÉXITO.");
+
                     }
                 }
             } catch (Exception ex)
@@ -1064,8 +993,10 @@ namespace pryPlanificador
             }
         }
 
-        public void NuevoVacaciones(string nombre, int dias, string salida, string regreso, int DiasTotales)
+        public void NuevoVacaciones(string nombre, int dias, string salida, string regreso, int DiasTotales, int mes, int anio)
         {
+            int DiasAnteriores = 0;
+            int DiasAgregar = 0;
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
@@ -1080,12 +1011,38 @@ namespace pryPlanificador
                         cmd.Parameters.AddWithValue("@regreso", regreso);
 
                         cmd.ExecuteNonQuery();
-                        MessageBox.Show("VACACIONES CREADAS CON EXITO!");
+
                     }
+
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT dia_vacaciones FROM empleados WHERE nombre = @nombre", conn))
+                    {
+
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+
+                        using (MySqlDataReader rdr = cmd.ExecuteReader())
+                        {
+                            while (rdr.Read())
+                            {
+                                DiasAnteriores = Convert.ToInt32(rdr["dia_vacaciones"]);
+                            }
+                        }
+
+
+                    }
+
+                    if (DiasAnteriores < DiasTotales)
+                    {
+                        MessageBox.Show("El empleado no cuenta con la cantidad de días vacacionales asignados. Intente de nuevo");
+                    }
+                    else
+                    {
+                        DiasAgregar = DiasAnteriores - DiasTotales;
+                    }
+
 
                     using (MySqlCommand cmd = new MySqlCommand("UPDATE empleados SET dia_vacaciones = @dia WHERE nombre = @nombre", conn))
                     {
-                        int DiasAgregar = DiasTotales - dias;
+
                         cmd.Parameters.AddWithValue("@nombre", nombre);
                         cmd.Parameters.AddWithValue("@dia", DiasAgregar);
 
@@ -1094,17 +1051,96 @@ namespace pryPlanificador
 
                     }
 
+
+                    string tablaAnual = "totales_" + anio;
+                    string tabla = "turnos_" + anio;
+                    int horasTotales = 0;
+                    int acumuladoTotal = 0;
+                    string valor = "vacaciones";
+                    int valorHora = 0;
+                    int horasManual = 8;
+
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT hora_normal FROM empleados WHERE nombre = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+
+                        using (MySqlDataReader rdr = cmd.ExecuteReader())
+                        {
+                            while (rdr.Read())
+                            {
+                                valorHora = Convert.ToInt32(rdr["hora_normal"]);
+                            }
+                        }
+                    }
+
+                    using (MySqlCommand cmd = new MySqlCommand($"SELECT horas, acumulado FROM {tablaAnual} WHERE mes = @mes AND nombre_empleado = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@mes", mes);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                horasTotales = Convert.ToInt32(reader["horas"]);
+                                acumuladoTotal = Convert.ToInt32(reader["acumulado"]);
+                            }
+                        }
+                    }
+
+                    int acumuladoManual = valorHora * horasManual;
+
+                    
+
+                    if (DateTime.TryParseExact(salida, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaSalida) &&
+                        DateTime.TryParseExact(regreso, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaRegreso))
+                    {
+
+                        for (DateTime fechaActual = fechaSalida; fechaActual <= fechaRegreso; fechaActual = fechaActual.AddDays(1))
+                        {
+                            string fechaSql = fechaActual.ToString("d/M/yyyy");
+                            using (MySqlCommand cmd = new MySqlCommand($"UPDATE {tabla} SET valor = @valor, horas = @horas, acumulado = @acumulado WHERE fecha = @fecha AND nombre_empleado = @nombre", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@valor", valor);
+                                cmd.Parameters.AddWithValue("@fecha", fechaSql);
+                                cmd.Parameters.AddWithValue("@nombre", nombre);
+                                cmd.Parameters.AddWithValue("@horas", horasManual);
+                                cmd.Parameters.AddWithValue("@acumulado", acumuladoManual);
+                                horasTotales = horasTotales + horasManual;
+                                acumuladoTotal = acumuladoTotal + acumuladoManual;
+
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+
+                        using (MySqlCommand cmd = new MySqlCommand($"UPDATE {tablaAnual} SET horas = @horas, acumulado = @acumulado WHERE mes = @fecha AND nombre_empleado = @nombre", conn))
+                        {
+                            cmd.Parameters.AddWithValue("@fecha", mes);
+                            cmd.Parameters.AddWithValue("@nombre", nombre);
+                            cmd.Parameters.AddWithValue("@horas", horasTotales);
+                            cmd.Parameters.AddWithValue("@acumulado", acumuladoTotal);
+
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("VACACIONES CREADAS CON ÉXITO!");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Formato de fecha no válido para la salida o regreso.");
+                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
-        public void ActualizarVacaciones(int id, string nombre, int dias, string salida, string regreso, int DiasTotales)
+        public void ActualizarVacaciones(int id, string nombre, int dias, string salida, string regreso, int DiasTotales, int mes, int anio)
         {
+            int DiasAnteriores = 0;
+            int DiasAgregar = 0;
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
@@ -1120,12 +1156,38 @@ namespace pryPlanificador
                         cmd.Parameters.AddWithValue("@regreso", regreso);
 
                         cmd.ExecuteNonQuery();
-                        MessageBox.Show("VACACIONES EDITADAS CON EXITO!");
+
                     }
+
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT dia_vacaciones FROM empleados WHERE nombre = @nombre", conn))
+                    {
+
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+
+                        using (MySqlDataReader rdr = cmd.ExecuteReader())
+                        {
+                            while (rdr.Read())
+                            {
+                                DiasAnteriores = Convert.ToInt32(rdr["dia_vacaciones"]);
+                            }
+                        }
+
+
+                    }
+
+                    if (DiasAnteriores < DiasTotales)
+                    {
+                        MessageBox.Show("El empleado no cuenta con la cantidad de días vacacionales asignados. Intente de nuevo");
+                    }
+                    else
+                    {
+                        DiasAgregar = DiasAnteriores - DiasTotales;
+                    }
+
 
                     using (MySqlCommand cmd = new MySqlCommand("UPDATE empleados SET dia_vacaciones = @dia WHERE nombre = @nombre", conn))
                     {
-                        int DiasAgregar = DiasTotales - dias;
+
                         cmd.Parameters.AddWithValue("@nombre", nombre);
                         cmd.Parameters.AddWithValue("@dia", DiasAgregar);
 
@@ -1133,14 +1195,95 @@ namespace pryPlanificador
                         cmd.ExecuteNonQuery();
 
                     }
+
+
+                    string tablaAnual = "totales_" + anio;
+                    string tabla = "turnos_" + anio;
+                    int horasTotales = 0;
+                    int acumuladoTotal = 0;
+                    string valor = "vacaciones";
+                    int valorHora = 0;
+                    int horasManual = 8;
+
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT hora_normal FROM empleados WHERE nombre = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+
+                        using (MySqlDataReader rdr = cmd.ExecuteReader())
+                        {
+                            while (rdr.Read())
+                            {
+                                valorHora = Convert.ToInt32(rdr["hora_normal"]);
+                            }
+                        }
+                    }
+
+                    using (MySqlCommand cmd = new MySqlCommand($"SELECT horas, acumulado FROM {tablaAnual} WHERE mes = @mes AND nombre_empleado = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@mes", mes);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                horasTotales = Convert.ToInt32(reader["horas"]);
+                                acumuladoTotal = Convert.ToInt32(reader["acumulado"]);
+                            }
+                        }
+                    }
+
+                    int acumuladoManual = valorHora * horasManual;
+
+
+
+                    if (DateTime.TryParseExact(salida, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaSalida) &&
+                        DateTime.TryParseExact(regreso, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaRegreso))
+                    {
+
+                        for (DateTime fechaActual = fechaSalida; fechaActual <= fechaRegreso; fechaActual = fechaActual.AddDays(1))
+                        {
+                            string fechaSql = fechaActual.ToString("d/M/yyyy");
+                            using (MySqlCommand cmd = new MySqlCommand($"UPDATE {tabla} SET valor = @valor, horas = @horas, acumulado = @acumulado WHERE fecha = @fecha AND nombre_empleado = @nombre", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@valor", valor);
+                                cmd.Parameters.AddWithValue("@fecha", fechaSql);
+                                cmd.Parameters.AddWithValue("@nombre", nombre);
+                                cmd.Parameters.AddWithValue("@horas", horasManual);
+                                cmd.Parameters.AddWithValue("@acumulado", acumuladoManual);
+                                horasTotales = horasTotales + horasManual;
+                                acumuladoTotal = acumuladoTotal + acumuladoManual;
+
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+
+                        using (MySqlCommand cmd = new MySqlCommand($"UPDATE {tablaAnual} SET horas = @horas, acumulado = @acumulado WHERE mes = @fecha AND nombre_empleado = @nombre", conn))
+                        {
+                            cmd.Parameters.AddWithValue("@fecha", mes);
+                            cmd.Parameters.AddWithValue("@nombre", nombre);
+                            cmd.Parameters.AddWithValue("@horas", horasTotales);
+                            cmd.Parameters.AddWithValue("@acumulado", acumuladoTotal);
+
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("VACACIONES CREADAS CON ÉXITO!");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Formato de fecha no válido para la salida o regreso.");
+                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
+
+
+        
 
         public void CargarCmbEmpleadoVacaciones(ComboBox cmb)
         {
@@ -1386,6 +1529,215 @@ namespace pryPlanificador
             }
         }
 
+
+
+
+
+
+
+        public bool NuevoLogeo(string nombre, string fecha, string accion, TimeSpan hora, string anio, string mes)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    // Obtener la huella dactilar desde la base de datos
+                    byte[] huellaGuardada = ObtenerHuellaDesdeBD(nombre, conn);
+
+                    // Verificar la huella dactilar si es necesario (dependiendo de tu aplicación)
+
+                    string tabla = "logueo_" + anio;
+                    using (MySqlCommand cmd = new MySqlCommand($"INSERT INTO {tabla} (fecha, nombre_empleado, accion, hora, mes, huella_dactilar) VALUES (@fecha, @nombre, @accion, @hora, @mes, @huella)", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@fecha", fecha);
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@accion", accion);
+                        cmd.Parameters.AddWithValue("@hora", hora);
+                        cmd.Parameters.AddWithValue("@mes", mes);
+                        cmd.Parameters.AddWithValue("@huella", huellaGuardada);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Registro enviado con éxito.");
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja la excepción según tus necesidades
+                MessageBox.Show("Error al registrar: " + ex.Message);
+                return false;
+            }
+        }
+
+        private byte[] ObtenerHuellaDesdeBD(string nombre, MySqlConnection connection)
+        {
+            byte[] huella = null;
+
+            using (MySqlCommand cmd = new MySqlCommand("SELECT huella_dactilar FROM empleados WHERE nombre = @nombre", connection))
+            {
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+
+                using (MySqlDataReader rdr = cmd.ExecuteReader())
+                {
+                    if (rdr.Read())
+                    {
+                        huella = (byte[])rdr["huella_dactilar"];
+                    }
+                }
+            }
+
+            return huella;
+        }
+
+
+        public TimeSpan HoraIngreso(string nombre, string anio)
+        {
+            TimeSpan hora = TimeSpan.Zero;  // Inicializa la variable para evitar problemas de alcance
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    string tabla = "logueo_" + anio;
+                    string accion = "INGRESO";
+                    conn.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand($"SELECT hora FROM {tabla} WHERE nombre_empleado = @nombre AND accion = @accion ORDER BY id DESC LIMIT 1;", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@accion", accion);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())  // Verifica si hay al menos una fila
+                            {
+                                // Lee la columna 'hora' y conviértela a TimeSpan
+                                if (reader["hora"] != DBNull.Value)
+                                {
+                                    hora = ((TimeSpan)reader["hora"]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error");
+            }
+
+            return hora;
+        }
+
+        public bool NuevoIngresoEgreso(string nombre, string fecha, TimeSpan horaIngreso, TimeSpan horaEgreso, string mes, string anio)
+        {
+            int valorHora = 0;
+            int horaT = 0;
+            int acumulado = 0;
+            TimeSpan horasTrabajadas = TimeSpan.Zero;
+            if (horaEgreso < horaIngreso)
+            {
+                horasTrabajadas = (horaEgreso + TimeSpan.FromDays(1)) - horaIngreso;
+            }
+            else
+            {
+                horasTrabajadas = horaEgreso - horaIngreso;
+            }
+
+            horaT = Convert.ToInt32(Math.Round(horasTrabajadas.TotalHours));
+            string tabla = "controlhs_" + anio;
+
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT hora_normal FROM empleados where nombre = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                valorHora = Convert.ToInt32(reader["hora_normal"]);
+                            }
+                        }
+                    }
+
+                    if (EsFeriado(fecha) == true)
+                    {
+                        acumulado = horaT * (valorHora * 2);
+
+                    }
+                    else
+                    {
+                        acumulado = horaT * valorHora;
+                    }
+
+
+
+
+
+                    using (MySqlCommand cmd = new MySqlCommand($"INSERT INTO {tabla} (fecha, nombre_empleado, hora_ingreso, hora_egreso, horas_trabajadas, acumulado, mes) VALUES (@fecha, @nombre, @horaIngreso, @horaEgreso, @horaT, @acumulado, @mes)", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@fecha", fecha);
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@horaIngreso", horaIngreso);
+                        cmd.Parameters.AddWithValue("@horaEgreso", horaEgreso);
+                        cmd.Parameters.AddWithValue("@horaT", horaT);
+                        cmd.Parameters.AddWithValue("@acumulado", acumulado);
+                        cmd.Parameters.AddWithValue("@mes", mes);
+
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Registro satisfactorio.");
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERROR: " + ex.Message);
+                return false;
+            }
+        }
+
+        public bool EsFeriado(string fecha)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM feriados WHERE fecha = @fecha", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@fecha", fecha);
+                        object result = cmd.ExecuteScalar();
+                        int count = result != null ? Convert.ToInt32(result) : 0;
+
+                        if (count > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+        }
 
 
 

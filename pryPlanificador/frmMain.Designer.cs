@@ -52,6 +52,7 @@
             this.graficoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graficoEficienciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graficoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.registroManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,7 +108,8 @@
             this.reciboToolStripMenuItem1,
             this.pagosExtraToolStripMenuItem,
             this.facturacionToolStripMenuItem,
-            this.vacacionesToolStripMenuItem1});
+            this.vacacionesToolStripMenuItem1,
+            this.registroManualToolStripMenuItem});
             this.eMPLEADOSToolStripMenuItem.Name = "eMPLEADOSToolStripMenuItem";
             this.eMPLEADOSToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.eMPLEADOSToolStripMenuItem.Text = "EMPLEADOS";
@@ -115,41 +117,41 @@
             // logueoToolStripMenuItem1
             // 
             this.logueoToolStripMenuItem1.Name = "logueoToolStripMenuItem1";
-            this.logueoToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.logueoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.logueoToolStripMenuItem1.Text = "Logueo";
             this.logueoToolStripMenuItem1.Click += new System.EventHandler(this.logueoToolStripMenuItem1_Click);
             // 
             // controlHorasToolStripMenuItem1
             // 
             this.controlHorasToolStripMenuItem1.Name = "controlHorasToolStripMenuItem1";
-            this.controlHorasToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.controlHorasToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.controlHorasToolStripMenuItem1.Text = "Control Horas";
             this.controlHorasToolStripMenuItem1.Click += new System.EventHandler(this.controlHorasToolStripMenuItem1_Click);
             // 
             // reciboToolStripMenuItem1
             // 
             this.reciboToolStripMenuItem1.Name = "reciboToolStripMenuItem1";
-            this.reciboToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.reciboToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.reciboToolStripMenuItem1.Text = "Recibo";
             this.reciboToolStripMenuItem1.Click += new System.EventHandler(this.reciboToolStripMenuItem1_Click);
             // 
             // pagosExtraToolStripMenuItem
             // 
             this.pagosExtraToolStripMenuItem.Name = "pagosExtraToolStripMenuItem";
-            this.pagosExtraToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.pagosExtraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pagosExtraToolStripMenuItem.Text = "Pagos Extra";
             this.pagosExtraToolStripMenuItem.Click += new System.EventHandler(this.pagosExtraToolStripMenuItem_Click);
             // 
             // facturacionToolStripMenuItem
             // 
             this.facturacionToolStripMenuItem.Name = "facturacionToolStripMenuItem";
-            this.facturacionToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.facturacionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.facturacionToolStripMenuItem.Text = "Facturacion";
             // 
             // vacacionesToolStripMenuItem1
             // 
             this.vacacionesToolStripMenuItem1.Name = "vacacionesToolStripMenuItem1";
-            this.vacacionesToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.vacacionesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.vacacionesToolStripMenuItem1.Text = "Vacaciones";
             this.vacacionesToolStripMenuItem1.Click += new System.EventHandler(this.vacacionesToolStripMenuItem1_Click);
             // 
@@ -239,6 +241,13 @@
             this.graficoToolStripMenuItem1.Text = "Grafico Facturacion";
             this.graficoToolStripMenuItem1.Click += new System.EventHandler(this.graficoToolStripMenuItem1_Click);
             // 
+            // registroManualToolStripMenuItem
+            // 
+            this.registroManualToolStripMenuItem.Name = "registroManualToolStripMenuItem";
+            this.registroManualToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.registroManualToolStripMenuItem.Text = "Registro Manual";
+            this.registroManualToolStripMenuItem.Click += new System.EventHandler(this.registroManualToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -285,6 +294,7 @@
         private System.Windows.Forms.ToolStripMenuItem nuevoEmpleadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarEmpleadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pagosExtraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registroManualToolStripMenuItem;
     }
 }
 

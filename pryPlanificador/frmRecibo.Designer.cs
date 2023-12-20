@@ -341,7 +341,7 @@
             this.lblHsTrabajadas.Name = "lblHsTrabajadas";
             this.lblHsTrabajadas.Size = new System.Drawing.Size(22, 13);
             this.lblHsTrabajadas.TabIndex = 61;
-            this.lblHsTrabajadas.Text = "(4)";
+            this.lblHsTrabajadas.Text = "(0)";
             // 
             // txtHsTrabajadas
             // 
@@ -363,7 +363,7 @@
             this.lblHsPlanificadas.Name = "lblHsPlanificadas";
             this.lblHsPlanificadas.Size = new System.Drawing.Size(22, 13);
             this.lblHsPlanificadas.TabIndex = 59;
-            this.lblHsPlanificadas.Text = "(4)";
+            this.lblHsPlanificadas.Text = "(0)";
             // 
             // txtHsPlanificadas
             // 

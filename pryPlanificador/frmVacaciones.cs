@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,20 +41,25 @@ namespace pryPlanificador
 
         private void btnSelec_Click(object sender, EventArgs e)
         {
+            
+            
             int id = Convert.ToInt32(lblId.Text);
             string empleado = cmbEmpleado.Text;
             string fechaS = txtSalida.Text;
+            DateTime fecha = DateTime.ParseExact(fechaS, "d/M/yyyy", CultureInfo.InvariantCulture);
+            int anio = fecha.Year;
+            int mes = fecha.Month;
             string fechaR = txtRegreso.Text;
             int dias = Convert.ToInt32(txtCantDia.Text);
-            int DiasTotales = Convert.ToInt32(cmbEmpleado.SelectedValue.ToString());
+            
 
             if (btnSelec.Text == "CARGAR VACACIONES")
             {
-                objC.NuevoVacaciones(empleado, dias, fechaS, fechaR, DiasTotales);
+                objC.NuevoVacaciones(empleado, dias, fechaS, fechaR, dias, mes, anio);
             }
             else
             {
-                objC.ActualizarVacaciones(id, empleado, dias, fechaS, fechaR, DiasTotales);
+                objC.ActualizarVacaciones(id, empleado, dias, fechaS, fechaR, dias, mes, anio);
             }
 
 
@@ -124,6 +130,8 @@ namespace pryPlanificador
                 objC.EliminarVacaciones(id);
                 objC.CargarGrillaVacaciones(dgvCalendario);
                 objC.CargarGrillaEmpleado(dgvEmpleados);
+                btnEliminar.Visible = false;
+                Limpiar();
 
             }
         }

@@ -72,5 +72,22 @@ namespace pryPlanificador
         {
             MessageBox.Show("SELECCIONE EL MES Y EL AÑO CORRESPONIDENTE EN EL QUE DESEA CONSULTAR LA INFORMACION.", "AYUDA", MessageBoxButtons.OK);
         }
+
+        private void dgvHora_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex > 0 && e.RowIndex >= 0)
+            {
+                DataGridViewCell cell = dgvHora.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string valor = cell.Value?.ToString();
+
+                if (!string.IsNullOrEmpty(valor))
+                {
+                    if (!valor.Equals("0"))
+                    {
+                        cell.Style.BackColor = Color.Green;
+                    }
+                }
+            }
+        }
     }
 }

@@ -63,6 +63,7 @@
             this.dgvHora.Size = new System.Drawing.Size(1063, 533);
             this.dgvHora.TabIndex = 10;
             this.dgvHora.Visible = false;
+            this.dgvHora.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvHora_CellFormatting);
             // 
             // dgvTotales
             // 

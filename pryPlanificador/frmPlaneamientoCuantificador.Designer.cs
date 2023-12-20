@@ -181,6 +181,8 @@
             this.dgvHora.Size = new System.Drawing.Size(1063, 533);
             this.dgvHora.TabIndex = 35;
             this.dgvHora.Visible = false;
+            this.dgvHora.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHora_CellContentClick);
+            this.dgvHora.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvHora_CellFormatting);
             // 
             // btnSalir
             // 

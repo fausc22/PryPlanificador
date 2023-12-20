@@ -52,7 +52,7 @@ namespace pryPlanificador
             string mes = cmbMes.Text;
             int subtotal1 = Convert.ToInt32(txtHsTrabajadas.Text) + Convert.ToInt32(txtPremios.Text);
             int subtotal2 = Convert.ToInt32(txtConsumos.Text) + Convert.ToInt32(txtADescontar.Text) + Convert.ToInt32(txtAdelantos.Text);
-            int totalll = subtotal1 + subtotal2;
+            int totalll = subtotal1 - subtotal2;
 
             SaveFileDialog guardar = new SaveFileDialog();
             string titulo = "RECIBO - " + empleado + " - " + mes + ".pdf";
