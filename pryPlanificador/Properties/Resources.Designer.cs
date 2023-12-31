@@ -104,7 +104,7 @@ namespace Planificador.Properties {
         ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
         ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
         ///&lt;head&gt;
-        ///    &lt;title&gt;Title of the document&lt;/title&gt;
+        ///    &lt;title&gt;PLANIFICADOR MENSUAL&lt;/title&gt;
         ///    &lt;style&gt;
         ///        table.border {
         ///            border-collapse: collapse;
@@ -123,7 +123,38 @@ namespace Planificador.Properties {
         ///&lt;/head&gt;
         ///&lt;body&gt;
         ///    &lt;table style=&quot;width:100%&quot;&gt;
-        ///        [resto de la cadena truncado]&quot;;.
+        ///         [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        internal static string Planificador {
+            get {
+                return ResourceManager.GetString("Planificador", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;RECIBO DE SUELDO&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        table.border {
+        ///            border-collapse: collapse;
+        ///        }
+        ///
+        ///            table.border th {
+        ///                padding: 5px;
+        ///                border: 1px solid black;
+        ///            }
+        ///
+        ///            table.border td {
+        ///                padding: 5px;
+        ///                border: 1px solid black;
+        ///            }
+        ///    &lt;/style&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;table style=&quot;width:100%&quot;&gt;
+        ///        &lt;tr&gt; [resto de la cadena truncado]&quot;;.
         /// </summary>
         internal static string Plantilla {
             get {
@@ -135,7 +166,7 @@ namespace Planificador.Properties {
         ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
         ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
         ///&lt;head&gt;
-        ///    &lt;title&gt;Title of the document&lt;/title&gt;
+        ///    &lt;title&gt;RECIBO DE SUELDO&lt;/title&gt;
         ///    &lt;style&gt;
         ///        table.border {
         ///            border-collapse: collapse;
@@ -154,7 +185,7 @@ namespace Planificador.Properties {
         ///&lt;/head&gt;
         ///&lt;body&gt;
         ///    &lt;table style=&quot;width:100%&quot;&gt;
-        ///        [resto de la cadena truncado]&quot;;.
+        ///        &lt;tr&gt; [resto de la cadena truncado]&quot;;.
         /// </summary>
         internal static string Plantilla1 {
             get {

@@ -20,11 +20,11 @@ namespace pryPlanificador
     {
         //MySqlConnection conn = new MySqlConnection();
 
-        static string servidor = "www.rsoftware.com.ar";
-        static string bd = "planificadordatabase";
-        static string user = "planificador";
-        static string pw = "251199";
-        static string port = "3306";
+        //static string servidor = "www.rsoftware.com.ar";
+        //static string bd = "planificadordatabase";
+        //static string user = "planificador";
+        //static string pw = "251199";
+        //static string port = "3306";
 
         //static string servidor = "localhost";
         //static string bd = "planificadordatabase";
@@ -32,9 +32,15 @@ namespace pryPlanificador
         //static string pw = "251199";
         //static string port = "3306";
 
+        static string servidor = "26.206.2.45";
+        static string bd = "planificador";
+        static string user = "planificador";
+        static string pw = "251199";
+        static string port = "3306";
 
 
-        string cadenaConexion = "server=" + servidor + ";" + "user=" + user + ";" + "password=" + pw + ";" + "database=" + bd + ";";
+
+        string cadenaConexion = "server=" + servidor + ";port=" + port + ";user=" + user + ";password=" + pw + ";database=" + bd + ";";
 
 
         //public MySqlConnection Conectar()
@@ -44,8 +50,8 @@ namespace pryPlanificador
         //    return conn;
         //}
 
-        
-        
+
+
 
 
         public void NuevoEmpleado(string nombre, string apellido, string email, string fecha, int antiguedad, int hora_normal, byte[] foto, byte[] huella, int diavacas)
@@ -220,7 +226,7 @@ namespace pryPlanificador
 
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            while (reader.Read())
+                            if (reader.Read())
                             {
 
                                 // Asigna los valores de cada columna a los controles correspondientes
@@ -233,6 +239,10 @@ namespace pryPlanificador
                                 hora_normal.Text = reader["hora_normal"].ToString();
                                 diavacas.Text = reader["dia_vacaciones"].ToString();
 
+
+
+
+
                                 // La columna de la imagen puede ser de tipo BLOB en la base de datos
                                 // Aquí asumimos que la columna se llama "foto" y es de tipo BLOB
                                 if (reader["foto_perfil"] != DBNull.Value)
@@ -240,19 +250,22 @@ namespace pryPlanificador
                                     byte[] imageData = (byte[])reader["foto_perfil"];
                                     MemoryStream ms = new MemoryStream(imageData);
                                     foto.Image = Image.FromStream(ms);
-                                    
+
                                 }
+
+
+
 
                                 // La columna de la huella también puede ser de tipo BLOB
                                 // Aquí asumimos que la columna se llama "huella" y es de tipo BLOB
                                 if (reader["huella_dactilar"] != DBNull.Value)
                                 {
+
                                     byte[] huellaData = (byte[])reader["huella_dactilar"];
                                     MemoryStream msHuella = new MemoryStream(huellaData);
                                     // Asigna la imagen de la huella al PictureBox
                                     // (Asegúrate de que el PictureBox esté configurado para mostrar imágenes)
                                     huella.Image = Image.FromStream(msHuella);
-                                    
                                 }
                             }
                         }
@@ -1739,6 +1752,21 @@ namespace pryPlanificador
             }
         }
 
+        private bool IsValidImage(byte[] imageData)
+        {
+            try
+            {
+                using (var ms = new MemoryStream(imageData))
+                {
+                    Image.FromStream(ms);
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
 
     }

@@ -43,6 +43,7 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnAyuda = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.btnPdf = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHora)).BeginInit();
             this.gpCmb.SuspendLayout();
             this.gpEmpleado.SuspendLayout();
@@ -223,12 +224,23 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // btnPdf
+            // 
+            this.btnPdf.Location = new System.Drawing.Point(12, 332);
+            this.btnPdf.Name = "btnPdf";
+            this.btnPdf.Size = new System.Drawing.Size(170, 22);
+            this.btnPdf.TabIndex = 36;
+            this.btnPdf.Text = "GENERAR PDF";
+            this.btnPdf.UseVisualStyleBackColor = true;
+            this.btnPdf.Click += new System.EventHandler(this.btnPdf_Click);
+            // 
             // frmPlaneamientoPlanificador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1356, 629);
+            this.Controls.Add(this.btnPdf);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.lblTitulo);
@@ -265,5 +277,6 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnAyuda;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnPdf;
     }
 }

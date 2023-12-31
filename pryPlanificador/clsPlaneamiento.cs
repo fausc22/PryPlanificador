@@ -25,15 +25,23 @@ namespace pryPlanificador
 
 
 
-        static string servidor = "www.rsoftware.com.ar";
-        static string bd = "planificadordatabase";
+        //static string servidor = "www.rsoftware.com.ar";
+        //static string bd = "planificadordatabase";
+        //static string user = "planificador";
+        //static string pw = "251199";
+        //static string port = "3306";
+
+
+        static string servidor = "26.206.2.45";
+        static string bd = "planificador";
         static string user = "planificador";
         static string pw = "251199";
         static string port = "3306";
 
 
 
-        string cadenaConexion = "server=" + servidor + ";" + "user=" + user + ";" + "password=" + pw + ";" + "database=" + bd + ";";
+        string cadenaConexion = "server=" + servidor + ";port=" + port + ";user=" + user + ";password=" + pw + ";database=" + bd + ";";
+
 
 
 
@@ -132,36 +140,68 @@ namespace pryPlanificador
                 {
                     conn.Open();
                     List<string> empleados = new List<string>();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT nombre FROM empleados", conn))
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT nombre FROM empleados ORDER BY nombre ASC", conn))
                     {
-                        
-
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
                                 string empleado = reader["nombre"].ToString();
                                 empleados.Add(empleado);
-
-                                // Crea una nueva columna de ComboBox para cada empleado
-                                DataGridViewTextBoxColumn comboBoxColumn = new DataGridViewTextBoxColumn();
-                                comboBoxColumn.HeaderText = empleado;
-                                comboBoxColumn.Name = empleado; // Nombre de la columna para referencia futura
-                                                                // Cambia el color de fondo de la columna a azul
-                                comboBoxColumn.DefaultCellStyle.BackColor = Color.DarkSalmon;
-
-
-                                // Agrega la columna ComboBox al DataGridView
-                                grilla.Columns.Add(comboBoxColumn);
-
-                            }
-                            // Bloquear los títulos de las columnas
-                            foreach (DataGridViewColumn column in grilla.Columns)
-                            {
-                                column.SortMode = DataGridViewColumnSortMode.NotSortable; // Desactiva la capacidad de ordenar las columnas
-                                column.Resizable = DataGridViewTriState.False; // Evita que se pueda cambiar el tamaño de las columnas
                             }
                         }
+                    }
+
+                    // Ordenar la lista de empleados alfabéticamente
+                    empleados.Sort();
+
+                    // Agregar las columnas ordenadas al DataGridView
+                    foreach (string empleado in empleados)
+                    {
+                        DataGridViewTextBoxColumn comboBoxColumn = new DataGridViewTextBoxColumn();
+                        comboBoxColumn.HeaderText = empleado;
+                        comboBoxColumn.Name = empleado;
+                        comboBoxColumn.DefaultCellStyle.BackColor = Color.DarkSalmon;
+
+                        // Agrega la columna ComboBox al DataGridView
+                        grilla.Columns.Add(comboBoxColumn);
+
+                        // Cambiar el color de fondo de las columnas en el encabezado
+                        if (empleado.Equals("TITI", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Purple; // Violeta
+                        }
+                        else if (empleado.Equals("PRISCILA", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Fuchsia;
+                        }
+                        else if (empleado.Equals("ALEJANDRO", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.LightBlue;
+                        }
+                        else if (empleado.Equals("LAUTARO", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Green;
+                        }
+                        else if (empleado.Equals("CANDELARIA", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Lavender; // Lila
+                        }
+                        else if (empleado.Equals("MICAELA", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Turquoise;
+                        }
+                        else if (empleado.Equals("CATALINA", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Violet;
+                        }
+                    }
+
+                    // Bloquear los títulos de las columnas
+                    foreach (DataGridViewColumn column in grilla.Columns)
+                    {
+                        column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                        column.Resizable = DataGridViewTriState.False;
                     }
 
                     // Obtener los valores para cada fecha y empleado
@@ -225,36 +265,68 @@ namespace pryPlanificador
                 {
                     conn.Open();
                     List<string> empleados = new List<string>();
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT nombre FROM empleados", conn))
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT nombre FROM empleados ORDER BY nombre ASC", conn))
                     {
-
-
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
                                 string empleado = reader["nombre"].ToString();
                                 empleados.Add(empleado);
-
-                                // Crea una nueva columna de ComboBox para cada empleado
-                                DataGridViewTextBoxColumn comboBoxColumn = new DataGridViewTextBoxColumn();
-                                comboBoxColumn.HeaderText = empleado;
-                                comboBoxColumn.Name = empleado; // Nombre de la columna para referencia futura
-                                                                // Cambia el color de fondo de la columna a azul
-                                comboBoxColumn.DefaultCellStyle.BackColor = Color.DarkSalmon;
-
-
-                                // Agrega la columna ComboBox al DataGridView
-                                grilla.Columns.Add(comboBoxColumn);
-
-                            }
-                            // Bloquear los títulos de las columnas
-                            foreach (DataGridViewColumn column in grilla.Columns)
-                            {
-                                column.SortMode = DataGridViewColumnSortMode.NotSortable; // Desactiva la capacidad de ordenar las columnas
-                                column.Resizable = DataGridViewTriState.False; // Evita que se pueda cambiar el tamaño de las columnas
                             }
                         }
+                    }
+
+                    // Ordenar la lista de empleados alfabéticamente
+                    empleados.Sort();
+
+                    // Agregar las columnas ordenadas al DataGridView
+                    foreach (string empleado in empleados)
+                    {
+                        DataGridViewTextBoxColumn comboBoxColumn = new DataGridViewTextBoxColumn();
+                        comboBoxColumn.HeaderText = empleado;
+                        comboBoxColumn.Name = empleado;
+                        comboBoxColumn.DefaultCellStyle.BackColor = Color.DarkSalmon;
+
+                        // Agrega la columna ComboBox al DataGridView
+                        grilla.Columns.Add(comboBoxColumn);
+
+                        // Cambiar el color de fondo de las columnas en el encabezado
+                        if (empleado.Equals("TITI", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Purple; // Violeta
+                        }
+                        else if (empleado.Equals("PRISCILA", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Fuchsia;
+                        }
+                        else if (empleado.Equals("ALEJANDRO", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.LightBlue;
+                        }
+                        else if (empleado.Equals("LAUTARO", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Green;
+                        }
+                        else if (empleado.Equals("CANDELARIA", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Lavender; // Lila
+                        }
+                        else if (empleado.Equals("MICAELA", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Turquoise;
+                        }
+                        else if (empleado.Equals("CATALINA", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Violet;
+                        }
+                    }
+
+                    // Bloquear los títulos de las columnas
+                    foreach (DataGridViewColumn column in grilla.Columns)
+                    {
+                        column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                        column.Resizable = DataGridViewTriState.False;
                     }
 
                     // Obtener los valores para cada fecha y empleado

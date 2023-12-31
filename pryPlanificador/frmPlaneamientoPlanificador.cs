@@ -1,9 +1,14 @@
-﻿using MySqlX.XDevAPI.Relational;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text;
+using iTextSharp.tool.xml;
+using MySqlX.XDevAPI.Relational;
+using Planificador.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -145,5 +150,210 @@ namespace pryPlanificador
                 }
             }
         }
+
+        private void btnPdf_Click(object sender, EventArgs e)
+        {
+            if (dgvHora.Rows.Count > 0)
+
+            {
+
+                SaveFileDialog save = new SaveFileDialog();
+
+                save.Filter = "PDF (*.pdf)|*.pdf";
+
+                save.FileName = "Planificador.pdf";
+
+                bool ErrorMessage = false;
+
+                if (save.ShowDialog() == DialogResult.OK)
+
+                {
+
+                    if (File.Exists(save.FileName))
+
+                    {
+
+                        try
+
+                        {
+
+                            File.Delete(save.FileName);
+
+                        }
+
+                        catch (Exception ex)
+
+                        {
+
+                            ErrorMessage = true;
+
+                            MessageBox.Show("Unable to wride data in disk" + ex.Message);
+
+                        }
+
+                    }
+
+                    if (!ErrorMessage)
+
+                    {
+
+                        try
+
+                        {
+
+                            PdfPTable pTable = new PdfPTable(dgvHora.Columns.Count);
+                            pTable.DefaultCell.Padding = 2;
+                            pTable.WidthPercentage = 100;
+                            pTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+                            
+
+                            // Modificar el estilo de la celda para las columnas del encabezado
+                            PdfPCell headerCell = new PdfPCell();
+                            headerCell.BackgroundColor = new BaseColor(0, 102, 204); // Azul
+                            headerCell.Padding = 5;
+                            
+                            headerCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                            headerCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                            headerCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+
+                            // Estilo de fuente para el texto en negrita y azul
+                            iTextSharp.text.Font font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD);
+                            font.Color = BaseColor.BLACK; // Color de texto blanco
+
+                            // Estilo de fuente para el texto en negrita y azul
+                            iTextSharp.text.Font fontt = FontFactory.GetFont(FontFactory.HELVETICA_BOLD);
+                            font.Color = BaseColor.BLACK; // Color de texto blanco
+                            fontt.Size = 8;
+
+
+                            // Establecer color de fondo gris para la primera columna
+                            PdfPCell greyCell = new PdfPCell();
+                            greyCell.BackgroundColor = new BaseColor(169, 169, 169); // Gris
+                            greyCell.Padding = 5;
+                            greyCell.HorizontalAlignment = Element.ALIGN_LEFT;
+
+                            // Crear documento y escritor
+                            using (FileStream fileStream = new FileStream(save.FileName, FileMode.Create))
+                            {
+                                Document document = new Document(PageSize.A4, 8f, 16f, 16f, 8f);
+                                PdfWriter writer = PdfWriter.GetInstance(document, fileStream);
+
+                                document.Open();
+
+                                foreach (DataGridViewColumn col in dgvHora.Columns)
+                                {
+
+
+
+
+                                    // Cambiar el color de fondo según el nombre de la columna
+                                    switch (col.HeaderText.ToUpper())
+                                    {
+                                        case "TITI":
+                                            headerCell.BackgroundColor = new BaseColor(138, 43, 226); // Violeta
+                                            break;
+                                        case "PRISCILA":
+                                            headerCell.BackgroundColor = new BaseColor(255, 0, 255); // Fucsia
+                                            break;
+                                        case "ALEJANDRO":
+                                            headerCell.BackgroundColor = new BaseColor(0, 0, 255); // Azul
+                                            break;
+                                        case "LAUTARO":
+                                            headerCell.BackgroundColor = new BaseColor(0, 128, 0); // Verde
+                                            break;
+                                        case "CANDELARIA":
+                                            headerCell.BackgroundColor = new BaseColor(128, 0, 128); // Lila
+                                            break;
+                                        case "MICAELA":
+                                            headerCell.BackgroundColor = new BaseColor(64, 224, 208); // Turquesa
+                                            break;
+                                        case "CATALINA":
+                                            headerCell.BackgroundColor = new BaseColor(138, 43, 226); // Violeta
+                                            break;
+                                        default:
+                                            headerCell.BackgroundColor = new BaseColor(0, 102, 204); // Azul (por defecto)
+                                            break;
+                                    }
+
+                                    // Asignar el nombre de la columna al encabezado
+                                    headerCell.Phrase = new Phrase(col.HeaderText, fontt);
+                                    
+                                    pTable.AddCell(headerCell);
+                                }
+
+                                foreach (DataGridViewRow viewRow in dgvHora.Rows)
+                                {
+                                    // Crear nueva página si es necesario
+                                    if (writer.GetVerticalPosition(false) - pTable.TotalHeight < document.BottomMargin)
+                                    {
+                                        document.Add(pTable);
+                                        pTable.DeleteBodyRows();
+                                    }
+
+                                    // Añadir la celda gris para la primera columna
+                                    greyCell.Phrase = new Phrase(viewRow.Cells[0].Value.ToString(), fontt);
+                                    pTable.AddCell(greyCell);
+
+                                    // Añadir las demás celdas
+                                    for (int i = 1; i < dgvHora.Columns.Count; i++)
+                                    {
+                                        PdfPCell cell = new PdfPCell();
+                                        cell.Phrase = new Phrase(viewRow.Cells[i].Value.ToString(), font);
+
+                                        // Cambiar el color de fondo según el valor de la celda
+                                        switch (viewRow.Cells[i].Value.ToString().ToLower())
+                                        {
+                                            case "libre":
+                                                cell.BackgroundColor = new BaseColor(0, 128, 0); // Verde
+                                                break;
+                                            case "vacaciones":
+                                                cell.BackgroundColor = new BaseColor(255, 255, 0); // Amarillo
+                                                break;
+                                            default:
+                                                cell.BackgroundColor = new BaseColor(255, 165, 0); // Naranja
+                                                break;
+                                        }
+
+                                        pTable.AddCell(cell);
+                                    }
+                                }
+
+                                // Agregar la última tabla a la página
+                                document.Add(pTable);
+
+                                document.Close();
+                                fileStream.Close();
+                            }
+
+                            MessageBox.Show("PDF creado con éxito!", "info");
+
+                        }
+
+                        catch (Exception ex)
+
+                        {
+
+                            MessageBox.Show("Error while exporting Data" + ex.Message);
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            else
+
+            {
+
+                MessageBox.Show("No Record Found", "Info");
+
+            }
+
+        }
+
+        
     }
 }

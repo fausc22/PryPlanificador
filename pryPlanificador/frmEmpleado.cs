@@ -151,6 +151,8 @@ namespace pryPlanificador
             {
                 MessageBox.Show("ERROR: Verificar que el lector este conectado correctamente.");
             }
+
+
         }
 
 
