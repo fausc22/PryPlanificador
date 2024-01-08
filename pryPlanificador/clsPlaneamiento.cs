@@ -16,11 +16,11 @@ namespace pryPlanificador
 {
     class clsPlaneamiento
     {
-        //static string servidor = "localhost";
-        //static string bd = "planificadordatabase";
-        //static string user = "root";
-        //static string pw = "251199";
-        //static string port = "3306";
+        static string servidor = "localhost";
+        static string bd = "planificadordatabase";
+        static string user = "root";
+        static string pw = "251199";
+        static string port = "3306";
 
 
 
@@ -32,11 +32,12 @@ namespace pryPlanificador
         //static string port = "3306";
 
 
-        static string servidor = "26.206.2.45";
-        static string bd = "planificador";
-        static string user = "planificador";
-        static string pw = "251199";
-        static string port = "3306";
+        //KIOSCO
+        //static string servidor = "26.206.2.45";
+        //static string bd = "planificador";
+        //static string user = "planificador";
+        //static string pw = "251199";
+        //static string port = "3306";
 
 
 
@@ -308,9 +309,9 @@ namespace pryPlanificador
                         {
                             comboBoxColumn.HeaderCell.Style.BackColor = Color.Green;
                         }
-                        else if (empleado.Equals("CANDELARIA", StringComparison.OrdinalIgnoreCase))
+                        else if (empleado.Equals("Fecha", StringComparison.OrdinalIgnoreCase))
                         {
-                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Lavender; // Lila
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Beige; // Lila
                         }
                         else if (empleado.Equals("MICAELA", StringComparison.OrdinalIgnoreCase))
                         {
@@ -319,6 +320,10 @@ namespace pryPlanificador
                         else if (empleado.Equals("CATALINA", StringComparison.OrdinalIgnoreCase))
                         {
                             comboBoxColumn.HeaderCell.Style.BackColor = Color.Violet;
+                        }
+                        else
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Lavender;
                         }
                     }
 

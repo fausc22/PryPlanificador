@@ -62,6 +62,7 @@ namespace pryPlanificador
             cmbAnio.Enabled = false;
             btnLimpiar.Enabled = true;
             button1.Enabled = false;
+            btnPdf.Visible = true;
         }
 
         private void dgvHora_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -104,11 +105,12 @@ namespace pryPlanificador
             int cantidadHoras = Convert.ToInt32(cmbTurno.SelectedValue.ToString());
             int valorHora = objC.HoraEmpleado(nombreC);
             int totalHoras = valorHora * cantidadHoras;
-            
+            dgvHora.Visible = false;
             
             plan.ActualizarTurnos(mes, anio, nuevoValor, nombreF, nombreC, cantidadHoras, totalHoras);
             plan.CargarGrillaPlanificador(dgvHora, mes, anio, form);
             gpCmb.Visible = false;
+            dgvHora.Visible = true;
 
         }
 
@@ -263,13 +265,13 @@ namespace pryPlanificador
                                             headerCell.BackgroundColor = new BaseColor(0, 128, 0); // Verde
                                             break;
                                         case "CANDELARIA":
-                                            headerCell.BackgroundColor = new BaseColor(128, 0, 128); // Lila
+                                            headerCell.BackgroundColor = new BaseColor(200, 120, 200); ; // Lila
                                             break;
                                         case "MICAELA":
                                             headerCell.BackgroundColor = new BaseColor(64, 224, 208); // Turquesa
                                             break;
                                         case "CATALINA":
-                                            headerCell.BackgroundColor = new BaseColor(138, 43, 226); // Violeta
+                                            headerCell.BackgroundColor = new BaseColor(255, 182, 193); // Violeta
                                             break;
                                         default:
                                             headerCell.BackgroundColor = new BaseColor(0, 102, 204); // Azul (por defecto)
@@ -278,6 +280,7 @@ namespace pryPlanificador
 
                                     // Asignar el nombre de la columna al encabezado
                                     headerCell.Phrase = new Phrase(col.HeaderText, fontt);
+                                    
                                     
                                     pTable.AddCell(headerCell);
                                 }
@@ -315,6 +318,7 @@ namespace pryPlanificador
                                                 break;
                                         }
 
+                                        cell.VerticalAlignment = Element.ALIGN_CENTER;
                                         pTable.AddCell(cell);
                                     }
                                 }

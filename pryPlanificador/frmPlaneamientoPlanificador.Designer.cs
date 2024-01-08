@@ -226,12 +226,14 @@
             // 
             // btnPdf
             // 
-            this.btnPdf.Location = new System.Drawing.Point(12, 332);
+            this.btnPdf.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnPdf.Location = new System.Drawing.Point(12, 318);
             this.btnPdf.Name = "btnPdf";
-            this.btnPdf.Size = new System.Drawing.Size(170, 22);
+            this.btnPdf.Size = new System.Drawing.Size(170, 41);
             this.btnPdf.TabIndex = 36;
             this.btnPdf.Text = "GENERAR PDF";
-            this.btnPdf.UseVisualStyleBackColor = true;
+            this.btnPdf.UseVisualStyleBackColor = false;
+            this.btnPdf.Visible = false;
             this.btnPdf.Click += new System.EventHandler(this.btnPdf_Click);
             // 
             // frmPlaneamientoPlanificador
