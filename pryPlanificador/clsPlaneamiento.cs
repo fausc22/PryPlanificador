@@ -16,11 +16,11 @@ namespace pryPlanificador
 {
     class clsPlaneamiento
     {
-        static string servidor = "localhost";
-        static string bd = "planificadordatabase";
-        static string user = "root";
-        static string pw = "251199";
-        static string port = "3306";
+        //static string servidor = "localhost";
+        //static string bd = "planificadordatabase";
+        //static string user = "root";
+        //static string pw = "251199";
+        //static string port = "3306";
 
 
 
@@ -32,12 +32,13 @@ namespace pryPlanificador
         //static string port = "3306";
 
 
+
         //KIOSCO
-        //static string servidor = "26.206.2.45";
-        //static string bd = "planificador";
-        //static string user = "planificador";
-        //static string pw = "251199";
-        //static string port = "3306";
+        static string servidor = "26.206.2.45";
+        static string bd = "planificador";
+        static string user = "planificador";
+        static string pw = "251199";
+        static string port = "3306";
 
 
 
@@ -122,6 +123,213 @@ namespace pryPlanificador
                 DayOfWeek ingles = fechaDateTime.DayOfWeek;
                 string diaSemana = ObtenerNombreDiaEnEspanol(ingles);
 
+                string agregar1 = fecha + " (" + diaSemana + ") ";
+
+                int index1 = grilla.Rows.Add(agregar1);
+
+                if (EsFeriado(fecha) == true)
+                {
+                    grilla.Rows[index1].Cells[0].Style.BackColor = Color.Red;
+                    // Puedes ajustar el formato de la fecha según tus necesidades
+                }
+                // Agregar una fila por cada día en el mes
+
+                // Agregar la segunda vez (puedes personalizar la cadena 'agregar2' según tus necesidades)
+                string agregar2 = fecha;
+                int index2 = grilla.Rows.Add(agregar2);
+
+                if (EsFeriado(fecha) == true)
+                {
+                    grilla.Rows[index2].Cells[0].Style.BackColor = Color.Red;
+                    // Puedes ajustar el formato de la fecha según tus necesidades
+                }
+
+
+            }
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+                    List<string> empleados = new List<string>();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT nombre FROM empleados ORDER BY nombre ASC", conn))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string empleado = reader["nombre"].ToString();
+                                empleados.Add(empleado);
+                            }
+                        }
+                    }
+
+                    // Ordenar la lista de empleados alfabéticamente
+                    empleados.Sort();
+
+                    // Agregar las columnas ordenadas al DataGridView
+                    foreach (string empleado in empleados)
+                    {
+                        DataGridViewTextBoxColumn comboBoxColumn = new DataGridViewTextBoxColumn();
+                        comboBoxColumn.HeaderText = empleado;
+                        comboBoxColumn.Name = empleado;
+                        comboBoxColumn.DefaultCellStyle.BackColor = Color.DarkSalmon;
+
+                        // Agrega la columna ComboBox al DataGridView
+                        grilla.Columns.Add(comboBoxColumn);
+
+                        // Cambiar el color de fondo de las columnas en el encabezado
+                        if (empleado.Equals("TITI", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Purple; // Violeta
+                        }
+                        else if (empleado.Equals("PRISCILA", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Fuchsia;
+                        }
+                        else if (empleado.Equals("ALEJANDRO", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.LightBlue;
+                        }
+                        else if (empleado.Equals("LAUTARO", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Green;
+                        }
+                        else if (empleado.Equals("CANDELARIA", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Lavender; // Lila
+                        }
+                        else if (empleado.Equals("MICAELA", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Turquoise;
+                        }
+                        else if (empleado.Equals("CATALINA", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Violet;
+                        }
+                    }
+
+                    // Bloquear los títulos de las columnas
+                    foreach (DataGridViewColumn column in grilla.Columns)
+                    {
+                        column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                        column.Resizable = DataGridViewTriState.False;
+                    }
+
+
+                    // Variable para controlar el turno (inicia en 1)
+                    int turno = 1;
+                    // Iterar sobre las filas de la grilla
+                    foreach (DataGridViewRow row in grilla.Rows)
+                    {
+                        // Obtener la fecha de la fila actual
+                        string fechaA = row.Cells[0].Value.ToString();
+
+                        // Asegurarse de que la fechaA no sea nula antes de procesar
+                        if (!string.IsNullOrEmpty(fechaA))
+                        {
+                            // Dividir la cadena utilizando el paréntesis como separador
+                            string[] partes = fechaA.Split('(');
+
+                            // La primera parte debe contener la fecha
+                            string fechaString = partes[0].Trim();
+
+                            
+
+                            // Iterar sobre los empleados
+                            foreach (string empleado in empleados)
+                            {
+                                
+                                // Determinar el nombre de la columna según el turno actual
+                                string columna = $"turno{turno}";
+
+                                using (MySqlCommand cmd = new MySqlCommand($"SELECT * FROM {tabla} WHERE fecha = @fecha AND nombre_empleado = @empleado", conn))
+                                {
+                                    cmd.Parameters.AddWithValue("@fecha", fechaString);
+                                    cmd.Parameters.AddWithValue("@empleado", empleado);
+
+                                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                                    {
+                                        if (reader.Read())
+                                        {
+                                            row.Cells[empleado].Value = reader[columna].ToString();
+                                        }
+                                    }
+                                }
+
+                                
+                            }
+                            // Cambiar el turno para la próxima iteración
+                            turno = (turno % 2) + 1;
+                        }
+                    }
+
+
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                // Maneja la excepción según tus necesidades
+                MessageBox.Show("Error al cargar empleados: " + ex.Message);
+            }
+        }
+
+        public void CargarGrillaPlanificador2(DataGridView grilla, string Mes, int anio, string form)
+        {
+            // Limpiar la grilla
+            grilla.Columns.Clear();
+            grilla.Rows.Clear();
+
+            // Agregar la columna "Fecha"
+            DataGridViewTextBoxColumn fechaColumn = new DataGridViewTextBoxColumn();
+            fechaColumn.HeaderText = "Fecha";
+            fechaColumn.ReadOnly = true;
+            fechaColumn.DefaultCellStyle.BackColor = Color.LightBlue;
+            fechaColumn.Width = 150;
+            grilla.Columns.Add(fechaColumn);
+
+            int NroMes = ObtenerNumeroMes(Mes);
+            int NroAnio = anio;
+            int diasEnMes = DateTime.DaysInMonth(NroAnio, NroMes);
+            string tabla = "turnos_" + NroAnio;
+            string fecha = string.Empty;
+            for (int dia = 1; dia <= diasEnMes; dia++)
+            {
+                if (dia < 10)
+                {
+                    if (NroMes < 10)
+                    {
+                        fecha = $"0{dia}/0{NroMes}/{anio}";
+                    }
+                    else
+                    {
+                        fecha = $"0{dia}/{NroMes}/{anio}";
+                    }
+
+                }
+                else
+                {
+                    if (NroMes < 10)
+                    {
+                        fecha = $"{dia}/0{NroMes}/{anio}";
+                    }
+                    else
+                    {
+                        fecha = $"{dia}/{NroMes}/{anio}";
+                    }
+                }
+
+
+                // Convertir la cadena de fecha a un objeto DateTime
+                DateTime fechaDateTime = DateTime.ParseExact(fecha, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                // Obtener el día de la semana
+                DayOfWeek ingles = fechaDateTime.DayOfWeek;
+                string diaSemana = ObtenerNombreDiaEnEspanol(ingles);
+
                 string agregar = fecha + " (" + diaSemana + ") ";
 
                 int index = grilla.Rows.Add(agregar);
@@ -132,7 +340,7 @@ namespace pryPlanificador
                     // Puedes ajustar el formato de la fecha según tus necesidades
                 }
                 // Agregar una fila por cada día en el mes
-                
+
             }
 
             try
@@ -218,6 +426,35 @@ namespace pryPlanificador
 
                         foreach (string empleado in empleados)
                         {
+                            string tablaAnual = "totales_" + NroAnio;
+                            
+                            //using (MySqlCommand cmd = new MySqlCommand($"SELECT horas, acumulado FROM {tablaAnual} WHERE mes = @mes AND nombre_empleado = @nombre", conn))
+                            //{
+                            //    cmd.Parameters.AddWithValue("@nombre", empleado);
+                            //    cmd.Parameters.AddWithValue("@mes", NroMes);
+
+                            //    using (MySqlDataReader reader = cmd.ExecuteReader())
+                            //    {
+                            //        if (reader.Read())
+                            //        {
+                            //            horasTotales = Convert.ToInt32(reader["horas"]);
+                            //            acumuladoTotal = Convert.ToInt32(reader["acumulado"]);
+                            //        }
+
+                            //    }
+                            //}
+
+
+
+
+
+
+
+
+
+
+
+
                             using (MySqlCommand cmd = new MySqlCommand($"SELECT {form} FROM {tabla} WHERE fecha = @fecha AND nombre_empleado = @empleado", conn))
                             {
                                 cmd.Parameters.AddWithValue("@fecha", fechaString);
@@ -229,7 +466,7 @@ namespace pryPlanificador
                                     {
                                         row.Cells[empleado].Value = reader[form].ToString();
                                     }
-                                    
+
                                 }
                             }
                         }
@@ -243,6 +480,10 @@ namespace pryPlanificador
             }
         }
 
+
+
+
+
         public void CargarGrillaTotales(DataGridView grilla, string Mes, int anio, string form)
         {
             // Limpiar la grilla
@@ -254,6 +495,7 @@ namespace pryPlanificador
             fechaColumn.HeaderText = "MES";
             fechaColumn.ReadOnly = true;
             fechaColumn.DefaultCellStyle.BackColor = Color.LightBlue;
+            fechaColumn.Width = 150;
             grilla.Columns.Add(fechaColumn);
             int NroMes = ObtenerNumeroMes(Mes);
             int NroAnio = anio;
@@ -334,30 +576,24 @@ namespace pryPlanificador
                         column.Resizable = DataGridViewTriState.False;
                     }
 
-                    // Obtener los valores para cada fecha y empleado
-                    foreach (DataGridViewRow row in grilla.Rows)
+                    foreach (string empleado in empleados)
                     {
-
-
-                        foreach (string empleado in empleados)
+                        using (MySqlCommand cmd = new MySqlCommand($"SELECT {form} FROM {tabla} WHERE mes = @fecha AND nombre_empleado = @empleado", conn))
                         {
-                            using (MySqlCommand cmd = new MySqlCommand($"SELECT {form} FROM {tabla} WHERE mes = @fecha AND nombre_empleado = @empleado", conn))
+                            cmd.Parameters.AddWithValue("@fecha", NroMes);
+                            cmd.Parameters.AddWithValue("@empleado", empleado);
+
+                            using (MySqlDataReader reader = cmd.ExecuteReader())
                             {
-                                cmd.Parameters.AddWithValue("@fecha", NroMes);
-                                cmd.Parameters.AddWithValue("@empleado", empleado);
-
-                                using (MySqlDataReader reader = cmd.ExecuteReader())
+                                if (reader.Read())
                                 {
-                                    if (reader.Read())
-                                    {
-                                        row.Cells[empleado].Value = reader[form].ToString();
-                                    }
-
+                                    grilla.Rows[0].Cells[empleado].Value = reader[form].ToString();
                                 }
                             }
                         }
+                    }
+                   
                 }
-            }
             }
             catch (Exception ex)
             {
@@ -515,7 +751,7 @@ namespace pryPlanificador
         }
 
 
-        public void ActualizarTurnos(string Mes, int anio, string valor, string fecha, string nombre, int horas, int acumulado)
+        public void ActualizarTurnos(string Mes, int anio, string turno, string valor, string fecha, string nombre, int horas, int acumulado, int horasAnteriores, int acumuladoAnterior)
         {
             int NroMes = ObtenerNumeroMes(Mes);
             int NroAnio = anio;
@@ -523,32 +759,33 @@ namespace pryPlanificador
             string tabla = "turnos_" + NroAnio;
             int horasTotales = 0;
             int acumuladoTotal = 0;
+            int horasMensual = 0;
+            int acumuladoMensual = 0;
             try
             {
 
                 using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
                 {
                     conn.Open();
+
                     
                     using (MySqlCommand cmd = new MySqlCommand($"SELECT horas, acumulado FROM {tablaAnual} WHERE mes = @mes AND nombre_empleado = @nombre", conn))
                     {
                         cmd.Parameters.AddWithValue("@nombre", nombre);
                         cmd.Parameters.AddWithValue("@mes", NroMes);
 
-                        using (MySqlDataReader reader = cmd.ExecuteReader()) 
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                horasTotales = Convert.ToInt32(reader["horas"]);
-                                acumuladoTotal = Convert.ToInt32(reader["acumulado"]);
+                                horasMensual = Convert.ToInt32(reader["horas"]);
+                                acumuladoMensual = Convert.ToInt32(reader["acumulado"]);
                             }
-                            
+
                         }
                     }
-                        
-                    string consulta = $"UPDATE {tabla} SET valor = @valor, horas = @horas, acumulado = @acumulado WHERE fecha = @fecha AND nombre_empleado = @nombre";
-                    
-                    using (MySqlCommand cmd = new MySqlCommand(consulta, conn))
+
+                    using (MySqlCommand cmd = new MySqlCommand($"SELECT horas, acumulado FROM {tabla} WHERE fecha = @fecha AND nombre_empleado = @nombre", conn))
                     {
                         cmd.Parameters.AddWithValue("@valor", valor);
                         cmd.Parameters.AddWithValue("@fecha", fecha);
@@ -557,21 +794,50 @@ namespace pryPlanificador
                         cmd.Parameters.AddWithValue("@acumulado", acumulado);
 
 
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                horasTotales = Convert.ToInt32(reader["horas"]);
+                                acumuladoTotal = Convert.ToInt32(reader["acumulado"]);
+                            }
+                        }
+                    }
+
+                    horasMensual = (horasMensual - horasAnteriores) + horas;
+                    acumuladoMensual = (acumuladoMensual - acumuladoAnterior) + acumulado;
+                    horasTotales = (horasTotales - horasAnteriores) + horas;
+                    acumuladoTotal = (acumuladoTotal - acumuladoAnterior) + acumulado;
+
+
+
+                    string consulta = $"UPDATE {tabla} SET {turno} = @valor, horas = @horas, acumulado = @acumulado WHERE fecha = @fecha AND nombre_empleado = @nombre";
+                    
+                    using (MySqlCommand cmd = new MySqlCommand(consulta, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@valor", valor);
+                        cmd.Parameters.AddWithValue("@fecha", fecha);
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@horas", horasTotales);
+                        cmd.Parameters.AddWithValue("@acumulado", acumuladoTotal);
+
+
                         cmd.ExecuteNonQuery();
+                        MessageBox.Show("TURNO ACTUALIZADO CON ÉXITO.");
                     }
 
                     string consulta2 = $"UPDATE {tablaAnual} SET horas = @horas, acumulado = @acumulado WHERE mes = @fecha AND nombre_empleado = @nombre";
                     int horasAgregar = horasTotales + horas;
                     int acumuladoAgregar = acumuladoTotal + acumulado;
-                    
+
 
                     using (MySqlCommand cmd = new MySqlCommand(consulta2, conn))
                     {
-                        
+
                         cmd.Parameters.AddWithValue("@fecha", NroMes);
                         cmd.Parameters.AddWithValue("@nombre", nombre);
-                        cmd.Parameters.AddWithValue("@horas", horasAgregar);
-                        cmd.Parameters.AddWithValue("@acumulado", acumuladoAgregar);
+                        cmd.Parameters.AddWithValue("@horas", horasMensual);
+                        cmd.Parameters.AddWithValue("@acumulado", acumuladoMensual);
 
 
                         cmd.ExecuteNonQuery();
@@ -592,5 +858,76 @@ namespace pryPlanificador
 
 
         }
+
+
+        public int ObtenerValorAnterior(string turno)
+        {
+            try 
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    int horas = 0;
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT horas FROM horarios WHERE turnos = @turnos", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@turnos", turno);
+
+                        using (MySqlDataReader rdr = cmd.ExecuteReader()) 
+                        {
+                            if (rdr.Read())
+                            {
+                                horas = rdr.GetInt32(0);
+                            }
+                        }
+                    }
+                    return horas;
+                }
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("ERROR: " + ex.Message);
+                return 0;
+
+            }
+
+        }
+
+        public int ObtenerAcumuladoAnterior(string nombre, int horas)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    int sueldo = 0;
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT hora_normal FROM empleados WHERE nombre = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+
+                        using (MySqlDataReader rdr = cmd.ExecuteReader())
+                        {
+                            if (rdr.Read())
+                            {
+                                sueldo = rdr.GetInt32(0);
+                            }
+                        }
+                    }
+
+                    int TotalEnviar = sueldo * horas;
+                    return TotalEnviar;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERROR: " + ex.Message);
+                return 0;
+
+            }
+
+        }
+
+
     }
 }

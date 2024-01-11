@@ -45,21 +45,29 @@ namespace pryPlanificador
             
             int id = Convert.ToInt32(lblId.Text);
             string empleado = cmbEmpleado.Text;
-            string fechaS = txtSalida.Text;
-            DateTime fecha = DateTime.ParseExact(fechaS, "d/M/yyyy", CultureInfo.InvariantCulture);
+            string fechaS = dtpSalida.Value.ToString("dd/MM/yyyy");
+            DateTime fecha = DateTime.ParseExact(fechaS, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             int anio = fecha.Year;
             int mes = fecha.Month;
-            string fechaR = txtRegreso.Text;
+            string fechaR = dtpRegreso.Value.ToString("dd/MM/yyyy");
             int dias = Convert.ToInt32(txtCantDia.Text);
-            
+            string vacaciones = string.Empty;
+            if (rbPagas.Checked == true)
+            {
+                vacaciones = "vacaciones";
+                    
+            }else if (rbSin.Checked == true)
+            {
+                vacaciones = "días sin goce de sueldo";
+            }
 
             if (btnSelec.Text == "CARGAR VACACIONES")
             {
-                objC.NuevoVacaciones(empleado, dias, fechaS, fechaR, dias, mes, anio);
+                objC.NuevoVacaciones(empleado, dias, fechaS, fechaR, dias, mes, anio, vacaciones);
             }
             else
             {
-                objC.ActualizarVacaciones(id, empleado, dias, fechaS, fechaR, dias, mes, anio);
+                objC.ActualizarVacaciones(id, empleado, dias, fechaS, fechaR, dias, mes, anio, vacaciones);
             }
 
 
@@ -73,10 +81,11 @@ namespace pryPlanificador
         {
             gpEmpleado.Visible = false;
             txtCantDia.Clear();
-            txtRegreso.Clear();
-            txtSalida.Clear();
+            dtpSalida.ResetText();
+            dtpRegreso.ResetText();
             cmbEmpleado.SelectedIndex = -1;
             btnNuevoFeriado.Enabled = true;
+            btnEliminar.Visible = false;
         }
 
         private void dgvCalendario_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -95,8 +104,17 @@ namespace pryPlanificador
 
                 lblId.Text = id;
                 cmbEmpleado.Text = empleado;
-                txtSalida.Text = fechaS;
-                txtRegreso.Text = fechaR;
+                if (DateTime.TryParseExact(fechaS, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fecha))
+                {
+                    // Establece la fecha en el DateTimePicker
+                    dtpSalida.Value = fecha;
+                }
+
+                if (DateTime.TryParseExact(fechaR, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fecha2))
+                {
+                    // Establece la fecha en el DateTimePicker
+                    dtpRegreso.Value = fecha2;
+                }
                 txtCantDia.Text = dias;
                 btnSelec.Text = "MODIFICAR VACACIONES";
                 btnEliminar.Visible = true;

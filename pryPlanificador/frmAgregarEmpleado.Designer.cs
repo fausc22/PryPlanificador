@@ -55,6 +55,8 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnAyuda = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.txtJornada = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHuella)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).BeginInit();
@@ -62,6 +64,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtJornada);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.lblId);
             this.groupBox1.Controls.Add(this.btnLimpiar);
@@ -86,7 +90,7 @@
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Location = new System.Drawing.Point(12, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(645, 409);
+            this.groupBox1.Size = new System.Drawing.Size(645, 439);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "INFORMACION";
@@ -115,7 +119,7 @@
             // btnLimpiar
             // 
             this.btnLimpiar.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnLimpiar.Location = new System.Drawing.Point(82, 361);
+            this.btnLimpiar.Location = new System.Drawing.Point(82, 383);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(149, 42);
             this.btnLimpiar.TabIndex = 73;
@@ -194,7 +198,7 @@
             // 
             this.btnAgregar.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnAgregar.Enabled = false;
-            this.btnAgregar.Location = new System.Drawing.Point(82, 313);
+            this.btnAgregar.Location = new System.Drawing.Point(82, 335);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(149, 42);
             this.btnAgregar.TabIndex = 64;
@@ -337,7 +341,7 @@
             // btnAyuda
             // 
             this.btnAyuda.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnAyuda.Location = new System.Drawing.Point(437, 456);
+            this.btnAyuda.Location = new System.Drawing.Point(437, 486);
             this.btnAyuda.Name = "btnAyuda";
             this.btnAyuda.Size = new System.Drawing.Size(107, 29);
             this.btnAyuda.TabIndex = 68;
@@ -348,7 +352,7 @@
             // btnSalir
             // 
             this.btnSalir.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSalir.Location = new System.Drawing.Point(550, 456);
+            this.btnSalir.Location = new System.Drawing.Point(550, 486);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(107, 29);
             this.btnSalir.TabIndex = 67;
@@ -356,12 +360,32 @@
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // txtJornada
+            // 
+            this.txtJornada.Enabled = false;
+            this.txtJornada.Location = new System.Drawing.Point(235, 299);
+            this.txtJornada.Name = "txtJornada";
+            this.txtJornada.Size = new System.Drawing.Size(102, 20);
+            this.txtJornada.TabIndex = 90;
+            this.txtJornada.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtJornada.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtJornada_KeyPress);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(27, 303);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(114, 16);
+            this.label5.TabIndex = 91;
+            this.label5.Text = "JORNADA (HS)";
+            // 
             // frmAgregarEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(669, 495);
+            this.ClientSize = new System.Drawing.Size(669, 527);
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.lblTitulo);
@@ -409,5 +433,7 @@
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtJornada;
+        private System.Windows.Forms.Label label5;
     }
 }

@@ -26,7 +26,11 @@ namespace pryPlanificador
         clsConexion objC = new clsConexion();
         string nombreC;
         string nombreF;
-        string form = "valor";
+        string form = "turno1, turno2";
+        int EsTurno = 0;
+        int HorasAnteriores = 0;
+        int AcumuladoAnterior = 0;
+        
 
 
         private void gpEmpleado_Enter(object sender, EventArgs e)
@@ -73,10 +77,13 @@ namespace pryPlanificador
                 // Obtiene el valor de la celda seleccionada
                 object cellValue = dgvHora.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
                 object fechaFila = dgvHora.Rows[e.RowIndex].Cells[0].Value;
+                HorasAnteriores = plan.ObtenerValorAnterior(cellValue.ToString());
+                
                 
 
                 DataGridViewColumn colum = dgvHora.Columns[e.ColumnIndex];
                 nombreC = colum.HeaderText;
+                AcumuladoAnterior = plan.ObtenerAcumuladoAnterior(nombreC, HorasAnteriores);
                 string fechaA = fechaFila.ToString();
                 // Dividir la cadena utilizando el paréntesis como separador
                 string[] partes = fechaA.Split('(');
@@ -94,7 +101,46 @@ namespace pryPlanificador
                     // Muestra el ComboBox
                     gpCmb.Visible = true;
                 }
+
+
+                // Verificar si hay una fila arriba antes de intentar acceder a ella
+                if (e.RowIndex - 1 >= 0)
+                {
+                    // Obtener el valor de la celda de arriba
+                    object valorCeldaArribaFecha = dgvHora.Rows[e.RowIndex - 1].Cells[0].Value;
+                    string fechaArriba = valorCeldaArribaFecha.ToString();
+
+                    // Dividir la cadena utilizando el paréntesis como separador
+                    string[] partesA = fechaArriba.Split('(');
+                    string fecha2 = partesA[0].Trim();
+
+                    // Comparar fechas y tomar decisiones según sea necesario
+                    if (fecha2 == nombreF)
+                    {
+                        EsTurno = 2;
+                    }
+                    else
+                    {
+                        EsTurno = 1;
+                    }
+                }
+                else
+                {
+                    // No hay una fila arriba, manejar según sea necesario
+                    // Por ejemplo, puedes establecer EsTurno en un valor predeterminado
+                    EsTurno = 1;
+                }
+
+
             }
+
+            // Verificar si el clic se realizó en una celda válida
+            if (e.RowIndex >= 1 && e.RowIndex < dgvHora.Rows.Count - 1)
+            {
+
+                
+            }
+
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -102,15 +148,16 @@ namespace pryPlanificador
             string mes = cmbMes.Text;
             int anio = Convert.ToInt32(cmbAnio.Text);
             string nuevoValor = cmbTurno.Text;
+            string turno = "turno" + EsTurno;
             int cantidadHoras = Convert.ToInt32(cmbTurno.SelectedValue.ToString());
             int valorHora = objC.HoraEmpleado(nombreC);
             int totalHoras = valorHora * cantidadHoras;
-            dgvHora.Visible = false;
             
-            plan.ActualizarTurnos(mes, anio, nuevoValor, nombreF, nombreC, cantidadHoras, totalHoras);
+            
+            plan.ActualizarTurnos(mes, anio, turno, nuevoValor, nombreF, nombreC, cantidadHoras, totalHoras, HorasAnteriores, AcumuladoAnterior);
             plan.CargarGrillaPlanificador(dgvHora, mes, anio, form);
             gpCmb.Visible = false;
-            dgvHora.Visible = true;
+            
 
         }
 
@@ -134,23 +181,23 @@ namespace pryPlanificador
 
         private void dgvHora_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex > 0 && e.RowIndex >= 0)
-            {
-                DataGridViewCell cell = dgvHora.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                string valor = cell.Value?.ToString();
+            //if (e.ColumnIndex > 0 && e.RowIndex >= 0)
+            //{
+            //    DataGridViewCell cell = dgvHora.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            //    string valor = cell.Value?.ToString();
 
-                if (!string.IsNullOrEmpty(valor))
-                {
-                    if (valor.Equals("libre", StringComparison.OrdinalIgnoreCase))
-                    {
-                        cell.Style.BackColor = Color.Green; // Cambia el color a verde para "libre"
-                    }
-                    else if (valor.Equals("vacaciones", StringComparison.OrdinalIgnoreCase))
-                    {
-                        cell.Style.BackColor = Color.Yellow; // Cambia el color a amarillo para "vacaciones"
-                    }
-                }
-            }
+            //    if (!string.IsNullOrEmpty(valor))
+            //    {
+            //        if (valor.Equals("libre", StringComparison.OrdinalIgnoreCase))
+            //        {
+            //            cell.Style.BackColor = Color.Green; // Cambia el color a verde para "libre"
+            //        }
+            //        else if (valor.Equals("vacaciones", StringComparison.OrdinalIgnoreCase))
+            //        {
+            //            cell.Style.BackColor = Color.Yellow; // Cambia el color a amarillo para "vacaciones"
+            //        }
+            //    }
+            //}
         }
 
         private void btnPdf_Click(object sender, EventArgs e)
@@ -163,7 +210,7 @@ namespace pryPlanificador
 
                 save.Filter = "PDF (*.pdf)|*.pdf";
 
-                save.FileName = "Planificador.pdf";
+                save.FileName = "Planificador - "+ cmbMes.Text +".pdf";
 
                 bool ErrorMessage = false;
 
@@ -310,8 +357,12 @@ namespace pryPlanificador
                                             case "libre":
                                                 cell.BackgroundColor = new BaseColor(0, 128, 0); // Verde
                                                 break;
-                                            case "vacaciones":
+                                            case "días sin goce de sueldo":
                                                 cell.BackgroundColor = new BaseColor(255, 255, 0); // Amarillo
+                                                break;
+                                            case "vacaciones":
+                                                cell.BackgroundColor = new BaseColor(64, 224, 208); // Turquesa
+
                                                 break;
                                             default:
                                                 cell.BackgroundColor = new BaseColor(255, 165, 0); // Naranja
@@ -358,6 +409,36 @@ namespace pryPlanificador
 
         }
 
-        
+        private void dgvHora_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex > 0 && e.RowIndex >= 0)
+            {
+                DataGridViewCell cell = dgvHora.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string valor = cell.Value?.ToString();
+
+                if (!string.IsNullOrEmpty(valor))
+                {
+                    Color nuevoColor = Color.Empty;
+
+                    if (valor.Equals("libre", StringComparison.OrdinalIgnoreCase))
+                    {
+                        nuevoColor = Color.Green; // Cambia el color a verde para "libre"
+                    }
+                    else if (valor.Equals("días sin goce de sueldo", StringComparison.OrdinalIgnoreCase))
+                    {
+                        nuevoColor = Color.Yellow; // Cambia el color a amarillo para "vacaciones"
+                    }
+                    else if (valor.Equals("vacaciones", StringComparison.OrdinalIgnoreCase))
+                    {
+                        nuevoColor = Color.Turquoise; // Cambia el color a amarillo para "vacaciones"
+                    }
+
+                    if (nuevoColor != Color.Empty && !e.CellStyle.BackColor.Equals(nuevoColor))
+                    {
+                        e.CellStyle.BackColor = nuevoColor;
+                    }
+                }
+            }
+        }
     }
 }

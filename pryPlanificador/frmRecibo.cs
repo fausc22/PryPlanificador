@@ -41,7 +41,7 @@ namespace pryPlanificador
             
             gpInfo.Visible = true;
             gpDatos.Visible = true;
-            objC.CargarEmpleadoRecibo(empleado, lblId, txtNombre, txtApellido, txtMail, txtFecha, txtAntiguedad, txtHoraNormal, txtDiaVaca, pbFoto);
+            objC.CargarEmpleadoRecibo(empleado, lblId, txtNombre, txtApellido, txtMail, txtFecha, txtAntiguedad, txtHoraNormal, txtDiaVaca, txtJornada, pbFoto);
 
             objC.CargarDatosRecibo(empleado, anio, mes, txtHsPlanificadas, lblHsPlanificadas, txtHsTrabajadas, lblHsTrabajadas, txtPremios, txtAdelantos);
         }
@@ -66,7 +66,8 @@ namespace pryPlanificador
             paginahtml_texto = paginahtml_texto.Replace("@mes", mes);
 
 
-            string descripcion = objC.DescripcionPremios(txtNombre.Text, cmbAnio.Text, cmbMes.Text);
+            string descripcionPremio = objC.DescripcionPremios(txtNombre.Text, cmbAnio.Text, cmbMes.Text);
+            string descripcionAdelanto = objC.DescripcionAdelanto(txtNombre.Text, cmbAnio.Text, cmbMes.Text);
 
             string filas1 = string.Empty;
             filas1 += "<tr>";
@@ -85,7 +86,7 @@ namespace pryPlanificador
 
             filas1 += "<tr>";
             filas1 += "<td >PREMIOS</td>";
-            filas1 += "<td>" + descripcion + "</td>";
+            filas1 += "<td>" + descripcionPremio + "</td>";
             filas1 += "<td>-</td>";
             filas1 += "<td> $ " + txtPremios.Text + "</td>";
             filas1 += "</tr>";
@@ -111,7 +112,7 @@ namespace pryPlanificador
 
             filas2 += "<tr>";
             filas2 += "<td >ADELANTOS DE SUELDO</td>";
-            filas2 += "<td>ADELANTO DE SUELDO A RESTAR</td>";
+            filas2 += "<td>"+ descripcionAdelanto +"</td>";
             filas2 += "<td> $ " + txtAdelantos.Text + "</td>";
             filas2 += "</tr>";
 

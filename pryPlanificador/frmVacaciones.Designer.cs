@@ -34,11 +34,11 @@
             this.btnAyuda = new System.Windows.Forms.Button();
             this.btnNuevoFeriado = new System.Windows.Forms.Button();
             this.gpEmpleado = new System.Windows.Forms.GroupBox();
+            this.dtpRegreso = new System.Windows.Forms.DateTimePicker();
+            this.dtpSalida = new System.Windows.Forms.DateTimePicker();
             this.lblDias = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
             this.txtCantDia = new System.Windows.Forms.TextBox();
-            this.txtRegreso = new System.Windows.Forms.TextBox();
-            this.txtSalida = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnSelec = new System.Windows.Forms.Button();
@@ -49,6 +49,8 @@
             this.dgvEmpleados = new System.Windows.Forms.DataGridView();
             this.dgvCalendario = new System.Windows.Forms.DataGridView();
             this.btnEliminar = new System.Windows.Forms.Button();
+            this.rbPagas = new System.Windows.Forms.RadioButton();
+            this.rbSin = new System.Windows.Forms.RadioButton();
             this.gpEmpleado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalendario)).BeginInit();
@@ -107,11 +109,13 @@
             // 
             // gpEmpleado
             // 
+            this.gpEmpleado.Controls.Add(this.rbSin);
+            this.gpEmpleado.Controls.Add(this.rbPagas);
+            this.gpEmpleado.Controls.Add(this.dtpRegreso);
+            this.gpEmpleado.Controls.Add(this.dtpSalida);
             this.gpEmpleado.Controls.Add(this.lblDias);
             this.gpEmpleado.Controls.Add(this.lblId);
             this.gpEmpleado.Controls.Add(this.txtCantDia);
-            this.gpEmpleado.Controls.Add(this.txtRegreso);
-            this.gpEmpleado.Controls.Add(this.txtSalida);
             this.gpEmpleado.Controls.Add(this.label4);
             this.gpEmpleado.Controls.Add(this.btnLimpiar);
             this.gpEmpleado.Controls.Add(this.btnSelec);
@@ -121,11 +125,25 @@
             this.gpEmpleado.Controls.Add(this.lblblblb);
             this.gpEmpleado.Location = new System.Drawing.Point(496, 99);
             this.gpEmpleado.Name = "gpEmpleado";
-            this.gpEmpleado.Size = new System.Drawing.Size(263, 265);
+            this.gpEmpleado.Size = new System.Drawing.Size(263, 299);
             this.gpEmpleado.TabIndex = 49;
             this.gpEmpleado.TabStop = false;
             this.gpEmpleado.Text = "COMPLETE LOS SIGUIENTOS DATOS";
             this.gpEmpleado.Visible = false;
+            // 
+            // dtpRegreso
+            // 
+            this.dtpRegreso.Location = new System.Drawing.Point(42, 131);
+            this.dtpRegreso.Name = "dtpRegreso";
+            this.dtpRegreso.Size = new System.Drawing.Size(180, 20);
+            this.dtpRegreso.TabIndex = 56;
+            // 
+            // dtpSalida
+            // 
+            this.dtpSalida.Location = new System.Drawing.Point(42, 89);
+            this.dtpSalida.Name = "dtpSalida";
+            this.dtpSalida.Size = new System.Drawing.Size(177, 20);
+            this.dtpSalida.TabIndex = 55;
             // 
             // lblDias
             // 
@@ -156,20 +174,6 @@
             this.txtCantDia.Size = new System.Drawing.Size(176, 20);
             this.txtCantDia.TabIndex = 41;
             // 
-            // txtRegreso
-            // 
-            this.txtRegreso.Location = new System.Drawing.Point(43, 131);
-            this.txtRegreso.Name = "txtRegreso";
-            this.txtRegreso.Size = new System.Drawing.Size(176, 20);
-            this.txtRegreso.TabIndex = 40;
-            // 
-            // txtSalida
-            // 
-            this.txtSalida.Location = new System.Drawing.Point(43, 89);
-            this.txtSalida.Name = "txtSalida";
-            this.txtSalida.Size = new System.Drawing.Size(176, 20);
-            this.txtSalida.TabIndex = 39;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -183,7 +187,7 @@
             // btnLimpiar
             // 
             this.btnLimpiar.BackColor = System.Drawing.SystemColors.Info;
-            this.btnLimpiar.Location = new System.Drawing.Point(137, 209);
+            this.btnLimpiar.Location = new System.Drawing.Point(139, 246);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(105, 38);
             this.btnLimpiar.TabIndex = 32;
@@ -194,7 +198,7 @@
             // btnSelec
             // 
             this.btnSelec.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnSelec.Location = new System.Drawing.Point(20, 209);
+            this.btnSelec.Location = new System.Drawing.Point(22, 246);
             this.btnSelec.Name = "btnSelec";
             this.btnSelec.Size = new System.Drawing.Size(101, 38);
             this.btnSelec.TabIndex = 31;
@@ -279,7 +283,7 @@
             // btnEliminar
             // 
             this.btnEliminar.BackColor = System.Drawing.Color.Red;
-            this.btnEliminar.Location = new System.Drawing.Point(571, 370);
+            this.btnEliminar.Location = new System.Drawing.Point(571, 404);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(147, 38);
             this.btnEliminar.TabIndex = 53;
@@ -287,6 +291,28 @@
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.Visible = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // rbPagas
+            // 
+            this.rbPagas.AutoSize = true;
+            this.rbPagas.Location = new System.Drawing.Point(43, 213);
+            this.rbPagas.Name = "rbPagas";
+            this.rbPagas.Size = new System.Drawing.Size(67, 17);
+            this.rbPagas.TabIndex = 57;
+            this.rbPagas.TabStop = true;
+            this.rbPagas.Text = "Pagadas";
+            this.rbPagas.UseVisualStyleBackColor = true;
+            // 
+            // rbSin
+            // 
+            this.rbSin.AutoSize = true;
+            this.rbSin.Location = new System.Drawing.Point(134, 213);
+            this.rbSin.Name = "rbSin";
+            this.rbSin.Size = new System.Drawing.Size(116, 17);
+            this.rbSin.TabIndex = 58;
+            this.rbSin.TabStop = true;
+            this.rbSin.Text = "Sin goce de sueldo";
+            this.rbSin.UseVisualStyleBackColor = true;
             // 
             // frmVacaciones
             // 
@@ -324,8 +350,6 @@
         private System.Windows.Forms.Button btnNuevoFeriado;
         private System.Windows.Forms.GroupBox gpEmpleado;
         private System.Windows.Forms.TextBox txtCantDia;
-        private System.Windows.Forms.TextBox txtRegreso;
-        private System.Windows.Forms.TextBox txtSalida;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnSelec;
@@ -338,5 +362,9 @@
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.Label lblDias;
         private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.DateTimePicker dtpRegreso;
+        private System.Windows.Forms.DateTimePicker dtpSalida;
+        private System.Windows.Forms.RadioButton rbSin;
+        private System.Windows.Forms.RadioButton rbPagas;
     }
 }

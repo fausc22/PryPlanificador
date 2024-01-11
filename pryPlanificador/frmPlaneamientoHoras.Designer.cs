@@ -63,7 +63,9 @@
             this.dgvHora.Size = new System.Drawing.Size(1063, 533);
             this.dgvHora.TabIndex = 10;
             this.dgvHora.Visible = false;
+            this.dgvHora.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHora_CellContentClick);
             this.dgvHora.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvHora_CellFormatting);
+            this.dgvHora.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvHora_CellPainting);
             // 
             // dgvTotales
             // 
@@ -78,6 +80,8 @@
             this.dgvTotales.Size = new System.Drawing.Size(1063, 50);
             this.dgvTotales.TabIndex = 27;
             this.dgvTotales.Visible = false;
+            this.dgvTotales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTotales_CellContentClick);
+            this.dgvTotales.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvTotales_CellPainting);
             // 
             // gpEmpleado
             // 

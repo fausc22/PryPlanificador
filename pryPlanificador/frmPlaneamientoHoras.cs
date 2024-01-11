@@ -32,7 +32,7 @@ namespace pryPlanificador
             string mes = cmbMes.Text;
             int anio = Convert.ToInt32(cmbAnio.Text);
 
-            plan.CargarGrillaPlanificador(dgvHora, mes, anio, form);
+            plan.CargarGrillaPlanificador2(dgvHora, mes, anio, form);
             plan.CargarGrillaTotales(dgvTotales, mes, anio, form);
 
             cmbMes.Enabled = false;
@@ -75,9 +75,41 @@ namespace pryPlanificador
 
         private void dgvHora_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            
+        }
+
+        private void dgvHora_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvHora_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
             if (e.ColumnIndex > 0 && e.RowIndex >= 0)
             {
                 DataGridViewCell cell = dgvHora.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string valor = cell.Value?.ToString();
+
+                if (!string.IsNullOrEmpty(valor))
+                {
+                    if (!valor.Equals("0"))
+                    {
+                        cell.Style.BackColor = Color.Green;
+                    }
+                }
+            }
+        }
+
+        private void dgvTotales_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvTotales_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex > 0 && e.RowIndex >= 0)
+            {
+                DataGridViewCell cell = dgvTotales.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 string valor = cell.Value?.ToString();
 
                 if (!string.IsNullOrEmpty(valor))

@@ -32,6 +32,8 @@ namespace pryPlanificador
             dgvLogueo.Visible = true;
             gpFiltro.Visible = true;
             btnLimpiar.Enabled = true;
+            cmbMes.Enabled = false;
+            cmbAnio.Enabled = false;
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
@@ -39,7 +41,9 @@ namespace pryPlanificador
             string empleado = cmbEmpleado.Text;
             string anio = cmbAnio.Text;
             string mes = cmbMes.Text;
-            objC.CargarGrillaLogueoFiltrada(dgvLogueo, anio, mes, empleado);
+            objC.CargarGrillaLogueoFiltradaNombre(dgvLogueo, anio, mes, empleado);
+            btnFiltrar.Enabled = false;
+            cmbEmpleado.SelectedIndex = -1;
             
         }
 
@@ -64,8 +68,10 @@ namespace pryPlanificador
         {
             btnSelec.Enabled = false;
             btnLimpiar.Enabled = false;
+            cmbMes.Enabled = true;
             cmbMes.SelectedIndex = -1;
             cmbAnio.SelectedIndex = -1;
+            cmbAnio.Enabled = true;
             cmbEmpleado.SelectedIndex = -1;
             gpFiltro.Visible = false;
             dgvLogueo.Visible = false;
@@ -80,6 +86,32 @@ namespace pryPlanificador
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            btnFiltrarFecha.Enabled = true;
+        }
+
+        private void btnFiltrarFecha_Click(object sender, EventArgs e)
+        {
+            string Fecharda = dateTimePicker1.Value.ToString("dd/MM/yyyy");
+            string anio = cmbAnio.Text;
+            string mes = cmbMes.Text;
+            objC.CargarGrillaLogueoFiltradaFecha(dgvLogueo, anio, mes, Fecharda);
+            btnFiltrarFecha.Enabled = false;
+            dateTimePicker1.ResetText();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string anio = cmbAnio.Text;
+            string mes = cmbMes.Text;
+            objC.CargarGrillaLogueo(dgvLogueo, anio, mes);
+            dateTimePicker1.ResetText();
+            btnFiltrar.Enabled = false;
+            cmbEmpleado.SelectedIndex = -1;
+            btnFiltrarFecha.Enabled = false;
         }
     }
 }

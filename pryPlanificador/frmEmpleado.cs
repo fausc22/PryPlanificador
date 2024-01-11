@@ -59,7 +59,7 @@ namespace pryPlanificador
         {
             string empleado = cmbEmpleado.Text;
             gpInfo.Visible = true;
-            objC.CargarEmpleado(empleado, lblId, txtNombre, txtApellido, txtMail, txtFecha, txtAntiguedad, txtHoraNormal, txtDiaVacaciones, pbFoto, pbHuella);
+            objC.CargarEmpleado(empleado, lblId, txtNombre, txtApellido, txtMail, txtFecha, txtAntiguedad, txtHoraNormal, txtDiaVacaciones, txtJornada, pbFoto, pbHuella);
             btnSelec.Enabled = false;
             cmbEmpleado.Enabled = false;
             
@@ -89,7 +89,8 @@ namespace pryPlanificador
             int horaNormal = Convert.ToInt32(txtHoraNormal.Text);
             int antiguedad = Convert.ToInt32(txtAntiguedad.Text);
             int diavacas = Convert.ToInt32(txtDiaVacaciones.Text);
-            objC.EditarEmpleado(id, nombre, apellido, mail, fecha, antiguedad, horaNormal, diavacas, fotoperfil, huella);
+            int horasVacas = Convert.ToInt32(txtJornada.Text);
+            objC.EditarEmpleado(id, nombre, apellido, mail, fecha, antiguedad, horaNormal, diavacas, horasVacas, fotoperfil, huella);
             gpInfo.Visible = false;
             objC.CargarCmbEmpleado(cmbEmpleado);
             cmbEmpleado.SelectedIndex = -1;
@@ -338,8 +339,14 @@ namespace pryPlanificador
             }
         }
 
-        
-
-        
+        private void txtJornada_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verifica si la tecla presionada es un número o una tecla de control
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                // Si no es un número ni una tecla de control, se cancela el evento
+                e.Handled = true;
+            }
+        }
     }
 }

@@ -188,9 +188,10 @@ namespace pryPlanificador
             int diavacas = Convert.ToInt32(txtDiaVacaciones.Text);
             int antiguedad = Convert.ToInt32(txtAntiguedad.Text);    
             int horaNormal = Convert.ToInt32(txtHoraNormal.Text);
+            int horasVacaciones = Convert.ToInt32(txtJornada.Text);
             
 
-            objC.NuevoEmpleado(nombre, apellido, mail, fecha, antiguedad, horaNormal, fotoperfil, huella, diavacas );
+            objC.NuevoEmpleado(nombre, apellido, mail, fecha, antiguedad, horaNormal, fotoperfil, huella, diavacas, horasVacaciones);
 
             LimpiarFormulario();
 
@@ -240,6 +241,7 @@ namespace pryPlanificador
             if (txtHoraNormal.Text != "" && txtHoraNormal.Text != null)
             {
                 txtDiaVacaciones.Enabled = true;
+                txtJornada.Enabled = true;
                 
             }
         }
@@ -274,6 +276,7 @@ namespace pryPlanificador
         {
             txtNombre.Clear();
             txtApellido.Clear();
+            txtJornada.Clear();
             txtApellido.Enabled = false;
             txtMail.Clear();
             txtMail.Enabled = false;
@@ -343,6 +346,16 @@ namespace pryPlanificador
         }
 
         private void txtHoraVacaciones_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verifica si la tecla presionada es un número o una tecla de control
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                // Si no es un número ni una tecla de control, se cancela el evento
+                e.Handled = true;
+            }
+        }
+
+        private void txtJornada_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Verifica si la tecla presionada es un número o una tecla de control
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))

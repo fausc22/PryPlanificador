@@ -66,6 +66,8 @@
             this.btnSelec = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.gpInfo = new System.Windows.Forms.GroupBox();
+            this.txtJornada = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.txtApellido = new System.Windows.Forms.TextBox();
@@ -245,9 +247,9 @@
             this.gpDatos.Controls.Add(this.txtADescontar);
             this.gpDatos.Controls.Add(this.txtAdelantos);
             this.gpDatos.Controls.Add(this.txtPremios);
-            this.gpDatos.Location = new System.Drawing.Point(719, 45);
+            this.gpDatos.Location = new System.Drawing.Point(705, 45);
             this.gpDatos.Name = "gpDatos";
-            this.gpDatos.Size = new System.Drawing.Size(319, 333);
+            this.gpDatos.Size = new System.Drawing.Size(334, 333);
             this.gpDatos.TabIndex = 28;
             this.gpDatos.TabStop = false;
             this.gpDatos.Text = "DATOS MENSUALES";
@@ -508,6 +510,8 @@
             // 
             // gpInfo
             // 
+            this.gpInfo.Controls.Add(this.txtJornada);
+            this.gpInfo.Controls.Add(this.label12);
             this.gpInfo.Controls.Add(this.lblId);
             this.gpInfo.Controls.Add(this.label13);
             this.gpInfo.Controls.Add(this.txtApellido);
@@ -526,11 +530,30 @@
             this.gpInfo.Controls.Add(this.pbFoto);
             this.gpInfo.Location = new System.Drawing.Point(12, 45);
             this.gpInfo.Name = "gpInfo";
-            this.gpInfo.Size = new System.Drawing.Size(298, 422);
+            this.gpInfo.Size = new System.Drawing.Size(298, 459);
             this.gpInfo.TabIndex = 61;
             this.gpInfo.TabStop = false;
             this.gpInfo.Text = "INFORMACION";
             this.gpInfo.Visible = false;
+            // 
+            // txtJornada
+            // 
+            this.txtJornada.Enabled = false;
+            this.txtJornada.Location = new System.Drawing.Point(176, 264);
+            this.txtJornada.Name = "txtJornada";
+            this.txtJornada.Size = new System.Drawing.Size(103, 20);
+            this.txtJornada.TabIndex = 92;
+            this.txtJornada.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(18, 265);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(114, 16);
+            this.label12.TabIndex = 93;
+            this.label12.Text = "JORNADA (HS)";
             // 
             // lblId
             // 
@@ -678,7 +701,7 @@
             // 
             // pbFoto
             // 
-            this.pbFoto.Location = new System.Drawing.Point(45, 255);
+            this.pbFoto.Location = new System.Drawing.Point(40, 306);
             this.pbFoto.Name = "pbFoto";
             this.pbFoto.Size = new System.Drawing.Size(199, 147);
             this.pbFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -792,5 +815,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnAyuda;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.TextBox txtJornada;
+        private System.Windows.Forms.Label label12;
     }
 }
