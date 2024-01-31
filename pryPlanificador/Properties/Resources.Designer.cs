@@ -22,7 +22,7 @@ namespace Planificador.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Planificador.Properties {
         ///   Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Planificador.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Planificador.Properties {
         ///   búsquedas de recursos mediante esta clase de recurso fuertemente tipado.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Planificador.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap background2 {
+        public static System.Drawing.Bitmap background2 {
             get {
                 object obj = ResourceManager.GetObject("background2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +73,7 @@ namespace Planificador.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap background3 {
+        public static System.Drawing.Bitmap background3 {
             get {
                 object obj = ResourceManager.GetObject("background3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,19 +83,9 @@ namespace Planificador.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap background4 {
+        public static System.Drawing.Bitmap background4 {
             get {
                 object obj = ResourceManager.GetObject("background4", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap LOGOINICIO {
-            get {
-                object obj = ResourceManager.GetObject("LOGOINICIO", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -111,21 +101,15 @@ namespace Planificador.Properties {
         ///        }
         ///
         ///            table.border th {
-        ///                padding: 5px;
+        ///                padding: 10px; /* Ajusta el relleno según sea necesario */
         ///                border: 1px solid black;
         ///            }
         ///
         ///            table.border td {
-        ///                padding: 5px;
-        ///                border: 1px solid black;
-        ///            }
-        ///    &lt;/style&gt;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;
-        ///    &lt;table style=&quot;width:100%&quot;&gt;
-        ///         [resto de la cadena truncado]&quot;;.
+        ///                padding: 10px; /* Ajusta el relleno según sea necesario */
+        ///                border: 1px solid blac [resto de la cadena truncado]&quot;;.
         /// </summary>
-        internal static string Planificador {
+        public static string Planificador {
             get {
                 return ResourceManager.GetString("Planificador", resourceCulture);
             }
@@ -156,7 +140,7 @@ namespace Planificador.Properties {
         ///    &lt;table style=&quot;width:100%&quot;&gt;
         ///        &lt;tr&gt; [resto de la cadena truncado]&quot;;.
         /// </summary>
-        internal static string Plantilla {
+        public static string Plantilla {
             get {
                 return ResourceManager.GetString("Plantilla", resourceCulture);
             }
@@ -187,9 +171,19 @@ namespace Planificador.Properties {
         ///    &lt;table style=&quot;width:100%&quot;&gt;
         ///        &lt;tr&gt; [resto de la cadena truncado]&quot;;.
         /// </summary>
-        internal static string Plantilla1 {
+        public static string Plantilla1 {
             get {
                 return ResourceManager.GetString("Plantilla1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap puntosur {
+            get {
+                object obj = ResourceManager.GetObject("puntosur", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

@@ -160,7 +160,7 @@
             this.dgvTotales.ReadOnly = true;
             this.dgvTotales.RowHeadersWidth = 51;
             this.dgvTotales.RowTemplate.Height = 24;
-            this.dgvTotales.Size = new System.Drawing.Size(1063, 50);
+            this.dgvTotales.Size = new System.Drawing.Size(976, 50);
             this.dgvTotales.TabIndex = 36;
             this.dgvTotales.Visible = false;
             this.dgvTotales.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvTotales_CellPainting);
@@ -179,7 +179,7 @@
             this.dgvHora.Name = "dgvHora";
             this.dgvHora.ReadOnly = true;
             this.dgvHora.RowHeadersWidth = 51;
-            this.dgvHora.Size = new System.Drawing.Size(1063, 533);
+            this.dgvHora.Size = new System.Drawing.Size(976, 529);
             this.dgvHora.TabIndex = 35;
             this.dgvHora.Visible = false;
             this.dgvHora.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHora_CellContentClick);
@@ -188,7 +188,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(1242, 626);
+            this.btnSalir.Location = new System.Drawing.Point(1159, 626);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(92, 22);
             this.btnSalir.TabIndex = 40;
@@ -198,7 +198,7 @@
             // 
             // btnAyuda
             // 
-            this.btnAyuda.Location = new System.Drawing.Point(1142, 626);
+            this.btnAyuda.Location = new System.Drawing.Point(1059, 626);
             this.btnAyuda.Name = "btnAyuda";
             this.btnAyuda.Size = new System.Drawing.Size(92, 22);
             this.btnAyuda.TabIndex = 39;
@@ -211,7 +211,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1356, 660);
+            this.ClientSize = new System.Drawing.Size(1260, 660);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.lblTitulo);

@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVacaciones));
             this.lblTitulo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnAyuda = new System.Windows.Forms.Button();
             this.btnNuevoFeriado = new System.Windows.Forms.Button();
             this.gpEmpleado = new System.Windows.Forms.GroupBox();
+            this.rbSin = new System.Windows.Forms.RadioButton();
+            this.rbPagas = new System.Windows.Forms.RadioButton();
             this.dtpRegreso = new System.Windows.Forms.DateTimePicker();
             this.dtpSalida = new System.Windows.Forms.DateTimePicker();
             this.lblDias = new System.Windows.Forms.Label();
@@ -49,8 +52,6 @@
             this.dgvEmpleados = new System.Windows.Forms.DataGridView();
             this.dgvCalendario = new System.Windows.Forms.DataGridView();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.rbPagas = new System.Windows.Forms.RadioButton();
-            this.rbSin = new System.Windows.Forms.RadioButton();
             this.gpEmpleado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalendario)).BeginInit();
@@ -130,6 +131,28 @@
             this.gpEmpleado.TabStop = false;
             this.gpEmpleado.Text = "COMPLETE LOS SIGUIENTOS DATOS";
             this.gpEmpleado.Visible = false;
+            // 
+            // rbSin
+            // 
+            this.rbSin.AutoSize = true;
+            this.rbSin.Location = new System.Drawing.Point(134, 213);
+            this.rbSin.Name = "rbSin";
+            this.rbSin.Size = new System.Drawing.Size(116, 17);
+            this.rbSin.TabIndex = 58;
+            this.rbSin.TabStop = true;
+            this.rbSin.Text = "Sin goce de sueldo";
+            this.rbSin.UseVisualStyleBackColor = true;
+            // 
+            // rbPagas
+            // 
+            this.rbPagas.AutoSize = true;
+            this.rbPagas.Location = new System.Drawing.Point(43, 213);
+            this.rbPagas.Name = "rbPagas";
+            this.rbPagas.Size = new System.Drawing.Size(67, 17);
+            this.rbPagas.TabIndex = 57;
+            this.rbPagas.TabStop = true;
+            this.rbPagas.Text = "Pagadas";
+            this.rbPagas.UseVisualStyleBackColor = true;
             // 
             // dtpRegreso
             // 
@@ -292,28 +315,6 @@
             this.btnEliminar.Visible = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // rbPagas
-            // 
-            this.rbPagas.AutoSize = true;
-            this.rbPagas.Location = new System.Drawing.Point(43, 213);
-            this.rbPagas.Name = "rbPagas";
-            this.rbPagas.Size = new System.Drawing.Size(67, 17);
-            this.rbPagas.TabIndex = 57;
-            this.rbPagas.TabStop = true;
-            this.rbPagas.Text = "Pagadas";
-            this.rbPagas.UseVisualStyleBackColor = true;
-            // 
-            // rbSin
-            // 
-            this.rbSin.AutoSize = true;
-            this.rbSin.Location = new System.Drawing.Point(134, 213);
-            this.rbSin.Name = "rbSin";
-            this.rbSin.Size = new System.Drawing.Size(116, 17);
-            this.rbSin.TabIndex = 58;
-            this.rbSin.TabStop = true;
-            this.rbSin.Text = "Sin goce de sueldo";
-            this.rbSin.UseVisualStyleBackColor = true;
-            // 
             // frmVacaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -329,6 +330,7 @@
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblTitulo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmVacaciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EMPLEADOS - VACACIONES";

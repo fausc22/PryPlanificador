@@ -72,17 +72,63 @@ namespace pryPlanificador
         private void dgvHora_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             plan.CargarTurnos(cmbTurno);
+            plan.CargarTurnos(cmbSegundoTurno);
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 // Obtiene el valor de la celda seleccionada
                 object cellValue = dgvHora.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
                 object fechaFila = dgvHora.Rows[e.RowIndex].Cells[0].Value;
-                HorasAnteriores = plan.ObtenerValorAnterior(cellValue.ToString());
-                
-                
+
+
+
+
+                if (cellValue != null)
+                {
+                    string valor = cellValue.ToString().ToLower(); // Convertir a minúsculas para ser insensible a mayúsculas y minúsculas
+
+                    if (valor == "libre")
+                    {
+                        cmbTurno.Text = "Libre";
+                        cmbSegundoTurno.Text = "Libre";
+                        HorasAnteriores = plan.ObtenerValorAnterior(valor);
+                    }
+                    else
+                    {
+                        string[] turnos = valor.Split('/');
+
+                        cmbTurno.Text = turnos[0].Trim();
+
+                        if (turnos.Length == 1)
+                        {
+                            cmbSegundoTurno.Text = "Libre";
+                            HorasAnteriores = plan.ObtenerValorAnterior(turnos[0]);
+                        }
+                        else if (turnos.Length == 2)
+                        {
+                            cmbSegundoTurno.Text = turnos[1].Trim();
+
+                            // Asegúrate de llamar a ObtenerValorAnterior para ambos turnos y sumar los resultados
+                            int primerTurno = plan.ObtenerValorAnterior(turnos[0]);
+                            int segundoTurno = plan.ObtenerValorAnterior(turnos[1].Trim());
+                            HorasAnteriores = primerTurno + segundoTurno;
+                        }
+                        // Puedes agregar lógica adicional para manejar casos con más de dos turnos si es necesario en el futuro
+                    }
+                }
+
+
+
+
+
+
+
+
+
+
 
                 DataGridViewColumn colum = dgvHora.Columns[e.ColumnIndex];
                 nombreC = colum.HeaderText;
+                txtEmpleado.Text = nombreC; 
                 AcumuladoAnterior = plan.ObtenerAcumuladoAnterior(nombreC, HorasAnteriores);
                 string fechaA = fechaFila.ToString();
                 // Dividir la cadena utilizando el paréntesis como separador
@@ -90,17 +136,12 @@ namespace pryPlanificador
 
                 
                 nombreF = partes[0].Trim();
+                txtFecha.Text = nombreF;
+                // Muestra el ComboBox
+                gpCmb.Visible = true;
 
 
-                // Verifica si el valor no es nulo
-                if (cellValue != null)
-                {
-                    // Carga el valor de la celda en el ComboBox
-                    cmbTurno.Text = cellValue.ToString();
 
-                    // Muestra el ComboBox
-                    gpCmb.Visible = true;
-                }
 
 
                 // Verificar si hay una fila arriba antes de intentar acceder a ella
@@ -147,17 +188,30 @@ namespace pryPlanificador
         {
             string mes = cmbMes.Text;
             int anio = Convert.ToInt32(cmbAnio.Text);
-            string nuevoValor = cmbTurno.Text;
-            string turno = "turno" + EsTurno;
-            int cantidadHoras = Convert.ToInt32(cmbTurno.SelectedValue.ToString());
+            string nuevoValor = string.Empty;
+            int cantidadHoras = 0;
+            if (cmbSegundoTurno.Text == "Libre")
+            {
+                nuevoValor = cmbTurno.Text;
+                cantidadHoras = Convert.ToInt32(cmbTurno.SelectedValue.ToString());
+            }
+            else
+            {
+                nuevoValor = cmbTurno.Text + " / " + cmbSegundoTurno.Text;
+                cantidadHoras = Convert.ToInt32(cmbTurno.SelectedValue.ToString()) + Convert.ToInt32(cmbSegundoTurno.SelectedValue.ToString());
+            }
+
+            
+            //string turno = "turno" + EsTurno;
+
             int valorHora = objC.HoraEmpleado(nombreC);
             int totalHoras = valorHora * cantidadHoras;
-            
-            
-            plan.ActualizarTurnos(mes, anio, turno, nuevoValor, nombreF, nombreC, cantidadHoras, totalHoras, HorasAnteriores, AcumuladoAnterior);
+
+
+            plan.ActualizarTurnos(mes, anio, nuevoValor, nombreF, nombreC, cantidadHoras, totalHoras, HorasAnteriores, AcumuladoAnterior);
             plan.CargarGrillaPlanificador(dgvHora, mes, anio, form);
             gpCmb.Visible = false;
-            
+
 
         }
 
@@ -210,7 +264,7 @@ namespace pryPlanificador
 
                 save.Filter = "PDF (*.pdf)|*.pdf";
 
-                save.FileName = "Planificador - "+ cmbMes.Text +".pdf";
+                save.FileName = "Planificador - " + cmbMes.Text + ".pdf";
 
                 bool ErrorMessage = false;
 
@@ -255,13 +309,13 @@ namespace pryPlanificador
                             pTable.WidthPercentage = 100;
                             pTable.HorizontalAlignment = Element.ALIGN_LEFT;
 
-                            
+
 
                             // Modificar el estilo de la celda para las columnas del encabezado
                             PdfPCell headerCell = new PdfPCell();
                             headerCell.BackgroundColor = new BaseColor(0, 102, 204); // Azul
                             headerCell.Padding = 5;
-                            
+
                             headerCell.HorizontalAlignment = Element.ALIGN_CENTER;
                             headerCell.VerticalAlignment = Element.ALIGN_MIDDLE;
                             headerCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
@@ -300,35 +354,36 @@ namespace pryPlanificador
                                     switch (col.HeaderText.ToUpper())
                                     {
                                         case "TITI":
-                                            headerCell.BackgroundColor = new BaseColor(138, 43, 226); // Violeta
+                                            headerCell.BackgroundColor = new BaseColor(148, 0, 211); // Violeta
                                             break;
                                         case "PRISCILA":
                                             headerCell.BackgroundColor = new BaseColor(255, 0, 255); // Fucsia
                                             break;
                                         case "ALEJANDRO":
-                                            headerCell.BackgroundColor = new BaseColor(0, 0, 255); // Azul
+                                            headerCell.BackgroundColor = new BaseColor(0, 0, 139); // Azul oscuro
                                             break;
                                         case "LAUTARO":
-                                            headerCell.BackgroundColor = new BaseColor(0, 128, 0); // Verde
+                                            headerCell.BackgroundColor = new BaseColor(255, 69, 0); // Naranja
                                             break;
                                         case "CANDELARIA":
-                                            headerCell.BackgroundColor = new BaseColor(200, 120, 200); ; // Lila
+                                            headerCell.BackgroundColor = new BaseColor(144, 238, 144); // Verde claro
                                             break;
                                         case "MICAELA":
                                             headerCell.BackgroundColor = new BaseColor(64, 224, 208); // Turquesa
                                             break;
                                         case "CATALINA":
-                                            headerCell.BackgroundColor = new BaseColor(255, 182, 193); // Violeta
+                                            headerCell.BackgroundColor = new BaseColor(255, 182, 193); // Rosa pálido
                                             break;
                                         default:
                                             headerCell.BackgroundColor = new BaseColor(0, 102, 204); // Azul (por defecto)
                                             break;
                                     }
 
+
                                     // Asignar el nombre de la columna al encabezado
                                     headerCell.Phrase = new Phrase(col.HeaderText, fontt);
-                                    
-                                    
+
+
                                     pTable.AddCell(headerCell);
                                 }
 
@@ -409,6 +464,10 @@ namespace pryPlanificador
 
         }
 
+
+
+
+
         private void dgvHora_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.ColumnIndex > 0 && e.RowIndex >= 0)
@@ -438,6 +497,19 @@ namespace pryPlanificador
                         e.CellStyle.BackColor = nuevoColor;
                     }
                 }
+            }
+        }
+
+        private void dgvHora_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void cmbTurno_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbTurno.Text != "libre")
+            {
+                cmbSegundoTurno.Enabled = true;
             }
         }
     }

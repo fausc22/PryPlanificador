@@ -90,6 +90,7 @@ namespace pryPlanificador
             int antiguedad = Convert.ToInt32(txtAntiguedad.Text);
             int diavacas = Convert.ToInt32(txtDiaVacaciones.Text);
             int horasVacas = Convert.ToInt32(txtJornada.Text);
+
             objC.EditarEmpleado(id, nombre, apellido, mail, fecha, antiguedad, horaNormal, diavacas, horasVacas, fotoperfil, huella);
             gpInfo.Visible = false;
             objC.CargarCmbEmpleado(cmbEmpleado);

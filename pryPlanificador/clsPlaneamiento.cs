@@ -23,6 +23,13 @@ namespace pryPlanificador
         //static string port = "3306";
 
 
+        static string servidor = "localhost";
+        static string bd = "planificador";
+        static string user = "planificador";
+        static string pw = "251199";
+        static string port = "3306";
+
+
 
 
         //static string servidor = "www.rsoftware.com.ar";
@@ -34,11 +41,15 @@ namespace pryPlanificador
 
 
         //KIOSCO
-        static string servidor = "26.206.2.45";
-        static string bd = "planificador";
-        static string user = "planificador";
-        static string pw = "251199";
-        static string port = "3306";
+
+        //static string servidor = "26.206.2.45";
+        //static string bd = "planificador";
+        //static string user = "planificador";
+        //static string pw = "251199";
+        //static string port = "3306";
+
+
+
 
 
 
@@ -134,15 +145,7 @@ namespace pryPlanificador
                 }
                 // Agregar una fila por cada día en el mes
 
-                // Agregar la segunda vez (puedes personalizar la cadena 'agregar2' según tus necesidades)
-                string agregar2 = fecha;
-                int index2 = grilla.Rows.Add(agregar2);
-
-                if (EsFeriado(fecha) == true)
-                {
-                    grilla.Rows[index2].Cells[0].Style.BackColor = Color.Red;
-                    // Puedes ajustar el formato de la fecha según tus necesidades
-                }
+                
 
 
             }
@@ -182,7 +185,7 @@ namespace pryPlanificador
                         // Cambiar el color de fondo de las columnas en el encabezado
                         if (empleado.Equals("TITI", StringComparison.OrdinalIgnoreCase))
                         {
-                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Purple; // Violeta
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.DarkViolet; // Violeta
                         }
                         else if (empleado.Equals("PRISCILA", StringComparison.OrdinalIgnoreCase))
                         {
@@ -190,15 +193,15 @@ namespace pryPlanificador
                         }
                         else if (empleado.Equals("ALEJANDRO", StringComparison.OrdinalIgnoreCase))
                         {
-                            comboBoxColumn.HeaderCell.Style.BackColor = Color.LightBlue;
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.DarkBlue;
                         }
                         else if (empleado.Equals("LAUTARO", StringComparison.OrdinalIgnoreCase))
                         {
-                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Green;
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Orange;
                         }
                         else if (empleado.Equals("CANDELARIA", StringComparison.OrdinalIgnoreCase))
                         {
-                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Lavender; // Lila
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.LightGreen; // Lila
                         }
                         else if (empleado.Equals("MICAELA", StringComparison.OrdinalIgnoreCase))
                         {
@@ -218,8 +221,7 @@ namespace pryPlanificador
                     }
 
 
-                    // Variable para controlar el turno (inicia en 1)
-                    int turno = 1;
+                    
                     // Iterar sobre las filas de la grilla
                     foreach (DataGridViewRow row in grilla.Rows)
                     {
@@ -241,10 +243,9 @@ namespace pryPlanificador
                             foreach (string empleado in empleados)
                             {
                                 
-                                // Determinar el nombre de la columna según el turno actual
-                                string columna = $"turno{turno}";
+                                
 
-                                using (MySqlCommand cmd = new MySqlCommand($"SELECT * FROM {tabla} WHERE fecha = @fecha AND nombre_empleado = @empleado", conn))
+                                using (MySqlCommand cmd = new MySqlCommand($"SELECT turno FROM {tabla} WHERE fecha = @fecha AND nombre_empleado = @empleado", conn))
                                 {
                                     cmd.Parameters.AddWithValue("@fecha", fechaString);
                                     cmd.Parameters.AddWithValue("@empleado", empleado);
@@ -253,15 +254,14 @@ namespace pryPlanificador
                                     {
                                         if (reader.Read())
                                         {
-                                            row.Cells[empleado].Value = reader[columna].ToString();
+                                            row.Cells[empleado].Value = reader["turno"].ToString();
                                         }
                                     }
                                 }
 
                                 
                             }
-                            // Cambiar el turno para la próxima iteración
-                            turno = (turno % 2) + 1;
+                            
                         }
                     }
 
@@ -751,7 +751,7 @@ namespace pryPlanificador
         }
 
 
-        public void ActualizarTurnos(string Mes, int anio, string turno, string valor, string fecha, string nombre, int horas, int acumulado, int horasAnteriores, int acumuladoAnterior)
+        public void ActualizarTurnos(string Mes, int anio, string valor, string fecha, string nombre, int horas, int acumulado, int horasAnteriores, int acumuladoAnterior)
         {
             int NroMes = ObtenerNumeroMes(Mes);
             int NroAnio = anio;
@@ -811,7 +811,7 @@ namespace pryPlanificador
 
 
 
-                    string consulta = $"UPDATE {tabla} SET {turno} = @valor, horas = @horas, acumulado = @acumulado WHERE fecha = @fecha AND nombre_empleado = @nombre";
+                    string consulta = $"UPDATE {tabla} SET turno = @valor, horas = @horas, acumulado = @acumulado WHERE fecha = @fecha AND nombre_empleado = @nombre";
                     
                     using (MySqlCommand cmd = new MySqlCommand(consulta, conn))
                     {

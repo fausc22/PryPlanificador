@@ -51,7 +51,7 @@ namespace pryPlanificador
             string empleado = cmbEmpleado.Text;
             string mes = cmbMes.Text;
             int subtotal1 = Convert.ToInt32(txtHsTrabajadas.Text) + Convert.ToInt32(txtPremios.Text);
-            int subtotal2 = Convert.ToInt32(txtConsumos.Text) + Convert.ToInt32(txtADescontar.Text) + Convert.ToInt32(txtAdelantos.Text);
+            int subtotal2 = Convert.ToInt32(txtADescontar.Text) + Convert.ToInt32(txtAdelantos.Text);
             int totalll = subtotal1 - subtotal2;
 
             SaveFileDialog guardar = new SaveFileDialog();
@@ -100,15 +100,11 @@ namespace pryPlanificador
             string filas2 = string.Empty;
             filas2 += "<tr>";
             filas2 += "<td>CONSUMOS</td>";
-            filas2 += "<td>CONSUMOS EN EL LOCAL A RESTAR</td>";
-            filas2 += "<td> $ " + txtConsumos.Text + "</td>";
-            filas2 += "</tr>";
-
-            filas2 += "<tr>";
-            filas2 += "<td>A DESCONTAR</td>";
-            filas2 += "<td>MONTOS A DESCONTAR</td>";
+            filas2 += "<td>CONSUMOS EN EL LOCAL (20% DESCUENTO)</td>";
             filas2 += "<td> $ " + txtADescontar.Text + "</td>";
             filas2 += "</tr>";
+
+            
 
             filas2 += "<tr>";
             filas2 += "<td >ADELANTOS DE SUELDO</td>";
@@ -140,7 +136,7 @@ namespace pryPlanificador
                     PdfWriter writer =  PdfWriter.GetInstance(pdfDoc, stream);
                     
                     pdfDoc.Open();
-                    pdfDoc.AddHeader("Title", titulo);
+                    pdfDoc.AddHeader("PUNTO SUR", titulo);
                     pdfDoc.Add(new Phrase(""));
 
                     using (StringReader sr = new StringReader(paginahtml_texto))
@@ -205,11 +201,11 @@ namespace pryPlanificador
         {
             int horasTrabajadas = ObtenerValor(txtHsTrabajadas);
             int premios = ObtenerValor(txtPremios);
-            int consumos = ObtenerValor(txtConsumos);
+            
             int descuento = ObtenerValor(txtADescontar);
             int adelantos = ObtenerValor(txtAdelantos);
 
-            int total = (horasTrabajadas + premios) - (consumos + descuento + adelantos);
+            int total = (horasTrabajadas + premios) - (descuento + adelantos);
 
             txtTotal.Text = total.ToString();
         }
@@ -236,7 +232,16 @@ namespace pryPlanificador
 
         private void txtConsumos_TextChanged(object sender, EventArgs e)
         {
-            ActualizarTotal();
+            int totalEscrito = 0;
+            if (!string.IsNullOrEmpty(txtConsumos.Text))
+            {
+                totalEscrito = Convert.ToInt32(txtConsumos.Text);
+            }
+                
+            int descuento20 = totalEscrito * 20 / 100;
+            int totalConDescuento = totalEscrito - descuento20;
+            txtADescontar.Text = totalConDescuento.ToString();
+              
         }
 
         private void txtADescontar_TextChanged(object sender, EventArgs e)
@@ -268,6 +273,29 @@ namespace pryPlanificador
         private void btnAyuda_Click(object sender, EventArgs e)
         {
             MessageBox.Show("SELECCIONE EMPLEADO, MES Y AÑO PARA RECIBIR UN INFORME MENSUAL. PARA VER LA DESCRIPCION DE LOS PREMIOS HAGA DOBLE CLICK EN EL MONTO DE PREMIOS. PARA CREAR UN PDF HAGA CLICK EN EL BOTON, ASEGURO DE VERIFICAR QUE LOS DATOS SEAN CORRECTOS. LOS APARTADOS CONSUMOS Y A DESCONTAR DEBEN SER ASIGNADOS MANUALMENTE.");
+        }
+
+        private void txtTotal_TextChanged(object sender, EventArgs e)
+        {
+            int numero = Convert.ToInt32(txtTotal.Text);
+
+            if (numero < 0)
+            {
+                txtTotal.BackColor = Color.Red;
+            }
+            else
+            {
+                txtTotal.BackColor = Color.Green;
+            }
+        }
+
+        private void txtAdelantos_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (txtAdelantos.Text != "0")
+            {
+                string descripcion = objC.DescripcionAdelanto(txtNombre.Text, cmbAnio.Text, cmbMes.Text);
+                MessageBox.Show(descripcion);
+            }
         }
     }
 }

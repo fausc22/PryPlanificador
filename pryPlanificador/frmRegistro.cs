@@ -85,7 +85,7 @@ namespace Planificador
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
 
-            int dia = DateTime.Now.Day;
+            int dia = 1302;
             if (txtContrasenia.Text == dia.ToString())
             {
                 string nombre = txtNombre.Text;

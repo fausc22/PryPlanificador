@@ -102,6 +102,7 @@
             this.txtTotal.TabIndex = 2;
             this.txtTotal.Text = "0";
             this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtTotal.TextChanged += new System.EventHandler(this.txtTotal_TextChanged);
             // 
             // txtConsumos
             // 
@@ -119,6 +120,7 @@
             this.txtADescontar.BackColor = System.Drawing.Color.Tomato;
             this.txtADescontar.Location = new System.Drawing.Point(181, 170);
             this.txtADescontar.Name = "txtADescontar";
+            this.txtADescontar.ReadOnly = true;
             this.txtADescontar.Size = new System.Drawing.Size(108, 20);
             this.txtADescontar.TabIndex = 6;
             this.txtADescontar.Text = "0";
@@ -141,14 +143,15 @@
             // txtAdelantos
             // 
             this.txtAdelantos.BackColor = System.Drawing.Color.Tomato;
-            this.txtAdelantos.Enabled = false;
             this.txtAdelantos.Location = new System.Drawing.Point(181, 203);
             this.txtAdelantos.Name = "txtAdelantos";
+            this.txtAdelantos.ReadOnly = true;
             this.txtAdelantos.Size = new System.Drawing.Size(108, 20);
             this.txtAdelantos.TabIndex = 10;
             this.txtAdelantos.Text = "0";
             this.txtAdelantos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtAdelantos.TextChanged += new System.EventHandler(this.txtAdelantos_TextChanged);
+            this.txtAdelantos.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtAdelantos_MouseDoubleClick);
             // 
             // lblblblb
             // 
@@ -411,12 +414,12 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(14, 172);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(12, 174);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(115, 16);
+            this.label4.Size = new System.Drawing.Size(110, 13);
             this.label4.TabIndex = 33;
-            this.label4.Text = "A DESCONTAR";
+            this.label4.Text = "DESCUENTO 20%";
             // 
             // label3
             // 
