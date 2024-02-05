@@ -50,6 +50,7 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnAyuda = new System.Windows.Forms.Button();
+            this.btnNuevoTurno = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).BeginInit();
             this.gpDatos.SuspendLayout();
             this.SuspendLayout();
@@ -101,7 +102,6 @@
             // 
             // txtTurno
             // 
-            this.txtTurno.Enabled = false;
             this.txtTurno.Location = new System.Drawing.Point(121, 40);
             this.txtTurno.Name = "txtTurno";
             this.txtTurno.ReadOnly = true;
@@ -110,7 +110,6 @@
             // 
             // txtInicio
             // 
-            this.txtInicio.Enabled = false;
             this.txtInicio.Location = new System.Drawing.Point(121, 76);
             this.txtInicio.Name = "txtInicio";
             this.txtInicio.Size = new System.Drawing.Size(100, 20);
@@ -118,7 +117,6 @@
             // 
             // txtFin
             // 
-            this.txtFin.Enabled = false;
             this.txtFin.Location = new System.Drawing.Point(121, 112);
             this.txtFin.Name = "txtFin";
             this.txtFin.Size = new System.Drawing.Size(100, 20);
@@ -126,7 +124,6 @@
             // 
             // txtTotal
             // 
-            this.txtTotal.Enabled = false;
             this.txtTotal.Location = new System.Drawing.Point(121, 149);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(100, 20);
@@ -185,7 +182,7 @@
             this.gpDatos.Controls.Add(this.label1);
             this.gpDatos.Controls.Add(this.txtFin);
             this.gpDatos.Controls.Add(this.txtTotal);
-            this.gpDatos.Location = new System.Drawing.Point(501, 54);
+            this.gpDatos.Location = new System.Drawing.Point(498, 106);
             this.gpDatos.Name = "gpDatos";
             this.gpDatos.Size = new System.Drawing.Size(243, 246);
             this.gpDatos.TabIndex = 28;
@@ -256,12 +253,24 @@
             this.btnAyuda.UseVisualStyleBackColor = true;
             this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
             // 
+            // btnNuevoTurno
+            // 
+            this.btnNuevoTurno.BackColor = System.Drawing.Color.Green;
+            this.btnNuevoTurno.Location = new System.Drawing.Point(498, 54);
+            this.btnNuevoTurno.Name = "btnNuevoTurno";
+            this.btnNuevoTurno.Size = new System.Drawing.Size(243, 39);
+            this.btnNuevoTurno.TabIndex = 49;
+            this.btnNuevoTurno.Text = "NUEVO TURNO";
+            this.btnNuevoTurno.UseVisualStyleBackColor = false;
+            this.btnNuevoTurno.Click += new System.EventHandler(this.btnNuevoTurno_Click);
+            // 
             // frmTurnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(753, 596);
+            this.Controls.Add(this.btnNuevoTurno);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.lblTitulo);
@@ -303,5 +312,6 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnAyuda;
+        private System.Windows.Forms.Button btnNuevoTurno;
     }
 }

@@ -127,5 +127,10 @@ namespace pryPlanificador
                 e.Handled = true;
             }
         }
+
+        private void cmbCategoria_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

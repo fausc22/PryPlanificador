@@ -29,6 +29,7 @@ namespace pryPlanificador
         public byte[] huella;
 
         bool cerrar = false;
+        public int ValorHoraAnterior = 0;
 
 
 
@@ -62,7 +63,8 @@ namespace pryPlanificador
             objC.CargarEmpleado(empleado, lblId, txtNombre, txtApellido, txtMail, txtFecha, txtAntiguedad, txtHoraNormal, txtDiaVacaciones, txtJornada, pbFoto, pbHuella);
             btnSelec.Enabled = false;
             cmbEmpleado.Enabled = false;
-            
+            ValorHoraAnterior = Convert.ToInt32(txtHoraNormal.Text);
+            MessageBox.Show(ValorHoraAnterior.ToString());
 
         }
         private byte[] ImageToByteArray(Image imagen)
@@ -87,6 +89,7 @@ namespace pryPlanificador
             string mail = txtMail.Text;
             string fecha = txtFecha.Text;
             int horaNormal = Convert.ToInt32(txtHoraNormal.Text);
+            
             int antiguedad = Convert.ToInt32(txtAntiguedad.Text);
             int diavacas = Convert.ToInt32(txtDiaVacaciones.Text);
             int horasVacas = Convert.ToInt32(txtJornada.Text);
@@ -97,6 +100,11 @@ namespace pryPlanificador
             cmbEmpleado.SelectedIndex = -1;
             cmbEmpleado.Enabled = true;
             btnSelec.Enabled = false;
+            int Diferencia = horaNormal - ValorHoraAnterior;
+            if (Diferencia != 0)
+            {
+                objC.ActualizarMesTrabajado(nombre, Diferencia);
+            }
             
         }
 

@@ -13,6 +13,10 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
 using Planificador.Properties;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.Drawing.Imaging;
+
 
 namespace pryPlanificador
 {
@@ -43,7 +47,7 @@ namespace pryPlanificador
             gpDatos.Visible = true;
             objC.CargarEmpleadoRecibo(empleado, lblId, txtNombre, txtApellido, txtMail, txtFecha, txtAntiguedad, txtHoraNormal, txtDiaVaca, txtJornada, pbFoto);
 
-            objC.CargarDatosRecibo(empleado, anio, mes, txtHsPlanificadas, lblHsPlanificadas, txtHsTrabajadas, lblHsTrabajadas, txtPremios, txtAdelantos);
+            objC.CargarDatosRecibo(empleado, anio, mes, txtHsPlanificadas, lblHsPlanificadas, txtHsTrabajadas, lblHsTrabajadas, txtPremios, txtAdelantos, txtConsumos);
         }
 
         private void btnPdf_Click(object sender, EventArgs e)
@@ -136,13 +140,40 @@ namespace pryPlanificador
                     PdfWriter writer =  PdfWriter.GetInstance(pdfDoc, stream);
                     
                     pdfDoc.Open();
+
                     pdfDoc.AddHeader("PUNTO SUR", titulo);
                     pdfDoc.Add(new Phrase(""));
+
+                    // Agregar logo al costado derecho del título (ajusta la ruta de la imagen según tu proyecto)
+                    string logoPath = "../../LOGOINICIO.jpg";
+
+                    iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(logoPath);
+                    logo.ScaleAbsolute(90f, 90f); // Ajusta el tamaño del logo según tus necesidades
+                    logo.Alignment = Element.ALIGN_RIGHT;
+                    pdfDoc.Add(logo);
+
+                    //// Salto de línea
+                    //pdfDoc.Add(Chunk.NEWLINE);
 
                     using (StringReader sr = new StringReader(paginahtml_texto))
                     {
                         XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
                     }
+
+
+                    // Agregar logo al final del PDF
+                    
+                    iTextSharp.text.Image logoFooter = iTextSharp.text.Image.GetInstance(logoPath);
+                    logoFooter.ScaleAbsolute(90f, 90f); // Ajusta el tamaño del logo según tus necesidades
+                    logoFooter.Alignment = Element.ALIGN_CENTER;
+                    pdfDoc.Add(logoFooter);
+
+                    // Agregar hora y fecha al final del PDF
+                    string formattedDateTime = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
+                    Paragraph dateTimeParagraph = new Paragraph(formattedDateTime, FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12));
+                    dateTimeParagraph.Alignment = Element.ALIGN_CENTER;
+                    pdfDoc.Add(dateTimeParagraph);
+
 
                     pdfDoc.Close();
 

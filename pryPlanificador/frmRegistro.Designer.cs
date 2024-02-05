@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRegistro));
             this.gpForm = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtHora = new System.Windows.Forms.TextBox();
             this.txtContrasenia = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.optEgreso = new System.Windows.Forms.RadioButton();
@@ -39,8 +41,6 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtFecha = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtHora = new System.Windows.Forms.TextBox();
             this.gpForm.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,20 +58,40 @@
             this.gpForm.Controls.Add(this.txtFecha);
             this.gpForm.Controls.Add(this.label1);
             this.gpForm.Location = new System.Drawing.Point(11, 11);
-            this.gpForm.Margin = new System.Windows.Forms.Padding(2);
+            this.gpForm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gpForm.Name = "gpForm";
-            this.gpForm.Padding = new System.Windows.Forms.Padding(2);
+            this.gpForm.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gpForm.Size = new System.Drawing.Size(373, 279);
             this.gpForm.TabIndex = 11;
             this.gpForm.TabStop = false;
             this.gpForm.Text = "INGRESE SUS DATOS";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(212, 81);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(121, 15);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "HORA (hh:mm:ss)";
+            // 
+            // txtHora
+            // 
+            this.txtHora.Enabled = false;
+            this.txtHora.Location = new System.Drawing.Point(204, 101);
+            this.txtHora.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtHora.Name = "txtHora";
+            this.txtHora.Size = new System.Drawing.Size(139, 20);
+            this.txtHora.TabIndex = 21;
+            this.txtHora.TextChanged += new System.EventHandler(this.txtHora_TextChanged);
+            // 
             // txtContrasenia
             // 
             this.txtContrasenia.Enabled = false;
             this.txtContrasenia.Location = new System.Drawing.Point(20, 99);
-            this.txtContrasenia.Margin = new System.Windows.Forms.Padding(2);
-            this.txtContrasenia.MaxLength = 2;
+            this.txtContrasenia.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtContrasenia.MaxLength = 4;
             this.txtContrasenia.Name = "txtContrasenia";
             this.txtContrasenia.Size = new System.Drawing.Size(128, 20);
             this.txtContrasenia.TabIndex = 20;
@@ -94,7 +114,7 @@
             this.optEgreso.Enabled = false;
             this.optEgreso.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.optEgreso.Location = new System.Drawing.Point(125, 175);
-            this.optEgreso.Margin = new System.Windows.Forms.Padding(2);
+            this.optEgreso.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.optEgreso.Name = "optEgreso";
             this.optEgreso.Size = new System.Drawing.Size(97, 22);
             this.optEgreso.TabIndex = 18;
@@ -109,7 +129,7 @@
             this.optIngreso.Enabled = false;
             this.optIngreso.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.optIngreso.Location = new System.Drawing.Point(125, 149);
-            this.optIngreso.Margin = new System.Windows.Forms.Padding(2);
+            this.optIngreso.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.optIngreso.Name = "optIngreso";
             this.optIngreso.Size = new System.Drawing.Size(102, 22);
             this.optIngreso.TabIndex = 17;
@@ -143,7 +163,7 @@
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(20, 49);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(128, 20);
             this.txtNombre.TabIndex = 14;
@@ -153,7 +173,7 @@
             // 
             this.txtFecha.Enabled = false;
             this.txtFecha.Location = new System.Drawing.Point(204, 49);
-            this.txtFecha.Margin = new System.Windows.Forms.Padding(2);
+            this.txtFecha.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(139, 20);
             this.txtFecha.TabIndex = 13;
@@ -169,26 +189,6 @@
             this.label1.TabIndex = 11;
             this.label1.Text = "NOMBRE";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(212, 81);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(121, 15);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "HORA (hh:mm:ss)";
-            // 
-            // txtHora
-            // 
-            this.txtHora.Enabled = false;
-            this.txtHora.Location = new System.Drawing.Point(204, 101);
-            this.txtHora.Margin = new System.Windows.Forms.Padding(2);
-            this.txtHora.Name = "txtHora";
-            this.txtHora.Size = new System.Drawing.Size(139, 20);
-            this.txtHora.TabIndex = 21;
-            this.txtHora.TextChanged += new System.EventHandler(this.txtHora_TextChanged);
-            // 
             // frmRegistro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,7 +199,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmRegistro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "EMPLEADOS - LOGUEO MANUAL";
+            this.Text = "Registro Manual";
             this.Load += new System.EventHandler(this.frmRegistro_Load);
             this.gpForm.ResumeLayout(false);
             this.gpForm.PerformLayout();

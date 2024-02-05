@@ -129,13 +129,15 @@
             this.cmbCategoria.Enabled = false;
             this.cmbCategoria.FormattingEnabled = true;
             this.cmbCategoria.Items.AddRange(new object[] {
-            "ADELANTO DE SUELDO",
-            "PREMIO\t"});
+            "PREMIO",
+            "CONSUMOS",
+            "ADELANTO DE SUELDO\t"});
             this.cmbCategoria.Location = new System.Drawing.Point(102, 138);
             this.cmbCategoria.Name = "cmbCategoria";
             this.cmbCategoria.Size = new System.Drawing.Size(145, 21);
             this.cmbCategoria.TabIndex = 34;
             this.cmbCategoria.SelectedIndexChanged += new System.EventHandler(this.cmbCategoria_SelectedIndexChanged);
+            this.cmbCategoria.TextChanged += new System.EventHandler(this.cmbCategoria_TextChanged);
             // 
             // btnLimpiar
             // 

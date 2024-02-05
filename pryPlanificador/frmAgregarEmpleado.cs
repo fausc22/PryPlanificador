@@ -25,7 +25,7 @@ namespace pryPlanificador
 
         bool cerrar = false;
 
-        
+
 
         private int mfpWidth = 0;
         private int mfpHeight = 0;
@@ -44,8 +44,8 @@ namespace pryPlanificador
 
         clsConexion objC = new clsConexion();
         public byte[] fotoperfil;
-        
-        
+
+
 
         private void btnActualizarFoto_Click(object sender, EventArgs e)
         {
@@ -73,11 +73,15 @@ namespace pryPlanificador
                 }
             }
 
-            
+
         }
 
         private void btnActualizarHuella_Click(object sender, EventArgs e)
         {
+
+
+
+
 
             int ret = zkfperrdef.ZKFP_ERR_OK;
             if ((ret = zkfp2.Init()) == zkfperrdef.ZKFP_ERR_OK)

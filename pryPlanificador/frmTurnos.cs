@@ -57,7 +57,16 @@ namespace pryPlanificador
             int horaTotal = Convert.ToInt32(txtTotal.Text);
             string turno = horaInicio + " a " + horaFin;
 
-            objE.ActualizarHorarios(id, turno, horaInicio, horaFin, horaTotal);
+            if (btnModificar.Text == "MODIFICAR")
+            {
+                objE.ActualizarHorarios(id, turno, horaInicio, horaFin, horaTotal);
+            }
+            else
+            {
+                objE.NuevoHorarios(turno, horaInicio, horaFin, horaTotal);
+            }
+
+            
             
             objC.CargarGrillaTurnos(dgvTurnos);
             gpDatos.Visible = false; 
@@ -78,6 +87,12 @@ namespace pryPlanificador
         {
             
 
+        }
+
+        private void btnNuevoTurno_Click(object sender, EventArgs e)
+        {
+            btnModificar.Text = "NUEVO TURNO";
+            gpDatos.Visible=true;
         }
     }
 }

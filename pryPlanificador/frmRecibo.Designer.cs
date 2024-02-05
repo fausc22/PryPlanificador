@@ -435,7 +435,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(122, 245);
+            this.label2.Location = new System.Drawing.Point(127, 245);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 20);
             this.label2.TabIndex = 31;
@@ -503,7 +503,7 @@
             // 
             this.btnSelec.BackColor = System.Drawing.SystemColors.Info;
             this.btnSelec.Enabled = false;
-            this.btnSelec.Location = new System.Drawing.Point(11, 129);
+            this.btnSelec.Location = new System.Drawing.Point(26, 129);
             this.btnSelec.Name = "btnSelec";
             this.btnSelec.Size = new System.Drawing.Size(101, 26);
             this.btnSelec.TabIndex = 31;
