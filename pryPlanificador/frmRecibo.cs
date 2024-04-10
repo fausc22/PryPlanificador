@@ -54,9 +54,13 @@ namespace pryPlanificador
         {
             string empleado = cmbEmpleado.Text;
             string mes = cmbMes.Text;
-            int subtotal1 = Convert.ToInt32(txtHsTrabajadas.Text) + Convert.ToInt32(txtPremios.Text);
-            int subtotal2 = Convert.ToInt32(txtADescontar.Text) + Convert.ToInt32(txtAdelantos.Text);
-            int totalll = subtotal1 - subtotal2;
+            double subtotal1 = Convert.ToDouble(txtHsTrabajadas.Text) + Convert.ToDouble(txtPremios.Text);
+            double subtotal2 = Convert.ToDouble(txtADescontar.Text) + Convert.ToDouble(txtAdelantos.Text);
+
+            int resultado1 = (int)Math.Round(subtotal1);
+            int resultado2 = (int)Math.Round(subtotal2);
+
+            int totalll = resultado1 - resultado2;
 
             SaveFileDialog guardar = new SaveFileDialog();
             string titulo = "RECIBO - " + empleado + " - " + mes + ".pdf";
@@ -144,10 +148,18 @@ namespace pryPlanificador
                     pdfDoc.AddHeader("PUNTO SUR", titulo);
                     pdfDoc.Add(new Phrase(""));
 
-                    // Agregar logo al costado derecho del título (ajusta la ruta de la imagen según tu proyecto)
-                    string logoPath = "../../LOGOINICIO.jpg";
+                    //// Agregar logo al costado derecho del título (ajusta la ruta de la imagen según tu proyecto)
+                    //string logoPath = "../../LOGOINICIO.jpg";
+                    //iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(logoPath);
 
-                    iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(logoPath);
+                    
+                    
+                    // Obtener el recurso de imagen como un objeto Bitmap
+                    Bitmap bitmap = Resources.LOGOINICIO;
+
+                    // Convertir el objeto Bitmap a un objeto iTextSharp.text.Image
+                    iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(bitmap, System.Drawing.Imaging.ImageFormat.Png);
+
                     logo.ScaleAbsolute(90f, 90f); // Ajusta el tamaño del logo según tus necesidades
                     logo.Alignment = Element.ALIGN_RIGHT;
                     pdfDoc.Add(logo);
@@ -163,7 +175,8 @@ namespace pryPlanificador
 
                     // Agregar logo al final del PDF
                     
-                    iTextSharp.text.Image logoFooter = iTextSharp.text.Image.GetInstance(logoPath);
+                    //iTextSharp.text.Image logoFooter = iTextSharp.text.Image.GetInstance(logoPath);
+                    iTextSharp.text.Image logoFooter = iTextSharp.text.Image.GetInstance(bitmap, System.Drawing.Imaging.ImageFormat.Png);
                     logoFooter.ScaleAbsolute(90f, 90f); // Ajusta el tamaño del logo según tus necesidades
                     logoFooter.Alignment = Element.ALIGN_CENTER;
                     pdfDoc.Add(logoFooter);

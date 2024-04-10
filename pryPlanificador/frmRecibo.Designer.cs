@@ -94,8 +94,9 @@
             // 
             // txtTotal
             // 
-            this.txtTotal.BackColor = System.Drawing.Color.LimeGreen;
+            this.txtTotal.BackColor = System.Drawing.Color.LightGreen;
             this.txtTotal.Enabled = false;
+            this.txtTotal.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.txtTotal.Location = new System.Drawing.Point(97, 268);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(125, 20);

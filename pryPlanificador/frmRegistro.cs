@@ -114,8 +114,9 @@ namespace Planificador
                 if (accion == "EGRESO")
                 {
                     TimeSpan horaIngreso = objC.HoraIngreso(nombre, anio);
+                    string fechaIngreso = objC.fechaIngreso(nombre, anio);
                     TimeSpan horaEgreso = TimeSpan.Parse(hora);
-                    cerrar = objC.NuevoIngresoEgreso(nombre, fecha, horaIngreso, horaEgreso, mes, anio);
+                    cerrar = objC.NuevoIngresoEgreso(nombre, fechaIngreso, horaIngreso, horaEgreso, mes, anio);
 
                 }
 

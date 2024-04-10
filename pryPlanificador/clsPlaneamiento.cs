@@ -16,18 +16,21 @@ namespace pryPlanificador
 {
     class clsPlaneamiento
     {
+        static string servidor = "localhost";
+        static string bd = "planificador";
+        static string user = "root";
+        static string pw = "251199";
+        static string port = "3306";
+
+
         //static string servidor = "localhost";
-        //static string bd = "planificadordatabase";
-        //static string user = "root";
+        //static string bd = "planificador";
+        //static string user = "planificador";
         //static string pw = "251199";
         //static string port = "3306";
 
 
-        static string servidor = "localhost";
-        static string bd = "planificador";
-        static string user = "planificador";
-        static string pw = "251199";
-        static string port = "3306";
+
 
 
 
@@ -757,8 +760,8 @@ namespace pryPlanificador
             int NroAnio = anio;
             string tablaAnual = "totales_" + NroAnio;
             string tabla = "turnos_" + NroAnio;
-            int horasTotales = 0;
-            int acumuladoTotal = 0;
+            int horasRegistradas = 0;
+            int acumuladoRegistrado = 0;
             int horasMensual = 0;
             int acumuladoMensual = 0;
             try
@@ -787,29 +790,38 @@ namespace pryPlanificador
 
                     using (MySqlCommand cmd = new MySqlCommand($"SELECT horas, acumulado FROM {tabla} WHERE fecha = @fecha AND nombre_empleado = @nombre", conn))
                     {
-                        cmd.Parameters.AddWithValue("@valor", valor);
+                        
                         cmd.Parameters.AddWithValue("@fecha", fecha);
                         cmd.Parameters.AddWithValue("@nombre", nombre);
-                        cmd.Parameters.AddWithValue("@horas", horas);
-                        cmd.Parameters.AddWithValue("@acumulado", acumulado);
+                        
 
 
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                horasTotales = Convert.ToInt32(reader["horas"]);
-                                acumuladoTotal = Convert.ToInt32(reader["acumulado"]);
+                                horasRegistradas = Convert.ToInt32(reader["horas"]);
+                                acumuladoRegistrado = Convert.ToInt32(reader["acumulado"]);
                             }
                         }
                     }
 
-                    horasMensual = (horasMensual - horasAnteriores) + horas;
-                    acumuladoMensual = (acumuladoMensual - acumuladoAnterior) + acumulado;
-                    horasTotales = (horasTotales - horasAnteriores) + horas;
-                    acumuladoTotal = (acumuladoTotal - acumuladoAnterior) + acumulado;
+                    
 
 
+                    //horasMensual = (horasMensual - horasAnteriores) + horas;
+                    //acumuladoMensual = (acumuladoMensual - acumuladoAnterior) + acumulado;
+                    //horasTotales = (horasTotales - horasAnteriores) + horas;
+                    //acumuladoTotal = (acumuladoTotal - acumuladoAnterior) + acumulado;
+
+
+                    horasMensual = Math.Max((horasMensual - horasAnteriores) + horas, 0);
+                    acumuladoMensual = Math.Max((acumuladoMensual - acumuladoAnterior) + acumulado, 0);
+                    horasRegistradas = Math.Max((horasRegistradas - horasAnteriores) + horas, 0);
+                    acumuladoRegistrado = Math.Max((acumuladoRegistrado - acumuladoAnterior) + acumulado, 0);
+
+
+                    
 
                     string consulta = $"UPDATE {tabla} SET turno = @valor, horas = @horas, acumulado = @acumulado WHERE fecha = @fecha AND nombre_empleado = @nombre";
                     
@@ -818,8 +830,8 @@ namespace pryPlanificador
                         cmd.Parameters.AddWithValue("@valor", valor);
                         cmd.Parameters.AddWithValue("@fecha", fecha);
                         cmd.Parameters.AddWithValue("@nombre", nombre);
-                        cmd.Parameters.AddWithValue("@horas", horasTotales);
-                        cmd.Parameters.AddWithValue("@acumulado", acumuladoTotal);
+                        cmd.Parameters.AddWithValue("@horas", horasRegistradas);
+                        cmd.Parameters.AddWithValue("@acumulado", acumuladoRegistrado);
 
 
                         cmd.ExecuteNonQuery();
@@ -827,8 +839,7 @@ namespace pryPlanificador
                     }
 
                     string consulta2 = $"UPDATE {tablaAnual} SET horas = @horas, acumulado = @acumulado WHERE mes = @fecha AND nombre_empleado = @nombre";
-                    int horasAgregar = horasTotales + horas;
-                    int acumuladoAgregar = acumuladoTotal + acumulado;
+                    
 
 
                     using (MySqlCommand cmd = new MySqlCommand(consulta2, conn))
@@ -893,7 +904,7 @@ namespace pryPlanificador
 
         }
 
-        public int ObtenerAcumuladoAnterior(string nombre, int horas)
+        public int ObtenerAcumuladoAnterior(string nombre, int horas, string fecha)
         {
             try
             {
@@ -913,9 +924,14 @@ namespace pryPlanificador
                                 sueldo = rdr.GetInt32(0);
                             }
                         }
+
                     }
 
                     int TotalEnviar = sueldo * horas;
+                    if (EsFeriado(fecha) == true)
+                    {
+                        TotalEnviar *= 2;
+                    }
                     return TotalEnviar;
                 }
             }

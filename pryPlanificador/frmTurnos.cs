@@ -51,6 +51,7 @@ namespace pryPlanificador
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            
             int id = Convert.ToInt32(lblid.Text);
             string horaInicio = txtInicio.Text;
             string horaFin = txtFin.Text;

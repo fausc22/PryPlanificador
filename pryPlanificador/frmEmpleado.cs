@@ -63,8 +63,10 @@ namespace pryPlanificador
             objC.CargarEmpleado(empleado, lblId, txtNombre, txtApellido, txtMail, txtFecha, txtAntiguedad, txtHoraNormal, txtDiaVacaciones, txtJornada, pbFoto, pbHuella);
             btnSelec.Enabled = false;
             cmbEmpleado.Enabled = false;
+            txtDiaVacaciones.Enabled = true;
+            txtHoraNormal.Enabled = true;
             ValorHoraAnterior = Convert.ToInt32(txtHoraNormal.Text);
-            MessageBox.Show(ValorHoraAnterior.ToString());
+            
 
         }
         private byte[] ImageToByteArray(Image imagen)

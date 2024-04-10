@@ -207,9 +207,9 @@
             this.lblid.AutoSize = true;
             this.lblid.Location = new System.Drawing.Point(202, 230);
             this.lblid.Name = "lblid";
-            this.lblid.Size = new System.Drawing.Size(35, 13);
+            this.lblid.Size = new System.Drawing.Size(13, 13);
             this.lblid.TabIndex = 29;
-            this.lblid.Text = "label4";
+            this.lblid.Text = "0";
             this.lblid.Visible = false;
             // 
             // btnModificar

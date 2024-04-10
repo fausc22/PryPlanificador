@@ -78,6 +78,13 @@ namespace pryPlanificador
                 // Obtiene el valor de la celda seleccionada
                 object cellValue = dgvHora.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
                 object fechaFila = dgvHora.Rows[e.RowIndex].Cells[0].Value;
+                string fecharda = fechaFila.ToString();
+                // Dividir la cadena utilizando el paréntesis como separador
+
+                string[] partesS = fecharda.Split('(');
+
+
+                string fechaParaAcumuladoAnterior = partesS[0].Trim();
 
 
 
@@ -129,7 +136,7 @@ namespace pryPlanificador
                 DataGridViewColumn colum = dgvHora.Columns[e.ColumnIndex];
                 nombreC = colum.HeaderText;
                 txtEmpleado.Text = nombreC; 
-                AcumuladoAnterior = plan.ObtenerAcumuladoAnterior(nombreC, HorasAnteriores);
+                AcumuladoAnterior = plan.ObtenerAcumuladoAnterior(nombreC, HorasAnteriores, fechaParaAcumuladoAnterior);
                 string fechaA = fechaFila.ToString();
                 // Dividir la cadena utilizando el paréntesis como separador
                 string[] partes = fechaA.Split('(');
@@ -206,6 +213,11 @@ namespace pryPlanificador
 
             int valorHora = objC.HoraEmpleado(nombreC);
             int totalHoras = valorHora * cantidadHoras;
+
+            if (plan.EsFeriado(nombreF) == true)
+            {
+                totalHoras *= 2;
+            }
 
 
             plan.ActualizarTurnos(mes, anio, nuevoValor, nombreF, nombreC, cantidadHoras, totalHoras, HorasAnteriores, AcumuladoAnterior);
