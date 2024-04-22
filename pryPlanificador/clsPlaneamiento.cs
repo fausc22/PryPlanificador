@@ -19,7 +19,7 @@ namespace pryPlanificador
         static string servidor = "localhost";
         static string bd = "planificador";
         static string user = "root";
-        static string pw = "251199";
+        static string pw = "2511";
         static string port = "3306";
 
 
@@ -699,7 +699,7 @@ namespace pryPlanificador
                 {
                     conn.Open();
 
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM horarios", conn))
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM horarios ORDER BY horaInicio ASC", conn))
                     {
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {

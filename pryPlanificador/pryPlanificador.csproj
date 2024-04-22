@@ -49,10 +49,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>BCDD97A74B3F070C1F9CE64CF261AD9DCDD68B9A</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>B6852816C52BEC8633E0F11E72CC7E32B78A5A50</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>pryPlanificador_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>pryPlanificador_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -65,6 +65,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>pryPlanificador.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -296,6 +302,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -310,8 +317,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="pryPlanificador_1_TemporaryKey.pfx" />
-    <None Include="pryPlanificador_TemporaryKey.pfx" />
+    <None Include="pryPlanificador_2_TemporaryKey.pfx" />
     <None Include="Resources\background2.jpg" />
   </ItemGroup>
   <ItemGroup>

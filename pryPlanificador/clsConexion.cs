@@ -29,7 +29,7 @@ namespace pryPlanificador
         static string servidor2 = "localhost";
         static string bd2 = "planificador";
         static string user2 = "root";
-        static string pw2 = "251199";
+        static string pw2 = "2511";
         static string port2 = "3306";
 
 
@@ -1497,11 +1497,11 @@ namespace pryPlanificador
                     int minutosTrabajados = 0;
 
 
-                    //foreach (string empleado in empleados)
-                    //{
-                        using (MySqlCommand cmd = new MySqlCommand("SELECT id, hora_ingreso, hora_egreso FROM planificador.controlhs_2024 WHERE id = @nombre", conn))
+                    foreach (string empleado in empleados)
+                    {
+                        using (MySqlCommand cmd = new MySqlCommand("SELECT id, hora_ingreso, hora_egreso FROM planificador.controlhs_2024 WHERE nombre_empleado = @nombre", conn))
                         {
-                            cmd.Parameters.AddWithValue("@nombre", 508);
+                            cmd.Parameters.AddWithValue("@nombre", empleado);
                             using (MySqlDataReader rdr = cmd.ExecuteReader())
                             {
                                 while (rdr.Read())
@@ -1531,20 +1531,108 @@ namespace pryPlanificador
                                 }
                             }
                         }
-                    //}
-                    
+                    }
+
 
 
 
 
 
                 }
+                MessageBox.Show("Minutos actualizado.");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
+        public void AcomodarAcumulado()
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+                    List<string> empleados = new List<string>();
+
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT nombre FROM empleados", conn))
+                    {
+
+
+                        using (MySqlDataReader rdr = cmd.ExecuteReader())
+                        {
+                            while (rdr.Read())
+                            {
+                                empleados.Add(rdr["nombre"].ToString());
+                            }
+                        }
+                    }
+                    int id = 0;
+                    int minutosTrabajados = 0;
+                    double horasTrabajadas = 0;
+                    int valorHora = 0;
+
+
+                    foreach (string empleado in empleados)
+                    {
+                        using (MySqlCommand cmd = new MySqlCommand("SELECT id, horas_trabajadas FROM planificador.controlhs_2024 WHERE nombre_empleado = @nombre", conn))
+                        {
+                            cmd.Parameters.AddWithValue("@nombre", empleado);
+                            using (MySqlDataReader rdr = cmd.ExecuteReader())
+                            {
+                                while (rdr.Read())
+                                {
+                                    id = (int)rdr["id"];
+                                    minutosTrabajados = (int)rdr["horas_trabajadas"];
+                                    horasTrabajadas = minutosTrabajados / 60.0;
+                                    
+
+                                    using (MySqlConnection conn2 = new MySqlConnection(cadenaConexion))
+                                    {
+                                        conn2.Open();
+                                        using (MySqlCommand cmd3 = new MySqlCommand("SELECT hora_normal FROM planificador.empleados WHERE nombre = @nombre", conn2))
+                                        {
+                                            cmd3.Parameters.AddWithValue("@nombre", empleado);
+                                            using (MySqlDataReader rdr2 = cmd3.ExecuteReader())
+                                            {
+                                                if (rdr2.Read())
+                                                {
+                                                    valorHora = (int)rdr2["hora_normal"];
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+
+                                        horasTrabajadas *= valorHora;
+
+                                        using (MySqlCommand cmd2 = new MySqlCommand("UPDATE planificador.controlhs_2024 SET acumulado = @acumulado WHERE id = @id", conn2))
+                                        {
+                                            cmd2.Parameters.AddWithValue("@acumulado", horasTrabajadas);
+                                            cmd2.Parameters.AddWithValue("@id", id);
+                                            cmd2.ExecuteNonQuery();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
+
+
+
+
+                }
+                MessageBox.Show("Acumulado actualizado.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
 
         public void NuevoVacaciones(string nombre, int dias, string salida, string regreso, int DiasTotales, int mes, int anio, string vacaciones)
         {
