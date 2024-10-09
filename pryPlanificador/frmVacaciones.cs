@@ -49,6 +49,7 @@ namespace pryPlanificador
             DateTime fecha = DateTime.ParseExact(fechaS, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             int anio = fecha.Year;
             int mes = fecha.Month;
+            string mesLetra = fecha.ToString("MMMM");
             string fechaR = dtpRegreso.Value.ToString("dd/MM/yyyy");
             int dias = Convert.ToInt32(txtCantDia.Text);
             string vacaciones = string.Empty;
@@ -63,11 +64,24 @@ namespace pryPlanificador
 
             if (btnSelec.Text == "CARGAR VACACIONES")
             {
-                objC.NuevoVacaciones(empleado, dias, fechaS, fechaR, dias, mes, anio, vacaciones);
+                if (vacaciones == "días sin goce de sueldo")
+                {
+                    objC.NuevoVacacionesSinGonce(empleado, fechaS, fechaR, vacaciones);
+                }
+                else
+                {
+                    objC.NuevoVacaciones(empleado, dias, fechaS, fechaR, dias, mes, anio, vacaciones);
+                    objC.NuevoPagoHorasVacaciones(empleado, anio, mesLetra, dias, fechaS, fechaR);
+                }
+                
             }
             else
             {
                 objC.ActualizarVacaciones(id, empleado, dias, fechaS, fechaR, dias, mes, anio, vacaciones);
+
+
+
+
             }
 
 

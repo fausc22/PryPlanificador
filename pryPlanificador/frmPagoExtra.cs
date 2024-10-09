@@ -49,7 +49,8 @@ namespace pryPlanificador
         {
             if (cmbAnio.SelectedIndex != -1)
             {
-                cmbCategoria.Enabled = true;
+                cmbDetalle.Enabled = true;
+                
             }
         }
 
@@ -88,11 +89,23 @@ namespace pryPlanificador
             string empleado = cmbEmpleado.Text;
             string anio = cmbAnio.Text;
             string mes = cmbMes.Text;
-            string categoria = cmbCategoria.Text;
+            string categoria = txtCategoria.Text;
             int monto = Convert.ToInt32(txtMonto.Text);
             string descripcion = txtDescripcion.Text;
+            int detalle = 0;
+            if (cmbDetalle.Text == "SUMAR")
+            {
+                detalle = 1;
+            }
+            else
+            {
+                if(cmbDetalle.Text == "RESTAR")
+                {
+                    detalle = 0;
+                }
+            }
 
-            objC.NuevoPagoExtra(empleado, anio, mes, categoria, monto, descripcion);
+            objC.NuevoPagoExtra(empleado, anio, mes, detalle, categoria, monto, descripcion);
             Limpiar();
         }
 
@@ -100,11 +113,14 @@ namespace pryPlanificador
         {
             cmbAnio.SelectedIndex = -1;
             cmbAnio.Enabled = false;
-            cmbCategoria.SelectedIndex = -1;
-            cmbCategoria.Enabled = false;
+            txtCategoria.Text = "";
+            txtCategoria.Enabled = false;
             cmbMes.SelectedIndex = -1;
             cmbMes.Enabled = false;
             cmbEmpleado.SelectedIndex = -1;
+            cmbDetalle.SelectedIndex = -1;
+            cmbDetalle.Enabled = false;
+            gpFinal.Visible = false;
             
             txtDescripcion.Clear();
             txtDescripcion.Enabled = false;
@@ -130,6 +146,25 @@ namespace pryPlanificador
 
         private void cmbCategoria_TextChanged(object sender, EventArgs e)
         {
+            
+        }
+
+        private void txtCategoria_TextChanged(object sender, EventArgs e)
+        {
+            if (txtCategoria.Text != null)
+            {
+                txtMonto.Enabled = true;
+            }
+        }
+
+        private void cmbDetalle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbDetalle.SelectedIndex != -1)
+            {
+                txtMonto.Enabled = true;
+                txtCategoria.Enabled = true;
+                gpFinal.Visible = true;
+            }
             
         }
     }

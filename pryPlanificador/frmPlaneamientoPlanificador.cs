@@ -362,32 +362,34 @@ namespace pryPlanificador
 
 
 
-                                    // Cambiar el color de fondo según el nombre de la columna
                                     switch (col.HeaderText.ToUpper())
                                     {
-                                        case "TITI":
-                                            headerCell.BackgroundColor = new BaseColor(148, 0, 211); // Violeta
+                                        case "EMANUEL":
+                                            headerCell.BackgroundColor = new BaseColor(238, 130, 238); // Violeta
                                             break;
                                         case "PRISCILA":
                                             headerCell.BackgroundColor = new BaseColor(255, 0, 255); // Fucsia
                                             break;
                                         case "ALEJANDRO":
-                                            headerCell.BackgroundColor = new BaseColor(0, 0, 139); // Azul oscuro
-                                            break;
-                                        case "LAUTARO":
-                                            headerCell.BackgroundColor = new BaseColor(255, 69, 0); // Naranja
-                                            break;
-                                        case "CANDELARIA":
-                                            headerCell.BackgroundColor = new BaseColor(144, 238, 144); // Verde claro
-                                            break;
-                                        case "MICAELA":
                                             headerCell.BackgroundColor = new BaseColor(64, 224, 208); // Turquesa
                                             break;
+                                        case "LAUTARO":
+                                            headerCell.BackgroundColor = new BaseColor(160, 82, 45); // Siena
+                                            break;
+                                        case "CANDELARIA":
+                                            headerCell.BackgroundColor = new BaseColor(238, 130, 238); // Lila
+                                            break;
+                                        case "GABRIEL":
+                                            headerCell.BackgroundColor = new BaseColor(255, 255, 0); // Amarillo
+                                            break;
+                                        case "SANTIAGO":
+                                            headerCell.BackgroundColor = new BaseColor(0, 0, 255); // Azul
+                                            break;
                                         case "CATALINA":
-                                            headerCell.BackgroundColor = new BaseColor(255, 182, 193); // Rosa pálido
+                                            headerCell.BackgroundColor = new BaseColor(173, 216, 230); // Azul claro
                                             break;
                                         default:
-                                            headerCell.BackgroundColor = new BaseColor(0, 102, 204); // Azul (por defecto)
+                                            headerCell.BackgroundColor = new BaseColor(255, 255, 255); // Blanco por defecto
                                             break;
                                     }
 

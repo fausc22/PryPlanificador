@@ -79,7 +79,29 @@ namespace pryPlanificador
         private void btnActualizarHuella_Click(object sender, EventArgs e)
         {
 
+            //using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            //{
+            //    openFileDialog.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Todos los archivos|*.*";
 
+            //    if (openFileDialog.ShowDialog() == DialogResult.OK)
+            //    {
+            //        try
+            //        {
+            //            // Obtén la ruta del archivo seleccionado
+            //            string rutaArchivo = openFileDialog.FileName;
+
+            //            // Carga la imagen en el PictureBox
+            //            pbHuella.Image = Image.FromFile(rutaArchivo);
+
+            //            // Opcional: Guarda la ruta del archivo si necesitas utilizarla posteriormente
+            //            huella = File.ReadAllBytes(rutaArchivo);
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            MessageBox.Show("Error al cargar la imagen: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        }
+            //    }
+            //}
 
 
 

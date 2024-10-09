@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPagoExtra));
             this.gpEmpleado = new System.Windows.Forms.GroupBox();
+            this.txtCategoria = new System.Windows.Forms.TextBox();
             this.txtDescripcion = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtMonto = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cmbCategoria = new System.Windows.Forms.ComboBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnSelec = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -47,17 +47,20 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnAyuda = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmbDetalle = new System.Windows.Forms.ComboBox();
+            this.gpFinal = new System.Windows.Forms.GroupBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.gpEmpleado.SuspendLayout();
+            this.gpFinal.SuspendLayout();
             this.SuspendLayout();
             // 
             // gpEmpleado
             // 
-            this.gpEmpleado.Controls.Add(this.txtDescripcion);
-            this.gpEmpleado.Controls.Add(this.label3);
-            this.gpEmpleado.Controls.Add(this.txtMonto);
-            this.gpEmpleado.Controls.Add(this.label2);
-            this.gpEmpleado.Controls.Add(this.label1);
-            this.gpEmpleado.Controls.Add(this.cmbCategoria);
+            this.gpEmpleado.Controls.Add(this.gpFinal);
+            this.gpEmpleado.Controls.Add(this.label5);
+            this.gpEmpleado.Controls.Add(this.cmbDetalle);
             this.gpEmpleado.Controls.Add(this.btnLimpiar);
             this.gpEmpleado.Controls.Add(this.btnSelec);
             this.gpEmpleado.Controls.Add(this.label7);
@@ -68,15 +71,24 @@
             this.gpEmpleado.Controls.Add(this.cmbMes);
             this.gpEmpleado.Location = new System.Drawing.Point(12, 59);
             this.gpEmpleado.Name = "gpEmpleado";
-            this.gpEmpleado.Size = new System.Drawing.Size(263, 400);
+            this.gpEmpleado.Size = new System.Drawing.Size(332, 473);
             this.gpEmpleado.TabIndex = 33;
             this.gpEmpleado.TabStop = false;
             this.gpEmpleado.Text = "COMPLETE LOS SIGUIENTOS DATOS";
             // 
+            // txtCategoria
+            // 
+            this.txtCategoria.Enabled = false;
+            this.txtCategoria.Location = new System.Drawing.Point(77, 36);
+            this.txtCategoria.Name = "txtCategoria";
+            this.txtCategoria.Size = new System.Drawing.Size(145, 20);
+            this.txtCategoria.TabIndex = 46;
+            this.txtCategoria.TextChanged += new System.EventHandler(this.txtCategoria_TextChanged);
+            // 
             // txtDescripcion
             // 
             this.txtDescripcion.Enabled = false;
-            this.txtDescripcion.Location = new System.Drawing.Point(11, 236);
+            this.txtDescripcion.Location = new System.Drawing.Point(29, 132);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(236, 101);
             this.txtDescripcion.TabIndex = 38;
@@ -87,7 +99,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(70, 217);
+            this.label3.Location = new System.Drawing.Point(89, 113);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(109, 16);
             this.label3.TabIndex = 37;
@@ -96,7 +108,7 @@
             // txtMonto
             // 
             this.txtMonto.Enabled = false;
-            this.txtMonto.Location = new System.Drawing.Point(103, 179);
+            this.txtMonto.Location = new System.Drawing.Point(77, 78);
             this.txtMonto.Name = "txtMonto";
             this.txtMonto.Size = new System.Drawing.Size(145, 20);
             this.txtMonto.TabIndex = 36;
@@ -107,7 +119,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(8, 183);
+            this.label2.Location = new System.Drawing.Point(104, 59);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 16);
             this.label2.TabIndex = 35;
@@ -117,32 +129,16 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 143);
+            this.label1.Location = new System.Drawing.Point(104, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 16);
             this.label1.TabIndex = 33;
             this.label1.Text = "CATEGORIA";
             // 
-            // cmbCategoria
-            // 
-            this.cmbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCategoria.Enabled = false;
-            this.cmbCategoria.FormattingEnabled = true;
-            this.cmbCategoria.Items.AddRange(new object[] {
-            "PREMIO",
-            "CONSUMOS",
-            "ADELANTO DE SUELDO\t"});
-            this.cmbCategoria.Location = new System.Drawing.Point(102, 138);
-            this.cmbCategoria.Name = "cmbCategoria";
-            this.cmbCategoria.Size = new System.Drawing.Size(145, 21);
-            this.cmbCategoria.TabIndex = 34;
-            this.cmbCategoria.SelectedIndexChanged += new System.EventHandler(this.cmbCategoria_SelectedIndexChanged);
-            this.cmbCategoria.TextChanged += new System.EventHandler(this.cmbCategoria_TextChanged);
-            // 
             // btnLimpiar
             // 
             this.btnLimpiar.BackColor = System.Drawing.SystemColors.Info;
-            this.btnLimpiar.Location = new System.Drawing.Point(142, 357);
+            this.btnLimpiar.Location = new System.Drawing.Point(168, 426);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(105, 26);
             this.btnLimpiar.TabIndex = 32;
@@ -154,7 +150,7 @@
             // 
             this.btnSelec.BackColor = System.Drawing.Color.YellowGreen;
             this.btnSelec.Enabled = false;
-            this.btnSelec.Location = new System.Drawing.Point(11, 357);
+            this.btnSelec.Location = new System.Drawing.Point(61, 426);
             this.btnSelec.Name = "btnSelec";
             this.btnSelec.Size = new System.Drawing.Size(101, 26);
             this.btnSelec.TabIndex = 31;
@@ -254,7 +250,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(185, 465);
+            this.btnSalir.Location = new System.Drawing.Point(253, 538);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(92, 22);
             this.btnSalir.TabIndex = 45;
@@ -264,7 +260,7 @@
             // 
             // btnAyuda
             // 
-            this.btnAyuda.Location = new System.Drawing.Point(85, 465);
+            this.btnAyuda.Location = new System.Drawing.Point(153, 538);
             this.btnAyuda.Name = "btnAyuda";
             this.btnAyuda.Size = new System.Drawing.Size(92, 22);
             this.btnAyuda.TabIndex = 44;
@@ -272,12 +268,62 @@
             this.btnAyuda.UseVisualStyleBackColor = true;
             this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(56, 79);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(15, 16);
+            this.label4.TabIndex = 47;
+            this.label4.Text = "$";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(8, 138);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(74, 16);
+            this.label5.TabIndex = 48;
+            this.label5.Text = "DETALLE";
+            // 
+            // cmbDetalle
+            // 
+            this.cmbDetalle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDetalle.Enabled = false;
+            this.cmbDetalle.FormattingEnabled = true;
+            this.cmbDetalle.Items.AddRange(new object[] {
+            "SUMAR",
+            "RESTAR"});
+            this.cmbDetalle.Location = new System.Drawing.Point(102, 137);
+            this.cmbDetalle.Name = "cmbDetalle";
+            this.cmbDetalle.Size = new System.Drawing.Size(145, 21);
+            this.cmbDetalle.TabIndex = 49;
+            this.cmbDetalle.SelectedIndexChanged += new System.EventHandler(this.cmbDetalle_SelectedIndexChanged);
+            // 
+            // gpFinal
+            // 
+            this.gpFinal.Controls.Add(this.label1);
+            this.gpFinal.Controls.Add(this.label2);
+            this.gpFinal.Controls.Add(this.txtDescripcion);
+            this.gpFinal.Controls.Add(this.label3);
+            this.gpFinal.Controls.Add(this.label4);
+            this.gpFinal.Controls.Add(this.txtMonto);
+            this.gpFinal.Controls.Add(this.txtCategoria);
+            this.gpFinal.Location = new System.Drawing.Point(11, 164);
+            this.gpFinal.Name = "gpFinal";
+            this.gpFinal.Size = new System.Drawing.Size(304, 256);
+            this.gpFinal.TabIndex = 50;
+            this.gpFinal.TabStop = false;
+            this.gpFinal.Visible = false;
+            // 
             // frmPagoExtra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(292, 498);
+            this.ClientSize = new System.Drawing.Size(355, 572);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.lblTitulo);
@@ -289,6 +335,8 @@
             this.Load += new System.EventHandler(this.frmPagoExtra_Load);
             this.gpEmpleado.ResumeLayout(false);
             this.gpEmpleado.PerformLayout();
+            this.gpFinal.ResumeLayout(false);
+            this.gpFinal.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -306,7 +354,6 @@
         private System.Windows.Forms.ComboBox cmbAnio;
         private System.Windows.Forms.ComboBox cmbMes;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbCategoria;
         private System.Windows.Forms.TextBox txtMonto;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox txtDescripcion;
@@ -314,5 +361,11 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnAyuda;
+        private System.Windows.Forms.TextBox txtCategoria;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbDetalle;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox gpFinal;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

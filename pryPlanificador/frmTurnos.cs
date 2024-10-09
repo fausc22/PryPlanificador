@@ -60,6 +60,7 @@ namespace pryPlanificador
 
             if (btnModificar.Text == "MODIFICAR")
             {
+                
                 objE.ActualizarHorarios(id, turno, horaInicio, horaFin, horaTotal);
             }
             else

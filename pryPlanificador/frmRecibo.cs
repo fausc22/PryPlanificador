@@ -13,9 +13,11 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
 using Planificador.Properties;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using System.Drawing.Imaging;
+using com.itextpdf.text.pdf;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
+using Planificador;
+using static iTextSharp.tool.xml.html.HTML;
 
 
 namespace pryPlanificador
@@ -31,6 +33,8 @@ namespace pryPlanificador
         }
 
         clsConexion objC = new clsConexion();
+        int totalSumaDetalle = 0;
+        int totalRestaDetalle = 0;
 
         private void frmRecibo_Load(object sender, EventArgs e)
         {
@@ -43,24 +47,23 @@ namespace pryPlanificador
             string mes = cmbMes.Text;
             string anio = cmbAnio.Text;
             
-            gpInfo.Visible = true;
-            gpDatos.Visible = true;
+            
             objC.CargarEmpleadoRecibo(empleado, lblId, txtNombre, txtApellido, txtMail, txtFecha, txtAntiguedad, txtHoraNormal, txtDiaVaca, txtJornada, pbFoto);
 
-            objC.CargarDatosRecibo(empleado, anio, mes, txtHsPlanificadas, lblHsPlanificadas, txtHsTrabajadas, lblHsTrabajadas, txtPremios, txtAdelantos, txtConsumos);
+            objC.CargarDatosRecibo(empleado, anio, mes, txtHsPlanificadas, lblHsPlanificadas, txtHsTrabajadas, lblHsTrabajadas, lbExtrasSuma, lbExtrasResta, lblTotalSuma, lblTotalResta);
+            gpInfo.Visible = true;
+            gpDatos.Visible = true;
+            ActualizarTotal(txtTotal);
         }
 
         private void btnPdf_Click(object sender, EventArgs e)
         {
             string empleado = cmbEmpleado.Text;
             string mes = cmbMes.Text;
-            double subtotal1 = Convert.ToDouble(txtHsTrabajadas.Text) + Convert.ToDouble(txtPremios.Text);
-            double subtotal2 = Convert.ToDouble(txtADescontar.Text) + Convert.ToDouble(txtAdelantos.Text);
+            double subtotal1 = Convert.ToDouble(txtHsTrabajadas.Text) + Convert.ToDouble(lblTotalSuma.Text);
+            double subtotal2 = Convert.ToDouble(txtADescontar.Text) + Convert.ToDouble(lblTotalResta.Text);
 
-            int resultado1 = (int)Math.Round(subtotal1);
-            int resultado2 = (int)Math.Round(subtotal2);
-
-            int totalll = resultado1 - resultado2;
+            double totall = subtotal1 - subtotal2; 
 
             SaveFileDialog guardar = new SaveFileDialog();
             string titulo = "RECIBO - " + empleado + " - " + mes + ".pdf";
@@ -79,24 +82,24 @@ namespace pryPlanificador
 
             string filas1 = string.Empty;
             filas1 += "<tr>";
-            filas1 += "<td>HORAS PLANIFICADAS</td>";
+            filas1 += "<td>Horas Planificadas</td>";
             filas1 += "<td>NO SE UTILIZAN PARA EL CALCULO</td>";
             filas1 += "<td>" + lblHsPlanificadas.Text + "</td>";
             filas1 += "<td> $ " + txtHsPlanificadas.Text + "</td>";
             filas1 += "</tr>";
 
             filas1 += "<tr>";
-            filas1 += "<td style=background-color: lightgreen;>HORAS TRABAJADAS</td>";
+            filas1 += "<td style=background-color: lightgreen;>Horas Trabajadas</td>";
             filas1 += "<td>HORAS NETAS TRABAJADAS</td>";
             filas1 += "<td>" + lblHsTrabajadas.Text + "</td>";
             filas1 += "<td> $ " + txtHsTrabajadas.Text + "</td>";
             filas1 += "</tr>";
 
             filas1 += "<tr>";
-            filas1 += "<td >PREMIOS</td>";
+            filas1 += "<td class='nowrap'>Bonificaciones</td>";
             filas1 += "<td>" + descripcionPremio + "</td>";
             filas1 += "<td>-</td>";
-            filas1 += "<td> $ " + txtPremios.Text + "</td>";
+            filas1 += "<td> $ " + lblTotalSuma.Text + "</td>";
             filas1 += "</tr>";
 
             paginahtml_texto = paginahtml_texto.Replace("@FILAS1", filas1);
@@ -107,17 +110,17 @@ namespace pryPlanificador
 
             string filas2 = string.Empty;
             filas2 += "<tr>";
-            filas2 += "<td>CONSUMOS</td>";
+            filas2 += "<td>Consumos</td>";
             filas2 += "<td>CONSUMOS EN EL LOCAL (20% DESCUENTO)</td>";
             filas2 += "<td> $ " + txtADescontar.Text + "</td>";
             filas2 += "</tr>";
 
-            
+
 
             filas2 += "<tr>";
-            filas2 += "<td >ADELANTOS DE SUELDO</td>";
-            filas2 += "<td>"+ descripcionAdelanto +"</td>";
-            filas2 += "<td> $ " + txtAdelantos.Text + "</td>";
+            filas2 += "<td class='nowrap'>Deducciones</td>";
+            filas2 += "<td>" + descripcionAdelanto + "</td>";
+            filas2 += "<td> $ " + lblTotalResta.Text + "</td>";
             filas2 += "</tr>";
 
             paginahtml_texto = paginahtml_texto.Replace("@FILAS2", filas2);
@@ -125,7 +128,7 @@ namespace pryPlanificador
             paginahtml_texto = paginahtml_texto.Replace("@subTotal2", subtotal2Text);
 
 
-            string totalText = "$ " + totalll.ToString();
+            string totalText = "$ " + totall.ToString();
             paginahtml_texto = paginahtml_texto.Replace("@total", totalText);
 
 
@@ -136,13 +139,13 @@ namespace pryPlanificador
 
 
             if (guardar.ShowDialog() == DialogResult.OK)
-            { 
+            {
                 using (FileStream stream = new FileStream(guardar.FileName, FileMode.Create))
                 {
                     Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
 
-                    PdfWriter writer =  PdfWriter.GetInstance(pdfDoc, stream);
-                    
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+
                     pdfDoc.Open();
 
                     pdfDoc.AddHeader("PUNTO SUR", titulo);
@@ -152,8 +155,8 @@ namespace pryPlanificador
                     //string logoPath = "../../LOGOINICIO.jpg";
                     //iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(logoPath);
 
-                    
-                    
+
+
                     // Obtener el recurso de imagen como un objeto Bitmap
                     Bitmap bitmap = Resources.LOGOINICIO;
 
@@ -174,7 +177,7 @@ namespace pryPlanificador
 
 
                     // Agregar logo al final del PDF
-                    
+
                     //iTextSharp.text.Image logoFooter = iTextSharp.text.Image.GetInstance(logoPath);
                     iTextSharp.text.Image logoFooter = iTextSharp.text.Image.GetInstance(bitmap, System.Drawing.Imaging.ImageFormat.Png);
                     logoFooter.ScaleAbsolute(90f, 90f); // Ajusta el tamaño del logo según tus necesidades
@@ -228,30 +231,25 @@ namespace pryPlanificador
 
         private void txtPremios_TextChanged(object sender, EventArgs e)
         {
-            ActualizarTotal();
+            ActualizarTotal(txtTotal);
         }
 
         private void txtPremios_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (txtPremios.Text != "0")
-            {
-                string descripcion = objC.DescripcionPremios(txtNombre.Text, cmbAnio.Text, cmbMes.Text);
-                MessageBox.Show(descripcion);
-            }
+            
             
         }
 
-        private void ActualizarTotal()
+        private void ActualizarTotal(TextBox txtFinal)
         {
-            int horasTrabajadas = ObtenerValor(txtHsTrabajadas);
-            int premios = ObtenerValor(txtPremios);
-            
-            int descuento = ObtenerValor(txtADescontar);
-            int adelantos = ObtenerValor(txtAdelantos);
+            double horasTrabajads = Convert.ToInt32(txtHsTrabajadas.Text);
+            double aDescontar = Convert.ToInt32(txtADescontar.Text);
+            double totalSuma = Convert.ToInt32(lblTotalSuma.Text);
+            double totalResta = Convert.ToInt32(lblTotalResta.Text);
 
-            int total = (horasTrabajadas + premios) - (descuento + adelantos);
+            double TotalFinal = (horasTrabajads + totalSuma) - (aDescontar + totalResta);
 
-            txtTotal.Text = total.ToString();
+            txtTotal.Text = TotalFinal.ToString();
         }
 
         private int ObtenerValor(TextBox textBox)
@@ -271,7 +269,7 @@ namespace pryPlanificador
 
         private void txtHsTrabajadas_TextChanged(object sender, EventArgs e)
         {
-            ActualizarTotal();
+            ActualizarTotal(txtTotal);
         }
 
         private void txtConsumos_TextChanged(object sender, EventArgs e)
@@ -290,17 +288,19 @@ namespace pryPlanificador
 
         private void txtADescontar_TextChanged(object sender, EventArgs e)
         {
-            ActualizarTotal();
+            ActualizarTotal(txtTotal);
         }
 
         private void txtAdelantos_TextChanged(object sender, EventArgs e)
         {
-            ActualizarTotal();
+            ActualizarTotal(txtTotal);
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             gpDatos.Visible = false;
+            lbExtrasSuma.Items.Clear();
+            lbExtrasResta.Items.Clear();
             gpInfo.Visible  = false;
             cmbAnio.SelectedIndex = -1;
             cmbAnio.Enabled = false;
@@ -326,19 +326,93 @@ namespace pryPlanificador
             if (numero < 0)
             {
                 txtTotal.BackColor = Color.Red;
+                txtTotal.ForeColor = Color.Transparent;
             }
             else
             {
                 txtTotal.BackColor = Color.Green;
+                txtTotal.ForeColor = Color.Transparent;
             }
         }
 
         private void txtAdelantos_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (txtAdelantos.Text != "0")
+            
+        }
+
+        private void lbExtrasSuma_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            
+            string categoria = string.Empty;
+            string monto = string.Empty;
+            string descripcion = string.Empty;
+            if (lbExtrasSuma.SelectedItem != null)
             {
-                string descripcion = objC.DescripcionAdelanto(txtNombre.Text, cmbAnio.Text, cmbMes.Text);
-                MessageBox.Show(descripcion);
+                string data = lbExtrasSuma.SelectedItem.ToString();
+
+                // Dividir el string en partes usando el guion como separador
+                string[] partes = data.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (partes.Length >= 3)
+                {
+                    categoria = partes[0].Trim();
+                    monto = partes[1].Trim().Replace("$", "");
+                    descripcion = partes[2].Trim();
+
+                    // Hacer algo con las partes divididas
+                }
+
+
+                AbrirFormAuxiliar(categoria, monto, descripcion);
+            }
+        }
+
+        private void AbrirFormAuxiliar(string categoria, string monto, string descripcion)
+        {
+            frmAuxRecibo formAuxiliar = new frmAuxRecibo(categoria, monto, descripcion);
+            formAuxiliar.FormClosed += frmAuxRecibo_FormClosed;
+            formAuxiliar.Show();
+        }
+
+        private void frmAuxRecibo_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            lbExtrasSuma.Items.Clear();
+            lbExtrasResta.Items.Clear();
+            string empleado = cmbEmpleado.Text;
+            string mes = cmbMes.Text;
+            string anio = cmbAnio.Text;
+            objC.CargarDatosRecibo(empleado, anio, mes, txtHsPlanificadas, lblHsPlanificadas, txtHsTrabajadas, lblHsTrabajadas, lbExtrasSuma, lbExtrasResta, lblTotalSuma, lblTotalResta);
+            ActualizarTotal(txtTotal);
+        }
+
+        private void lbExtrasSuma_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbExtrasResta_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string categoria = string.Empty;
+            string monto = string.Empty;
+            string descripcion = string.Empty;
+            if (lbExtrasResta.SelectedItem != null)
+            {
+                string data = lbExtrasResta.SelectedItem.ToString();
+
+                // Dividir el string en partes usando el guion como separador
+                string[] partes = data.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (partes.Length >= 3)
+                {
+                    categoria = partes[0].Trim();
+                    monto = partes[1].Trim().Replace("$", "");
+                    descripcion = partes[2].Trim();
+
+                    // Hacer algo con las partes divididas
+                }
+
+
+                AbrirFormAuxiliar(categoria, monto, descripcion);
             }
         }
     }

@@ -77,7 +77,7 @@
             this.dgvTotales.ReadOnly = true;
             this.dgvTotales.RowHeadersWidth = 51;
             this.dgvTotales.RowTemplate.Height = 24;
-            this.dgvTotales.Size = new System.Drawing.Size(976, 50);
+            this.dgvTotales.Size = new System.Drawing.Size(976, 80);
             this.dgvTotales.TabIndex = 27;
             this.dgvTotales.Visible = false;
             this.dgvTotales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTotales_CellContentClick);
@@ -189,7 +189,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(1165, 635);
+            this.btnSalir.Location = new System.Drawing.Point(1162, 665);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(92, 22);
             this.btnSalir.TabIndex = 42;
@@ -199,7 +199,7 @@
             // 
             // btnAyuda
             // 
-            this.btnAyuda.Location = new System.Drawing.Point(1065, 635);
+            this.btnAyuda.Location = new System.Drawing.Point(1062, 665);
             this.btnAyuda.Name = "btnAyuda";
             this.btnAyuda.Size = new System.Drawing.Size(92, 22);
             this.btnAyuda.TabIndex = 41;
@@ -212,7 +212,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1267, 660);
+            this.ClientSize = new System.Drawing.Size(1267, 699);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.lblTitulo);

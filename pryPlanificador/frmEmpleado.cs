@@ -46,6 +46,7 @@ namespace pryPlanificador
 
 
         clsConexion objC = new clsConexion();
+        clsPlaneamiento objP = new clsPlaneamiento();
         public byte[] fotoperfil;
         
 
@@ -83,7 +84,18 @@ namespace pryPlanificador
 
         private void button1_Click(object sender, EventArgs e)
         {
-            huella = ImageToByteArray(pbHuella.Image);
+            if (pbHuella.Image == null)
+            {
+                // Asigna un valor predeterminado cuando no hay imagen
+                huella = new byte[0]; // Arreglo de bytes vacío
+                MessageBox.Show("No hay ninguna imagen en el PictureBox.");
+            }
+            else
+            {
+                huella = ImageToByteArray(pbHuella.Image);
+            }
+
+            
             fotoperfil = ImageToByteArray(pbFoto.Image);
             int id = Convert.ToInt32(lblId.Text);
             string nombre = txtNombre.Text;
@@ -106,6 +118,8 @@ namespace pryPlanificador
             if (Diferencia != 0)
             {
                 objC.ActualizarMesTrabajado(nombre, Diferencia);
+                objP.ActualizarMesTrabajadoPlanificador(nombre, Diferencia);
+                
             }
             
         }

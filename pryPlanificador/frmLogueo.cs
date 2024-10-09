@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Planificador;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -112,6 +113,39 @@ namespace pryPlanificador
             btnFiltrar.Enabled = false;
             cmbEmpleado.SelectedIndex = -1;
             btnFiltrarFecha.Enabled = false;
+        }
+
+        private void dgvLogueo_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                // Obtener la fila en la que se hizo doble clic
+                DataGridViewRow row = dgvLogueo.Rows[e.RowIndex];
+
+                // Acceder a los datos de las celdas en la fila
+                int id = Convert.ToInt32(row.Cells["idRegistro"].Value.ToString());
+                string fecharda = row.Cells["Fecha"].Value.ToString();
+                string[] dateParts = fecharda.Split(' ');
+                string fecha = dateParts[0]; // Esto te dará "02/06/2024"
+                string nombre = row.Cells["Nombre"].Value.ToString(); 
+                string accion = row.Cells["Entrada"].Value.ToString(); 
+                string horaGrilla = row.Cells["Salida"].Value.ToString();
+                TimeSpan hora = TimeSpan.Parse(horaGrilla);
+
+                frmAuxLogueo frm = new frmAuxLogueo(id, fecha, nombre, accion, hora);
+                frm.FormClosed += new FormClosedEventHandler(frm_FormClosed);
+                frm.ShowDialog();
+
+
+
+            }
+        }
+
+        private void frm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            string anio = cmbAnio.Text;
+            string mes = cmbMes.Text;
+            objC.CargarGrillaLogueo(dgvLogueo, anio, mes);
         }
     }
 }

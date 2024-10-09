@@ -90,6 +90,7 @@ namespace Planificador
             {
                 string nombre = txtNombre.Text;
                 string fecha = txtFecha.Text;
+                string nombreMesActual = DateTime.Now.ToString("MMMM");
                 string hora = txtHora.Text;
                 TimeSpan horaCargar = TimeSpan.Parse(hora);
                 // Obtener el nombre del mes actual en formato de cadena
@@ -98,6 +99,12 @@ namespace Planificador
                 string mes = fechaB.ToString("MMMM", new CultureInfo("es-ES"));
                 if (optIngreso.Checked == true)
                 {
+                    int accionRepetida = objC.ExisteIngreso(nombre, fecha, nombreMesActual, anio);
+                    if (accionRepetida == 1)
+                    {
+                        MessageBox.Show("Ya existe un registro de ingreso anteriormente. Verifique la opción correctamente.", "ATENCION", MessageBoxButtons.OK);
+                        return;
+                    }
                     accion = "INGRESO";
                 }
                 else
@@ -113,8 +120,9 @@ namespace Planificador
 
                 if (accion == "EGRESO")
                 {
-                    TimeSpan horaIngreso = objC.HoraIngreso(nombre, anio);
-                    string fechaIngreso = objC.fechaIngreso(nombre, anio);
+                    TimeSpan horaIngreso = objC.ObtenerHoraIngresoUpdate(fecha, anio, nombre);
+
+                    string fechaIngreso = fecha;
                     TimeSpan horaEgreso = TimeSpan.Parse(hora);
                     cerrar = objC.NuevoIngresoEgreso(nombre, fechaIngreso, horaIngreso, horaEgreso, mes, anio);
 

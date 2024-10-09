@@ -33,7 +33,7 @@ namespace Planificador
 
         private void button2_Click(object sender, EventArgs e)
         {
-            objC.AcomodarAcumulado();
+            objC.NuevoPagoHorasExtras("aa", "2024", "JULIO", 21414, "23/07/2024", 30);
         }
     }
 }

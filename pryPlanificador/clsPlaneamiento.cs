@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Globalization;
+using System.Linq.Expressions;
 
 namespace pryPlanificador
 {
@@ -19,7 +20,7 @@ namespace pryPlanificador
         static string servidor = "localhost";
         static string bd = "planificador";
         static string user = "root";
-        static string pw = "2511";
+        static string pw = "251199";
         static string port = "3306";
 
 
@@ -186,9 +187,9 @@ namespace pryPlanificador
                         grilla.Columns.Add(comboBoxColumn);
 
                         // Cambiar el color de fondo de las columnas en el encabezado
-                        if (empleado.Equals("TITI", StringComparison.OrdinalIgnoreCase))
+                        if (empleado.Equals("EMANUEL", StringComparison.OrdinalIgnoreCase))
                         {
-                            comboBoxColumn.HeaderCell.Style.BackColor = Color.DarkViolet; // Violeta
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Red; // Violeta
                         }
                         else if (empleado.Equals("PRISCILA", StringComparison.OrdinalIgnoreCase))
                         {
@@ -196,23 +197,31 @@ namespace pryPlanificador
                         }
                         else if (empleado.Equals("ALEJANDRO", StringComparison.OrdinalIgnoreCase))
                         {
-                            comboBoxColumn.HeaderCell.Style.BackColor = Color.DarkBlue;
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Turquoise;
                         }
                         else if (empleado.Equals("LAUTARO", StringComparison.OrdinalIgnoreCase))
                         {
-                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Orange;
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Sienna;
                         }
                         else if (empleado.Equals("CANDELARIA", StringComparison.OrdinalIgnoreCase))
                         {
-                            comboBoxColumn.HeaderCell.Style.BackColor = Color.LightGreen; // Lila
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Violet; // Lila
                         }
-                        else if (empleado.Equals("MICAELA", StringComparison.OrdinalIgnoreCase))
+                        else if (empleado.Equals("GABRIEL", StringComparison.OrdinalIgnoreCase))
                         {
-                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Turquoise;
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Yellow;
+                        }
+                        else if (empleado.Equals("SANTIAGO", StringComparison.OrdinalIgnoreCase))
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Blue;
                         }
                         else if (empleado.Equals("CATALINA", StringComparison.OrdinalIgnoreCase))
                         {
-                            comboBoxColumn.HeaderCell.Style.BackColor = Color.Violet;
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.LightBlue;
+                        }
+                        else
+                        {
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.OrangeRed;
                         }
                     }
 
@@ -658,7 +667,7 @@ namespace pryPlanificador
                 {
                     conn.Open();
 
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM horarios", conn))
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM horarios ORDER BY horaInicio ASC", conn))
                     {
 
 
@@ -942,6 +951,133 @@ namespace pryPlanificador
 
             }
 
+        }
+
+
+        public void ActualizarMesTrabajadoPlanificador(string nombre, int diferencia)
+        {
+            int AcumuladoFaltante = 0;
+            int AcumuladoAnterior = 0;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(cadenaConexion))
+                {
+                    con.Open();
+
+                    using (MySqlTransaction trans = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            DateTime fechaActual = DateTime.Now;
+
+                            DateTime primerDiaDelMes = new DateTime(fechaActual.Year, fechaActual.Month, 1);
+                            string fechaInicioMes = primerDiaDelMes.ToString("dd/MM/yyyy");
+
+
+                            List<DateTime> fechas = new List<DateTime>();
+
+                            for (DateTime fecha = primerDiaDelMes; fecha <= fechaActual; fecha = fecha.AddDays(1))
+                            {
+                                fechas.Add(fecha);
+                            }
+
+
+
+
+                            foreach (DateTime fecha in fechas)
+                                {
+
+                                    using (MySqlCommand cmd2 = new MySqlCommand("SELECT horas, acumulado FROM turnos_2024 WHERE nombre_empleado = @nombre AND fecha = @fecha", con))
+                                    {
+                                        cmd2.Parameters.AddWithValue("@nombre", nombre);
+                                        cmd2.Parameters.AddWithValue("@fecha", fecha.ToString("dd/MM/yyyy"));
+
+                                        using (MySqlDataReader rdr = cmd2.ExecuteReader())
+                                        {
+                                            if (rdr.Read())
+                                            {
+                                                int horasTrabajadas = (int)rdr["horas"];
+                                                
+                                                
+                                                AcumuladoAnterior = Convert.ToInt32(rdr["acumulado"]);
+                                            AcumuladoFaltante = diferencia * horasTrabajadas;
+                                            }
+                                        }
+                                    }
+
+                                
+                                int AcumuladoBD = AcumuladoAnterior + AcumuladoFaltante;
+                                
+
+
+                                using (MySqlCommand updateCmd = new MySqlCommand("UPDATE turnos_2024 SET acumulado = @acumulado WHERE nombre_empleado = @nombre AND fecha = @fecha", con, trans))
+                                {
+                                        updateCmd.Parameters.AddWithValue("@nombre", nombre);
+                                        updateCmd.Parameters.AddWithValue("@acumulado", AcumuladoBD);
+                                        updateCmd.Parameters.AddWithValue("@fecha", fecha.ToString("dd/MM/yyyy"));
+
+                                        updateCmd.ExecuteNonQuery();
+                                }
+
+                                AcumuladoFaltante = 0;
+                                AcumuladoAnterior = 0;
+
+
+                                using (MySqlCommand cmd3 = new MySqlCommand("SELECT horas, acumulado FROM totales_2024 WHERE nombre_empleado = @nombre AND mes = @fecha", con))
+                                {
+                                    int fechaMesNumero = ObtenerNumeroMes(fecha.ToString("MMMM"));
+                                    cmd3.Parameters.AddWithValue("@nombre", nombre);
+                                    cmd3.Parameters.AddWithValue("@fecha", fechaMesNumero);
+
+                                    using (MySqlDataReader rdr = cmd3.ExecuteReader())
+                                    {
+                                        if (rdr.Read())
+                                        {
+                                            int horasTrabajadas = (int)rdr["horas"];
+
+
+                                            AcumuladoAnterior = Convert.ToInt32(rdr["acumulado"]);
+                                            AcumuladoFaltante = diferencia * horasTrabajadas;
+                                        }
+                                    }
+                                }
+
+                                int AcumuladoBD2 = AcumuladoAnterior + AcumuladoFaltante;
+
+
+                                using (MySqlCommand updateCmd2 = new MySqlCommand("UPDATE totales_2024 SET acumulado = @acumulado WHERE nombre_empleado = @nombre AND mes = @fecha", con, trans))
+                                {
+                                    int fechaMesNumero = ObtenerNumeroMes(fecha.ToString("MMMM"));
+                                    updateCmd2.Parameters.AddWithValue("@nombre", nombre);
+                                    updateCmd2.Parameters.AddWithValue("@acumulado", AcumuladoBD2);
+                                    updateCmd2.Parameters.AddWithValue("@fecha", fechaMesNumero);
+
+                                    updateCmd2.ExecuteNonQuery();
+                                }
+                                AcumuladoFaltante = 0;
+                                AcumuladoAnterior = 0;
+                            }
+                            
+
+                            trans.Commit();
+                            MessageBox.Show("SE ACTUALIZARON LOS ACUMULADOS DEL EMPLEADO.");
+                        }
+                        catch (Exception ex)
+                        {
+                            trans.Rollback();
+                            // Loguea el error o maneja de otra manera apropiada
+                            MessageBox.Show("Error al actualizar el mes trabajado: " + ex.Message);
+                        }
+
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                // Loguea el error o maneja de otra manera apropiada
+                MessageBox.Show("Error al conectar con la base de datos: " + ex.Message);
+            }
         }
 
 

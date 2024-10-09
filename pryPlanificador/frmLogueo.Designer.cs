@@ -46,13 +46,13 @@
             this.label7 = new System.Windows.Forms.Label();
             this.cmbEmpleado = new System.Windows.Forms.ComboBox();
             this.gpFiltro = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.btnFiltrarFecha = new System.Windows.Forms.Button();
             this.btnFiltrar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnAyuda = new System.Windows.Forms.Button();
-            this.btnFiltrarFecha = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogueo)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.gpFiltro.SuspendLayout();
@@ -142,6 +142,7 @@
             this.dgvLogueo.Size = new System.Drawing.Size(488, 541);
             this.dgvLogueo.TabIndex = 29;
             this.dgvLogueo.Visible = false;
+            this.dgvLogueo.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvLogueo_CellMouseDoubleClick);
             // 
             // idRegistro
             // 
@@ -250,6 +251,37 @@
             this.gpFiltro.Text = "FILTRO";
             this.gpFiltro.Visible = false;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.IndianRed;
+            this.button1.Location = new System.Drawing.Point(37, 207);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(152, 26);
+            this.button1.TabIndex = 37;
+            this.button1.Text = "LIMPIAR FILTROS";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(32, 129);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(174, 20);
+            this.dateTimePicker1.TabIndex = 36;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // btnFiltrarFecha
+            // 
+            this.btnFiltrarFecha.BackColor = System.Drawing.SystemColors.Info;
+            this.btnFiltrarFecha.Enabled = false;
+            this.btnFiltrarFecha.Location = new System.Drawing.Point(40, 155);
+            this.btnFiltrarFecha.Name = "btnFiltrarFecha";
+            this.btnFiltrarFecha.Size = new System.Drawing.Size(152, 26);
+            this.btnFiltrarFecha.TabIndex = 34;
+            this.btnFiltrarFecha.Text = "FILTRAR POR FECHA";
+            this.btnFiltrarFecha.UseVisualStyleBackColor = false;
+            this.btnFiltrarFecha.Click += new System.EventHandler(this.btnFiltrarFecha_Click);
+            // 
             // btnFiltrar
             // 
             this.btnFiltrar.BackColor = System.Drawing.SystemColors.Info;
@@ -261,6 +293,16 @@
             this.btnFiltrar.Text = "FILTRAR POR EMPLEADO";
             this.btnFiltrar.UseVisualStyleBackColor = false;
             this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(90, 110);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 16);
+            this.label1.TabIndex = 31;
+            this.label1.Text = "FECHA";
             // 
             // btnSalir
             // 
@@ -281,47 +323,6 @@
             this.btnAyuda.Text = "Ayuda";
             this.btnAyuda.UseVisualStyleBackColor = true;
             this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
-            // 
-            // btnFiltrarFecha
-            // 
-            this.btnFiltrarFecha.BackColor = System.Drawing.SystemColors.Info;
-            this.btnFiltrarFecha.Enabled = false;
-            this.btnFiltrarFecha.Location = new System.Drawing.Point(40, 155);
-            this.btnFiltrarFecha.Name = "btnFiltrarFecha";
-            this.btnFiltrarFecha.Size = new System.Drawing.Size(152, 26);
-            this.btnFiltrarFecha.TabIndex = 34;
-            this.btnFiltrarFecha.Text = "FILTRAR POR FECHA";
-            this.btnFiltrarFecha.UseVisualStyleBackColor = false;
-            this.btnFiltrarFecha.Click += new System.EventHandler(this.btnFiltrarFecha_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(90, 110);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 16);
-            this.label1.TabIndex = 31;
-            this.label1.Text = "FECHA";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(32, 129);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(174, 20);
-            this.dateTimePicker1.TabIndex = 36;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.IndianRed;
-            this.button1.Location = new System.Drawing.Point(37, 207);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(152, 26);
-            this.button1.TabIndex = 37;
-            this.button1.Text = "LIMPIAR FILTROS";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmLogueo
             // 
