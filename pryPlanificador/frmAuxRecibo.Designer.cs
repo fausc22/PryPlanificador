@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAuxRecibo));
             this.gpFinal = new System.Windows.Forms.GroupBox();
+            this.btnSelec = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.RichTextBox();
@@ -37,13 +38,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtMonto = new System.Windows.Forms.TextBox();
             this.txtCategoria = new System.Windows.Forms.TextBox();
-            this.btnSelec = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.gpFinal.SuspendLayout();
             this.SuspendLayout();
             // 
             // gpFinal
             // 
+            this.gpFinal.Controls.Add(this.button1);
             this.gpFinal.Controls.Add(this.btnSelec);
             this.gpFinal.Controls.Add(this.label1);
             this.gpFinal.Controls.Add(this.label2);
@@ -54,9 +56,20 @@
             this.gpFinal.Controls.Add(this.txtCategoria);
             this.gpFinal.Location = new System.Drawing.Point(12, 41);
             this.gpFinal.Name = "gpFinal";
-            this.gpFinal.Size = new System.Drawing.Size(304, 307);
+            this.gpFinal.Size = new System.Drawing.Size(304, 366);
             this.gpFinal.TabIndex = 51;
             this.gpFinal.TabStop = false;
+            // 
+            // btnSelec
+            // 
+            this.btnSelec.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnSelec.Location = new System.Drawing.Point(92, 239);
+            this.btnSelec.Name = "btnSelec";
+            this.btnSelec.Size = new System.Drawing.Size(120, 45);
+            this.btnSelec.TabIndex = 48;
+            this.btnSelec.Text = "MODIFICAR EXTRA";
+            this.btnSelec.UseVisualStyleBackColor = false;
+            this.btnSelec.Click += new System.EventHandler(this.btnSelec_Click);
             // 
             // label1
             // 
@@ -120,17 +133,6 @@
             this.txtCategoria.Size = new System.Drawing.Size(145, 20);
             this.txtCategoria.TabIndex = 46;
             // 
-            // btnSelec
-            // 
-            this.btnSelec.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnSelec.Location = new System.Drawing.Point(92, 239);
-            this.btnSelec.Name = "btnSelec";
-            this.btnSelec.Size = new System.Drawing.Size(120, 45);
-            this.btnSelec.TabIndex = 48;
-            this.btnSelec.Text = "MODIFICAR EXTRA";
-            this.btnSelec.UseVisualStyleBackColor = false;
-            this.btnSelec.Click += new System.EventHandler(this.btnSelec_Click);
-            // 
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
@@ -141,12 +143,23 @@
             this.lblTitulo.TabIndex = 52;
             this.lblTitulo.Text = "EDITAR PAGO EXTRA";
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Red;
+            this.button1.Location = new System.Drawing.Point(92, 290);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(120, 45);
+            this.button1.TabIndex = 49;
+            this.button1.Text = "ELIMINAR EXTRA";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmAuxRecibo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(329, 360);
+            this.ClientSize = new System.Drawing.Size(329, 419);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.gpFinal);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -173,5 +186,6 @@
         private System.Windows.Forms.TextBox txtCategoria;
         private System.Windows.Forms.Button btnSelec;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Button button1;
     }
 }

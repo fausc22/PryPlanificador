@@ -63,7 +63,7 @@ namespace pryPlanificador
 
 
 
-        private static string ObtenerNombreDiaEnEspanol(DayOfWeek dia)
+        public static string ObtenerNombreDiaEnEspanol(DayOfWeek dia)
         {
             switch (dia)
             {
@@ -1079,6 +1079,73 @@ namespace pryPlanificador
                 MessageBox.Show("Error al conectar con la base de datos: " + ex.Message);
             }
         }
+
+        public void GenerarTurnosYTotales(int year)
+        {
+            try
+            {
+                // Conexión a la base de datos
+                using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
+                {
+                    conn.Open();
+
+                    // Obtener todos los empleados
+                    List<string> empleados = new List<string>();
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT nombre FROM empleados", conn))
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            empleados.Add(reader.GetString("nombre"));
+                        }
+                    }
+
+                    // Insertar registros en turnos y totales para cada empleado
+                    foreach (var empleado in empleados)
+                    {
+                        for (int mes = 1; mes <= 12; mes++)
+                        {
+                            // Insertar totales para cada mes
+                            using (MySqlCommand cmdTotales = new MySqlCommand(
+                                $"INSERT INTO totales_2025 (mes, nombre_empleado, horas, acumulado) VALUES (@mes, @nombre, @horas, @acumulado)", conn))
+                            {
+                                cmdTotales.Parameters.AddWithValue("@mes", mes);
+                                cmdTotales.Parameters.AddWithValue("@nombre", empleado);
+                                cmdTotales.Parameters.AddWithValue("@horas", 0);
+                                cmdTotales.Parameters.AddWithValue("@acumulado", 0);
+                                cmdTotales.ExecuteNonQuery();
+                            }
+
+                            // Insertar turnos para cada día del mes
+                            int diasEnMes = DateTime.DaysInMonth(year, mes);
+                            for (int dia = 1; dia <= diasEnMes; dia++)
+                            {
+                                string fecha = new DateTime(year, mes, dia).ToString("dd/MM/yyyy");
+                                using (MySqlCommand cmdTurnos = new MySqlCommand(
+                                    $"INSERT INTO turnos_2025 (fecha, nombre_empleado, turno, horas, acumulado) VALUES (@fecha, @nombre, @turno, @horas, @acumulado)", conn))
+                                {
+                                    cmdTurnos.Parameters.AddWithValue("@fecha", fecha);
+                                    cmdTurnos.Parameters.AddWithValue("@nombre", empleado);
+                                    cmdTurnos.Parameters.AddWithValue("@turno", "Libre");
+                                    cmdTurnos.Parameters.AddWithValue("@horas", 0);
+                                    cmdTurnos.Parameters.AddWithValue("@acumulado", 0);
+                                    cmdTurnos.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                    }
+
+                    conn.Close();
+                }
+
+                MessageBox.Show("Turnos y totales generados con éxito para el año " + year, "Éxito");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar turnos y totales: " + ex.Message, "Error");
+            }
+        }
+
 
 
     }

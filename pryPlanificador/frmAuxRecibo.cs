@@ -56,5 +56,12 @@ namespace Planificador
             objC.ModificarPagoExtra(categoria, monto, descripcion, categoria2, monto2, descripcion2);
             this.Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            clsConexion cls = new clsConexion();
+            cls.EliminarPagoExtra(categoria2, monto2, descripcion2);
+            this.Close();
+        }
     }
 }

@@ -88,6 +88,7 @@
             this.pbFoto = new System.Windows.Forms.PictureBox();
             this.btnAyuda = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.gpDatos.SuspendLayout();
             this.gpEmpleado.SuspendLayout();
             this.gpInfo.SuspendLayout();
@@ -204,6 +205,7 @@
             // gpDatos
             // 
             this.gpDatos.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gpDatos.Controls.Add(this.button1);
             this.gpDatos.Controls.Add(this.label23);
             this.gpDatos.Controls.Add(this.label22);
             this.gpDatos.Controls.Add(this.lblTotalResta);
@@ -296,6 +298,7 @@
             this.lbExtrasResta.Name = "lbExtrasResta";
             this.lbExtrasResta.Size = new System.Drawing.Size(203, 147);
             this.lbExtrasResta.TabIndex = 72;
+            this.lbExtrasResta.SelectedIndexChanged += new System.EventHandler(this.lbExtrasResta_SelectedIndexChanged);
             this.lbExtrasResta.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbExtrasResta_MouseDoubleClick);
             // 
             // label20
@@ -331,12 +334,13 @@
             // 
             // btnPdf
             // 
-            this.btnPdf.Location = new System.Drawing.Point(104, 458);
+            this.btnPdf.BackColor = System.Drawing.Color.Yellow;
+            this.btnPdf.Location = new System.Drawing.Point(210, 458);
             this.btnPdf.Name = "btnPdf";
             this.btnPdf.Size = new System.Drawing.Size(207, 49);
             this.btnPdf.TabIndex = 62;
             this.btnPdf.Text = "CREAR PDF";
-            this.btnPdf.UseVisualStyleBackColor = true;
+            this.btnPdf.UseVisualStyleBackColor = false;
             this.btnPdf.Click += new System.EventHandler(this.btnPdf_Click);
             // 
             // label25
@@ -392,14 +396,15 @@
             // txtHsTrabajadas
             // 
             this.txtHsTrabajadas.BackColor = System.Drawing.Color.Turquoise;
-            this.txtHsTrabajadas.Enabled = false;
             this.txtHsTrabajadas.Location = new System.Drawing.Point(239, 44);
             this.txtHsTrabajadas.Name = "txtHsTrabajadas";
+            this.txtHsTrabajadas.ReadOnly = true;
             this.txtHsTrabajadas.Size = new System.Drawing.Size(108, 20);
             this.txtHsTrabajadas.TabIndex = 60;
             this.txtHsTrabajadas.Text = "0";
             this.txtHsTrabajadas.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtHsTrabajadas.TextChanged += new System.EventHandler(this.txtHsTrabajadas_TextChanged);
+            this.txtHsTrabajadas.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtHsTrabajadas_MouseDoubleClick);
             // 
             // lblHsPlanificadas
             // 
@@ -414,13 +419,15 @@
             // txtHsPlanificadas
             // 
             this.txtHsPlanificadas.BackColor = System.Drawing.Color.Turquoise;
-            this.txtHsPlanificadas.Enabled = false;
             this.txtHsPlanificadas.Location = new System.Drawing.Point(239, 19);
             this.txtHsPlanificadas.Name = "txtHsPlanificadas";
+            this.txtHsPlanificadas.ReadOnly = true;
             this.txtHsPlanificadas.Size = new System.Drawing.Size(108, 20);
             this.txtHsPlanificadas.TabIndex = 58;
             this.txtHsPlanificadas.Text = "0";
             this.txtHsPlanificadas.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtHsPlanificadas.TextChanged += new System.EventHandler(this.txtHsPlanificadas_TextChanged);
+            this.txtHsPlanificadas.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtHsPlanificadas_MouseDoubleClick);
             // 
             // label9
             // 
@@ -754,6 +761,17 @@
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.LawnGreen;
+            this.button1.Location = new System.Drawing.Point(2, 458);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(207, 49);
+            this.button1.TabIndex = 77;
+            this.button1.Text = "GUARDAR CAMBIOS";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmRecibo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -843,5 +861,6 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label lblTotalResta;
         private System.Windows.Forms.Label lblTotalSuma;
+        private System.Windows.Forms.Button button1;
     }
 }

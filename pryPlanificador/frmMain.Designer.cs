@@ -39,9 +39,8 @@
             this.controlHorasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.reciboToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pagosExtraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.facturacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vacacionesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.registroManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vacacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eDICIONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colaboradoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoEmpleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,10 +48,8 @@
             this.feriadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.turnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eSTADISTICASToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cashFlowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.graficoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.graficoEficienciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.graficoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.facturacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.productosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,27 +73,27 @@
             this.horasToolStripMenuItem,
             this.cuantificadorToolStripMenuItem});
             this.pLANEAMIENTOToolStripMenuItem.Name = "pLANEAMIENTOToolStripMenuItem";
-            this.pLANEAMIENTOToolStripMenuItem.Size = new System.Drawing.Size(106, 20);
+            this.pLANEAMIENTOToolStripMenuItem.Size = new System.Drawing.Size(107, 20);
             this.pLANEAMIENTOToolStripMenuItem.Text = "PLANEAMIENTO";
             // 
             // planificadorToolStripMenuItem
             // 
             this.planificadorToolStripMenuItem.Name = "planificadorToolStripMenuItem";
-            this.planificadorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.planificadorToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.planificadorToolStripMenuItem.Text = "Planificador";
             this.planificadorToolStripMenuItem.Click += new System.EventHandler(this.planificadorToolStripMenuItem_Click);
             // 
             // horasToolStripMenuItem
             // 
             this.horasToolStripMenuItem.Name = "horasToolStripMenuItem";
-            this.horasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.horasToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.horasToolStripMenuItem.Text = "Horas";
             this.horasToolStripMenuItem.Click += new System.EventHandler(this.horasToolStripMenuItem_Click);
             // 
             // cuantificadorToolStripMenuItem
             // 
             this.cuantificadorToolStripMenuItem.Name = "cuantificadorToolStripMenuItem";
-            this.cuantificadorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cuantificadorToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.cuantificadorToolStripMenuItem.Text = "Cuantificador";
             this.cuantificadorToolStripMenuItem.Click += new System.EventHandler(this.cuantificadorToolStripMenuItem_Click);
             // 
@@ -107,9 +104,8 @@
             this.controlHorasToolStripMenuItem1,
             this.reciboToolStripMenuItem1,
             this.pagosExtraToolStripMenuItem,
-            this.facturacionToolStripMenuItem,
-            this.vacacionesToolStripMenuItem1,
-            this.registroManualToolStripMenuItem});
+            this.registroManualToolStripMenuItem,
+            this.vacacionesToolStripMenuItem});
             this.eMPLEADOSToolStripMenuItem.Name = "eMPLEADOSToolStripMenuItem";
             this.eMPLEADOSToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.eMPLEADOSToolStripMenuItem.Text = "EMPLEADOS";
@@ -142,25 +138,19 @@
             this.pagosExtraToolStripMenuItem.Text = "Pagos Extra";
             this.pagosExtraToolStripMenuItem.Click += new System.EventHandler(this.pagosExtraToolStripMenuItem_Click);
             // 
-            // facturacionToolStripMenuItem
-            // 
-            this.facturacionToolStripMenuItem.Name = "facturacionToolStripMenuItem";
-            this.facturacionToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.facturacionToolStripMenuItem.Text = "Facturacion";
-            // 
-            // vacacionesToolStripMenuItem1
-            // 
-            this.vacacionesToolStripMenuItem1.Name = "vacacionesToolStripMenuItem1";
-            this.vacacionesToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
-            this.vacacionesToolStripMenuItem1.Text = "Vacaciones";
-            this.vacacionesToolStripMenuItem1.Click += new System.EventHandler(this.vacacionesToolStripMenuItem1_Click);
-            // 
             // registroManualToolStripMenuItem
             // 
             this.registroManualToolStripMenuItem.Name = "registroManualToolStripMenuItem";
             this.registroManualToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.registroManualToolStripMenuItem.Text = "Registro Manual";
             this.registroManualToolStripMenuItem.Click += new System.EventHandler(this.registroManualToolStripMenuItem_Click);
+            // 
+            // vacacionesToolStripMenuItem
+            // 
+            this.vacacionesToolStripMenuItem.Name = "vacacionesToolStripMenuItem";
+            this.vacacionesToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.vacacionesToolStripMenuItem.Text = "Vacaciones";
+            this.vacacionesToolStripMenuItem.Click += new System.EventHandler(this.vacacionesToolStripMenuItem_Click);
             // 
             // eDICIONToolStripMenuItem
             // 
@@ -213,40 +203,25 @@
             // eSTADISTICASToolStripMenuItem
             // 
             this.eSTADISTICASToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cashFlowToolStripMenuItem,
-            this.graficoToolStripMenuItem});
+            this.facturacionToolStripMenuItem,
+            this.productosToolStripMenuItem});
             this.eSTADISTICASToolStripMenuItem.Name = "eSTADISTICASToolStripMenuItem";
-            this.eSTADISTICASToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
+            this.eSTADISTICASToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.eSTADISTICASToolStripMenuItem.Text = "ESTADISTICAS";
             // 
-            // cashFlowToolStripMenuItem
+            // facturacionToolStripMenuItem
             // 
-            this.cashFlowToolStripMenuItem.Name = "cashFlowToolStripMenuItem";
-            this.cashFlowToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            this.cashFlowToolStripMenuItem.Text = "Cash Flow";
+            this.facturacionToolStripMenuItem.Name = "facturacionToolStripMenuItem";
+            this.facturacionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.facturacionToolStripMenuItem.Text = "Facturacion";
+            this.facturacionToolStripMenuItem.Click += new System.EventHandler(this.facturacionToolStripMenuItem_Click);
             // 
-            // graficoToolStripMenuItem
+            // productosToolStripMenuItem
             // 
-            this.graficoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.graficoEficienciaToolStripMenuItem,
-            this.graficoToolStripMenuItem1});
-            this.graficoToolStripMenuItem.Name = "graficoToolStripMenuItem";
-            this.graficoToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            this.graficoToolStripMenuItem.Text = "Grafico";
-            this.graficoToolStripMenuItem.Click += new System.EventHandler(this.graficoToolStripMenuItem_Click);
-            // 
-            // graficoEficienciaToolStripMenuItem
-            // 
-            this.graficoEficienciaToolStripMenuItem.Name = "graficoEficienciaToolStripMenuItem";
-            this.graficoEficienciaToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.graficoEficienciaToolStripMenuItem.Text = "Grafico Eficiencia";
-            // 
-            // graficoToolStripMenuItem1
-            // 
-            this.graficoToolStripMenuItem1.Name = "graficoToolStripMenuItem1";
-            this.graficoToolStripMenuItem1.Size = new System.Drawing.Size(177, 22);
-            this.graficoToolStripMenuItem1.Text = "Grafico Facturacion";
-            this.graficoToolStripMenuItem1.Click += new System.EventHandler(this.graficoToolStripMenuItem1_Click);
+            this.productosToolStripMenuItem.Name = "productosToolStripMenuItem";
+            this.productosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.productosToolStripMenuItem.Text = "Productos";
+            this.productosToolStripMenuItem.Click += new System.EventHandler(this.productosToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -277,10 +252,6 @@
         private System.Windows.Forms.ToolStripMenuItem horasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cuantificadorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eSTADISTICASToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cashFlowToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem graficoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem graficoEficienciaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem graficoToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem eDICIONToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem feriadosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem turnosToolStripMenuItem;
@@ -289,12 +260,13 @@
         private System.Windows.Forms.ToolStripMenuItem logueoToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem controlHorasToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem reciboToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem facturacionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem vacacionesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem nuevoEmpleadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarEmpleadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pagosExtraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem registroManualToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vacacionesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem facturacionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem productosToolStripMenuItem;
     }
 }
 

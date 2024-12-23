@@ -71,7 +71,7 @@ namespace pryPlanificador
                 else
                 {
                     objC.NuevoVacaciones(empleado, dias, fechaS, fechaR, dias, mes, anio, vacaciones);
-                    objC.NuevoPagoHorasVacaciones(empleado, anio, mesLetra, dias, fechaS, fechaR);
+                    
                 }
                 
             }

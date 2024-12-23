@@ -265,5 +265,38 @@ namespace pryPlanificador
             }
         }
 
+        clsPlaneamiento objP = new clsPlaneamiento();
+        private void btnAyuda_Click(object sender, EventArgs e)
+        {
+            objP.GenerarTurnosYTotales(2025);
+        }
+
+        private void vacacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmVacaciones frmVacas = new frmVacaciones();
+            frmVacas.ShowDialog();
+        }
+
+        private void facturacionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmGraficos frm = new frmGraficos();
+            frm.ShowDialog();
+        }
+
+        private void mENSUALToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void mENSUALToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void productosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmGraficosProductos frm = new frmGraficosProductos();
+            frm.ShowDialog();
+        }
     }
 }

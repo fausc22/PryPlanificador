@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Planificador;
 
 namespace pryPlanificador
 {
@@ -266,217 +267,41 @@ namespace pryPlanificador
             //}
         }
 
+        
+
         private void btnPdf_Click(object sender, EventArgs e)
         {
-            if (dgvHora.Rows.Count > 0)
-
+            // Obtener nombres de las columnas (empleados)
+            List<string> nombresEmpleados = new List<string>();
+            foreach (DataGridViewColumn column in dgvHora.Columns)
             {
-
-                SaveFileDialog save = new SaveFileDialog();
-
-                save.Filter = "PDF (*.pdf)|*.pdf";
-
-                save.FileName = "Planificador - " + cmbMes.Text + ".pdf";
-
-                bool ErrorMessage = false;
-
-                if (save.ShowDialog() == DialogResult.OK)
-
+                if (column.HeaderText != "Fecha" && column.HeaderText != "Horario")
                 {
-
-                    if (File.Exists(save.FileName))
-
-                    {
-
-                        try
-
-                        {
-
-                            File.Delete(save.FileName);
-
-                        }
-
-                        catch (Exception ex)
-
-                        {
-
-                            ErrorMessage = true;
-
-                            MessageBox.Show("Unable to wride data in disk" + ex.Message);
-
-                        }
-
-                    }
-
-                    if (!ErrorMessage)
-
-                    {
-
-                        try
-
-                        {
-
-                            PdfPTable pTable = new PdfPTable(dgvHora.Columns.Count);
-                            pTable.DefaultCell.Padding = 2;
-                            pTable.WidthPercentage = 100;
-                            pTable.HorizontalAlignment = Element.ALIGN_LEFT;
-
-
-
-                            // Modificar el estilo de la celda para las columnas del encabezado
-                            PdfPCell headerCell = new PdfPCell();
-                            headerCell.BackgroundColor = new BaseColor(0, 102, 204); // Azul
-                            headerCell.Padding = 5;
-
-                            headerCell.HorizontalAlignment = Element.ALIGN_CENTER;
-                            headerCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-                            headerCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
-
-                            // Estilo de fuente para el texto en negrita y azul
-                            iTextSharp.text.Font font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD);
-                            font.Color = BaseColor.BLACK; // Color de texto blanco
-
-                            // Estilo de fuente para el texto en negrita y azul
-                            iTextSharp.text.Font fontt = FontFactory.GetFont(FontFactory.HELVETICA_BOLD);
-                            font.Color = BaseColor.BLACK; // Color de texto blanco
-                            fontt.Size = 8;
-
-
-                            // Establecer color de fondo gris para la primera columna
-                            PdfPCell greyCell = new PdfPCell();
-                            greyCell.BackgroundColor = new BaseColor(169, 169, 169); // Gris
-                            greyCell.Padding = 5;
-                            greyCell.HorizontalAlignment = Element.ALIGN_LEFT;
-
-                            // Crear documento y escritor
-                            using (FileStream fileStream = new FileStream(save.FileName, FileMode.Create))
-                            {
-                                Document document = new Document(PageSize.A4, 8f, 16f, 16f, 8f);
-                                PdfWriter writer = PdfWriter.GetInstance(document, fileStream);
-
-                                document.Open();
-
-                                foreach (DataGridViewColumn col in dgvHora.Columns)
-                                {
-
-
-
-
-                                    switch (col.HeaderText.ToUpper())
-                                    {
-                                        case "EMANUEL":
-                                            headerCell.BackgroundColor = new BaseColor(238, 130, 238); // Violeta
-                                            break;
-                                        case "PRISCILA":
-                                            headerCell.BackgroundColor = new BaseColor(255, 0, 255); // Fucsia
-                                            break;
-                                        case "ALEJANDRO":
-                                            headerCell.BackgroundColor = new BaseColor(64, 224, 208); // Turquesa
-                                            break;
-                                        case "LAUTARO":
-                                            headerCell.BackgroundColor = new BaseColor(160, 82, 45); // Siena
-                                            break;
-                                        case "CANDELARIA":
-                                            headerCell.BackgroundColor = new BaseColor(238, 130, 238); // Lila
-                                            break;
-                                        case "GABRIEL":
-                                            headerCell.BackgroundColor = new BaseColor(255, 255, 0); // Amarillo
-                                            break;
-                                        case "SANTIAGO":
-                                            headerCell.BackgroundColor = new BaseColor(0, 0, 255); // Azul
-                                            break;
-                                        case "CATALINA":
-                                            headerCell.BackgroundColor = new BaseColor(173, 216, 230); // Azul claro
-                                            break;
-                                        default:
-                                            headerCell.BackgroundColor = new BaseColor(255, 255, 255); // Blanco por defecto
-                                            break;
-                                    }
-
-
-                                    // Asignar el nombre de la columna al encabezado
-                                    headerCell.Phrase = new Phrase(col.HeaderText, fontt);
-
-
-                                    pTable.AddCell(headerCell);
-                                }
-
-                                foreach (DataGridViewRow viewRow in dgvHora.Rows)
-                                {
-                                    // Crear nueva página si es necesario
-                                    if (writer.GetVerticalPosition(false) - pTable.TotalHeight < document.BottomMargin)
-                                    {
-                                        document.Add(pTable);
-                                        pTable.DeleteBodyRows();
-                                    }
-
-                                    // Añadir la celda gris para la primera columna
-                                    greyCell.Phrase = new Phrase(viewRow.Cells[0].Value.ToString(), fontt);
-                                    pTable.AddCell(greyCell);
-
-                                    // Añadir las demás celdas
-                                    for (int i = 1; i < dgvHora.Columns.Count; i++)
-                                    {
-                                        PdfPCell cell = new PdfPCell();
-                                        cell.Phrase = new Phrase(viewRow.Cells[i].Value.ToString(), font);
-
-                                        // Cambiar el color de fondo según el valor de la celda
-                                        switch (viewRow.Cells[i].Value.ToString().ToLower())
-                                        {
-                                            case "libre":
-                                                cell.BackgroundColor = new BaseColor(0, 128, 0); // Verde
-                                                break;
-                                            case "días sin goce de sueldo":
-                                                cell.BackgroundColor = new BaseColor(255, 255, 0); // Amarillo
-                                                break;
-                                            case "vacaciones":
-                                                cell.BackgroundColor = new BaseColor(64, 224, 208); // Turquesa
-
-                                                break;
-                                            default:
-                                                cell.BackgroundColor = new BaseColor(255, 165, 0); // Naranja
-                                                break;
-                                        }
-
-                                        cell.VerticalAlignment = Element.ALIGN_CENTER;
-                                        pTable.AddCell(cell);
-                                    }
-                                }
-
-                                // Agregar la última tabla a la página
-                                document.Add(pTable);
-
-                                document.Close();
-                                fileStream.Close();
-                            }
-
-                            MessageBox.Show("PDF creado con éxito!", "info");
-
-                        }
-
-                        catch (Exception ex)
-
-                        {
-
-                            MessageBox.Show("Error while exporting Data" + ex.Message);
-
-                        }
-
-                    }
-
+                    nombresEmpleados.Add(column.HeaderText);
                 }
-
             }
 
-            else
-
+            // Mostrar el formulario auxiliar para la selección
+            using (frmAuxPlaniHorarios formSeleccionar = new frmAuxPlaniHorarios(nombresEmpleados))
             {
+                if (formSeleccionar.ShowDialog() == DialogResult.OK)
+                {
+                    // Recuperar empleados seleccionados
+                    List<string> empleadosSeleccionados = formSeleccionar.EmpleadosSeleccionados;
 
-                MessageBox.Show("No Record Found", "Info");
+                    if (empleadosSeleccionados.Count == 0)
+                    {
+                        MessageBox.Show("Debe seleccionar al menos un empleado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
 
+                    // Generar el PDF solo con los empleados seleccionados
+                    GenerarPdf(empleadosSeleccionados);
+                }
             }
-
         }
+
+
 
 
 
@@ -526,5 +351,152 @@ namespace pryPlanificador
                 cmbSegundoTurno.Enabled = true;
             }
         }
+
+        private void GenerarPdf(List<string> empleadosSeleccionados)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "PDF (*.pdf)|*.pdf";
+            save.FileName = "Planificador - " + cmbMes.Text + ".pdf";
+
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    PdfPTable pTable = new PdfPTable(empleadosSeleccionados.Count + 1); // +1 para la columna "Horario"
+                    pTable.DefaultCell.Padding = 2;
+                    pTable.WidthPercentage = 100;
+                    pTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+                    // Crear documento
+                    using (FileStream fileStream = new FileStream(save.FileName, FileMode.Create))
+                    {
+                        Document document = new Document(PageSize.A4, 8f, 16f, 16f, 8f);
+                        PdfWriter writer = PdfWriter.GetInstance(document, fileStream);
+                        document.Open();
+
+                        // Configuración de estilos
+                        iTextSharp.text.Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 8);
+                        iTextSharp.text.Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 8);
+
+                        PdfPCell headerCell = new PdfPCell
+                        {
+                            HorizontalAlignment = Element.ALIGN_CENTER,
+                            VerticalAlignment = Element.ALIGN_MIDDLE,
+                            Padding = 5
+                        };
+
+                        PdfPCell greyCell = new PdfPCell
+                        {
+                            HorizontalAlignment = Element.ALIGN_LEFT,
+                            VerticalAlignment = Element.ALIGN_MIDDLE,
+                            Padding = 5,
+                            BackgroundColor = new BaseColor(169, 169, 169) // Gris
+                        };
+
+                        // Agregar encabezado "Horario" con color predeterminado
+                        headerCell.BackgroundColor = new BaseColor(0, 102, 204); // Azul para "Horario"
+                        headerCell.Phrase = new Phrase("Horario", headerFont);
+                        pTable.AddCell(headerCell);
+
+                        // Agregar encabezados para cada empleado con colores específicos
+                        foreach (string empleado in empleadosSeleccionados)
+                        {
+                            switch (empleado.ToUpper())
+                            {
+                                case "EMANUEL":
+                                    headerCell.BackgroundColor = new BaseColor(238, 130, 238); // Violeta
+                                    break;
+                                case "PRISCILA":
+                                    headerCell.BackgroundColor = new BaseColor(255, 0, 255); // Fucsia
+                                    break;
+                                case "ALEJANDRO":
+                                    headerCell.BackgroundColor = new BaseColor(64, 224, 208); // Turquesa
+                                    break;
+                                case "LAUTARO":
+                                    headerCell.BackgroundColor = new BaseColor(160, 82, 45); // Siena
+                                    break;
+                                case "CANDELARIA":
+                                    headerCell.BackgroundColor = new BaseColor(238, 130, 238); // Lila
+                                    break;
+                                case "GABRIEL":
+                                    headerCell.BackgroundColor = new BaseColor(255, 255, 0); // Amarillo
+                                    break;
+                                case "SANTIAGO":
+                                    headerCell.BackgroundColor = new BaseColor(0, 0, 255); // Azul
+                                    break;
+                                case "CATALINA":
+                                    headerCell.BackgroundColor = new BaseColor(173, 216, 230); // Azul claro
+                                    break;
+                                default:
+                                    headerCell.BackgroundColor = new BaseColor(255, 255, 255); // Blanco por defecto
+                                    break;
+                            }
+
+                            headerCell.Phrase = new Phrase(empleado, headerFont);
+                            pTable.AddCell(headerCell);
+                        }
+
+                        // Agregar filas
+                        foreach (DataGridViewRow row in dgvHora.Rows)
+                        {
+                            if (row.IsNewRow) continue;
+
+                            // Columna "Horario" (primera columna en gris)
+                            greyCell.Phrase = new Phrase(row.Cells[0].Value?.ToString() ?? "", cellFont);
+                            pTable.AddCell(greyCell);
+
+                            // Columnas seleccionadas
+                            foreach (string empleado in empleadosSeleccionados)
+                            {
+                                foreach (DataGridViewColumn col in dgvHora.Columns)
+                                {
+                                    if (col.HeaderText == empleado)
+                                    {
+                                        PdfPCell cell = new PdfPCell
+                                        {
+                                            Phrase = new Phrase(row.Cells[col.Index].Value?.ToString() ?? "", cellFont),
+                                            VerticalAlignment = Element.ALIGN_CENTER
+                                        };
+
+                                        // Cambiar color de fondo según el valor de la celda
+                                        string cellValue = row.Cells[col.Index].Value?.ToString()?.ToLower();
+                                        switch (cellValue)
+                                        {
+                                            case "libre":
+                                                cell.BackgroundColor = new BaseColor(0, 128, 0); // Verde
+                                                break;
+                                            case "días sin goce de sueldo":
+                                                cell.BackgroundColor = new BaseColor(255, 255, 0); // Amarillo
+                                                break;
+                                            case "vacaciones":
+                                                cell.BackgroundColor = new BaseColor(64, 224, 208); // Turquesa
+                                                break;
+                                            default:
+                                                cell.BackgroundColor = new BaseColor(255, 165, 0); // Naranja
+                                                break;
+                                        }
+
+                                        pTable.AddCell(cell);
+                                    }
+                                }
+                            }
+                        }
+
+                        // Agregar tabla al documento
+                        document.Add(pTable);
+                        document.Close();
+                    }
+
+                    MessageBox.Show("PDF creado con éxito!", "Info");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error while exporting data: " + ex.Message);
+                }
+            }
+        }
+
+
+
     }
 }

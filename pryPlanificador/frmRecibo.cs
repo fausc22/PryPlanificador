@@ -50,7 +50,7 @@ namespace pryPlanificador
             
             objC.CargarEmpleadoRecibo(empleado, lblId, txtNombre, txtApellido, txtMail, txtFecha, txtAntiguedad, txtHoraNormal, txtDiaVaca, txtJornada, pbFoto);
 
-            objC.CargarDatosRecibo(empleado, anio, mes, txtHsPlanificadas, lblHsPlanificadas, txtHsTrabajadas, lblHsTrabajadas, lbExtrasSuma, lbExtrasResta, lblTotalSuma, lblTotalResta);
+            objC.CargarDatosRecibo(empleado, anio, mes, txtHsPlanificadas, lblHsPlanificadas, txtHsTrabajadas, lblHsTrabajadas, txtConsumos, lbExtrasSuma, lbExtrasResta, lblTotalSuma, lblTotalResta);
             gpInfo.Visible = true;
             gpDatos.Visible = true;
             ActualizarTotal(txtTotal);
@@ -381,7 +381,7 @@ namespace pryPlanificador
             string empleado = cmbEmpleado.Text;
             string mes = cmbMes.Text;
             string anio = cmbAnio.Text;
-            objC.CargarDatosRecibo(empleado, anio, mes, txtHsPlanificadas, lblHsPlanificadas, txtHsTrabajadas, lblHsTrabajadas, lbExtrasSuma, lbExtrasResta, lblTotalSuma, lblTotalResta);
+            objC.CargarDatosRecibo(empleado, anio, mes, txtHsPlanificadas, lblHsPlanificadas, txtHsTrabajadas, lblHsTrabajadas, txtConsumos, lbExtrasSuma, lbExtrasResta, lblTotalSuma, lblTotalResta);
             ActualizarTotal(txtTotal);
         }
 
@@ -414,6 +414,48 @@ namespace pryPlanificador
 
                 AbrirFormAuxiliar(categoria, monto, descripcion);
             }
+        }
+
+        private void lbExtrasResta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtHsPlanificadas_TextChanged(object sender, EventArgs e)
+        {
+            ActualizarTotal(txtTotal);
+        }
+
+        private void txtHsPlanificadas_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            using (frmAuxReciboHoras formAux = new frmAuxReciboHoras(txtHsPlanificadas.Text, lblHsPlanificadas.Text))
+            {
+                if (formAux.ShowDialog() == DialogResult.OK)
+                {
+                    txtHsPlanificadas.Text = formAux.NuevoMonto;
+                    lblHsPlanificadas.Text = formAux.NuevaCantidadHoras;
+                }
+            }
+        }
+
+        private void txtHsTrabajadas_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            using (frmAuxReciboHoras formAux = new frmAuxReciboHoras(txtHsTrabajadas.Text, lblHsTrabajadas.Text))
+            {
+                if (formAux.ShowDialog() == DialogResult.OK)
+                {
+                    txtHsTrabajadas.Text = formAux.NuevoMonto;
+                    lblHsTrabajadas.Text = formAux.NuevaCantidadHoras;
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string empleado = cmbEmpleado.Text;
+            string mes = cmbMes.Text;
+            string anio = cmbAnio.Text;
+            objC.GuardarDatosRecibo(empleado, anio, mes, txtHsPlanificadas, lblHsPlanificadas, txtHsTrabajadas, lblHsTrabajadas, txtConsumos);
         }
     }
 }

@@ -93,6 +93,36 @@ namespace Planificador.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap carga {
+            get {
+                object obj = ResourceManager.GetObject("carga", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap loading {
+            get {
+                object obj = ResourceManager.GetObject("loading", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap loading1 {
+            get {
+                object obj = ResourceManager.GetObject("loading1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap LOGOINICIO {
             get {
                 object obj = ResourceManager.GetObject("LOGOINICIO", resourceCulture);
@@ -144,11 +174,11 @@ namespace Planificador.Properties {
         ///                padding: 5px;
         ///                border: 1px solid black;
         ///            }
-        ///    &lt;/style&gt;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;
-        ///    &lt;table style=&quot;width:100%&quot;&gt;
-        ///        &lt;tr&gt; [resto de la cadena truncado]&quot;;.
+        ///
+        ///        .nowrap {
+        ///            white-space: nowrap;
+        ///        }
+        ///    &lt;/sty [resto de la cadena truncado]&quot;;.
         /// </summary>
         public static string Plantilla {
             get {
@@ -175,11 +205,11 @@ namespace Planificador.Properties {
         ///                padding: 5px;
         ///                border: 1px solid black;
         ///            }
-        ///    &lt;/style&gt;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;
-        ///    &lt;table style=&quot;width:100%&quot;&gt;
-        ///        &lt;tr&gt; [resto de la cadena truncado]&quot;;.
+        ///
+        ///        .nowrap {
+        ///            white-space: nowrap;
+        ///        }
+        ///    &lt;/sty [resto de la cadena truncado]&quot;;.
         /// </summary>
         public static string Plantilla1 {
             get {

@@ -19,6 +19,7 @@ namespace Planificador
         }
 
         clsConexion objC = new clsConexion();
+        clsPlaneamiento objP = new clsPlaneamiento();
         private void frmAyuda_Load(object sender, EventArgs e)
         {
             
@@ -26,7 +27,7 @@ namespace Planificador
 
         private void button1_Click(object sender, EventArgs e)
         {
-            objC.AcomodarMinutos();
+            objP.GenerarTurnosYTotales(2025);
             
             
         }
