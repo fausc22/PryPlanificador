@@ -38,7 +38,7 @@ namespace pryPlanificador
 
 
         //static string servidor = "localhost";
-        //static string bd = "planifebrero";
+        //static string bd = "planisv";
         //static string user = "root";
         //static string pw = "251199";
         //static string port = "3306";
@@ -79,7 +79,7 @@ namespace pryPlanificador
                 using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
                 {
                     conn.Open();
-                    
+
                     using (MySqlCommand cmd = new MySqlCommand("INSERT INTO empleados (nombre, apellido, mail, fecha_ingreso, antiguedad, hora_normal, foto_perfil, huella_dactilar, dia_vacaciones, horas_vacaciones) " +
                                                       "VALUES (@nombre, @apellido, @email, @fecha, @antiguedad, @hora_normal, @foto, @huella, @diavacas, @horas)", conn))
                     {
@@ -100,7 +100,7 @@ namespace pryPlanificador
 
                     }
 
-               
+
 
 
                     conn.Close();
@@ -129,8 +129,8 @@ namespace pryPlanificador
 
                     }
 
-                    int anioo = 23;
-                    while (anioo <= 25)
+                    int anioo = 24;
+                    while (anioo <= 26)
                     {
                         int mess = 1; // Mover la inicialización al interior del bucle anidado
                         while (mess <= 12)
@@ -539,6 +539,21 @@ namespace pryPlanificador
                         MessageBox.Show("EMPLEADO ELIMINADO CON ÉXITO.");
 
                     }
+
+                    using (MySqlCommand cmd = new MySqlCommand("DELETE FROM turnos_2025 WHERE nombre_empleado = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.ExecuteNonQuery();
+
+                    }
+
+                    using (MySqlCommand cmd = new MySqlCommand("DELETE FROM totales_2025 WHERE nombre_empleado = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("EMPLEADO ELIMINADO CON ÉXITO.");
+
+                    }
                 }
 
                 using (MySqlConnection conn = new MySqlConnection(cadenaConexion2))
@@ -579,8 +594,24 @@ namespace pryPlanificador
                         MessageBox.Show("EMPLEADO ELIMINADO CON ÉXITO.");
 
                     }
+
+                    using (MySqlCommand cmd = new MySqlCommand("DELETE FROM turnos_2025 WHERE nombre_empleado = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.ExecuteNonQuery();
+
+                    }
+
+                    using (MySqlCommand cmd = new MySqlCommand("DELETE FROM totales_2025 WHERE nombre_empleado = @nombre", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("EMPLEADO ELIMINADO CON ÉXITO.");
+
+                    }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -592,7 +623,7 @@ namespace pryPlanificador
         {
             try
             {
-                
+
 
 
 
@@ -635,7 +666,7 @@ namespace pryPlanificador
             try
             {
 
-                
+
 
 
                 using (MySqlConnection conn = new MySqlConnection(cadenaConexion2))
@@ -682,7 +713,8 @@ namespace pryPlanificador
                     }
                     return valorHora;
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return valorHora;
@@ -713,7 +745,7 @@ namespace pryPlanificador
                             DateTime primerDiaDelMes = new DateTime(fechaActual.Year, fechaActual.Month, 1);
                             string fechaInicioMes = primerDiaDelMes.ToString("dd/MM/yyyy");
 
-                            using (MySqlCommand cmd = new MySqlCommand("SELECT fecha FROM planificador.controlhs_2024 WHERE nombre_empleado = @nombre AND fecha >= @fechaInicio AND fecha < @fechaActual", con))
+                            using (MySqlCommand cmd = new MySqlCommand("SELECT fecha FROM planificador.controlhs_2025 WHERE nombre_empleado = @nombre AND fecha >= @fechaInicio AND fecha < @fechaActual", con))
                             {
                                 cmd.Parameters.AddWithValue("@nombre", nombre);
                                 cmd.Parameters.AddWithValue("@fechaInicio", fechaInicioMes);
@@ -732,7 +764,7 @@ namespace pryPlanificador
                                 foreach (DateTime fecha in fechas)
                                 {
 
-                                    using (MySqlCommand cmd2 = new MySqlCommand("SELECT horas_trabajadas, acumulado FROM planificador.controlhs_2024 WHERE nombre_empleado = @nombre AND fecha = @fecha", con))
+                                    using (MySqlCommand cmd2 = new MySqlCommand("SELECT horas_trabajadas, acumulado FROM planificador.controlhs_2025 WHERE nombre_empleado = @nombre AND fecha = @fecha", con))
                                     {
                                         cmd2.Parameters.AddWithValue("@nombre", nombre);
                                         cmd2.Parameters.AddWithValue("@fecha", fecha.ToString("dd/MM/yyyy"));
@@ -753,7 +785,7 @@ namespace pryPlanificador
                                     int AcumuladoBD = AcumuladoAnterior + AcumuladoFaltante;
 
 
-                                    using (MySqlCommand updateCmd = new MySqlCommand("UPDATE planificador.controlhs_2024 SET acumulado = @acumulado WHERE nombre_empleado = @nombre AND fecha = @fecha", con, trans))
+                                    using (MySqlCommand updateCmd = new MySqlCommand("UPDATE planificador.controlhs_2025 SET acumulado = @acumulado WHERE nombre_empleado = @nombre AND fecha = @fecha", con, trans))
                                     {
                                         updateCmd.Parameters.AddWithValue("@nombre", nombre);
                                         updateCmd.Parameters.AddWithValue("@acumulado", AcumuladoBD);
@@ -884,7 +916,8 @@ namespace pryPlanificador
                         MessageBox.Show("FERIADO CREADO CON EXITO!");
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -1299,7 +1332,7 @@ namespace pryPlanificador
 
         public void ModificarPagoExtra(string categoria, int monto, string descripcion, string categoria2, int monto2, string descripcion2)
         {
-            string tablaAnual = "extras_2024";
+            string tablaAnual = "extras_2025";
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
@@ -1308,7 +1341,7 @@ namespace pryPlanificador
 
                     using (MySqlCommand cmd = new MySqlCommand($"UPDATE {tablaAnual} SET categoria = @categoria, monto = @monto, descripcion = @descripcion WHERE categoria = @categoria2 AND monto = @monto2 AND descripcion = @descripcion2", conn))
                     {
-                        
+
                         cmd.Parameters.AddWithValue("@categoria", categoria);
                         cmd.Parameters.AddWithValue("@monto", monto);
                         cmd.Parameters.AddWithValue("@descripcion", descripcion);
@@ -1528,7 +1561,7 @@ namespace pryPlanificador
 
                     foreach (string empleado in empleados)
                     {
-                        using (MySqlCommand cmd = new MySqlCommand("SELECT id, hora_ingreso, hora_egreso FROM planificador.controlhs_2024 WHERE nombre_empleado = @nombre", conn))
+                        using (MySqlCommand cmd = new MySqlCommand("SELECT id, hora_ingreso, hora_egreso FROM planificador.controlhs_2025 WHERE nombre_empleado = @nombre", conn))
                         {
                             cmd.Parameters.AddWithValue("@nombre", empleado);
                             using (MySqlDataReader rdr = cmd.ExecuteReader())
@@ -1550,7 +1583,7 @@ namespace pryPlanificador
                                     using (MySqlConnection conn2 = new MySqlConnection(cadenaConexion))
                                     {
                                         conn2.Open();
-                                        using (MySqlCommand cmd2 = new MySqlCommand("UPDATE planificador.controlhs_2024 SET horas_trabajadas = @minutos WHERE id = @id", conn2))
+                                        using (MySqlCommand cmd2 = new MySqlCommand("UPDATE planificador.controlhs_2025 SET horas_trabajadas = @minutos WHERE id = @id", conn2))
                                         {
                                             cmd2.Parameters.AddWithValue("@minutos", minutosTrabajados);
                                             cmd2.Parameters.AddWithValue("@id", id);
@@ -1605,7 +1638,7 @@ namespace pryPlanificador
 
                     foreach (string empleado in empleados)
                     {
-                        using (MySqlCommand cmd = new MySqlCommand("SELECT id, fecha, horas_trabajadas FROM planificador.controlhs_2024 WHERE nombre_empleado = @nombre AND fecha >= @fechaInicio AND fecha < @fechaActual", conn))
+                        using (MySqlCommand cmd = new MySqlCommand("SELECT id, fecha, horas_trabajadas FROM planificador.controlhs_2025 WHERE nombre_empleado = @nombre AND fecha >= @fechaInicio AND fecha < @fechaActual", conn))
                         {
                             cmd.Parameters.AddWithValue("@nombre", empleado);
                             cmd.Parameters.AddWithValue("@fechaInicio", "01/06/2024");
@@ -1618,8 +1651,8 @@ namespace pryPlanificador
                                     minutosTrabajados = (int)rdr["horas_trabajadas"];
                                     horasTrabajadas = minutosTrabajados / 60.00;
                                     string fecha = rdr["fecha"].ToString();
-                                       
-                                    
+
+
 
                                     using (MySqlConnection conn2 = new MySqlConnection(cadenaConexion))
                                     {
@@ -1633,9 +1666,9 @@ namespace pryPlanificador
                                                 {
                                                     valorHora = (int)rdr2["hora_normal"];
                                                 }
-                                                
+
                                             }
-                                            
+
                                         }
 
 
@@ -1699,7 +1732,7 @@ namespace pryPlanificador
                                 cmd.Parameters.AddWithValue("@nombre", nombre);
                                 cmd.Parameters.AddWithValue("@acumulado", 0);
                                 cmd.Parameters.AddWithValue("@horas", 0);
-                               
+
 
 
                                 cmd.ExecuteNonQuery();
@@ -1708,9 +1741,9 @@ namespace pryPlanificador
                         }
 
 
-                        
-                            
-                        
+
+
+
                     }
                     else
                     {
@@ -1787,8 +1820,8 @@ namespace pryPlanificador
                     }
 
 
-                    
-                    
+
+
 
 
                     conn.Close();
@@ -1863,7 +1896,7 @@ namespace pryPlanificador
                                         horasTotales = horasTotales + horasManual;
                                         acumuladoTotal = acumuladoTotal + acumuladoManual;
 
-                                        
+
                                     }
                                     else
                                     {
@@ -1905,7 +1938,7 @@ namespace pryPlanificador
 
 
 
-                
+
             }
             catch (Exception ex)
             {
@@ -1947,7 +1980,7 @@ namespace pryPlanificador
 
                     horasManual = horasManual / 5;
 
-                    
+
 
                     int acumuladoManual = valorHora * horasManual;
                     int acumuladoFinal = acumuladoManual * dias;
@@ -2026,7 +2059,7 @@ namespace pryPlanificador
 
 
                     }
-                    DiasAnteriores = DiasAnteriores + DiasVacacionesAnterior;
+                    int DiasAnterioresss = DiasAnteriores + DiasVacacionesAnterior;
 
 
                     int DiasFinales = 0;
@@ -2037,7 +2070,7 @@ namespace pryPlanificador
                     }
                     else
                     {
-                        DiasFinales = DiasAnteriores - dias;
+                        DiasFinales = DiasAnterioresss - dias;
                     }
 
 
@@ -2089,7 +2122,7 @@ namespace pryPlanificador
 
                     }
 
-                    string tabla = "planificador.controlhs_2024";
+                    string tabla = "planificador.controlhs_2025";
                     if (DateTime.TryParseExact(fechaSalidaAnterior, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaSalida) &&
                     DateTime.TryParseExact(fechaRegresoAnterior, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaRegreso))
                     {
@@ -2226,7 +2259,7 @@ namespace pryPlanificador
 
 
 
-                                            using (MySqlCommand cmdKiosco = new MySqlCommand("INSERT INTO planificador.controlhs_2024 (fecha, nombre_empleado, hora_ingreso, hora_egreso, horas_trabajadas, acumulado, mes) VALUES (@fecha, @nombre, @hora1, @hora2, @hora3, @acumulado, @mes) ", connKiosco))
+                                            using (MySqlCommand cmdKiosco = new MySqlCommand("INSERT INTO planificador.controlhs_2025 (fecha, nombre_empleado, hora_ingreso, hora_egreso, horas_trabajadas, acumulado, mes) VALUES (@fecha, @nombre, @hora1, @hora2, @hora3, @acumulado, @mes) ", connKiosco))
                                             {
                                                 cmdKiosco.Parameters.AddWithValue("@fecha", fechaSql2);
                                                 cmdKiosco.Parameters.AddWithValue("@nombre", nombre);
@@ -2283,150 +2316,149 @@ namespace pryPlanificador
 
 
                 //PLANIFICADOR
-                
 
 
 
 
-                    //    //REESTABLEZCO LOS DIAS DE VACACIONES
-                    //    int DiasAnteriores = 0;
-                    //    using (MySqlCommand cmd = new MySqlCommand("SELECT dia_vacaciones FROM empleados WHERE nombre = @nombre", conn))
-                    //    {
 
-                    //        cmd.Parameters.AddWithValue("@nombre", nombre);
+                //    //REESTABLEZCO LOS DIAS DE VACACIONES
+                //    int DiasAnteriores = 0;
+                //    using (MySqlCommand cmd = new MySqlCommand("SELECT dia_vacaciones FROM empleados WHERE nombre = @nombre", conn))
+                //    {
 
-                    //        using (MySqlDataReader rdr = cmd.ExecuteReader())
-                    //        {
-                    //            while (rdr.Read())
-                    //            {
-                    //                DiasAnteriores = Convert.ToInt32(rdr["dia_vacaciones"]);
-                    //            }
-                    //        }
+                //        cmd.Parameters.AddWithValue("@nombre", nombre);
 
+                //        using (MySqlDataReader rdr = cmd.ExecuteReader())
+                //        {
+                //            while (rdr.Read())
+                //            {
+                //                DiasAnteriores = Convert.ToInt32(rdr["dia_vacaciones"]);
+                //            }
+                //        }
 
-                    //    }
-                    //    DiasAnteriores = DiasAnteriores + DiasVacacionesAnterior;
 
+                //    }
+                //    DiasAnteriores = DiasAnteriores + DiasVacacionesAnterior;
 
-                    //    int DiasFinales = 0;
-                    //    if (DiasAnteriores < dias)
-                    //    {
-                    //        MessageBox.Show("El empleado no cuenta con la cantidad de días vacacionales asignados. Intente de nuevo");
-                    //        return;
-                    //    }
-                    //    else
-                    //    {
-                    //        DiasFinales = DiasAnteriores - dias;
-                    //    }
 
+                //    int DiasFinales = 0;
+                //    if (DiasAnteriores < dias)
+                //    {
+                //        MessageBox.Show("El empleado no cuenta con la cantidad de días vacacionales asignados. Intente de nuevo");
+                //        return;
+                //    }
+                //    else
+                //    {
+                //        DiasFinales = DiasAnteriores - dias;
+                //    }
 
 
 
-                    //    int valorHora = 0;
-                    //    int horasManual = 0;
 
-                    //    using (MySqlCommand cmd = new MySqlCommand("SELECT hora_normal, horas_vacaciones FROM empleados WHERE nombre = @nombre", conn))
-                    //    {
-                    //        cmd.Parameters.AddWithValue("@nombre", nombre);
+                //    int valorHora = 0;
+                //    int horasManual = 0;
 
-                    //        using (MySqlDataReader rdr = cmd.ExecuteReader())
-                    //        {
-                    //            if (rdr.Read())
-                    //            {
-                    //                valorHora = Convert.ToInt32(rdr["hora_normal"]);
-                    //                horasManual = Convert.ToInt32(rdr["horas_vacaciones"]);
-                    //            }
-                    //        }
-                    //    }
+                //    using (MySqlCommand cmd = new MySqlCommand("SELECT hora_normal, horas_vacaciones FROM empleados WHERE nombre = @nombre", conn))
+                //    {
+                //        cmd.Parameters.AddWithValue("@nombre", nombre);
 
-                    //    horasManual = horasManual / 5;
-                    //    int acumuladoManual = valorHora * horasManual;
+                //        using (MySqlDataReader rdr = cmd.ExecuteReader())
+                //        {
+                //            if (rdr.Read())
+                //            {
+                //                valorHora = Convert.ToInt32(rdr["hora_normal"]);
+                //                horasManual = Convert.ToInt32(rdr["horas_vacaciones"]);
+                //            }
+                //        }
+                //    }
 
+                //    horasManual = horasManual / 5;
+                //    int acumuladoManual = valorHora * horasManual;
 
 
 
 
 
-                    //    int horasMensual = 0;
-                    //    int acumuladoMensual = 0;
-                    //    using (MySqlCommand cmd = new MySqlCommand($"SELECT horas, acumulado FROM {tablaAnual} WHERE mes = @mes AND nombre_empleado = @nombre", conn))
-                    //    {
-                    //        cmd.Parameters.AddWithValue("@nombre", nombre);
-                    //        cmd.Parameters.AddWithValue("@mes", mes);
 
-                    //        using (MySqlDataReader reader = cmd.ExecuteReader())
-                    //        {
-                    //            if (reader.Read())
-                    //            {
-                    //                horasMensual = Convert.ToInt32(reader["horas"]);
-                    //                acumuladoMensual = Convert.ToInt32(reader["acumulado"]);
-                    //            }
-                    //        }
-                    //    }
+                //    int horasMensual = 0;
+                //    int acumuladoMensual = 0;
+                //    using (MySqlCommand cmd = new MySqlCommand($"SELECT horas, acumulado FROM {tablaAnual} WHERE mes = @mes AND nombre_empleado = @nombre", conn))
+                //    {
+                //        cmd.Parameters.AddWithValue("@nombre", nombre);
+                //        cmd.Parameters.AddWithValue("@mes", mes);
 
+                //        using (MySqlDataReader reader = cmd.ExecuteReader())
+                //        {
+                //            if (reader.Read())
+                //            {
+                //                horasMensual = Convert.ToInt32(reader["horas"]);
+                //                acumuladoMensual = Convert.ToInt32(reader["acumulado"]);
+                //            }
+                //        }
+                //    }
 
 
 
-                    //    //LIMPIO EL PLANIFICADOR
-                    //    string tabla = "turnos_" + anio;
 
-                    //    if (DateTime.TryParseExact(fechaSalidaAnterior, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaSalida) &&
-                    //    DateTime.TryParseExact(fechaRegresoAnterior, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaRegreso))
-                    //    {
+                //    //LIMPIO EL PLANIFICADOR
+                //    string tabla = "turnos_" + anio;
 
-                    //        for (DateTime fechaActual = fechaSalida; fechaActual <= fechaRegreso; fechaActual = fechaActual.AddDays(1))
-                    //        {
-                    //            string fechaSql = fechaActual.ToString("dd/MM/yyyy");
-                    //            using (MySqlCommand cmd = new MySqlCommand($"UPDATE {tabla} SET turno = @valor, horas = @horas, acumulado = @acumulado WHERE fecha = @fecha AND nombre_empleado = @nombre", conn))
-                    //            {
-                    //                cmd.Parameters.AddWithValue("@valor", "Libre");
-                    //                cmd.Parameters.AddWithValue("@fecha", fechaSql);
-                    //                cmd.Parameters.AddWithValue("@nombre", nombre);
-                    //                cmd.Parameters.AddWithValue("@horas", 0);
-                    //                cmd.Parameters.AddWithValue("@acumulado", 0);
-                    //                horasMensual = horasMensual - horasManual;
-                    //                acumuladoMensual = acumuladoMensual - acumuladoManual;
+                //    if (DateTime.TryParseExact(fechaSalidaAnterior, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaSalida) &&
+                //    DateTime.TryParseExact(fechaRegresoAnterior, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaRegreso))
+                //    {
 
+                //        for (DateTime fechaActual = fechaSalida; fechaActual <= fechaRegreso; fechaActual = fechaActual.AddDays(1))
+                //        {
+                //            string fechaSql = fechaActual.ToString("dd/MM/yyyy");
+                //            using (MySqlCommand cmd = new MySqlCommand($"UPDATE {tabla} SET turno = @valor, horas = @horas, acumulado = @acumulado WHERE fecha = @fecha AND nombre_empleado = @nombre", conn))
+                //            {
+                //                cmd.Parameters.AddWithValue("@valor", "Libre");
+                //                cmd.Parameters.AddWithValue("@fecha", fechaSql);
+                //                cmd.Parameters.AddWithValue("@nombre", nombre);
+                //                cmd.Parameters.AddWithValue("@horas", 0);
+                //                cmd.Parameters.AddWithValue("@acumulado", 0);
+                //                horasMensual = horasMensual - horasManual;
+                //                acumuladoMensual = acumuladoMensual - acumuladoManual;
 
-                    //                cmd.ExecuteNonQuery();
-                    //            }
-                    //        }
 
+                //                cmd.ExecuteNonQuery();
+                //            }
+                //        }
 
 
 
 
-                    //    }
-                    //    else
-                    //    {
-                    //        MessageBox.Show("Formato de fecha no válido para la salida o regreso.");
-                    //    }
 
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show("Formato de fecha no válido para la salida o regreso.");
+                //    }
 
-                    //    //ACTUALIZO LAS VACACIONES
-                    //    using (MySqlCommand cmd = new MySqlCommand("UPDATE vacaciones SET nombre_empleado = @nombre, dias = @dias, salida = @salida, regreso = @regreso WHERE id = @id", conn))
-                    //    {
-                    //        cmd.Parameters.AddWithValue("@id", id);
-                    //        cmd.Parameters.AddWithValue("@nombre", nombre);
-                    //        cmd.Parameters.AddWithValue("@dias", dias);
-                    //        cmd.Parameters.AddWithValue("@salida", salida);
-                    //        cmd.Parameters.AddWithValue("@regreso", regreso);
 
-                    //        cmd.ExecuteNonQuery();
+                //    //ACTUALIZO LAS VACACIONES
+                //    using (MySqlCommand cmd = new MySqlCommand("UPDATE vacaciones SET nombre_empleado = @nombre, dias = @dias, salida = @salida, regreso = @regreso WHERE id = @id", conn))
+                //    {
+                //        cmd.Parameters.AddWithValue("@id", id);
+                //        cmd.Parameters.AddWithValue("@nombre", nombre);
+                //        cmd.Parameters.AddWithValue("@dias", dias);
+                //        cmd.Parameters.AddWithValue("@salida", salida);
+                //        cmd.Parameters.AddWithValue("@regreso", regreso);
 
-                    //    }
+                //        cmd.ExecuteNonQuery();
 
-                    //    using (MySqlCommand cmd = new MySqlCommand("UPDATE empleados SET dia_vacaciones = @dias WHERE nombre = @nombre", conn))
-                    //    {
+                //    }
 
-                    //        cmd.Parameters.AddWithValue("@nombre", nombre);
-                    //        cmd.Parameters.AddWithValue("@dias", DiasFinales);
+                //    using (MySqlCommand cmd = new MySqlCommand("UPDATE empleados SET dia_vacaciones = @dias WHERE nombre = @nombre", conn))
+                //    {
 
+                //        cmd.Parameters.AddWithValue("@nombre", nombre);
+                //        cmd.Parameters.AddWithValue("@dias", DiasFinales);
 
-                    //        cmd.ExecuteNonQuery();
 
-                    //    }
+                //        cmd.ExecuteNonQuery();
 
+                //    }
 
 
 
@@ -2436,119 +2468,120 @@ namespace pryPlanificador
 
 
 
-                    //    //ACTUALIZO PLANIFICADOR Y LO PINTO
-                    //    if (DateTime.TryParseExact(salida, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaSalida2) &&
-                    //         DateTime.TryParseExact(regreso, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaRegreso2))
-                    //    {
 
-                    //        for (DateTime fechaActual2 = fechaSalida2; fechaActual2 <= fechaRegreso2; fechaActual2 = fechaActual2.AddDays(1))
-                    //        {
-                    //            string fechaSql2 = fechaActual2.ToString("dd/MM/yyyy");
-                    //            using (MySqlCommand cmd = new MySqlCommand($"UPDATE {tabla} SET turno = @turno, horas = @horas, acumulado = @acumulado WHERE fecha = @fecha AND nombre_empleado = @nombre", conn))
-                    //            {
-                    //                cmd.Parameters.AddWithValue("@turno", vacaciones);
-                    //                cmd.Parameters.AddWithValue("@fecha", fechaSql2);
-                    //                cmd.Parameters.AddWithValue("@nombre", nombre);
-                    //                if (vacaciones == "vacaciones")
-                    //                {
-                    //                    cmd.Parameters.AddWithValue("@horas", horasManual);
-                    //                    cmd.Parameters.AddWithValue("@acumulado", acumuladoManual);
-                    //                    horasMensual = horasMensual + horasManual;
-                    //                    acumuladoMensual = acumuladoMensual + acumuladoManual;
+                //    //ACTUALIZO PLANIFICADOR Y LO PINTO
+                //    if (DateTime.TryParseExact(salida, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaSalida2) &&
+                //         DateTime.TryParseExact(regreso, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaRegreso2))
+                //    {
 
+                //        for (DateTime fechaActual2 = fechaSalida2; fechaActual2 <= fechaRegreso2; fechaActual2 = fechaActual2.AddDays(1))
+                //        {
+                //            string fechaSql2 = fechaActual2.ToString("dd/MM/yyyy");
+                //            using (MySqlCommand cmd = new MySqlCommand($"UPDATE {tabla} SET turno = @turno, horas = @horas, acumulado = @acumulado WHERE fecha = @fecha AND nombre_empleado = @nombre", conn))
+                //            {
+                //                cmd.Parameters.AddWithValue("@turno", vacaciones);
+                //                cmd.Parameters.AddWithValue("@fecha", fechaSql2);
+                //                cmd.Parameters.AddWithValue("@nombre", nombre);
+                //                if (vacaciones == "vacaciones")
+                //                {
+                //                    cmd.Parameters.AddWithValue("@horas", horasManual);
+                //                    cmd.Parameters.AddWithValue("@acumulado", acumuladoManual);
+                //                    horasMensual = horasMensual + horasManual;
+                //                    acumuladoMensual = acumuladoMensual + acumuladoManual;
 
-                    //                    using (MySqlConnection connKiosco = new MySqlConnection(cadenaConexion))
-                    //                    {
-                    //                        connKiosco.Open();
-                    //                        string horaInicio = "00:00:00";
-                    //                        string horaFin = "0" + horasManual + ":00:00";
 
-                    //                        DateTime horaInicioDateTime = DateTime.ParseExact(horaInicio, "HH:mm:ss", CultureInfo.InvariantCulture);
-                    //                        DateTime horaFinDateTime = DateTime.ParseExact(horaFin, "HH:mm:ss", CultureInfo.InvariantCulture);
+                //                    using (MySqlConnection connKiosco = new MySqlConnection(cadenaConexion))
+                //                    {
+                //                        connKiosco.Open();
+                //                        string horaInicio = "00:00:00";
+                //                        string horaFin = "0" + horasManual + ":00:00";
 
+                //                        DateTime horaInicioDateTime = DateTime.ParseExact(horaInicio, "HH:mm:ss", CultureInfo.InvariantCulture);
+                //                        DateTime horaFinDateTime = DateTime.ParseExact(horaFin, "HH:mm:ss", CultureInfo.InvariantCulture);
 
 
-                    //                        int minutos = horasManual * 60;
 
+                //                        int minutos = horasManual * 60;
 
-                    //                        // Usa soloHora en tu lógica
 
-                    //                        string nombreMes = ObtenerNombreMes(mes);
+                //                        // Usa soloHora en tu lógica
 
+                //                        string nombreMes = ObtenerNombreMes(mes);
 
 
 
-                    //                        using (MySqlCommand cmdKiosco = new MySqlCommand("INSERT INTO planificador.controlhs_2024 (fecha, nombre_empleado, hora_ingreso, hora_egreso, horas_trabajadas, acumulado, mes) VALUES (@fecha, @nombre, @hora1, @hora2, @hora3, @acumulado, @mes) ", connKiosco))
-                    //                        {
-                    //                            cmdKiosco.Parameters.AddWithValue("@fecha", fechaSql2);
-                    //                            cmdKiosco.Parameters.AddWithValue("@nombre", nombre);
-                    //                            cmdKiosco.Parameters.AddWithValue("@hora1", horaInicioDateTime);
-                    //                            cmdKiosco.Parameters.AddWithValue("@hora2", horaFinDateTime);
-                    //                            cmdKiosco.Parameters.AddWithValue("@hora3", minutos);
-                    //                            cmdKiosco.Parameters.AddWithValue("@acumulado", acumuladoManual);
-                    //                            cmdKiosco.Parameters.AddWithValue("@mes", nombreMes);
 
-                    //                            cmdKiosco.ExecuteNonQuery();
+                //                        using (MySqlCommand cmdKiosco = new MySqlCommand("INSERT INTO planificador.controlhs_2025 (fecha, nombre_empleado, hora_ingreso, hora_egreso, horas_trabajadas, acumulado, mes) VALUES (@fecha, @nombre, @hora1, @hora2, @hora3, @acumulado, @mes) ", connKiosco))
+                //                        {
+                //                            cmdKiosco.Parameters.AddWithValue("@fecha", fechaSql2);
+                //                            cmdKiosco.Parameters.AddWithValue("@nombre", nombre);
+                //                            cmdKiosco.Parameters.AddWithValue("@hora1", horaInicioDateTime);
+                //                            cmdKiosco.Parameters.AddWithValue("@hora2", horaFinDateTime);
+                //                            cmdKiosco.Parameters.AddWithValue("@hora3", minutos);
+                //                            cmdKiosco.Parameters.AddWithValue("@acumulado", acumuladoManual);
+                //                            cmdKiosco.Parameters.AddWithValue("@mes", nombreMes);
 
-                    //                        }
-                    //                    }
+                //                            cmdKiosco.ExecuteNonQuery();
 
-                    //                }
-                    //                else
-                    //                {
-                    //                    cmd.Parameters.AddWithValue("@horas", 0);
-                    //                    cmd.Parameters.AddWithValue("@acumulado", 0);
-                    //                }
+                //                        }
+                //                    }
 
+                //                }
+                //                else
+                //                {
+                //                    cmd.Parameters.AddWithValue("@horas", 0);
+                //                    cmd.Parameters.AddWithValue("@acumulado", 0);
+                //                }
 
 
-                    //                cmd.ExecuteNonQuery();
 
-                    //            }
-                    //        }
+                //                cmd.ExecuteNonQuery();
 
+                //            }
+                //        }
 
 
 
-                    //    }
-                    //    else
-                    //    {
-                    //        MessageBox.Show("Formato de fecha no válido para la salida o regreso.");
-                    //    }
 
-                    //    using (MySqlCommand cmd = new MySqlCommand($"UPDATE {tablaAnual} SET horas = @horas, acumulado = @acumulado WHERE mes = @fecha AND nombre_empleado = @nombre", conn))
-                    //    {
-                    //        cmd.Parameters.AddWithValue("@fecha", mes);
-                    //        cmd.Parameters.AddWithValue("@fecha", mes);
-                    //        cmd.Parameters.AddWithValue("@nombre", nombre);
-                    //        cmd.Parameters.AddWithValue("@horas", horasMensual);
-                    //        cmd.Parameters.AddWithValue("@acumulado", horasMensual);
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show("Formato de fecha no válido para la salida o regreso.");
+                //    }
 
-                    //        cmd.ExecuteNonQuery();
-                    //        MessageBox.Show("VACACIONES ACTUALIZADAS CON ÉXITO!");
-                    //    }
+                //    using (MySqlCommand cmd = new MySqlCommand($"UPDATE {tablaAnual} SET horas = @horas, acumulado = @acumulado WHERE mes = @fecha AND nombre_empleado = @nombre", conn))
+                //    {
+                //        cmd.Parameters.AddWithValue("@fecha", mes);
+                //        cmd.Parameters.AddWithValue("@fecha", mes);
+                //        cmd.Parameters.AddWithValue("@nombre", nombre);
+                //        cmd.Parameters.AddWithValue("@horas", horasMensual);
+                //        cmd.Parameters.AddWithValue("@acumulado", horasMensual);
 
+                //        cmd.ExecuteNonQuery();
+                //        MessageBox.Show("VACACIONES ACTUALIZADAS CON ÉXITO!");
+                //    }
 
 
 
 
-                    //}
 
+                //}
 
 
 
-                
+
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
 
             }
-            
+
         }
 
 
-        
+
 
         public void CargarCmbEmpleadoVacaciones(ComboBox cmb)
         {
@@ -2652,7 +2685,7 @@ namespace pryPlanificador
 
 
 
-        public void CargarDatosRecibo(string nombre, string anio, string mes, TextBox txtHorasPlanificadas, Label lblHorasPlanificadas, TextBox txtHorasTrabajadas, Label lblHorasTrabajadas, TextBox txtConsumos, ListBox lbDetalleSuma, ListBox lbDetalleResta, Label totalSumaDetalle, Label totalRestaDetalle)
+        public void CargarDatosRecibo(string nombreNoTrim, string anio, string mes, TextBox txtHorasPlanificadas, Label lblHorasPlanificadas, TextBox txtHorasTrabajadas, Label lblHorasTrabajadas, TextBox txtConsumos, ListBox lbDetalleSuma, ListBox lbDetalleResta, Label totalSumaDetalle, Label totalRestaDetalle)
         {
             try
             {
@@ -2663,7 +2696,7 @@ namespace pryPlanificador
                 int sumaDetalle = 0;
                 int restadetalle = 0;
 
-
+                string nombre = nombreNoTrim.Trim();
                 int totalHorasTrabajadas = 0;
                 int subTotal = 0;
                 int valorHora = 0;
@@ -2949,7 +2982,7 @@ namespace pryPlanificador
                     {
                         cmd.Parameters.AddWithValue("@nombre", empleado);
                         cmd.Parameters.AddWithValue("@mes", mes);
-                        
+
 
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
@@ -3002,7 +3035,7 @@ namespace pryPlanificador
 
                                 // Concatenar cada descripción con un salto de línea
                                 descripcionBuilder.AppendLine($"CATEGORIA: {categoria} - MONTO: $ {monto} - DESCRIPCION: {descripcionBD}");
-                                
+
 
 
 
@@ -3020,14 +3053,14 @@ namespace pryPlanificador
             return descripcionBuilder.ToString();
         }
 
-        public void  EliminarVacaciones(int id) 
+        public void EliminarVacaciones(int id)
         {
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
                 {
                     conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("DELETE FROM vacaciones WHERE id = @id", conn)) 
+                    using (MySqlCommand cmd = new MySqlCommand("DELETE FROM vacaciones WHERE id = @id", conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.ExecuteNonQuery();
@@ -3061,7 +3094,7 @@ namespace pryPlanificador
                 {
                     conn.Open();
 
-                    string tabla = "logueo_2024";
+                    string tabla = "logueo_2025";
                     string query = $"UPDATE {tabla} SET fecha = @fecha, accion = @accion, hora = @hora WHERE id = @id";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
@@ -3105,7 +3138,7 @@ namespace pryPlanificador
                     {
                         conn.Open();
 
-                        string tabla = "logueo_2024";
+                        string tabla = "logueo_2025";
                         string query = $"DELETE FROM {tabla} WHERE id = @id";
 
                         using (MySqlCommand cmd = new MySqlCommand(query, conn))
@@ -3152,12 +3185,12 @@ namespace pryPlanificador
                     {
                         conn.Open();
 
-                        string tabla = "extras_2024";
+                        string tabla = "extras_2025";
                         string query = $"DELETE FROM {tabla} WHERE categoria = @categoria2 AND monto = @monto2 AND descripcion = @descripcion2";
 
                         using (MySqlCommand cmd = new MySqlCommand(query, conn))
                         {
-                            
+
                             cmd.Parameters.AddWithValue("@categoria2", categoria);
                             cmd.Parameters.AddWithValue("@monto2", monto);
                             cmd.Parameters.AddWithValue("@descripcion2", descripcion);
@@ -3206,7 +3239,7 @@ namespace pryPlanificador
 
                     // Verificar la huella dactilar si es necesario (dependiendo de tu aplicación)
 
-                    string tabla = "logueo_2024";
+                    string tabla = "logueo_2025";
                     using (MySqlCommand cmd = new MySqlCommand($"INSERT INTO {tabla} (fecha, nombre_empleado, accion, hora, mes, huella_dactilar) VALUES (@fecha, @nombre, @accion, @hora, @mes, @huella)", conn))
                     {
                         cmd.Parameters.AddWithValue("@fecha", fecha);
@@ -3291,7 +3324,7 @@ namespace pryPlanificador
         //    return hora;
         //}
 
-        
+
 
 
 
@@ -3359,7 +3392,7 @@ namespace pryPlanificador
                 using (MySqlConnection conn = new MySqlConnection(cadenaConexion))
                 {
                     string tabla = "controlhs_" + anio;
-                    
+
                     conn.Open();
 
                     DateTime fechaActual = DateTime.Parse(fecha);
@@ -3369,7 +3402,7 @@ namespace pryPlanificador
                     using (MySqlCommand cmd = new MySqlCommand($"SELECT id FROM {tabla} WHERE nombre_empleado = @nombre AND (fecha = @fecha OR fecha = @fechaAnterior) ORDER BY id DESC LIMIT 1;", conn))
                     {
                         cmd.Parameters.AddWithValue("@nombre", nombre);
-                        
+
                         cmd.Parameters.AddWithValue("@fecha", fecha);
                         cmd.Parameters.AddWithValue("@fechaAnterior", fechaAnteriorStr);
 
@@ -3488,7 +3521,7 @@ namespace pryPlanificador
                         clsConexion objC = new clsConexion();
                         objC.NuevoPagoHorasExtras(nombre, anio, mes, acumulado, fecha, horaT);
                     }
-                    
+
 
                     using (MySqlCommand cmd = new MySqlCommand($"INSERT INTO {tabla} (fecha, nombre_empleado, hora_ingreso, hora_egreso, horas_trabajadas, acumulado, mes) VALUES (@fecha, @nombre, @horaIngreso, @horaEgreso, @horaT, @acumulado, @mes)", conn))
                     {
@@ -3521,7 +3554,7 @@ namespace pryPlanificador
 
             int detalle = 1;
             string categoria = "HORAS EXTRAS FERIADO";
-            string descripcion =  fecha + " - " + horasTrabajadas + " Horas trabajadas";  
+            string descripcion = fecha + " - " + horasTrabajadas + " Horas trabajadas";
             string tablaAnual = "extras_" + anio;
             try
             {
@@ -3539,7 +3572,7 @@ namespace pryPlanificador
                         cmd.Parameters.AddWithValue("@descripcion", descripcion);
 
                         cmd.ExecuteNonQuery();
-                        
+
                     }
                 }
             }
@@ -3601,7 +3634,7 @@ namespace pryPlanificador
                         clsConexion objC = new clsConexion();
                         objC.NuevoPagoHorasExtras(nombre, anio, mes, acumulado, fecha, horaT);
                     }
-                    
+
 
                     // Iniciar una transacción
                     using (MySqlTransaction transaction = conn.BeginTransaction())
@@ -3745,11 +3778,11 @@ namespace pryPlanificador
             }
 
         }
-        
 
 
 
 
 
-}
+
+    }
 }

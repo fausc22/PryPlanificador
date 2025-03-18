@@ -211,7 +211,7 @@ namespace pryPlanificador
                         {
                             comboBoxColumn.HeaderCell.Style.BackColor = Color.Yellow;
                         }
-                        else if (empleado.Equals("SANTIAGO", StringComparison.OrdinalIgnoreCase))
+                        else if (empleado.Equals("NATALIA", StringComparison.OrdinalIgnoreCase))
                         {
                             comboBoxColumn.HeaderCell.Style.BackColor = Color.Blue;
                         }
@@ -221,7 +221,7 @@ namespace pryPlanificador
                         }
                         else
                         {
-                            comboBoxColumn.HeaderCell.Style.BackColor = Color.OrangeRed;
+                            comboBoxColumn.HeaderCell.Style.BackColor = Color.WhiteSmoke;
                         }
                     }
 

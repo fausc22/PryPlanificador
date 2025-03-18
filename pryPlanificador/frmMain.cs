@@ -298,5 +298,11 @@ namespace pryPlanificador
             frmGraficosProductos frm = new frmGraficosProductos();
             frm.ShowDialog();
         }
+
+        private void baseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmBd frm = new frmBd();
+            frm.ShowDialog();
+        }
     }
 }
